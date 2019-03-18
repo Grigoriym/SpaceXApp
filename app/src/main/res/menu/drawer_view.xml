@@ -9,6 +9,9 @@
     <item
       android:id="@+id/nav_capsules"
       android:title="Capsules"/>
+    <item
+      android:id="@+id/nav_rockets"
+      android:title="Rockets"/>
   </group>
 
 </menu>
