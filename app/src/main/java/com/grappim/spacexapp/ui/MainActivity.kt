@@ -8,10 +8,12 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.capsules.CapsuleFragment
+import com.grappim.spacexapp.ui.rockets.RocketFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
     val toggle = ActionBarDrawerToggle(
       this,
       drawerLayout,
+      toolbar,
       R.string.navigation_drawer_open,
       R.string.navigation_drawer_close
     )
@@ -38,13 +41,16 @@ class MainActivity : AppCompatActivity(),  NavigationView.OnNavigationItemSelect
 
   private fun displaySelectedScreen(itemId: Int) {
     var fragment: Fragment? = null
-    when(itemId){
-      R.id.nav_ships->{
-      fragment = ShipsFragment()
+    when (itemId) {
+      R.id.nav_ships -> {
+        fragment = ShipsFragment()
       }
 
-      R.id.nav_capsules->{
-      fragment = CapsuleFragment()
+      R.id.nav_capsules -> {
+        fragment = CapsuleFragment()
+      }
+      R.id.nav_rockets -> {
+        fragment = RocketFragment()
       }
     }
     if (fragment != null) {

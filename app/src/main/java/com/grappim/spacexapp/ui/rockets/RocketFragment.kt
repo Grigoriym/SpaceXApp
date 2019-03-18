@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.ui.rockets
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,17 +8,17 @@ import androidx.fragment.app.Fragment
 
 import com.grappim.spacexapp.R
 
-class CapsuleFragment : Fragment() {
+class RocketFragment : Fragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_capsule, container, false)
+    return inflater.inflate(R.layout.fragment_rocket, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    activity?.title = "Capsules"
+    activity?.title = "Rockets"
   }
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="8dp"
+  app:cardCornerRadius="8dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/tvCapsuleSerial"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="C101"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleId"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      app:layout_constraintStart_toEndOf="@+id/tvCapsuleSerial"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="dragon1"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleStatus"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.0"
+      app:layout_constraintStart_toEndOf="@+id/tvCapsuleId"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="retitred"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleOriginalLaunch"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toStartOf="@+id/tvCapsuleSerial"
+      app:layout_constraintTop_toBottomOf="@+id/tvCapsuleSerial"
+      tools:text="2010-12-08"/>
+
+    <TextView
+      android:id="@+id/tvLandings"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      app:layout_constraintStart_toStartOf="@+id/tvCapsuleOriginalLaunch"
+      app:layout_constraintTop_toBottomOf="@+id/tvCapsuleOriginalLaunch"
+      tools:text="0"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleType"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      app:layout_constraintStart_toEndOf="@+id/tvLandings"
+      app:layout_constraintTop_toBottomOf="@+id/tvCapsuleOriginalLaunch"
+      tools:text="Dragon 1.0"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleDetails"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/tvLandings"
+      app:layout_constraintTop_toBottomOf="@+id/tvLandings"
+      tools:text="Reentered after three weeks in orbit"/>
+
+    <TextView
+      android:id="@+id/tvCapsuleReuseCount"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:text="0"
+      app:layout_constraintStart_toEndOf="@+id/tvCapsuleType"
+      app:layout_constraintTop_toBottomOf="@+id/tvCapsuleOriginalLaunch"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
