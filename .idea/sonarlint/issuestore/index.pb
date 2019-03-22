@@ -52,3 +52,9 @@ t
 Dapp/src/main/java/com/grappim/spacexapp/ui/rockets/RocketFragment.kt,c\a\cad0d0662855582236268069e3a2537c03936db3
 o
 ?app/src/main/java/com/grappim/spacexapp/model/rocket/Engines.kt,0\8\083130ff9ea8c271a93482ba71625823d3639d59
+l
+<app/src/main/java/com/grappim/spacexapp/ui/ScopedFragment.kt,c\1\c1a53c27e1f78673bddb1761a1c41dcbfb68c987
+p
+@app/src/main/java/com/grappim/spacexapp/model/capsule/Mission.kt,0\0\0031f5bbecf8a2b575a2d6fb9470d7a3af02831f
+r
+Bapp/src/main/java/com/grappim/spacexapp/ui/BaseViewModelFactory.kt,7\6\762f524214805af87e68aed243394b09db92f042

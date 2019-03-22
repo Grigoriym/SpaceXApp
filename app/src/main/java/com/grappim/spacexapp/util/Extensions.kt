@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -132,4 +134,11 @@ class CallbackKt<T> : Callback<T> {
 
 fun View.showSnackbar(text: String, timeLength: Int) {
   Snackbar.make(this, text, timeLength).show()
+}
+
+inline fun FragmentManager.transact(action:FragmentTransaction.() -> Unit){
+  beginTransaction()
+    .apply{
+      action()
+    }.commit()
 }
