@@ -7,9 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.network.API
+import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
+import com.grappim.spacexapp.ui.ScopedFragment
 import kotlinx.android.synthetic.main.fragment_capsule.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CapsuleFragment : Fragment() {
 
@@ -20,9 +28,14 @@ class CapsuleFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_capsule, container, false)
   }
 
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    activity?.title = "Capsules"
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    activity?.title = "Capsules"
+
     btnGetAllCapsules.setOnClickListener {
       val newFragment = GetCapsulesFragment()
       if (activity?.supportFragmentManager != null) {
@@ -32,7 +45,6 @@ class CapsuleFragment : Fragment() {
         ft.addToBackStack(null)
         ft.commit()
       }
-
     }
 
     btnGetUpcomingCapsules.setOnClickListener {
