@@ -4,7 +4,8 @@ import android.app.Application
 import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
-import com.grappim.spacexapp.ui.capsules.CapsuleSahredViewModelFactory
+import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
+import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -22,7 +23,8 @@ class SpaceXApplication : Application(), KodeinAware {
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
     bind() from singleton { API(instance()) }
 
-    bind() from provider { CapsuleSahredViewModelFactory(instance()) }
+    bind() from provider { CapsuleSharedViewModelFactory(instance()) }
+    bind() from provider { RocketsSharedViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

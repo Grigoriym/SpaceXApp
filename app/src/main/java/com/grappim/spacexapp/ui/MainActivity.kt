@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.ui.capsules.CapsuleFragment
+import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
 import com.grappim.spacexapp.ui.rockets.RocketFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -31,7 +32,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     drawerLayout.addDrawerListener(toggle)
     toggle.syncState()
     navigationView.setNavigationItemSelectedListener(this)
-    displaySelectedScreen(R.id.nav_capsules)
+    if (null == savedInstanceState) {
+      displaySelectedScreen(R.id.nav_capsules)
+    }
   }
 
   override fun onNavigationItemSelected(p0: MenuItem): Boolean {

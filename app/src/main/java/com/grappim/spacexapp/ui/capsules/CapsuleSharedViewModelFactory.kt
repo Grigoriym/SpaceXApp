@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.API
 
-class CapsuleSahredViewModelFactory(
+class CapsuleSharedViewModelFactory(
   private val api: API
 ) : ViewModelProvider.NewInstanceFactory(){
 

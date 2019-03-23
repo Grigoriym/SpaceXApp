@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
+import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
-import com.grappim.spacexapp.ui.BaseViewModelFactory
+import com.grappim.spacexapp.ui.capsules.details.CapsuleDetailsFragment
+import com.grappim.spacexapp.util.FieldConstants
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class GetCapsulesFragment : Fragment(), KodeinAware {
 
@@ -30,7 +27,13 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private lateinit var cAdapter: CapsulesAdapter
 
-  private val viewModelFactory: CapsuleSahredViewModelFactory by instance()
+  private val viewModelFactory: CapsuleSharedViewModelFactory by instance()
+
+  private val observer = Observer<List<CapsuleModel>> {
+    cAdapter.loadItems(it)
+  }
+
+  private var args: Int? = null
 
   private val viewModel: CapsuleSharedViewModel by lazy {
     ViewModelProviders.of(this, viewModelFactory).get(CapsuleSharedViewModel::class.java)
@@ -40,32 +43,54 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
+    args = arguments?.getInt(FieldConstants.CAPSULES_ARGS)
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
-  }
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     activity?.title = "Get all Capsules"
 
-    viewModel.allCapsules.observe(this, Observer {
-      cAdapter.loadItems(it)
-    })
+    viewModel.allCapsules.observe(this, observer)
+    viewModel.upcomingCapsules.observe(this, observer)
+    viewModel.pastCapsules.observe(this, observer)
 
     bindAdapter()
-    viewModel.getAllCapsules()
+
+    getData()
+
+    srlGetCapsules.setOnRefreshListener {
+      getData()
+      srlGetCapsules.isRefreshing = false
+    }
+  }
+
+  private fun getData() {
+    when (args) {
+      1 -> viewModel.getAllCapsules()
+      2 -> viewModel.getUpcomingCapsules()
+      3 -> viewModel.getPastCapsules()
+    }
   }
 
   private fun bindAdapter() {
-    cAdapter = CapsulesAdapter { }
+    cAdapter = CapsulesAdapter {
+      var args = Bundle()
+      args.putParcelable("model", it)
+      val f = CapsuleDetailsFragment()
+      if (activity?.supportFragmentManager != null) {
+        val ft: FragmentTransaction =
+          (activity?.supportFragmentManager as FragmentManager).beginTransaction()
+        ft.replace(R.id.contentFrame, f)
+        f.arguments = args
+        ft.addToBackStack(null)
+        ft.commit()
+      }
+    }
     rvGetAllCapsules.apply {
       layoutManager = LinearLayoutManager(this.context)
       addItemDecoration(MarginItemDecorator())
       adapter = cAdapter
     }
   }
-
 }

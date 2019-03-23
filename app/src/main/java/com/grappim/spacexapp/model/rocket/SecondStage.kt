@@ -8,7 +8,7 @@ data class SecondStage(
   @SerializedName("engines")
   val engines: Int?,
   @SerializedName("fuel_amount_tons")
-  val fuelAmountTons: Int?,
+  val fuelAmountTons: Double?,
   @SerializedName("payloads")
   val payloads: Payloads?,
   @SerializedName("thrust")
