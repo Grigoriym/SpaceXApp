@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.capsule
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class CapsuleModel(
   @SerializedName("capsule_id")
   val capsuleId: String?,
@@ -23,4 +26,4 @@ data class CapsuleModel(
   val status: String?,
   @SerializedName("type")
   val type: String?
-)
+) : Parcelable

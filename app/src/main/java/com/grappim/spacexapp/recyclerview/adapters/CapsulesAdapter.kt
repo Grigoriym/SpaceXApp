@@ -16,7 +16,7 @@ class CapsulesAdapter(
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CapsulesViewHolder =
     CapsulesViewHolder(
       LayoutInflater.from(parent.context)
-        .inflate(R.layout.layout_all_capsules_item, parent, false)
+        .inflate(R.layout.layout_capsule_item, parent, false)
     )
 
   override fun getItemCount(): Int = items.size

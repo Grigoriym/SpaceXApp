@@ -10,11 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -136,9 +143,18 @@ fun View.showSnackbar(text: String, timeLength: Int) {
   Snackbar.make(this, text, timeLength).show()
 }
 
-inline fun FragmentManager.transact(action:FragmentTransaction.() -> Unit){
+inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
   beginTransaction()
-    .apply{
+    .apply {
       action()
     }.commit()
+}
+
+fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
+  CoroutineScope(Dispatchers.Main).launch {
+    val response = req.await()
+    if (response.isSuccessful) {
+      response.body()?.let { mld.value = it }
+    }
+  }
 }
