@@ -82,3 +82,13 @@ Capp/src/main/java/com/grappim/spacexapp/model/rocket/SecondStage.kt,3\2\3225c7
 Uapp/src/main/java/com/grappim/spacexapp/ui/capsules/details/CapsuleDetailsFragment.kt,6\0\607f7212b9368040b27ddca466a4213b1cc2af44
 k
 ;app/src/main/java/com/grappim/spacexapp/util/GlideModule.kt,e\5\e54205fa806782eda8e244c13b7f23d7e6cbf21a
+u
+Eapp/src/main/java/com/grappim/spacexapp/model/mission/MissionModel.kt,c\a\ca343fdca2588fe53edcc83d7da57392b06e7af5
+ç
+]app/src/main/java/com/grappim/spacexapp/recyclerview/viewholders/CapsuleMissionsViewHolder.kt,e\9\e9342246f4003ce1dc641fbee4f700b987ba0423
+á
+Wapp/src/main/java/com/grappim/spacexapp/recyclerview/adapters/CapsuleMissionsAdapter.kt,9\4\9437c18cd2296c6d80a3aad16fe1189680393d20
+f
+6app/src/main/java/com/grappim/spacexapp/util/Images.kt,e\f\efed726afc1c4f89b69f507cb62784a23cd2d9b4
+v
+Fapp/src/main/java/com/grappim/spacexapp/ui/missions/MissionFragment.kt,8\f\8fccd7deec475233542edbc77bd1818c43278192

@@ -29,14 +29,14 @@ class RocketFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     btnGetAllRockets.setOnClickListener {
-      val f = GetRocketsFragment()
-      if (activity?.supportFragmentManager != null) {
-        val ft: FragmentTransaction =
-          (activity?.supportFragmentManager as FragmentManager).beginTransaction()
-        ft.replace(R.id.contentFrame, f)
-        ft.addToBackStack(null)
-        ft.commit()
-      }
+      // val f = GetRocketsFragment()
+      // if (activity?.supportFragmentManager != null) {
+      //   val ft: FragmentTransaction =
+      //     (activity?.supportFragmentManager as FragmentManager).beginTransaction()
+      //   ft.replace(R.id.contentFrame, f)
+      //   ft.addToBackStack(null)
+      //   ft.commit()
+      // }
     }
   }
 }

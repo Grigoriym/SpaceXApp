@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.grappim.spacexapp.R
@@ -40,7 +41,6 @@ class CapsuleDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-
     bindAdapter()
 
     GlideApp.with(this@CapsuleDetailsFragment)
@@ -48,6 +48,7 @@ class CapsuleDetailsFragment : Fragment() {
       .into(ivCapsuleDetails)
 
     args?.let {
+      mainToolbar.title = it.capsuleSerial
       tvCapsuleDetailsDetails.text = it.details
       tvCapsuleDetailsLandings.text = it.landings.toString()
       tvCapsuleDetailsOriginalLaunch.text = it.originalLaunch
@@ -60,7 +61,9 @@ class CapsuleDetailsFragment : Fragment() {
   }
 
   private fun bindAdapter() {
-    mAdapter = CapsuleMissionsAdapter { }
+    mAdapter = CapsuleMissionsAdapter {
+      findNavController().navigate(R.id.nextFragment)
+    }
     rvCapsuleDetails.apply {
       layoutManager = LinearLayoutManager(this.context)
       addItemDecoration(MarginItemDecorator())

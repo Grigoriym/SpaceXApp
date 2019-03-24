@@ -27,27 +27,7 @@ captures/
 
 # IntelliJ
 *.iml
-.idea/sonarlint
-.idea/markdown-navigator
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/caches
-.idea/modules.xml
-.idea/.name
-.idea/compiler.xml
-.idea/copyright/profiles_settings.xml
-.idea/encodings.xml
-.idea/misc.xml
-.idea/scopes/scope_settings.xml
-.idea/vcs.xml
-.idea/runConfigurations.xml
-.idea/markdown-exported-files.xml
-.idea/markdown-navigator.xml
-.idea/render.experimental.xml
+.idea
 
 # Gradle generated files
 .gradle/

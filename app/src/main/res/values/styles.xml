@@ -6,6 +6,12 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
+  <style name="DayNightAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+  </style>
+
   <style name="SplashTheme" parent="Theme.MaterialComponents.NoActionBar">
     <item name="android:windowBackground">@color/icons</item>
     <item name="colorPrimary">@color/colorPrimary</item>
@@ -16,9 +22,5 @@
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
   </style>
-
-  <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
-
-  <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
 
 </resources>
