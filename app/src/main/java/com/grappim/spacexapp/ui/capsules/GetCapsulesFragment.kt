@@ -5,16 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
-import com.grappim.spacexapp.ui.capsules.details.CapsuleDetailsFragment
 import com.grappim.spacexapp.util.FieldConstants
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
@@ -50,15 +48,11 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     activity?.title = "Get all Capsules"
-
     viewModel.allCapsules.observe(this, observer)
     viewModel.upcomingCapsules.observe(this, observer)
     viewModel.pastCapsules.observe(this, observer)
-
     bindAdapter()
-
     getData()
-
     srlGetCapsules.setOnRefreshListener {
       getData()
       srlGetCapsules.isRefreshing = false
@@ -75,17 +69,9 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private fun bindAdapter() {
     cAdapter = CapsulesAdapter {
-      var args = Bundle()
+      val args = Bundle()
       args.putParcelable("model", it)
-      val f = CapsuleDetailsFragment()
-      if (activity?.supportFragmentManager != null) {
-        val ft: FragmentTransaction =
-          (activity?.supportFragmentManager as FragmentManager).beginTransaction()
-        ft.replace(R.id.contentFrame, f)
-        f.arguments = args
-        ft.addToBackStack(null)
-        ft.commit()
-      }
+      findNavController().navigate(R.id.nextFragment, args)
     }
     rvGetAllCapsules.apply {
       layoutManager = LinearLayoutManager(this.context)

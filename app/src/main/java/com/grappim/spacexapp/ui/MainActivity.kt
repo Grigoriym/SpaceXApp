@@ -2,66 +2,89 @@ package com.grappim.spacexapp.ui
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SwitchCompat
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.ui.capsules.CapsuleFragment
-import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
-import com.grappim.spacexapp.ui.rockets.RocketFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.app_bar_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
+  private lateinit var navController: NavController
+  private lateinit var appBarConfiguration: AppBarConfiguration
+  private lateinit var switcher: SwitchCompat
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
+    setupNavigation()
+    setupThemeChange()
+  }
 
-    val toggle = ActionBarDrawerToggle(
-      this,
-      drawerLayout,
-      toolbar,
-      R.string.navigation_drawer_open,
-      R.string.navigation_drawer_close
-    )
-    toggle.isDrawerIndicatorEnabled = true
-    drawerLayout.addDrawerListener(toggle)
-    toggle.syncState()
-    navigationView.setNavigationItemSelectedListener(this)
-    if (null == savedInstanceState) {
-      displaySelectedScreen(R.id.nav_capsules)
+  private fun setupThemeChange() {
+    val menu = navigationView.menu
+    val menuItem = menu.findItem(R.id.nav_switch_theme)
+    val actionView = menuItem.actionView
+    switcher = actionView.findViewById(R.id.drawerSwitch)
+    switcher.isChecked = delegate.localNightMode != AppCompatDelegate.MODE_NIGHT_NO
+    switcher.setOnCheckedChangeListener { _, isChecked ->
+      run {
+        if (!isChecked) {
+          delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+          delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+        }
+      }
     }
   }
+
+  private fun setupNavigation() {
+    appBarConfiguration = AppBarConfiguration(
+      setOf(
+        R.id.capsuleFragment,
+        R.id.rocketFragment,
+        R.id.shipsFragment
+      ), drawerLayout
+    )
+
+    navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+    setupActionBarWithNavController(navController, appBarConfiguration)
+    navigationView.setupWithNavController(navController)
+    navigationView.setNavigationItemSelectedListener(this)
+  }
+
+  override fun onSupportNavigateUp() =
+    findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
 
   override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-    displaySelectedScreen(p0.itemId)
-    return true
+    p0.isChecked = true
+    drawerLayout.closeDrawers()
+    return displaySelectedScreen(p0.itemId)
   }
 
-  private fun displaySelectedScreen(itemId: Int) {
-    var fragment: Fragment? = null
+  private fun displaySelectedScreen(itemId: Int): Boolean {
     when (itemId) {
-      R.id.nav_ships -> {
-        fragment = ShipsFragment()
+      R.id.nav_capsules -> navController.navigate(R.id.capsuleFragment)
+      R.id.nav_rockets -> navController.navigate(R.id.rocketFragment)
+      R.id.nav_ships -> navController.navigate(R.id.shipsFragment)
+      R.id.nav_switch_theme -> {
+        switcher.isChecked = !switcher.isChecked
+        return false
       }
-
-      R.id.nav_capsules -> {
-        fragment = CapsuleFragment()
-      }
-      R.id.nav_rockets -> {
-        fragment = RocketFragment()
-      }
-    }
-    if (fragment != null) {
-      val ft = supportFragmentManager.beginTransaction()
-      ft.replace(R.id.contentFrame, fragment)
-      ft.commit()
     }
     drawerLayout.closeDrawer(GravityCompat.START)
+    return true
   }
 
   override fun onBackPressed() {

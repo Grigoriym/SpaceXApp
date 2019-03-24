@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/mobile_navigation"
+  app:startDestination="@id/capsuleFragment">
+
+  <fragment
+    android:id="@+id/capsuleFragment"
+    android:label="fragment_capsule"
+    android:name="com.grappim.spacexapp.ui.capsules.CapsuleFragment"
+    tools:layout="@layout/fragment_capsule">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getCapsulesFragment"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getCapsulesFragment"
+    android:label="fragment_get_capsules"
+    android:name="com.grappim.spacexapp.ui.capsules.GetCapsulesFragment"
+    tools:layout="@layout/fragment_get_capsules">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/capsuleDetailsFragment"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/capsuleDetailsFragment"
+    android:label="fragment_capsule_details"
+    android:name="com.grappim.spacexapp.ui.capsules.details.CapsuleDetailsFragment"
+    tools:layout="@layout/fragment_capsule_details">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/missionFragment"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/missionFragment"
+    android:label="fragment_mission"
+    android:name="com.grappim.spacexapp.ui.missions.MissionFragment"
+    tools:layout="@layout/fragment_mission"/>
+
+  <fragment
+    android:id="@+id/rocketFragment"
+    android:label="fragment_rocket"
+    android:name="com.grappim.spacexapp.ui.rockets.RocketFragment"
+    tools:layout="@layout/fragment_rocket"/>
+
+  <fragment
+    android:id="@+id/shipsFragment"
+    android:name="com.grappim.spacexapp.ui.ShipsFragment"
+    android:label="fragment_ships"
+    tools:layout="@layout/fragment_ships"/>
+
+</navigation>
