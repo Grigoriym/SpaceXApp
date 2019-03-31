@@ -13,7 +13,10 @@ class CapsulesAdapter(
 
   var items: List<CapsuleModel> = emptyList()
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CapsulesViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  ): CapsulesViewHolder =
     CapsulesViewHolder(
       LayoutInflater.from(parent.context)
         .inflate(R.layout.layout_capsule_item, parent, false)

@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.rocket
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Engines(
   @SerializedName("engine_loss_max")
   val engineLossMax: Int?,
@@ -23,4 +26,4 @@ data class Engines(
   val type: String?,
   @SerializedName("version")
   val version: String?
-)
+) : Parcelable

@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.rocket
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class RocketModel(
   @SerializedName("active")
   val active: Boolean?,
@@ -47,4 +50,4 @@ data class RocketModel(
   val successRatePct: Int?,
   @SerializedName("wikipedia")
   val wikipedia: String?
-)
+) : Parcelable

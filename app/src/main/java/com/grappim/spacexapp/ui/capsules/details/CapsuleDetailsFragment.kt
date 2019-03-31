@@ -43,7 +43,7 @@ class CapsuleDetailsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     bindAdapter()
 
-    GlideApp.with(this@CapsuleDetailsFragment)
+    GlideApp.with(this)
       .load("https://upload.wikimedia.org/wikipedia/commons/f/f6/COTS-1_Dragon_After_Return_from_Orbit_%28crop%29.jpg")
       .into(ivCapsuleDetails)
 

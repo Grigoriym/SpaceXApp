@@ -4,35 +4,76 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
+  android:layout_height="wrap_content"
   android:layout_margin="8dp"
   app:cardCornerRadius="8dp">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple">
 
-
-    <TextView
-      android:id="@+id/tvRocketName"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+    <ImageView
+      android:id="@+id/ivRocketItem"
+      android:layout_width="0dp"
+      android:layout_height="150dp"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
       android:layout_marginLeft="8dp"
-      android:text="Falcon 9"
+      android:layout_marginRight="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"/>
+      app:layout_constraintTop_toTopOf="parent"
+      tools:src="@tools:sample/backgrounds/scenic"/>
+
     <TextView
-      android:id="@+id/tvRocketActive"
-      android:layout_width="wrap_content"
+      android:id="@+id/tvRocketItemRocketName"
+      android:textStyle="bold"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginLeft="8dp"
-      android:text="true"
-      app:layout_constraintStart_toEndOf="@+id/tvRocketName"
-      app:layout_constraintTop_toTopOf="parent"/>
+      android:layout_marginTop="16dp"
+      android:drawableEnd="@drawable/ic_keyboard_arrow_down_black_24dp"
+      android:drawableRight="@drawable/ic_keyboard_arrow_down_black_24dp"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="@+id/ivRocketItem"
+      app:layout_constraintStart_toStartOf="@+id/ivRocketItem"
+      app:layout_constraintTop_toBottomOf="@+id/ivRocketItem"
+      tools:text="Big Falcon Rocket"/>
+
+    <TextView
+      android:id="@+id/tvRocketItemDescription"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="@+id/tvRocketItemRocketName"
+      app:layout_constraintStart_toStartOf="@+id/tvRocketItemRocketName"
+      app:layout_constraintTop_toBottomOf="@+id/tvRocketItemRocketName"
+      tools:text="asdasdsa dsfsdfsd fsdf sdf wef 42f 23f 23f 23f asd asd asd asd asdas dasd asd as dsa das das "/>
+
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/btnRocketItem"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_marginBottom="8dp"
+      android:text="Rocket Specs"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="@+id/divider2"
+      app:layout_constraintStart_toStartOf="@+id/divider2"
+      app:layout_constraintTop_toBottomOf="@+id/divider2"/>
+
+    <View
+      android:id="@+id/divider2"
+      android:layout_width="0dp"
+      android:layout_height="2dp"
+      android:layout_marginTop="16dp"
+      android:background="?android:attr/listDivider"
+      app:layout_constraintEnd_toEndOf="@+id/tvRocketItemRocketName"
+      app:layout_constraintStart_toStartOf="@+id/tvRocketItemRocketName"
+      app:layout_constraintTop_toBottomOf="@+id/tvRocketItemDescription"/>
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

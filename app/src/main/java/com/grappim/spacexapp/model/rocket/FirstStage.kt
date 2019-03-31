@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.rocket
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class FirstStage(
   @SerializedName("burn_time_sec")
   val burnTimeSec: Int?,
@@ -15,4 +18,4 @@ data class FirstStage(
   val thrustSeaLevel: ThrustSeaLevel?,
   @SerializedName("thrust_vacuum")
   val thrustVacuum: ThrustVacuum?
-)
+) : Parcelable
