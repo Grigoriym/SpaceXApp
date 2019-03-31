@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
 
 import com.grappim.spacexapp.R
 import kotlinx.android.synthetic.main.fragment_rocket.*
@@ -29,14 +30,7 @@ class RocketFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     btnGetAllRockets.setOnClickListener {
-      // val f = GetRocketsFragment()
-      // if (activity?.supportFragmentManager != null) {
-      //   val ft: FragmentTransaction =
-      //     (activity?.supportFragmentManager as FragmentManager).beginTransaction()
-      //   ft.replace(R.id.contentFrame, f)
-      //   ft.addToBackStack(null)
-      //   ft.commit()
-      // }
+     findNavController().navigate(R.id.nextFragment)
     }
   }
 }

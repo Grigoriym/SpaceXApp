@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -29,12 +30,15 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val observer = Observer<List<CapsuleModel>> {
     cAdapter.loadItems(it)
+    rvGetAllCapsules.scheduleLayoutAnimation()
   }
 
   private var args: Int? = null
 
   private val viewModel: CapsuleSharedViewModel by lazy {
-    ViewModelProviders.of(this, viewModelFactory).get(CapsuleSharedViewModel::class.java)
+    ViewModelProviders
+      .of(this, viewModelFactory)
+      .get(CapsuleSharedViewModel::class.java)
   }
 
   override fun onCreateView(
@@ -47,7 +51,6 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    activity?.title = "Get all Capsules"
     viewModel.allCapsules.observe(this, observer)
     viewModel.upcomingCapsules.observe(this, observer)
     viewModel.pastCapsules.observe(this, observer)
@@ -76,6 +79,8 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     rvGetAllCapsules.apply {
       layoutManager = LinearLayoutManager(this.context)
       addItemDecoration(MarginItemDecorator())
+      layoutAnimation = AnimationUtils
+        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = cAdapter
     }
   }

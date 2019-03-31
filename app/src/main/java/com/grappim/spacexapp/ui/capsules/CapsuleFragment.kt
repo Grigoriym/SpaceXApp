@@ -19,11 +19,6 @@ class CapsuleFragment : Fragment() {
     return inflater.inflate(R.layout.fragment_capsule, container, false)
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    activity?.title = "Capsules"
-  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 

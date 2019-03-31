@@ -7,7 +7,7 @@
 
   <fragment
     android:id="@+id/capsuleFragment"
-    android:label="fragment_capsule"
+    android:label="Capsules"
     android:name="com.grappim.spacexapp.ui.capsules.CapsuleFragment"
     tools:layout="@layout/fragment_capsule">
     <action
@@ -21,7 +21,7 @@
 
   <fragment
     android:id="@+id/getCapsulesFragment"
-    android:label="fragment_get_capsules"
+    android:label="Get Capsules"
     android:name="com.grappim.spacexapp.ui.capsules.GetCapsulesFragment"
     tools:layout="@layout/fragment_get_capsules">
     <action
@@ -35,7 +35,7 @@
 
   <fragment
     android:id="@+id/capsuleDetailsFragment"
-    android:label="fragment_capsule_details"
+    android:label="Capsule Details"
     android:name="com.grappim.spacexapp.ui.capsules.details.CapsuleDetailsFragment"
     tools:layout="@layout/fragment_capsule_details">
     <action
@@ -49,20 +49,40 @@
 
   <fragment
     android:id="@+id/missionFragment"
-    android:label="fragment_mission"
+    android:label="Missions"
     android:name="com.grappim.spacexapp.ui.missions.MissionFragment"
     tools:layout="@layout/fragment_mission"/>
 
   <fragment
     android:id="@+id/rocketFragment"
-    android:label="fragment_rocket"
+    android:label="Rockets"
     android:name="com.grappim.spacexapp.ui.rockets.RocketFragment"
-    tools:layout="@layout/fragment_rocket"/>
+    tools:layout="@layout/fragment_rocket">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getRocketsFragment"/>
+  </fragment>
 
   <fragment
     android:id="@+id/shipsFragment"
+    android:label="Ships"
     android:name="com.grappim.spacexapp.ui.ShipsFragment"
-    android:label="fragment_ships"
     tools:layout="@layout/fragment_ships"/>
+
+  <fragment
+    android:id="@+id/getRocketsFragment"
+    android:name="com.grappim.spacexapp.ui.rockets.GetRocketsFragment"
+    android:label="Get Rockets"
+    tools:layout="@layout/fragment_get_rockets">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/rocketDetailsFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/rocketDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.rockets.details.RocketDetailsFragment"
+    android:label="Rocket Details"
+    tools:layout="@layout/fragment_rocket_details"/>
 
 </navigation>
