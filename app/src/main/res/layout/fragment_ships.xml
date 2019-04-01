@@ -4,23 +4,22 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.ShipsFragment">
+  tools:context=".ui.ships.ShipsFragment">
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-      android:layout_width="0dp"
+    <com.google.android.material.button.MaterialButton
+      android:id="@+id/btnShipsGetAllShips"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
-      android:layout_marginBottom="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginEnd="8dp"
       android:layout_marginLeft="8dp"
       android:layout_marginRight="8dp"
-      android:text="Ships"
-      app:layout_constraintBottom_toBottomOf="parent"
+      android:text="All Ships"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"/>

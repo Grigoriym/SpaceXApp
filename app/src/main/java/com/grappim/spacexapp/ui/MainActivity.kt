@@ -54,7 +54,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       setOf(
         R.id.capsuleFragment,
         R.id.rocketFragment,
-        R.id.shipsFragment
+        R.id.shipsFragment,
+        R.id.coreFragment
       ), drawerLayout
     )
 
@@ -78,6 +79,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       R.id.nav_capsules -> navController.navigate(R.id.capsuleFragment)
       R.id.nav_rockets -> navController.navigate(R.id.rocketFragment)
       R.id.nav_ships -> navController.navigate(R.id.shipsFragment)
+      R.id.nav_cores -> navController.navigate(R.id.coreFragment)
       R.id.nav_switch_theme -> {
         switcher.isChecked = !switcher.isChecked
         return false

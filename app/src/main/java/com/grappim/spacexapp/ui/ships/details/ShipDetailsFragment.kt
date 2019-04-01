@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.capsules.details
+package com.grappim.spacexapp.ui.ships.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,15 +10,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.capsule.CapsuleModel
+import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.util.GlideApp
-import kotlinx.android.synthetic.main.fragment_capsule_details.*
+import kotlinx.android.synthetic.main.fragment_ship_details.*
 
-class CapsuleDetailsFragment : Fragment() {
+class ShipDetailsFragment : Fragment() {
 
-  private var args: CapsuleModel? = null
+  private var args: ShipModel? = null
   private lateinit var mAdapter: RvInnerMissionsAdapter
 
   override fun onCreateView(
@@ -26,7 +26,7 @@ class CapsuleDetailsFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     args = arguments?.getParcelable("model")
-    return inflater.inflate(R.layout.fragment_capsule_details, container, false)
+    return inflater.inflate(R.layout.fragment_ship_details, container, false)
   }
 
   override fun onResume() {
@@ -41,40 +41,35 @@ class CapsuleDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    tlbrCapsuleDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
-    tlbrCapsuleDetails.setNavigationOnClickListener {
+    tlbrShipDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
+    tlbrShipDetails.setNavigationOnClickListener {
       activity?.onBackPressed()
     }
-
     bindAdapter()
 
-    GlideApp.with(this)
-      .load("https://upload.wikimedia.org/wikipedia/commons/f/f6/COTS-1_Dragon_After_Return_from_Orbit_%28crop%29.jpg")
-      .into(ivCapsuleDetailsToolbar)
-
     args?.let {
-      tlbrCapsuleDetails.title = it.capsuleSerial
-      tvCapsuleDetailsDetails.text = it.details
-      tvCapsuleDetailsLandings.text = it.landings.toString()
-      tvCapsuleDetailsOriginalLaunch.text = it.originalLaunch
-      tvCapsuleDetailsSerial.text = it.capsuleSerial
-      tvCapsuleDetailsReuseCount.text = it.reuseCount.toString()
-      tvCapsuleDetailsType.text = it.type?.capitalize()
-      tvCapsuleDetailsStatus.text = it.status?.capitalize()
+      GlideApp.with(this)
+        .load(it.image)
+        .into(ivShipDetailsToolbar)
+      tlbrShipDetails.title = it.shipName
+      tvShipDetailsName.text = it.shipName
+      tvShipDetailsType.text = it.shipType
+      tvShipDetailsHomePort.text = it.homePort
+      tvShipDetailsStatus.text = it.status
+      tvShipDetailsLandings.text = "${it.successfulLandings ?: 0} / ${it.attemptedLandings ?: 0}"
       mAdapter.loadItems(it.missions)
     }
   }
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      val args = Bundle()
-      args.putParcelable("model", it)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(R.id.nextFragment)
     }
-    rvCapsuleDetails.apply {
-      layoutManager = LinearLayoutManager(this.context)
+    rvShipDetailsMissions.apply {
+      layoutManager = LinearLayoutManager(context)
       addItemDecoration(MarginItemDecorator())
       adapter = mAdapter
     }
   }
+
 }

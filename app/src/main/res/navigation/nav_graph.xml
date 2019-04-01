@@ -50,8 +50,10 @@
   <fragment
     android:id="@+id/missionFragment"
     android:label="Missions"
-    android:name="com.grappim.spacexapp.ui.missions.MissionFragment"
+    android:name="com.grappim.spacexapp.ui.missionspayloads.MissionFragment"
     tools:layout="@layout/fragment_mission"/>
+
+  <!--ROCKETS-->
 
   <fragment
     android:id="@+id/rocketFragment"
@@ -64,15 +66,9 @@
   </fragment>
 
   <fragment
-    android:id="@+id/shipsFragment"
-    android:label="Ships"
-    android:name="com.grappim.spacexapp.ui.ShipsFragment"
-    tools:layout="@layout/fragment_ships"/>
-
-  <fragment
     android:id="@+id/getRocketsFragment"
-    android:name="com.grappim.spacexapp.ui.rockets.GetRocketsFragment"
     android:label="Get Rockets"
+    android:name="com.grappim.spacexapp.ui.rockets.GetRocketsFragment"
     tools:layout="@layout/fragment_get_rockets">
     <action
       android:id="@+id/nextFragment"
@@ -81,8 +77,59 @@
 
   <fragment
     android:id="@+id/rocketDetailsFragment"
-    android:name="com.grappim.spacexapp.ui.rockets.details.RocketDetailsFragment"
     android:label="Rocket Details"
+    android:name="com.grappim.spacexapp.ui.rockets.details.RocketDetailsFragment"
     tools:layout="@layout/fragment_rocket_details"/>
+
+  <!--CORES-->
+
+  <fragment
+    android:id="@+id/coreFragment"
+    android:label="fragment_core"
+    android:name="com.grappim.spacexapp.ui.cores.CoreFragment"
+    tools:layout="@layout/fragment_core">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getCoresFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getCoresFragment"
+    android:label="Get Cores"
+    android:name="com.grappim.spacexapp.ui.cores.GetCoresFragment"
+    tools:layout="@layout/fragment_get_cores">
+  </fragment>
+
+  <!--SHIPS-->
+
+  <fragment
+    android:id="@+id/shipsFragment"
+    android:label="Ships"
+    android:name="com.grappim.spacexapp.ui.ships.ShipsFragment"
+    tools:layout="@layout/fragment_ships">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getShipsFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getShipsFragment"
+    android:label="Get ships"
+    android:name="com.grappim.spacexapp.ui.ships.GetShipsFragment"
+    tools:layout="@layout/fragment_get_ships">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/shipDetailsFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/shipDetailsFragment"
+    android:label="Ship Details"
+    android:name="com.grappim.spacexapp.ui.ships.details.ShipDetailsFragment"
+    tools:layout="@layout/fragment_ship_details">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/missionFragment"/>
+  </fragment>
 
 </navigation>

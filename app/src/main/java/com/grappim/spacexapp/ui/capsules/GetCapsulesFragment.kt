@@ -30,7 +30,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val observer = Observer<List<CapsuleModel>> {
     cAdapter.loadItems(it)
-    rvGetAllCapsules.scheduleLayoutAnimation()
+    rvGetCapsules.scheduleLayoutAnimation()
   }
 
   private var args: Int? = null
@@ -76,7 +76,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       args.putParcelable("model", it)
       findNavController().navigate(R.id.nextFragment, args)
     }
-    rvGetAllCapsules.apply {
+    rvGetCapsules.apply {
       layoutManager = LinearLayoutManager(this.context)
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils

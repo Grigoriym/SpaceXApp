@@ -36,6 +36,10 @@ class RocketDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    tlbrRocketDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
+    tlbrRocketDetails.setNavigationOnClickListener {
+      activity?.onBackPressed()
+    }
 
     GlideApp.with(this)
       .load("https://upload.wikimedia.org/wikipedia/commons/f/f6/COTS-1_Dragon_After_Return_from_Orbit_%28crop%29.jpg")

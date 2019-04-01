@@ -1,0 +1,32 @@
+package com.grappim.spacexapp.model.payloads
+
+import com.google.gson.annotations.SerializedName
+
+data class OrbitParams(
+  @SerializedName("apoapsis_km")
+  val apoapsisKm: Double?,
+  @SerializedName("eccentricity")
+  val eccentricity: Double?,
+  @SerializedName("epoch")
+  val epoch: String?,
+  @SerializedName("inclination_deg")
+  val inclinationDeg: Double?,
+  @SerializedName("lifespan_years")
+  val lifespanYears: Double?,
+  @SerializedName("longitude")
+  val longitude: Double?,
+  @SerializedName("mean_motion")
+  val meanMotion: Double?,
+  @SerializedName("periapsis_km")
+  val periapsisKm: Double?,
+  @SerializedName("period_min")
+  val periodMin: Double?,
+  @SerializedName("raan")
+  val raan: Double?,
+  @SerializedName("reference_system")
+  val referenceSystem: String?,
+  @SerializedName("regime")
+  val regime: String?,
+  @SerializedName("semi_major_axis_km")
+  val semiMajorAxisKm: Double?
+)

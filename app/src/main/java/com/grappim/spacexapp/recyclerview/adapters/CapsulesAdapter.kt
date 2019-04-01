@@ -28,6 +28,7 @@ class CapsulesAdapter(
     holder.apply {
       capsule = items[position]
       itemView.setOnClickListener { onClick(items[position]) }
+      btnCapsuleSpecs.setOnClickListener { onClick(items[position]) }
     }
   }
 

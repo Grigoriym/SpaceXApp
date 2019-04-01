@@ -5,24 +5,24 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
-import com.grappim.spacexapp.recyclerview.viewholders.CapsuleMissionsViewHolder
+import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
 
-class CapsuleMissionsAdapter(
+class RvInnerMissionsAdapter(
   val onClick: (Mission?) -> Unit
-) : RecyclerView.Adapter<CapsuleMissionsViewHolder>() {
+) : RecyclerView.Adapter<RvInnerMissionsViewHolder>() {
   var items: List<Mission?>? = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup, viewType: Int
-  ): CapsuleMissionsViewHolder =
-    CapsuleMissionsViewHolder(
+  ): RvInnerMissionsViewHolder =
+    RvInnerMissionsViewHolder(
       LayoutInflater.from(parent.context)
-        .inflate(R.layout.layout_capsule_details_mission_item, parent, false)
+        .inflate(R.layout.layout_inner_rv_details_mission_item, parent, false)
     )
 
   override fun getItemCount(): Int = items?.size ?: 0
 
-  override fun onBindViewHolder(holder: CapsuleMissionsViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: RvInnerMissionsViewHolder, position: Int) {
     holder.apply {
       mission = items?.get(position)
       itemView.setOnClickListener {

@@ -1,12 +1,14 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.ui.ships
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 
 import com.grappim.spacexapp.R
+import kotlinx.android.synthetic.main.fragment_ships.*
 
 class ShipsFragment : Fragment() {
 
@@ -19,6 +21,9 @@ class ShipsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    activity?.title = "Ships"
+
+    btnShipsGetAllShips.setOnClickListener {
+      findNavController().navigate(R.id.nextFragment)
+    }
   }
 }
