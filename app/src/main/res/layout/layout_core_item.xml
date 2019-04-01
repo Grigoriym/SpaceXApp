@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_margin="8dp"
+  app:cardCornerRadius="8dp">
+
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple">
+
+    <TextView
+      android:id="@+id/tvCoreItemOriginalLaunch"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="25 Mar '06 - 04:30"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemCoreSerial"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:textSize="20sp"
+      app:layout_constraintStart_toStartOf="@+id/tvCoreItemOriginalLaunch"
+      app:layout_constraintTop_toBottomOf="@+id/tvCoreItemOriginalLaunch"
+      tools:text="Merlin1A"/>
+
+    <TextView
+      android:id="@+id/textView15"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      android:gravity="end"
+      android:text="Block"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/guideline"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemBlock"
+      android:textStyle="bold"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="@+id/textView15"
+      app:layout_constraintStart_toStartOf="@+id/textView15"
+      app:layout_constraintTop_toTopOf="@+id/tvCoreItemCoreSerial"
+      tools:text="TBD"/>
+
+    <TextView
+      android:id="@+id/textView20"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:text="@string/missions"
+      app:layout_constraintStart_toStartOf="@+id/tvCoreItemCoreSerial"
+      app:layout_constraintTop_toBottomOf="@+id/tvCoreItemCoreSerial"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemMissions"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      app:layout_constraintEnd_toEndOf="@+id/tvCoreItemBlock"
+      app:layout_constraintStart_toStartOf="@+id/tvCoreItemBlock"
+      app:layout_constraintTop_toTopOf="@+id/textView20"
+      tools:text="FalconSat"/>
+
+    <TextView
+      android:id="@+id/textView24"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="RTLS landings"
+      app:layout_constraintStart_toStartOf="@+id/textView20"
+      app:layout_constraintTop_toBottomOf="@+id/tvCoreItemMissions"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemRTLS"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      app:layout_constraintEnd_toEndOf="@+id/tvCoreItemMissions"
+      app:layout_constraintStart_toStartOf="@+id/tvCoreItemMissions"
+      app:layout_constraintTop_toTopOf="@+id/textView24"
+      tools:text="0/0"/>
+
+    <TextView
+      android:id="@+id/textView28"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:gravity="end"
+      android:text="ASDS landings"
+      app:layout_constraintStart_toStartOf="@+id/textView24"
+      app:layout_constraintTop_toBottomOf="@+id/textView24"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemASDS"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      app:layout_constraintEnd_toEndOf="@+id/tvCoreItemRTLS"
+      app:layout_constraintStart_toStartOf="@+id/tvCoreItemRTLS"
+      app:layout_constraintTop_toTopOf="@+id/textView28"
+      tools:text="0/0"/>
+
+    <TextView
+      android:id="@+id/tvCoreItemLabelWaterLanding"
+      android:layout_width="wrap_content"
+      android:layout_height="23dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:text="Water landing"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="@+id/textView28"
+      app:layout_constraintTop_toBottomOf="@+id/textView28"/>
+
+    <ImageView
+      android:id="@+id/ivCoreItemWaterLanding"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="@+id/tvCoreItemASDS"
+      app:layout_constraintTop_toTopOf="@+id/tvCoreItemLabelWaterLanding"
+      tools:src="@drawable/ic_check_circle_black_24dp"/>
+
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintGuide_percent="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

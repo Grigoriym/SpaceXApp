@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  xmlns:app="http://schemas.android.com/apk/res-auto">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  >
 
   <group android:checkableBehavior="single">
     <item
       android:id="@+id/nav_ships"
-      android:title="Ships"/>
+      android:title="@string/drawer_menu_ships"/>
     <item
       android:id="@+id/nav_capsules"
-      android:title="Capsules"/>
+      android:title="@string/drawer_menu_capsules"/>
     <item
       android:id="@+id/nav_rockets"
-      android:title="Rockets"/>
+      android:title="@string/drawer_menu_rockets"/>
+
+    <item
+      android:id="@+id/nav_cores"
+      android:title="@string/drawer_menu_cores"/>
   </group>
 
-  <item android:id="@+id/nav_switch_theme"
-    android:title="Theme"
+  <item
+    android:id="@+id/nav_switch_theme"
+    android:title="@string/drawer_menu_theme"
     app:actionLayout="@layout/layout_switch"/>
 
 </menu>

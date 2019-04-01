@@ -1,13 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
   <string name="app_name">SpaceXApp</string>
   <string name="navigation_drawer_open">Open navigation drawer</string>
   <string name="navigation_drawer_close">Close navigation drawer</string>
 
-  <string name="missions">Missions</string>
-  <string name="status">Status</string>
-  <string name="company">Company</string>
-  <string name="country">Country</string>
+  <string name="missions">Миссии</string>
+  <string name="status">Статус</string>
+  <string name="company">Компания</string>
+  <string name="country">Страна</string>
   <string name="boosters">Boosters</string>
 
   <string name="drawer_menu_ships">Ships</string>
@@ -21,8 +22,5 @@
   <string name="capsule_item_capsule_specs">Capsule Specs</string>
   <string name="type">Type</string>
   <string name="serial">Serial</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

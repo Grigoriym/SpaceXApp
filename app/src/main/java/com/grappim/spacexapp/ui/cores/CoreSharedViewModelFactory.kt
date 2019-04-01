@@ -1,14 +1,13 @@
-package com.grappim.spacexapp.ui.capsules
+package com.grappim.spacexapp.ui.cores
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.API
 
-class CapsuleSharedViewModelFactory(
+class CoreSharedViewModelFactory(
   private val api: API
 ) : ViewModelProvider.NewInstanceFactory() {
 
   override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-    CapsuleSharedViewModel(api) as T
-
+    CoresSharedViewModel(api) as T
 }
