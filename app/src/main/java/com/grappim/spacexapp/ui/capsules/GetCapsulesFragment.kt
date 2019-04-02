@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 class GetCapsulesFragment : Fragment(), KodeinAware {
 
@@ -29,6 +30,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
   private val viewModelFactory: CapsuleSharedViewModelFactory by instance()
 
   private val observer = Observer<List<CapsuleModel>> {
+    Timber.d("GetCapsulesFragment - observer")
     cAdapter.loadItems(it)
     rvGetCapsules.scheduleLayoutAnimation()
   }
@@ -37,36 +39,46 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val viewModel: CapsuleSharedViewModel by lazy {
     ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(CapsuleSharedViewModel::class.java)
+        .of(this, viewModelFactory)
+        .get(CapsuleSharedViewModel::class.java)
   }
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
+      inflater: LayoutInflater, container: ViewGroup?,
+      savedInstanceState: Bundle?
   ): View? {
     args = arguments?.getInt(FieldConstants.CAPSULES_ARGS)
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  override fun onActivityCreated(savedInstanceState: Bundle?) {
+    super.onActivityCreated(savedInstanceState)
+    Timber.d("GetCapsulesFragment - onActivityCreated")
+
     viewModel.allCapsules.observe(this, observer)
     viewModel.upcomingCapsules.observe(this, observer)
     viewModel.pastCapsules.observe(this, observer)
+
     bindAdapter()
     getData()
+
     srlGetCapsules.setOnRefreshListener {
       getData()
       srlGetCapsules.isRefreshing = false
     }
   }
 
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    Timber.d("GetCapsulesFragment - onViewCreated")
+  }
+
   private fun getData() {
+    Timber.d("GetCapsulesFragment - getData")
     when (args) {
-      1 -> viewModel.getAllCapsules()
-      2 -> viewModel.getUpcomingCapsules()
-      3 -> viewModel.getPastCapsules()
+      0 -> viewModel.getAllCapsules()
+      1 -> viewModel.getUpcomingCapsules()
+      2 -> viewModel.getPastCapsules()
     }
   }
 
@@ -80,8 +92,18 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       layoutManager = LinearLayoutManager(this.context)
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+          .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = cAdapter
     }
+  }
+
+  companion object {
+    @JvmStatic
+    fun newInstance(param1: Int) =
+        GetCapsulesFragment().apply {
+          arguments = Bundle().apply {
+            putInt(FieldConstants.CAPSULES_ARGS, param1)
+          }
+        }
   }
 }

@@ -1,10 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/frameLayout"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   tools:context=".ui.missionspayloads.MissionFragment">
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <TextView
+      android:id="@+id/tvMissionPayloadId"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:textSize="20sp"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      tools:text="SpaceX CRS-1"/>
+
+    <TextView
+      android:id="@+id/tvMissionNationality"
+      android:textStyle="bold"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="8dp"
+      android:layout_marginRight="8dp"
+      android:textSize="20sp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@+id/tvMissionPayloadId"
+      tools:text="United States"/>
+
+    <TextView
+      android:id="@+id/textView36"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Reused"
+      app:layout_constraintBottom_toBottomOf="@+id/ivMissionReused"
+      app:layout_constraintStart_toStartOf="@+id/tvMissionPayloadId"
+      app:layout_constraintTop_toTopOf="@+id/ivMissionReused"/>
+
+    <ImageView
+      android:id="@+id/ivMissionReused"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="32dp"
+      app:layout_constraintEnd_toEndOf="@+id/tvMissionNationality"
+      app:layout_constraintTop_toBottomOf="@+id/tvMissionPayloadId"
+      tools:src="@drawable/ic_check_circle_black_24dp"/>
+
+    <TextView
+      android:id="@+id/textView37"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="Manufacturer"
+      app:layout_constraintStart_toStartOf="@+id/textView36"
+      app:layout_constraintTop_toBottomOf="@+id/ivMissionReused"/>
+
+    <TextView
+      android:id="@+id/tvMissionManufacturer"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="@+id/ivMissionReused"
+      app:layout_constraintTop_toTopOf="@+id/textView37"
+      tools:text="SpaceX"/>
+
+    <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/textView37">
+
+      <ExpandableListView
+        android:id="@+id/elvMission"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>
