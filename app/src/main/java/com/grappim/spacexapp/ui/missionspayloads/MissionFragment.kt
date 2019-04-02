@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.model.payloads.PayloadModel
+import com.grappim.spacexapp.ui.CustomExpandableListAdapter
+import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
@@ -23,6 +25,29 @@ class MissionFragment : Fragment(), KodeinAware {
 
   private val observer = Observer<PayloadModel> {
     Timber.d(it.toString())
+
+    tvMissionPayloadId.text = it.payloadId
+    tvMissionManufacturer.text = it.manufacturer
+    tvMissionNationality.text = it.nationality ?: "N/A"
+    ivMissionReused.setImageResource(
+      if (it?.reused!!) R.drawable.ic_check_circle_black_24dp
+      else R.drawable.ic_cancel_black_24dp
+    )
+
+    elvMission.setAdapter(
+      CustomExpandableListAdapter(
+        context!!,
+        elvMission,
+        "Orbit Params",
+        it,
+        R.layout.layout_elv_mission_item
+      ) { view ->
+        MissionsPayloadsListAdapterItem(
+          view,
+          it
+        ).fillItemWithData()
+      }
+    )
   }
 
   private var args: Mission? = null

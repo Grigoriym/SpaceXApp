@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
+import com.grappim.spacexapp.ui.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 
@@ -58,6 +59,22 @@ class RocketDetailsFragment : Fragment() {
         if (it.active!!) R.drawable.ic_check_circle_black_24dp
         else R.drawable.ic_cancel_black_24dp
       )
+
+      elvRocketDetailsMetrics.setAdapter(
+        CustomExpandableListAdapter(
+          context!!,
+          elvRocketDetailsMetrics,
+          "Metrics",
+          it,
+          R.layout.layout_elv_rocket_details_metrics
+        ) { view ->
+          MetricsListAdapterItem(
+            view,
+            it
+          ).fillItemsWithData()
+        }
+      )
+
     }
   }
 

@@ -5,6 +5,8 @@
   android:id="@+id/mobile_navigation"
   app:startDestination="@id/capsuleFragment">
 
+  <!--CAPSULES-->
+
   <fragment
     android:id="@+id/capsuleFragment"
     android:label="Capsules"
