@@ -29,4 +29,9 @@
   <string name="capsule_item_capsule_specs">Capsule Specs</string>
   <string name="active_since">Active since</string>
 
+  <string name="rocket_details_metrics_m_ft">%1$sм/%2$sфт</string>
+  <string name="rocket_details_metrics_kg_lb">%1$sкг/%2$slb</string>
+
+  <string name="successful_attempted">%1$d/%2$d</string>
+
 </resources>

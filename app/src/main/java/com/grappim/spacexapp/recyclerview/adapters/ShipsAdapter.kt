@@ -3,7 +3,6 @@ package com.grappim.spacexapp.recyclerview.adapters
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.viewholders.ShipsViewHolder
@@ -37,16 +36,6 @@ class ShipsAdapter(
       itemView.setOnClickListener {
         onClick(items[position])
       }
-
-      // items[position].roles?.let {
-      //   for (item in it) {
-      //     val chip = Chip(context)
-      //     chip.text = item
-      //     chip.isClickable = true
-      //     chip.isCheckable = false
-      //     chipGroup.addView(chip)
-      //   }
-      // }
     }
   }
 

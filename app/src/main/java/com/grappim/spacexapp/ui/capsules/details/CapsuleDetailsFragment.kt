@@ -4,19 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
+import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 
-class CapsuleDetailsFragment : Fragment() {
+class CapsuleDetailsFragment : ScopedFragment() {
 
   private var args: CapsuleModel? = null
   private lateinit var mAdapter: RvInnerMissionsAdapter
@@ -27,16 +25,6 @@ class CapsuleDetailsFragment : Fragment() {
   ): View? {
     args = arguments?.getParcelable("model")
     return inflater.inflate(R.layout.fragment_capsule_details, container, false)
-  }
-
-  override fun onResume() {
-    super.onResume()
-    (activity as AppCompatActivity).supportActionBar?.hide()
-  }
-
-  override fun onStop() {
-    super.onStop()
-    (activity as AppCompatActivity).supportActionBar?.show()
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

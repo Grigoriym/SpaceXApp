@@ -10,7 +10,6 @@ import kotlinx.android.synthetic.main.layout_ship_item.view.*
 class ShipsViewHolder(
   private val view: View
 ) : RecyclerView.ViewHolder(view) {
-  // val chipGroup: ChipGroup = view.cgShipItem
   var ship: ShipModel? = null
     set(value) {
       field = value

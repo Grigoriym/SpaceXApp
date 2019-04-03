@@ -1,27 +1,17 @@
 package com.grappim.spacexapp.ui
 
-import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import com.grappim.spacexapp.model.capsule.CapsuleModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlin.coroutines.CoroutineContext
 
-abstract class ScopedFragment : Fragment(), CoroutineScope {
+abstract class ScopedFragment : Fragment() {
 
-  private lateinit var job: Job
-  override val coroutineContext: CoroutineContext
-    get() = job + Dispatchers.Main
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    job = Job()
+  override fun onResume() {
+    super.onResume()
+    (activity as AppCompatActivity).supportActionBar?.hide()
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    job.cancel()
+  override fun onStop() {
+    super.onStop()
+    (activity as AppCompatActivity).supportActionBar?.show()
   }
 }
