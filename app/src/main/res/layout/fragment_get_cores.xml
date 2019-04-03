@@ -5,6 +5,14 @@
   android:layout_height="match_parent"
   tools:context=".ui.cores.GetCoresFragment">
 
+  <ProgressBar
+    android:id="@+id/pbGetCores"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:visibility="gone"/>
+
   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
     android:id="@+id/srlGetCores"
     android:layout_width="match_parent"

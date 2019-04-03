@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     val menu = navigationView.menu
     val menuItem = menu.findItem(R.id.nav_switch_theme)
     val actionView = menuItem.actionView
+
     switcher = actionView.findViewById(R.id.drawerSwitch)
     switcher.isChecked = delegate.localNightMode != AppCompatDelegate.MODE_NIGHT_NO
     switcher.setOnCheckedChangeListener { _, isChecked ->

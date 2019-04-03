@@ -135,6 +135,7 @@
       android:id="@+id/ivCoreItemWaterLanding"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:tint="@color/drawableVector"
       app:layout_constraintEnd_toEndOf="@+id/tvCoreItemASDS"
       app:layout_constraintTop_toTopOf="@+id/tvCoreItemLabelWaterLanding"
       tools:src="@drawable/ic_check_circle_black_24dp"/>

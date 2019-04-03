@@ -15,12 +15,15 @@
     <TextView
       android:id="@+id/tvShipItemName"
       android:textStyle="bold"
-      android:layout_width="wrap_content"
+      android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
       android:layout_marginStart="8dp"
+      android:layout_marginEnd="8dp"
       android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp"
       android:textSize="20sp"
+      app:layout_constraintEnd_toStartOf="@+id/guideline2"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
       tools:text="Go Navigator"/>
@@ -37,20 +40,19 @@
       app:layout_constraintTop_toTopOf="@+id/tvShipItemName"
       tools:text="Tug"/>
 
-    <com.google.android.material.chip.ChipGroup
-      android:id="@+id/cgShipItem"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="16dp"
-      android:layout_marginStart="8dp"
-      android:layout_marginEnd="8dp"
-      android:layout_marginLeft="8dp"
-      android:layout_marginRight="8dp"
-      app:chipSpacingVertical="8dp"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintHorizontal_bias="0.498"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/tvShipItemName"/>
+    <!--<com.google.android.material.chip.ChipGroup-->
+      <!--android:id="@+id/cgShipItem"-->
+      <!--android:layout_width="0dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_marginTop="16dp"-->
+      <!--android:layout_marginStart="8dp"-->
+      <!--android:layout_marginEnd="8dp"-->
+      <!--android:layout_marginLeft="8dp"-->
+      <!--android:layout_marginRight="8dp"-->
+      <!--app:chipSpacingVertical="8dp"-->
+      <!--app:layout_constraintEnd_toEndOf="parent"-->
+      <!--app:layout_constraintStart_toStartOf="parent"-->
+      <!--app:layout_constraintTop_toBottomOf="@+id/tvShipItemName"/>-->
 
     <TextView
       android:id="@+id/textView18"
@@ -61,12 +63,13 @@
       android:layout_marginLeft="8dp"
       android:text="Active"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/cgShipItem"/>
+      app:layout_constraintTop_toBottomOf="@+id/tvShipItemType"/>
 
     <ImageView
       android:id="@+id/ivShipItemActive"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
+      android:tint="@color/drawableVector"
       app:layout_constraintEnd_toEndOf="@+id/tvShipItemType"
       app:layout_constraintTop_toTopOf="@+id/textView18"
       tools:src="@drawable/ic_check_circle_black_24dp"/>
@@ -106,6 +109,16 @@
       app:layout_constraintEnd_toEndOf="@+id/tvShipItemHomePort"
       app:layout_constraintTop_toTopOf="@+id/textView30"
       tools:text="Moored"/>
+    <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintGuide_percent="0.6"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.network.interceptors
 
 import android.content.Context
-import android.net.ConnectivityManager
 import com.grappim.spacexapp.util.NoConnectivityException
+import com.grappim.spacexapp.util.connectivityManager
 import okhttp3.Interceptor
 import okhttp3.Response
 import timber.log.Timber
@@ -22,9 +22,7 @@ class ConnectivityInterceptorImpl(
   }
 
   private fun isOnline(): Boolean {
-    val connectivityManager = appContext
-      ?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val networkInfo = connectivityManager.activeNetworkInfo
+    val networkInfo = appContext?.connectivityManager?.activeNetworkInfo
     return networkInfo != null && networkInfo.isConnected
   }
 }

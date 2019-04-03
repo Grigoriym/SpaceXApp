@@ -1,6 +1,9 @@
 package com.grappim.spacexapp
 
 import android.app.Application
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
@@ -9,6 +12,7 @@ import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
 import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
 import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -17,6 +21,9 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import timber.log.Timber
+import java.security.KeyManagementException
+import java.security.NoSuchAlgorithmException
+import javax.net.ssl.SSLContext
 
 class SpaceXApplication : Application(), KodeinAware {
 
@@ -34,10 +41,29 @@ class SpaceXApplication : Application(), KodeinAware {
   }
 
   override fun onCreate() {
+    Timber.d("Application - onCreate")
     super.onCreate()
     if (BuildConfig.DEBUG) {
       Timber.plant(Timber.DebugTree())
     }
-    Timber.d("Application - onCreate")
+    AndroidThreeTen.init(this)
+    enableTLS12OnPreLollipop()
+  }
+
+  private fun enableTLS12OnPreLollipop() {
+    try {
+      ProviderInstaller.installIfNeeded(applicationContext)
+      val sslContext: SSLContext = SSLContext.getInstance("TLSv1.2")
+      sslContext.init(null, null, null)
+      sslContext.createSSLEngine()
+    } catch (e: GooglePlayServicesRepairableException) {
+      e.printStackTrace()
+    } catch (e: GooglePlayServicesNotAvailableException) {
+      e.printStackTrace()
+    } catch (e: NoSuchAlgorithmException) {
+      e.printStackTrace()
+    } catch (e: KeyManagementException) {
+      e.printStackTrace()
+    }
   }
 }

@@ -14,6 +14,8 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
 import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.gone
+import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import kotlinx.android.synthetic.main.fragment_get_cores.*
 import org.kodein.di.KodeinAware
@@ -27,6 +29,7 @@ class GetCoresFragment : Fragment(), KodeinAware {
   private lateinit var coreAdapter: CoresAdapter
 
   private val observer = Observer<List<CoreModel>> {
+    pbGetCores.gone()
     coreAdapter.loadItems(it)
     rvGetCores.scheduleLayoutAnimation()
   }
@@ -51,6 +54,7 @@ class GetCoresFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    pbGetCores.show()
 
     viewModel.apply {
       allCores.observe(this@GetCoresFragment, observer)

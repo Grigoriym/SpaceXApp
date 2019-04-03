@@ -11,6 +11,9 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.CustomExpandableListAdapter
+import com.grappim.spacexapp.util.gone
+import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -24,15 +27,12 @@ class MissionFragment : Fragment(), KodeinAware {
   private val viewModelFactory: MissionSharedViewModelFactory by instance()
 
   private val observer = Observer<PayloadModel> {
-    Timber.d(it.toString())
+    pbMission.gone()
 
     tvMissionPayloadId.text = it.payloadId
     tvMissionManufacturer.text = it.manufacturer
     tvMissionNationality.text = it.nationality ?: "N/A"
-    ivMissionReused.setImageResource(
-      if (it?.reused!!) R.drawable.ic_check_circle_black_24dp
-      else R.drawable.ic_cancel_black_24dp
-    )
+    ivMissionReused.setImageResource(setMyImageResource(it?.reused))
 
     elvMission.setAdapter(
       CustomExpandableListAdapter(
@@ -68,6 +68,7 @@ class MissionFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    pbMission.show()
 
     viewModel.getPayloadById(args?.name?.replace(" ", "-"))
     viewModel.onePayload.observe(this, observer)

@@ -91,6 +91,7 @@
         android:id="@+id/ivRocketDetailsActive"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:tint="@color/drawableVector"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintTop_toTopOf="@+id/tvRocketDetailsType"
         tools:src="@drawable/ic_check_circle_black_24dp"/>

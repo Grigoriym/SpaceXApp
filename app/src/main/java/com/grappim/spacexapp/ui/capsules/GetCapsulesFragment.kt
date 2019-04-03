@@ -15,6 +15,8 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.gone
+import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -31,6 +33,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val observer = Observer<List<CapsuleModel>> {
     Timber.d("GetCapsulesFragment - observer")
+    pbGetCapsules.gone()
     cAdapter.loadItems(it)
     rvGetCapsules.scheduleLayoutAnimation()
   }
@@ -54,6 +57,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
     Timber.d("GetCapsulesFragment - onActivityCreated")
+    pbGetCapsules.show()
 
     viewModel.allCapsules.observe(this, observer)
     viewModel.upcomingCapsules.observe(this, observer)
@@ -95,15 +99,5 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
           .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = cAdapter
     }
-  }
-
-  companion object {
-    @JvmStatic
-    fun newInstance(param1: Int) =
-        GetCapsulesFragment().apply {
-          arguments = Bundle().apply {
-            putInt(FieldConstants.CAPSULES_ARGS, param1)
-          }
-        }
   }
 }

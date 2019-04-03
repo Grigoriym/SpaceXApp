@@ -15,7 +15,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.8"
+        versionName "1.8.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         archivesBaseName = "$applicationId-v$versionCode($versionName)"
     }
@@ -75,6 +75,10 @@ dependencies {
     //    Kodein
     implementation 'org.kodein.di:kodein-di-generic-jvm:6.1.0'
     implementation 'org.kodein.di:kodein-di-framework-android-x:6.1.0'
+
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.2-alpha02'

@@ -1,11 +1,11 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.viewholders.CapsulesViewHolder
+import com.grappim.spacexapp.util.inflateLayout
 
 class CapsulesAdapter(
   val onClick: (CapsuleModel) -> Unit
@@ -18,8 +18,9 @@ class CapsulesAdapter(
     viewType: Int
   ): CapsulesViewHolder =
     CapsulesViewHolder(
-      LayoutInflater.from(parent.context)
-        .inflate(R.layout.layout_capsule_item, parent, false)
+      parent
+        .context
+        .inflateLayout(R.layout.layout_capsule_item, parent)
     )
 
   override fun getItemCount(): Int = items.size

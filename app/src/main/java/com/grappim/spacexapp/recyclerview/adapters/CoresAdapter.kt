@@ -1,11 +1,11 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
-import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.viewholders.CoreViewHolder
+import com.grappim.spacexapp.util.inflateLayout
 
 class CoresAdapter(
   val onClick: (CoreModel) -> Unit
@@ -14,8 +14,9 @@ class CoresAdapter(
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoreViewHolder =
     CoreViewHolder(
-      LayoutInflater.from(parent.context)
-        .inflate(R.layout.layout_core_item, parent, false)
+      parent
+        .context
+        .inflateLayout(R.layout.layout_core_item, parent)
     )
 
   override fun getItemCount(): Int = items.size
