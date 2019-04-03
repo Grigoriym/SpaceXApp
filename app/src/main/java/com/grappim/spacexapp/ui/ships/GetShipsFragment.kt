@@ -14,6 +14,8 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
+import com.grappim.spacexapp.util.gone
+import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_get_ships.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -24,6 +26,7 @@ class GetShipsFragment : Fragment(), KodeinAware {
   override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
   private val observer = Observer<List<ShipModel>> {
+    pbGetShips.gone()
     shipAdapter.loadItems(it)
     rvGetShips.scheduleLayoutAnimation()
   }
@@ -44,6 +47,7 @@ class GetShipsFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    pbGetShips.show()
 
     viewModel.apply {
       allShips.observe(this@GetShipsFragment, observer)

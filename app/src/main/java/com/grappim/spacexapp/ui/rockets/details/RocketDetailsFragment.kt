@@ -11,6 +11,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.ui.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 
 class RocketDetailsFragment : Fragment() {
@@ -55,10 +56,7 @@ class RocketDetailsFragment : Fragment() {
       tvRocketDetailsCountry.text = it.country
       tvRocketDetailsSuccessRate.text = it.successRatePct.toString()
       tvRocketDetailsStages.text = it.stages.toString()
-      ivRocketDetailsActive.setImageResource(
-        if (it.active!!) R.drawable.ic_check_circle_black_24dp
-        else R.drawable.ic_cancel_black_24dp
-      )
+      ivRocketDetailsActive.setImageResource(setMyImageResource(it.active))
 
       elvRocketDetailsMetrics.setAdapter(
         CustomExpandableListAdapter(

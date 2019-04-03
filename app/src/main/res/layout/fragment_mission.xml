@@ -7,6 +7,14 @@
   android:layout_height="match_parent"
   tools:context=".ui.missionspayloads.MissionFragment">
 
+  <ProgressBar
+    android:id="@+id/pbMission"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:visibility="gone"/>
+
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -40,7 +48,7 @@
       android:id="@+id/textView36"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Reused"
+      android:text="@string/reused"
       app:layout_constraintBottom_toBottomOf="@+id/ivMissionReused"
       app:layout_constraintStart_toStartOf="@+id/tvMissionPayloadId"
       app:layout_constraintTop_toTopOf="@+id/ivMissionReused"/>
@@ -50,6 +58,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="32dp"
+      android:tint="@color/drawableVector"
       app:layout_constraintEnd_toEndOf="@+id/tvMissionNationality"
       app:layout_constraintTop_toBottomOf="@+id/tvMissionPayloadId"
       tools:src="@drawable/ic_check_circle_black_24dp"/>
@@ -59,7 +68,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:text="Manufacturer"
+      android:text="@string/manufacturer"
       app:layout_constraintStart_toStartOf="@+id/textView36"
       app:layout_constraintTop_toBottomOf="@+id/ivMissionReused"/>
 
@@ -87,7 +96,8 @@
         android:id="@+id/elvMission"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"

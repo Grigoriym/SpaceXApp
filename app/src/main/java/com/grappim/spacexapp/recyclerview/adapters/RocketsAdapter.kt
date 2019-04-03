@@ -11,6 +11,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.viewholders.RocketsViewHolder
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.inflateLayout
 
 class RocketsAdapter(
   private val context: Context?,
@@ -27,8 +28,9 @@ class RocketsAdapter(
     viewType: Int
   ): RocketsViewHolder =
     RocketsViewHolder(
-      LayoutInflater.from(parent.context)
-        .inflate(R.layout.layout_rocket_item, parent, false)
+      parent
+        .context
+        .inflateLayout(R.layout.layout_rocket_item, parent)
     )
 
   override fun getItemCount(): Int = items.size
@@ -42,7 +44,7 @@ class RocketsAdapter(
       .into(holder.ivGetRockets)
     holder.apply {
       rocket = items[position]
-      btnRocketItem.setOnClickListener{
+      btnRocketItem.setOnClickListener {
         onClick(items[position])
       }
       itemView.setOnClickListener {

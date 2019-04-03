@@ -8,12 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_ship_details.*
 
 class ShipDetailsFragment : Fragment() {
@@ -57,13 +59,25 @@ class ShipDetailsFragment : Fragment() {
       tvShipDetailsHomePort.text = it.homePort
       tvShipDetailsStatus.text = it.status
       tvShipDetailsLandings.text = "${it.successfulLandings ?: 0} / ${it.attemptedLandings ?: 0}"
+      ivShipDetailsActive.setImageResource(setMyImageResource(it.active))
       mAdapter.loadItems(it.missions)
+
+      for (item in it.roles.orEmpty()) {
+        val chip = Chip(context)
+        chip.text = item
+        chip.isClickable = true
+        chip.isCheckable = false
+        cgShipDetails.addView(chip)
+      }
+
     }
   }
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      findNavController().navigate(R.id.nextFragment)
+      val bndl = Bundle()
+      bndl.putParcelable("model", it)
+      findNavController().navigate(R.id.nextFragment, bndl)
     }
     rvShipDetailsMissions.apply {
       layoutManager = LinearLayoutManager(context)

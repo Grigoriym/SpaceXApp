@@ -10,21 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.grappim.spacexapp.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 inline val Context.connectivityManager: ConnectivityManager?
   get() = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -132,10 +130,18 @@ inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
 }
 
 fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
+  Timber.d("Extensions - fetchData")
   CoroutineScope(Dispatchers.Main).launch {
     val response = req.await()
     if (response.isSuccessful) {
+      Timber.d("Extensions - fetchData - response is successful")
       response.body()?.let { mld.value = it }
     }
   }
 }
+
+fun setMyImageResource(bool: Boolean?): Int =
+  when (bool) {
+    true -> R.drawable.ic_check_circle_black_24dp
+    else -> R.drawable.ic_cancel_black_24dp
+  }

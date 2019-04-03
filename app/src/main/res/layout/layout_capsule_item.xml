@@ -37,7 +37,7 @@
       app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toEndOf="@+id/textView"
       app:layout_constraintTop_toTopOf="@+id/textView"
-      tools:text="Retitred"/>
+      tools:text="Retired"/>
 
     <TextView
       android:id="@+id/tvCapsuleOriginalLaunch"
@@ -78,7 +78,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="16dp"
-      android:text="Active since"
+      android:text="@string/active_since"
       app:layout_constraintStart_toStartOf="@+id/textView"
       app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
@@ -97,7 +97,7 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginLeft="8dp"
-      android:text="1"
+      tools:text="1"
       app:layout_constraintEnd_toEndOf="@+id/tvCapsuleOriginalLaunch"
       app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toEndOf="@+id/textView3"

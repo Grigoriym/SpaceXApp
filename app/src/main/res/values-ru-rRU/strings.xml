@@ -10,6 +10,13 @@
   <string name="company">Компания</string>
   <string name="country">Страна</string>
   <string name="boosters">Boosters</string>
+  <string name="type">Тип</string>
+  <string name="serial">Serial</string>
+  <string name="manufacturer">Производитель</string>
+  <string name="reused">Reused</string>
+  <string name="active">Active</string>
+  <string name="home_port">Home Port</string>
+  <string name="landings">Посадки</string>
 
   <string name="drawer_menu_ships">Ships</string>
   <string name="drawer_menu_capsules">Capsules</string>
@@ -20,7 +27,6 @@
   <string name="rocket_item_rocket_specs">Rocket Specs</string>
 
   <string name="capsule_item_capsule_specs">Capsule Specs</string>
-  <string name="type">Type</string>
-  <string name="serial">Serial</string>
+  <string name="active_since">Active since</string>
 
 </resources>
