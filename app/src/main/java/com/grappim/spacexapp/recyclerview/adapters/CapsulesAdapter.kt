@@ -4,20 +4,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.recyclerview.viewholders.CapsulesViewHolder
+import com.grappim.spacexapp.recyclerview.viewholders.CapsuleViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class CapsulesAdapter(
   val onClick: (CapsuleModel) -> Unit
-) : RecyclerView.Adapter<CapsulesViewHolder>() {
+) : RecyclerView.Adapter<CapsuleViewHolder>() {
 
   var items: List<CapsuleModel> = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): CapsulesViewHolder =
-    CapsulesViewHolder(
+  ): CapsuleViewHolder =
+    CapsuleViewHolder(
       parent
         .context
         .inflateLayout(R.layout.layout_capsule_item, parent)
@@ -25,7 +25,7 @@ class CapsulesAdapter(
 
   override fun getItemCount(): Int = items.size
 
-  override fun onBindViewHolder(holder: CapsulesViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: CapsuleViewHolder, position: Int) {
     holder.apply {
       capsule = items[position]
       itemView.setOnClickListener { onClick(items[position]) }

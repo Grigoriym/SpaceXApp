@@ -26,7 +26,6 @@ import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
 class SpaceXApplication : Application(), KodeinAware {
-
   override val kodein by Kodein.lazy {
     import(androidXModule(this@SpaceXApplication))
 

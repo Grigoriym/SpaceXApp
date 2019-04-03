@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.ui.CustomExpandableListAdapter
+import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.getFormattedyyyyMMdd
 import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 
-class RocketDetailsFragment : Fragment() {
+class RocketDetailsFragment : ScopedFragment() {
 
   private var args: RocketModel? = null
 
@@ -24,16 +23,6 @@ class RocketDetailsFragment : Fragment() {
   ): View? {
     args = arguments?.getParcelable("model")
     return inflater.inflate(R.layout.fragment_rocket_details, container, false)
-  }
-
-  override fun onResume() {
-    super.onResume()
-    (activity as AppCompatActivity).supportActionBar?.hide()
-  }
-
-  override fun onStop() {
-    super.onStop()
-    (activity as AppCompatActivity).supportActionBar?.show()
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,6 +40,12 @@ class RocketDetailsFragment : Fragment() {
       tvRocketDetailsBoosters.text = it.boosters.toString()
       tvRocketDetailsCompany.text = it.company
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
+      tvRocketDetailsDateFirstFlight.text =
+        if (it.firstFlight != null) {
+          getFormattedyyyyMMdd(it.firstFlight)
+        } else {
+          "Unknown"
+        }
       tvRocketDetailsDescription.text = it.description
       tvRocketDetailsType.text = it.rocketName
       tvRocketDetailsCountry.text = it.country
@@ -72,8 +67,6 @@ class RocketDetailsFragment : Fragment() {
           ).fillItemsWithData()
         }
       )
-
     }
   }
-
 }
