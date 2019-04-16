@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.ui.CustomExpandableListAdapter
+import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
@@ -32,10 +32,6 @@ class RocketDetailsFragment : ScopedFragment() {
       activity?.onBackPressed()
     }
 
-    GlideApp.with(this)
-      .load("https://upload.wikimedia.org/wikipedia/commons/f/f6/COTS-1_Dragon_After_Return_from_Orbit_%28crop%29.jpg")
-      .into(ivRocketDetails)
-
     args?.let {
       tvRocketDetailsBoosters.text = it.boosters.toString()
       tvRocketDetailsCompany.text = it.company
@@ -52,6 +48,11 @@ class RocketDetailsFragment : ScopedFragment() {
       tvRocketDetailsSuccessRate.text = it.successRatePct.toString()
       tvRocketDetailsStages.text = it.stages.toString()
       ivRocketDetailsActive.setImageResource(setMyImageResource(it.active))
+
+      GlideApp.with(this)
+        .load(it.flickrImages?.random())
+        .centerCrop()
+        .into(ivRocketDetails)
 
       elvRocketDetailsMetrics.setAdapter(
         CustomExpandableListAdapter(

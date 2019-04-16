@@ -3,35 +3,44 @@ package com.grappim.spacexapp.ui.capsules
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.API
+import com.grappim.spacexapp.repository.SpaceXRepository
 import com.grappim.spacexapp.util.fetchData
 import timber.log.Timber
 
 class CapsuleSharedViewModel(
-  private val api: API
+  private val api: API,
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
-  val allCapsules = MutableLiveData<List<CapsuleModel>>()
+  private val _allCapsules = MutableLiveData<List<CapsuleModel>>()
+  val allCapsules: LiveData<List<CapsuleModel>>
+    get() = _allCapsules
 
-  val upcomingCapsules = MutableLiveData<List<CapsuleModel>>()
+  private val _upcomingCapsules = MutableLiveData<List<CapsuleModel>>()
+  val upcomingCapsules: LiveData<List<CapsuleModel>>
+    get() = _upcomingCapsules
 
-  val pastCapsules = MutableLiveData<List<CapsuleModel>>()
+  private val _pastCapsules = MutableLiveData<List<CapsuleModel>>()
+  val pastCapsules: LiveData<List<CapsuleModel>>
+    get() = _pastCapsules
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getPastCapsules() {
     Timber.d("CapsuleSharedViewModel - getPastCapsules")
-    fetchData(api.getPastCapsules(), pastCapsules)
+    fetchData(api.getPastCapsules(), _pastCapsules)
   }
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getUpcomingCapsules() {
     Timber.d("CapsuleSharedViewModel - getUpcomingCapsules")
-    fetchData(api.getUpcomingCapsules(), upcomingCapsules)
+    fetchData(api.getUpcomingCapsules(), _upcomingCapsules)
   }
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllCapsules() {
     Timber.d("CapsuleSharedViewModel - getAllCapsules")
-    fetchData(api.getCapsules(), allCapsules)
+    fetchData(api.getCapsules(), _allCapsules)
+    // _allCapsules.value = repository.getCapsules().value
   }
 
 }

@@ -26,6 +26,8 @@ data class RocketModel(
   val firstFlight: String?,
   @SerializedName("first_stage")
   val firstStage: FirstStage?,
+  @SerializedName("flickr_images")
+  val flickrImages: List<String>?,
   @SerializedName("height")
   val height: Height?,
   @SerializedName("id")

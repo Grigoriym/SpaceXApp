@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.FieldConstants
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.NIGHT_THEME_PREF_KEY
+import com.grappim.spacexapp.util.THEME_PREFS
 import com.grappim.spacexapp.util.startActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import timber.log.Timber
@@ -39,8 +40,8 @@ class SplashActivity : AppCompatActivity() {
   }
 
   private fun initSharedPrefs() {
-    val prefs = getSharedPreferences(FieldConstants.THEME_PREFS, Context.MODE_PRIVATE)
-    val restoredValue = prefs.getBoolean(FieldConstants.NIGHT_THEME_PREF_KEY, false)
+    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
+    val restoredValue = prefs.getBoolean(NIGHT_THEME_PREF_KEY, false)
     if (!restoredValue) {
       delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
     } else {

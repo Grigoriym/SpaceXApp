@@ -13,10 +13,9 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
-import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.CORES_ARGS
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
-import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import kotlinx.android.synthetic.main.fragment_get_cores.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
@@ -48,7 +47,7 @@ class GetCoresFragment : Fragment(), KodeinAware {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getInt(FieldConstants.CORES_ARGS)
+    args = arguments?.getInt(CORES_ARGS)
     return inflater.inflate(R.layout.fragment_get_cores, container, false)
   }
 

@@ -7,7 +7,7 @@ import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
-import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.SPACE_X_BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.OkHttpClient
@@ -38,7 +38,7 @@ interface API {
 
       return Retrofit.Builder()
         .client(okHttpClient)
-        .baseUrl(FieldConstants.SPACE_X_BASE_URL)
+        .baseUrl(SPACE_X_BASE_URL)
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         .build()

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Response
 import timber.log.Timber
 
@@ -122,20 +120,15 @@ fun View.showSnackbar(text: String, timeLength: Int) {
   Snackbar.make(this, text, timeLength).show()
 }
 
-inline fun FragmentManager.transact(action: FragmentTransaction.() -> Unit) {
-  beginTransaction()
-    .apply {
-      action()
-    }.commit()
-}
-
 fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
   Timber.d("Extensions - fetchData")
-  CoroutineScope(Dispatchers.Main).launch {
+  CoroutineScope(Dispatchers.IO).launch {
     val response = req.await()
     if (response.isSuccessful) {
       Timber.d("Extensions - fetchData - response is successful")
-      response.body()?.let { mld.value = it }
+      withContext(Dispatchers.Main){
+        response.body()?.let { mld.value = it }
+      }
     }
   }
 }

@@ -14,7 +14,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
-import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.CAPSULES_ARGS
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
@@ -50,7 +50,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       inflater: LayoutInflater, container: ViewGroup?,
       savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getInt(FieldConstants.CAPSULES_ARGS)
+    args = arguments?.getInt(CAPSULES_ARGS)
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
   }
 
@@ -59,9 +59,11 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     Timber.d("GetCapsulesFragment - onActivityCreated")
     pbGetCapsules.show()
 
-    viewModel.allCapsules.observe(this, observer)
-    viewModel.upcomingCapsules.observe(this, observer)
-    viewModel.pastCapsules.observe(this, observer)
+    viewModel.apply {
+      allCapsules.observe(this@GetCapsulesFragment, observer)
+      upcomingCapsules.observe(this@GetCapsulesFragment, observer)
+      pastCapsules.observe(this@GetCapsulesFragment, observer)
+    }
 
     bindAdapter()
     getData()
@@ -93,7 +95,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       findNavController().navigate(R.id.nextFragment, args)
     }
     rvGetCapsules.apply {
-      layoutManager = LinearLayoutManager(this.context)
+      layoutManager = LinearLayoutManager(context)
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
           .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)

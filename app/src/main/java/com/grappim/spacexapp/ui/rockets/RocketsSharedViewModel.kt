@@ -1,6 +1,7 @@
 package com.grappim.spacexapp.ui.rockets
 
 import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.grappim.spacexapp.model.rocket.RocketModel
@@ -11,10 +12,12 @@ class RocketsSharedViewModel(
   private val api: API
 ) : ViewModel(), LifecycleObserver {
 
-  val allRockets = MutableLiveData<List<RocketModel>>()
+  private val _allRockets = MutableLiveData<List<RocketModel>>()
+  val allRockets: LiveData<List<RocketModel>>
+    get() = _allRockets
 
   fun getAllRockets() {
-    fetchData(api.getAllRockets(), allRockets)
+    fetchData(api.getAllRockets(), _allRockets)
   }
 
 }
