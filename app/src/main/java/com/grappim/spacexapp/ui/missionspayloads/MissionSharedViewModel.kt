@@ -9,17 +9,21 @@ class MissionSharedViewModel(
   private val api: API
 ) : ViewModel(), LifecycleObserver {
 
-  val allPayloads = MutableLiveData<List<PayloadModel>>()
+  private val _allPayloads = MutableLiveData<List<PayloadModel>>()
+  val allPayloads: LiveData<List<PayloadModel>>
+    get() = _allPayloads
 
-  val onePayload = MutableLiveData<PayloadModel>()
+  private val _onePayload = MutableLiveData<PayloadModel>()
+  val onePayload: LiveData<PayloadModel>
+    get() = _onePayload
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllPayloads() {
-    fetchData(api.getAllPayloads(), allPayloads)
+    fetchData(api.getAllPayloads(), _allPayloads)
   }
 
   // @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getPayloadById(payloadId: String?) {
-    fetchData(api.getPayloadById(payloadId), onePayload)
+    fetchData(api.getPayloadById(payloadId), _onePayload)
   }
 }

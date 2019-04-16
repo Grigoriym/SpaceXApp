@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.util
 
 import android.content.Context
 import android.view.LayoutInflater

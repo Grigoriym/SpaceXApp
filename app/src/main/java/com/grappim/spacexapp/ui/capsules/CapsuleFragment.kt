@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.CAPSULES_ARGS
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
 
@@ -26,19 +26,19 @@ class CapsuleFragment : Fragment() {
 
     btnGetAllCapsules.setOnClickListener {
       val args = Bundle()
-      args.putInt(FieldConstants.CAPSULES_ARGS, 0)
+      args.putInt(CAPSULES_ARGS, 0)
       findNavController().navigate(R.id.nextFragment, args)
     }
 
     btnGetUpcomingCapsules.setOnClickListener {
       val args = Bundle()
-      args.putInt(FieldConstants.CAPSULES_ARGS, 1)
+      args.putInt(CAPSULES_ARGS, 1)
       findNavController().navigate(R.id.nextFragment, args)
     }
 
     btnGetPastCapsules.setOnClickListener {
       val args = Bundle()
-      args.putInt(FieldConstants.CAPSULES_ARGS, 2)
+      args.putInt(CAPSULES_ARGS, 2)
       findNavController().navigate(R.id.nextFragment, args)
     }
   }

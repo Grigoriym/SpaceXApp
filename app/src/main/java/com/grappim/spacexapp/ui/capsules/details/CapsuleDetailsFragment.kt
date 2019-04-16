@@ -12,6 +12,7 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 
 class CapsuleDetailsFragment : ScopedFragment() {
@@ -37,7 +38,7 @@ class CapsuleDetailsFragment : ScopedFragment() {
     bindAdapter()
 
     GlideApp.with(this)
-      .load("https://upload.wikimedia.org/wikipedia/commons/f/f6/COTS-1_Dragon_After_Return_from_Orbit_%28crop%29.jpg")
+      .load(capsuleImageList["default"])
       .into(ivCapsuleDetailsToolbar)
 
     args?.let {

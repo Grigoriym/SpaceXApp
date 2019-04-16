@@ -16,7 +16,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.FieldConstants
+import com.grappim.spacexapp.util.NIGHT_THEME_PREF_KEY
+import com.grappim.spacexapp.util.THEME_PREFS
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
@@ -36,15 +37,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 
   private fun setupThemeChange() {
-    val sp = getSharedPreferences(FieldConstants.THEME_PREFS, Context.MODE_PRIVATE)
+    val sp = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
 
     val menu = navigationView.menu
     val menuItem = menu.findItem(R.id.nav_switch_theme)
     val actionView = menuItem.actionView
 
     switcher = actionView.findViewById(R.id.drawerSwitch)
-    switcher.isChecked = getSharedPreferences(FieldConstants.THEME_PREFS, Context.MODE_PRIVATE)
-      .getBoolean(FieldConstants.NIGHT_THEME_PREF_KEY, false)
+    switcher.isChecked = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
+      .getBoolean(NIGHT_THEME_PREF_KEY, false)
     delegate.localNightMode =
       if (!switcher.isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
     switcher.setOnCheckedChangeListener { _, isChecked ->
@@ -53,14 +54,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
           Timber.d("Switcher !isChecked")
           delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
           sp.edit().apply {
-            putBoolean(FieldConstants.NIGHT_THEME_PREF_KEY, false)
+            putBoolean(NIGHT_THEME_PREF_KEY, false)
             apply()
           }
         } else {
           Timber.d("Switcher isChecked")
           delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
           sp.edit().apply {
-            putBoolean(FieldConstants.NIGHT_THEME_PREF_KEY, true)
+            putBoolean(NIGHT_THEME_PREF_KEY, true)
             apply()
           }
         }

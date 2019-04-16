@@ -7,12 +7,14 @@ import com.grappim.spacexapp.util.fetchData
 
 class ShipsSharedViewModel(
   private val api: API
-) : ViewModel(), LifecycleObserver{
+) : ViewModel(), LifecycleObserver {
 
-  val allShips = MutableLiveData<List<ShipModel>>()
+  private val _allShips = MutableLiveData<List<ShipModel>>()
+  val allShips: LiveData<List<ShipModel>>
+    get() = _allShips
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllShips() {
-    fetchData(api.getAllShips(), allShips)
+    fetchData(api.getAllShips(), _allShips)
   }
 }

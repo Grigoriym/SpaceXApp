@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.ui.CustomExpandableListAdapter
+import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.setMyImageResource
 import com.grappim.spacexapp.util.show
@@ -18,7 +18,6 @@ import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import timber.log.Timber
 
 class MissionFragment : Fragment(), KodeinAware {
 
