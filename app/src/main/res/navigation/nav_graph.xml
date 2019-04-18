@@ -134,4 +134,11 @@
       app:destination="@id/missionFragment"/>
   </fragment>
 
+  <!--Info-->
+  <fragment
+    android:id="@+id/infoFragment"
+    android:name="com.grappim.spacexapp.ui.info.InfoFragment"
+    android:label="fragment_info"
+    tools:layout="@layout/fragment_info"/>
+
 </navigation>

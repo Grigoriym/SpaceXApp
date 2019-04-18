@@ -14,16 +14,17 @@ class CapsuleViewHolder(
   var capsule: CapsuleModel? = null
     set(value) {
       field = value
-      view.tvCapsuleSerial.text = value?.capsuleSerial
-      view.tvCapsuleStatus.text = value?.status?.capitalize()
-      view.tvCapsuleOriginalLaunch.text =
-        if (value?.originalLaunch == null) {
-          "Unknown"
-        } else {
-          getFormattedDate(value.originalLaunch)
-        }
-
-      view.tvCapsuleType.text = value?.type
-      view.tvCapsuleNumberOfMissions.text = value?.missions?.size.toString()
+      view.apply {
+        tvCapsuleSerial.text = value?.capsuleSerial
+        tvCapsuleStatus.text = value?.status?.capitalize()
+        tvCapsuleOriginalLaunch.text =
+          if (value?.originalLaunch == null) {
+            "Unknown"
+          } else {
+            getFormattedDate(value.originalLaunch)
+          }
+        tvCapsuleType.text = value?.type
+        tvCapsuleNumberOfMissions.text = value?.missions?.size.toString()
+      }
     }
 }

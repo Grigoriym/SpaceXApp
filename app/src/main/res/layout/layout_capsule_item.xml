@@ -10,7 +10,8 @@
 
   <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/ripple">
 
     <TextView
       android:id="@+id/tvCapsuleSerial"
@@ -97,11 +98,11 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginLeft="8dp"
-      tools:text="1"
       app:layout_constraintEnd_toEndOf="@+id/tvCapsuleOriginalLaunch"
       app:layout_constraintHorizontal_bias="1.0"
       app:layout_constraintStart_toEndOf="@+id/textView3"
-      app:layout_constraintTop_toTopOf="@+id/textView3"/>
+      app:layout_constraintTop_toTopOf="@+id/textView3"
+      tools:text="1"/>
 
     <View
       android:id="@+id/divider"
@@ -117,8 +118,9 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/textView3"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
       android:id="@+id/btnCapsuleSpecs"
+      style="@style/MyMaterialButton"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"

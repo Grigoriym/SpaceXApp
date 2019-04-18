@@ -60,13 +60,17 @@ class RocketDetailsFragment : ScopedFragment() {
           elvRocketDetailsMetrics,
           "Metrics",
           it,
-          R.layout.layout_elv_rocket_details_metrics
-        ) { view ->
-          MetricsListAdapterItem(
-            view,
-            it
-          ).fillItemsWithData()
-        }
+          R.layout.layout_elv_rocket_details_metrics,
+          listAdapterItemInit = { view ->
+            MetricsListAdapterItem(
+              view,
+              it
+            ).fillItemsWithData()
+          },
+          onGroupClick = {
+
+          }
+        )
       )
     }
   }

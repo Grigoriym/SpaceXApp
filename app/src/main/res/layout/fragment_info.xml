@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".ui.info.InfoFragment">
+
+  <ProgressBar
+    android:id="@+id/pbInfo"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:visibility="gone"/>
+
+  <androidx.core.widget.NestedScrollView
+    android:id="@+id/svFragmentInfo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:scrollbars="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/clFragmentInfo"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
+
+      <TextView
+        android:id="@+id/tvInfoName"
+        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:gravity="center"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="SpaceX"/>
+
+      <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Founder"
+        app:layout_constraintStart_toStartOf="@+id/tvInfoName"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoSummary"/>
+
+      <TextView
+        android:id="@+id/tvInfoFounder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoName"
+        app:layout_constraintTop_toTopOf="@+id/textView47"
+        tools:text="Elon Musk"/>
+
+      <TextView
+        android:id="@+id/textView49"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Founded"
+        app:layout_constraintStart_toStartOf="@+id/textView47"
+        app:layout_constraintTop_toBottomOf="@+id/textView47"/>
+
+      <TextView
+        android:id="@+id/tvInfoFounded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoFounder"
+        app:layout_constraintTop_toTopOf="@+id/textView49"
+        tools:text="2002"/>
+
+      <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Empoyees"
+        app:layout_constraintStart_toStartOf="@+id/textView49"
+        app:layout_constraintTop_toBottomOf="@+id/textView49"/>
+
+      <TextView
+        android:id="@+id/tvInfoEmployees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoFounded"
+        app:layout_constraintTop_toTopOf="@+id/textView51"
+        tools:text="7000"/>
+
+      <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Vehicles"
+        app:layout_constraintStart_toStartOf="@+id/textView51"
+        app:layout_constraintTop_toBottomOf="@+id/textView51"/>
+
+      <TextView
+        android:id="@+id/tvInfoVehicles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoEmployees"
+        app:layout_constraintTop_toTopOf="@+id/textView53"
+        tools:text="3"/>
+
+      <TextView
+        android:id="@+id/textView55"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Launch sites"
+        app:layout_constraintStart_toStartOf="@+id/textView53"
+        app:layout_constraintTop_toBottomOf="@+id/textView53"/>
+
+      <TextView
+        android:id="@+id/tvInfoLaunchSItes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoVehicles"
+        app:layout_constraintTop_toTopOf="@+id/textView55"
+        tools:text="3"/>
+
+      <TextView
+        android:id="@+id/textView57"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Test sites"
+        app:layout_constraintStart_toStartOf="@+id/textView55"
+        app:layout_constraintTop_toBottomOf="@+id/textView55"/>
+
+      <TextView
+        android:id="@+id/tvInfoTestSites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoLaunchSItes"
+        app:layout_constraintTop_toTopOf="@+id/textView57"
+        tools:text="1"/>
+
+      <TextView
+        android:id="@+id/textView59"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CEO"
+        app:layout_constraintStart_toStartOf="@+id/textView57"
+        app:layout_constraintTop_toBottomOf="@+id/textView57"/>
+
+      <TextView
+        android:id="@+id/tvInfoCeo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoTestSites"
+        app:layout_constraintTop_toTopOf="@+id/textView59"
+        tools:text="Elon Musk"/>
+
+      <TextView
+        android:id="@+id/textView61"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CTO"
+        app:layout_constraintStart_toStartOf="@+id/textView59"
+        app:layout_constraintTop_toBottomOf="@+id/textView59"/>
+
+      <TextView
+        android:id="@+id/tvInfoCto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoCeo"
+        app:layout_constraintTop_toTopOf="@+id/textView61"
+        tools:text="Elon Musk"/>
+
+      <TextView
+        android:id="@+id/textView63"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="COO"
+        app:layout_constraintStart_toStartOf="@+id/textView61"
+        app:layout_constraintTop_toBottomOf="@+id/textView61"/>
+
+      <TextView
+        android:id="@+id/tvInfoCoo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoCto"
+        app:layout_constraintTop_toTopOf="@+id/textView63"
+        tools:text="Gwynne Shotwell"/>
+
+      <TextView
+        android:id="@+id/textView65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="CTO propulsion"
+        app:layout_constraintStart_toStartOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/textView63"/>
+
+      <TextView
+        android:id="@+id/tvInfoCtoPropulsion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoCoo"
+        app:layout_constraintTop_toTopOf="@+id/textView65"
+        tools:text="Tom Mueller"/>
+
+      <TextView
+        android:id="@+id/textView67"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Valuation"
+        app:layout_constraintStart_toStartOf="@+id/textView65"
+        app:layout_constraintTop_toBottomOf="@+id/textView65"/>
+
+      <TextView
+        android:id="@+id/tvInfoValuation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoCtoPropulsion"
+        app:layout_constraintTop_toTopOf="@+id/textView67"
+        tools:text="15000000000"/>
+
+      <TextView
+        android:id="@+id/tvInfoSummary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvInfoName"
+        app:layout_constraintStart_toStartOf="@+id/tvInfoName"
+        app:layout_constraintTop_toBottomOf="@+id/tvInfoName"
+        tools:text="SpaceX designs, manufacures and launches advanced rockets"/>
+
+      <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvFragmentInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView67">
+
+        <ExpandableListView
+          android:id="@+id/elvInfo"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginBottom="8dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginLeft="8dp"
+          android:layout_marginRight="8dp"
+          android:animateLayoutChanges="true"
+          android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+          android:nestedScrollingEnabled="true"/>
+
+      </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

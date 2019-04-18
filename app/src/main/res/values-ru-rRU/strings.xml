@@ -22,7 +22,7 @@
   <string name="drawer_menu_capsules">Capsules</string>
   <string name="drawer_menu_rockets">Rockets</string>
   <string name="drawer_menu_cores">Cores</string>
-  <string name="drawer_menu_theme">Theme</string>
+  <string name="drawer_menu_theme">Светлая тема</string>
 
   <string name="rocket_item_rocket_specs">Rocket Specs</string>
 

@@ -13,6 +13,8 @@
   <color name="gray">#696969</color>
   <color name="black">#000000</color>
 
+  <color name="windowBackground">#FFFFFF</color>
+
   <color name="innerRvItem">#edd6d6</color>
   <color name="drawableVector">#FF000000</color>
 

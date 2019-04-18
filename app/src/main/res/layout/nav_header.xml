@@ -4,11 +4,11 @@
   android:layout_width="match_parent"
   android:layout_height="176dp"
   android:background="@color/primary_light"
-  android:theme="@style/AppTheme.NoActionBar">
+  android:theme="@style/DayNightAppTheme">
 
   <ImageView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginStart="8dp"

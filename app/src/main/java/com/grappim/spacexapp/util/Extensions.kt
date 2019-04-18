@@ -15,9 +15,11 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import kotlinx.coroutines.*
 import retrofit2.Response
 import timber.log.Timber
@@ -126,7 +128,7 @@ fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
     val response = req.await()
     if (response.isSuccessful) {
       Timber.d("Extensions - fetchData - response is successful")
-      withContext(Dispatchers.Main){
+      withContext(Dispatchers.Main) {
         response.body()?.let { mld.value = it }
       }
     }
