@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
@@ -85,6 +86,10 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       0 -> viewModel.getAllCapsules()
       1 -> viewModel.getUpcomingCapsules()
       2 -> viewModel.getPastCapsules()
+      else -> {
+        Snackbar.make(srlGetCapsules, "Cannot retrieve data", Snackbar.LENGTH_LONG).show()
+        findNavController().popBackStack()
+      }
     }
   }
 

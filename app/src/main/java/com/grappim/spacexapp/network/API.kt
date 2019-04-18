@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
@@ -31,9 +32,9 @@ interface API {
       val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(connectivityInterceptor)
         .addInterceptor(logging)
-        .connectTimeout(120, TimeUnit.SECONDS)
-        .readTimeout(120, TimeUnit.SECONDS)
-        .writeTimeout(90, TimeUnit.SECONDS)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(10, TimeUnit.SECONDS)
+        .writeTimeout(10, TimeUnit.SECONDS)
         .build()
 
       return Retrofit.Builder()
@@ -121,4 +122,9 @@ interface API {
   fun getPayloadById(
     @Path("payloadId") payloadId: String?
   ): Deferred<Response<PayloadModel>>
+
+  //  INFO
+  //  https://api.spacexdata.com/v3/info
+  @GET("info")
+  fun getInfo(): Deferred<Response<InfoModel>>
 }

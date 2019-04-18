@@ -39,13 +39,17 @@ class MissionFragment : Fragment(), KodeinAware {
         elvMission,
         "Orbit Params",
         it,
-        R.layout.layout_elv_mission_item
-      ) { view ->
-        MissionsPayloadsListAdapterItem(
-          view,
-          it
-        ).fillItemWithData()
-      }
+        R.layout.layout_elv_mission_item,
+        listAdapterItemInit = { view ->
+          MissionsPayloadsListAdapterItem(
+            view,
+            it
+          ).fillItemWithData()
+        },
+        onGroupClick = {
+
+        }
+      )
     )
   }
 

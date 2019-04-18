@@ -75,7 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.capsuleFragment,
         R.id.rocketFragment,
         R.id.shipsFragment,
-        R.id.coreFragment
+        R.id.coreFragment,
+        R.id.infoFragment
       ), drawerLayout
     )
 
@@ -104,6 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         switcher.isChecked = !switcher.isChecked
         return false
       }
+      R.id.nav_info -> navController.navigate(R.id.infoFragment)
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true

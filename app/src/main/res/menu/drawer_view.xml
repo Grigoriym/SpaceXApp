@@ -24,4 +24,10 @@
     android:title="@string/drawer_menu_theme"
     app:actionLayout="@layout/layout_switch"/>
 
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/nav_info"
+      android:title="Info"/>
+  </group>
+
 </menu>

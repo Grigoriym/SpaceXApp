@@ -8,7 +8,9 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
@@ -74,6 +76,10 @@ class GetCoresFragment : Fragment(), KodeinAware {
       1 -> viewModel.getAllCapsules()
       2 -> viewModel.getPastCores()
       3 -> viewModel.getUpcomingCores()
+      else -> {
+        Snackbar.make(srlGetCores, "Cannot retrieve data", Snackbar.LENGTH_LONG).show()
+        findNavController().popBackStack()
+      }
     }
   }
 
