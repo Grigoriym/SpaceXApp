@@ -11,7 +11,7 @@ class CapsulesAdapter(
   val onClick: (CapsuleModel) -> Unit
 ) : RecyclerView.Adapter<CapsuleViewHolder>() {
 
-  var items: List<CapsuleModel> = emptyList()
+  private var items: List<CapsuleModel> = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup,

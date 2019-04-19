@@ -17,4 +17,6 @@
 
   <color name="innerRvItem">@color/gray</color>
   <color name="drawableVector">#FFFFFFFF</color>
+
+  <color name="timelineMarker">#5C6BC0</color>
 </resources>

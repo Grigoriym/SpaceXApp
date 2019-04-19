@@ -4,10 +4,10 @@ import android.view.View
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import kotlinx.android.synthetic.main.layout_elv_mission_item.view.*
 
-class MissionsPayloadsListAdapterItem<T>(
+class MissionsPayloadsListAdapterItem(
   val view: View,
-  private val body: T
-) where T : PayloadModel {
+  private val body: PayloadModel
+) {
   fun fillItemWithData() {
     view.tvElvMissionItemLongitude.text = body.orbitParams?.longitude.toString()
     view.tvElvMissionItemReferenceSystem.text = body.orbitParams?.referenceSystem?.capitalize()

@@ -10,6 +10,7 @@ import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
 import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
 import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
+import com.grappim.spacexapp.ui.history.HistoryViewModelFactory
 import com.grappim.spacexapp.ui.info.InfoViewModelFactory
 import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
@@ -42,6 +43,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from provider { ShipsSharedViewModelFactory(instance()) }
     bind() from provider { MissionSharedViewModelFactory(instance()) }
     bind() from provider { InfoViewModelFactory(instance()) }
+    bind() from provider { HistoryViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

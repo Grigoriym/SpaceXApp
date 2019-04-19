@@ -10,14 +10,12 @@ import androidx.lifecycle.ViewModelProviders
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.util.CustomExpandableListAdapter
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.setMyImageResource
-import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import timber.log.Timber
 
 class MissionFragment : Fragment(), KodeinAware {
 
@@ -45,9 +43,6 @@ class MissionFragment : Fragment(), KodeinAware {
             view,
             it
           ).fillItemWithData()
-        },
-        onGroupClick = {
-
         }
       )
     )
@@ -65,17 +60,22 @@ class MissionFragment : Fragment(), KodeinAware {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getParcelable("model")
+    args = arguments?.getParcelable(PARCELABLE_MISSION_MODEL)
     return inflater.inflate(R.layout.fragment_mission, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    Timber.d("MissionFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
     pbMission.show()
 
-    viewModel.getPayloadById(args?.name?.replace(" ", "-"))
+    val missionName = args?.name
+    viewModel
+      .getPayloadById(
+        payloads[missionName]
+          ?: missionName
+      )
     viewModel.onePayload.observe(this, observer)
   }
-
 
 }

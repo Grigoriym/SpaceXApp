@@ -1,7 +1,9 @@
 package com.grappim.spacexapp.network
 
+// import okhttp3.logging.HttpLoggingInterceptor
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
@@ -127,4 +129,9 @@ interface API {
   //  https://api.spacexdata.com/v3/info
   @GET("info")
   fun getInfo(): Deferred<Response<InfoModel>>
+
+  //  HISTORY
+  //  https://api.spacexdata.com/v3/history
+  @GET("history")
+  fun getHistory(): Deferred<Response<List<HistoryModel>>>
 }

@@ -5,10 +5,10 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import kotlinx.android.synthetic.main.layout_elv_rocket_details_metrics.view.*
 
-class MetricsListAdapterItem<T>(
+class MetricsListAdapterItem(
   val view: View,
-  private val body: T
-) where T : RocketModel {
+  private val body: RocketModel
+) {
   fun fillItemsWithData() {
     view
       .tvElvRocketDetailsMetricsDiameter

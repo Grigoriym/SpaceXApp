@@ -54,9 +54,8 @@ class InfoFragment : Fragment(), KodeinAware {
             view, it
           ).fillItemWithData()
         },
-        onGroupClick = {
+        onGroupClick = {}
 
-        }
       )
     )
   }
