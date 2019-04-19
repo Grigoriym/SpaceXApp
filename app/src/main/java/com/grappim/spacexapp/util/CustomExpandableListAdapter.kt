@@ -14,11 +14,11 @@ import timber.log.Timber
 class CustomExpandableListAdapter(
   val context: Context,
   private val expandableListView: ExpandableListView,
-  private val header: String,
+  private val header: String = "Header",
   private val body: Any,
   @LayoutRes private val childLayout: Int,
-  val listAdapterItemInit: (view: View) -> Unit,
-  val onGroupClick: () -> Unit
+  val listAdapterItemInit: (view: View) -> Unit = {},
+  val onGroupClick: () -> Unit = {}
 ) : BaseExpandableListAdapter() {
 
   override fun isChildSelectable(
@@ -73,12 +73,12 @@ class CustomExpandableListAdapter(
         text = header
         setOnClickListener {
           Timber.d("On group Click")
-          onGroupClick
           if (expandableListView.isGroupExpanded(groupPosition)) {
             expandableListView.collapseGroup(groupPosition)
           } else {
             expandableListView.expandGroup(groupPosition)
           }
+          onGroupClick
         }
       }
     return cv!!

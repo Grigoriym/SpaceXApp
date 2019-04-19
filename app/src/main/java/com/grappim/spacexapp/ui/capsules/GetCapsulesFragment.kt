@@ -16,6 +16,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.util.CAPSULES_ARGS
+import com.grappim.spacexapp.util.PARCELABLE_CAPSULE_MODEL
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
@@ -96,7 +97,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
   private fun bindAdapter() {
     cAdapter = CapsulesAdapter {
       val args = Bundle()
-      args.putParcelable("model", it)
+      args.putParcelable(PARCELABLE_CAPSULE_MODEL, it)
       findNavController().navigate(R.id.nextFragment, args)
     }
     rvGetCapsules.apply {

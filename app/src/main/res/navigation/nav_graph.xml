@@ -138,7 +138,24 @@
   <fragment
     android:id="@+id/infoFragment"
     android:name="com.grappim.spacexapp.ui.info.InfoFragment"
-    android:label="fragment_info"
+    android:label="Info"
     tools:layout="@layout/fragment_info"/>
+
+  <!--History-->
+  <fragment
+    android:id="@+id/historyFragment"
+    android:name="com.grappim.spacexapp.ui.history.HistoryFragment"
+    android:label="History"
+    tools:layout="@layout/fragment_history">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/historyDetailsFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/historyDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.history.details.HistoryDetailsFragment"
+    android:label="History details"
+    tools:layout="@layout/fragment_history_details"/>
 
 </navigation>

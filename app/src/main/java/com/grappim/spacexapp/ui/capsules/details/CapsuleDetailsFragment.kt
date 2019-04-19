@@ -12,8 +12,11 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.PARCELABLE_CAPSULE_MODEL
+import com.grappim.spacexapp.util.PARCELABLE_MISSION_MODEL
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
+import timber.log.Timber
 
 class CapsuleDetailsFragment : ScopedFragment() {
 
@@ -24,11 +27,12 @@ class CapsuleDetailsFragment : ScopedFragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getParcelable("model")
+    args = arguments?.getParcelable(PARCELABLE_CAPSULE_MODEL)
     return inflater.inflate(R.layout.fragment_capsule_details, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    Timber.d("CapsuleDetailsFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
     tlbrCapsuleDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
     tlbrCapsuleDetails.setNavigationOnClickListener {
@@ -57,7 +61,7 @@ class CapsuleDetailsFragment : ScopedFragment() {
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
       val args = Bundle()
-      args.putParcelable("model", it)
+      args.putParcelable(PARCELABLE_MISSION_MODEL, it)
       findNavController().navigate(R.id.nextFragment, args)
     }
     rvCapsuleDetails.apply {
