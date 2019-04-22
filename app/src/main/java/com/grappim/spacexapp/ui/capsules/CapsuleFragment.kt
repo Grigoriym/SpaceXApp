@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.CAPSULES_ARGS
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
 
 class CapsuleFragment : Fragment() {
 
   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_capsule, container, false)
   }
@@ -25,21 +24,15 @@ class CapsuleFragment : Fragment() {
     Timber.d("CapsuleFragment - onViewCreated")
 
     btnGetAllCapsules.setOnClickListener {
-      val args = Bundle()
-      args.putInt(CAPSULES_ARGS, 0)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(0))
     }
 
     btnGetUpcomingCapsules.setOnClickListener {
-      val args = Bundle()
-      args.putInt(CAPSULES_ARGS, 1)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(1))
     }
 
     btnGetPastCapsules.setOnClickListener {
-      val args = Bundle()
-      args.putInt(CAPSULES_ARGS, 2)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(2))
     }
   }
 }

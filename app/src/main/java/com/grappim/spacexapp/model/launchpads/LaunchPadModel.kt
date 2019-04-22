@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.launchpads
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class LaunchPadModel(
   @SerializedName("attempted_launches")
   val attemptedLaunches: Int?,
@@ -23,4 +26,4 @@ data class LaunchPadModel(
   val vehiclesLaunched: List<String?>?,
   @SerializedName("wikipedia")
   val wikipedia: String?
-)
+) : Parcelable

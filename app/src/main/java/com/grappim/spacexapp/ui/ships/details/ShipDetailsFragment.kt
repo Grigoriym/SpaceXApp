@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.ScopedFragment
@@ -18,14 +18,13 @@ import kotlinx.android.synthetic.main.fragment_ship_details.*
 
 class ShipDetailsFragment : ScopedFragment() {
 
-  private var args: ShipModel? = null
+  private val args: ShipDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getParcelable("model")
     return inflater.inflate(R.layout.fragment_ship_details, container, false)
   }
 
@@ -36,7 +35,7 @@ class ShipDetailsFragment : ScopedFragment() {
       activity?.onBackPressed()
     }
     bindAdapter()
-    args?.let {
+    args.shipModel.let {
       GlideApp.with(this)
         .load(it.image)
         .into(ivShipDetailsToolbar)
@@ -51,7 +50,7 @@ class ShipDetailsFragment : ScopedFragment() {
         it.attemptedLandings ?: 0
       )
       ivShipDetailsActive.setImageResource(setMyImageResource(it.active))
-      mAdapter.loadItems(it.missions)
+      mAdapter.loadItems(it.missions!!)
 
       for (item in it.roles.orEmpty()) {
         val chip = Chip(context)
@@ -60,15 +59,12 @@ class ShipDetailsFragment : ScopedFragment() {
         chip.isCheckable = false
         cgShipDetails.addView(chip)
       }
-
     }
   }
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      val bndl = Bundle()
-      bndl.putParcelable("model", it)
-      findNavController().navigate(R.id.nextFragment, bndl)
+      findNavController().navigate(ShipDetailsFragmentDirections.nextFragment(it))
     }
     rvShipDetailsMissions.apply {
       layoutManager = LinearLayoutManager(context)

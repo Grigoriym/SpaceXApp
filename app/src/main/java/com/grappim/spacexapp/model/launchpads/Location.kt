@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.launchpads
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Location(
   @SerializedName("latitude")
   val latitude: Double?,
@@ -11,4 +14,4 @@ data class Location(
   val name: String?,
   @SerializedName("region")
   val region: String?
-)
+) : Parcelable

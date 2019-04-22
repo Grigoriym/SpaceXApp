@@ -20,7 +20,7 @@ class RocketsAdapter(
   val onClick: (RocketModel) -> Unit
 ) : RecyclerView.Adapter<RocketsViewHolder>() {
 
-  var items: List<RocketModel> = emptyList()
+  private var items: List<RocketModel> = emptyList()
 
   private val animationUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
   private val animationDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)

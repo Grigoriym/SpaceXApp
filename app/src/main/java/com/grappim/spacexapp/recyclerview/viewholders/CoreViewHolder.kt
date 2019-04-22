@@ -18,11 +18,13 @@ class CoreViewHolder(
       view.tvCoreItemCoreSerial.text = value?.coreSerial
       view.tvCoreItemASDS.text = view.context.getString(
         R.string.successful_attempted,
-        value?.asdsAttempts ?: 0, value?.asdsLandings ?: 0
+        value?.asdsLandings ?: 0,
+        value?.asdsAttempts ?: 0
       )
       view.tvCoreItemRTLS.text = view.context.getString(
         R.string.successful_attempted,
-        value?.rtlsAttempts ?: 0, value?.rtlsLandings ?: 0
+        value?.rtlsLandings ?: 0,
+        value?.rtlsAttempts ?: 0
       )
       view.ivCoreItemWaterLanding.setImageResource(setMyImageResource(value?.waterLanding))
       value?.missions?.let {

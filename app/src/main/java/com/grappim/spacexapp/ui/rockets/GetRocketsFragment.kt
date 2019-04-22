@@ -14,14 +14,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RocketsAdapter
-import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_get_rockets.*
-import kotlinx.android.synthetic.main.layout_rocket_item.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 
 class GetRocketsFragment : Fragment(), KodeinAware {
 
@@ -31,9 +31,15 @@ class GetRocketsFragment : Fragment(), KodeinAware {
 
   private lateinit var rAdapter: RocketsAdapter
 
-  private val observer = Observer<List<RocketModel>> {
+  private val observer = Observer<Response<List<RocketModel>>> {
     pbGetRockets.gone()
-    rAdapter.loadItems(it)
+    if (it.isSuccessful) {
+      it.body()?.let { items ->
+        rAdapter.loadItems(items)
+      }
+    } else {
+      srlGetRockets.showSnackbar(getString(R.string.error_retrieving_data))
+    }
     rvGetRockets.scheduleLayoutAnimation()
   }
 
@@ -64,9 +70,7 @@ class GetRocketsFragment : Fragment(), KodeinAware {
 
   private fun bindAdapter() {
     rAdapter = RocketsAdapter(context) {
-      val args = Bundle()
-      args.putParcelable("model", it)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(GetRocketsFragmentDirections.nextFragment(it))
     }
     rvGetRockets.apply {
       layoutManager = LinearLayoutManager(this.context)

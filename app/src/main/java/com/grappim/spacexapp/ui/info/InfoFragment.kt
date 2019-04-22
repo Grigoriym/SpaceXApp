@@ -12,10 +12,12 @@ import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_info.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 import timber.log.Timber
 
 class InfoFragment : Fragment(), KodeinAware {
@@ -24,40 +26,44 @@ class InfoFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: InfoViewModelFactory by instance()
 
-  private val observer = Observer<InfoModel> {
+  private val observer = Observer<Response<InfoModel>> { response ->
     pbInfo.gone()
-    clFragmentInfo.show()
+    if (response.isSuccessful) {
+      clFragmentInfo.show()
+      response.body()?.let {
+        tvInfoName.text = it.name
+        tvInfoFounder.text = it.founder
+        tvInfoFounded.text = it.founded.toString()
+        tvInfoEmployees.text = it.employees.toString()
+        tvInfoVehicles.text = it.vehicles.toString()
+        tvInfoLaunchSItes.text = it.launchSites.toString()
+        tvInfoTestSites.text = it.testSites.toString()
+        tvInfoCeo.text = it.ceo
+        tvInfoCto.text = it.cto
+        tvInfoCoo.text = it.coo
+        tvInfoCtoPropulsion.text = it.ctoPropulsion
+        tvInfoValuation.text = it.valuation.toString()
+        tvInfoSummary.text = it.summary
 
-    tvInfoName.text = it.name
-    tvInfoFounder.text = it.founder
-    tvInfoFounded.text = it.founded.toString()
-    tvInfoEmployees.text = it.employees.toString()
-    tvInfoVehicles.text = it.vehicles.toString()
-    tvInfoLaunchSItes.text = it.launchSites.toString()
-    tvInfoTestSites.text = it.testSites.toString()
-    tvInfoCeo.text = it.ceo
-    tvInfoCto.text = it.cto
-    tvInfoCoo.text = it.coo
-    tvInfoCtoPropulsion.text = it.ctoPropulsion
-    tvInfoValuation.text = it.valuation.toString()
-    tvInfoSummary.text = it.summary
-
-    elvInfo.setAdapter(
-      CustomExpandableListAdapter(
-        context!!,
-        elvInfo,
-        "Headquarters",
-        it,
-        R.layout.layout_elv_info_headquarters,
-        listAdapterItemInit = { view ->
-          InfoHeadquartersAdapterItem(
-            view, it
-          ).fillItemWithData()
-        },
-        onGroupClick = {}
-
-      )
-    )
+        elvInfo.setAdapter(
+          CustomExpandableListAdapter(
+            context!!,
+            elvInfo,
+            "Headquarters",
+            it,
+            R.layout.layout_elv_info_headquarters,
+            listAdapterItemInit = { view ->
+              InfoHeadquartersAdapterItem(
+                view, it
+              ).fillItemWithData()
+            }
+          )
+        )
+      }
+    } else {
+      clFragmentInfo.gone()
+      clFragmentInfo.showSnackbar(getString(R.string.error_retrieving_data))
+    }
   }
 
   private val viewModel: InfoViewModel by lazy {

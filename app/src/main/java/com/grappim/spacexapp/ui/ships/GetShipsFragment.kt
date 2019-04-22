@@ -16,18 +16,26 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_get_ships.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 
 class GetShipsFragment : Fragment(), KodeinAware {
 
   override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
-  private val observer = Observer<List<ShipModel>> {
+
+  private val observer = Observer<Response<List<ShipModel>>> {
     pbGetShips.gone()
-    shipAdapter.loadItems(it)
+    if (it.isSuccessful) {
+      it.body()?.let { items -> shipAdapter.loadItems(items) }
+    } else {
+      srlGetShips.showSnackbar(getString(R.string.error_retrieving_data))
+    }
+
     rvGetShips.scheduleLayoutAnimation()
   }
   private val viewModelFactory: ShipsSharedViewModelFactory by instance()
@@ -67,9 +75,7 @@ class GetShipsFragment : Fragment(), KodeinAware {
 
   private fun bindAdapter() {
     shipAdapter = ShipsAdapter(context = context, onClick = {
-      val args = Bundle()
-      args.putParcelable("model", it)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(GetShipsFragmentDirections.nextFragment(it))
     })
     rvGetShips.apply {
       layoutManager = LinearLayoutManager(context)

@@ -1,31 +1,31 @@
-package com.grappim.spacexapp.ui.rockets
+package com.grappim.spacexapp.ui.launchpads
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
-
 import com.grappim.spacexapp.R
-import kotlinx.android.synthetic.main.fragment_rocket.*
+import kotlinx.android.synthetic.main.fragment_launch_pad.*
+import timber.log.Timber
 
-class RocketFragment : Fragment() {
+class LaunchPadFragment : Fragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_rocket, container, false)
+    return inflater.inflate(R.layout.fragment_launch_pad, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("LaunchPadFragment - onViewCreated")
 
-    btnGetAllRockets.setOnClickListener {
-     findNavController().navigate(R.id.nextFragment)
+    btnGetAllLaunchPads.setOnClickListener {
+      findNavController().navigate(R.id.nextFragment)
     }
   }
+
 }
