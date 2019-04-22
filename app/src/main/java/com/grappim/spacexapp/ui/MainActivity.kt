@@ -77,7 +77,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.shipsFragment,
         R.id.coreFragment,
         R.id.infoFragment,
-        R.id.historyFragment
+        R.id.historyFragment,
+        R.id.launchPadFragment
       ), drawerLayout
     )
 
@@ -108,6 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       }
       R.id.nav_info -> navController.navigate(R.id.infoFragment)
       R.id.nav_history -> navController.navigate(R.id.historyFragment)
+      R.id.nav_launch_pads -> navController.navigate(R.id.launchPadFragment)
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true

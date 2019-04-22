@@ -17,6 +17,8 @@
   <string name="active">Active</string>
   <string name="home_port">Home Port</string>
   <string name="landings">Посадки</string>
+  <string name="info">Info</string>
+  <string name="history">История</string>
 
   <string name="drawer_menu_ships">Ships</string>
   <string name="drawer_menu_capsules">Capsules</string>
@@ -33,5 +35,6 @@
   <string name="rocket_details_metrics_kg_lb">%1$sкг/%2$slb</string>
 
   <string name="successful_attempted">%1$d/%2$d</string>
+  <string name="error_retrieving_data">Cannot retrieve data</string>
 
 </resources>

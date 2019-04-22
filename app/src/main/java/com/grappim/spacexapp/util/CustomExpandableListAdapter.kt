@@ -18,7 +18,7 @@ class CustomExpandableListAdapter(
   private val body: Any,
   @LayoutRes private val childLayout: Int,
   val listAdapterItemInit: (view: View) -> Unit = {},
-  val onGroupClick: () -> Unit = {}
+  private val onGroupClick: () -> Unit = {}
 ) : BaseExpandableListAdapter() {
 
   override fun isChildSelectable(

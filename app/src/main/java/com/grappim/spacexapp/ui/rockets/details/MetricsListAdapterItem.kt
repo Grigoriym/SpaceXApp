@@ -1,6 +1,7 @@
 package com.grappim.spacexapp.ui.rockets.details
 
 import android.view.View
+import com.grappim.spacexapp.ElvAdapterItem
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import kotlinx.android.synthetic.main.layout_elv_rocket_details_metrics.view.*
@@ -8,8 +9,8 @@ import kotlinx.android.synthetic.main.layout_elv_rocket_details_metrics.view.*
 class MetricsListAdapterItem(
   val view: View,
   private val body: RocketModel
-) {
-  fun fillItemsWithData() {
+) : ElvAdapterItem {
+  override fun fillItemsWithData() {
     view
       .tvElvRocketDetailsMetricsDiameter
       .text = view.context.getString(

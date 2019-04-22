@@ -9,19 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
-import com.grappim.spacexapp.util.CORES_ARGS
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_get_cores.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 
 class GetCoresFragment : Fragment(), KodeinAware {
 
@@ -29,13 +30,17 @@ class GetCoresFragment : Fragment(), KodeinAware {
 
   private lateinit var coreAdapter: CoresAdapter
 
-  private val observer = Observer<List<CoreModel>> {
+  private val args: GetCoresFragmentArgs by navArgs()
+
+  private val observer = Observer<Response<List<CoreModel>>> {
     pbGetCores.gone()
-    coreAdapter.loadItems(it)
+    if (it.isSuccessful) {
+      it.body()?.let { items -> coreAdapter.loadItems(items) }
+    } else {
+      srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
+    }
     rvGetCores.scheduleLayoutAnimation()
   }
-
-  private var args: Int? = null
 
   private val viewModelFactory: CoreSharedViewModelFactory by instance()
 
@@ -49,13 +54,11 @@ class GetCoresFragment : Fragment(), KodeinAware {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getInt(CORES_ARGS)
     return inflater.inflate(R.layout.fragment_get_cores, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    pbGetCores.show()
 
     viewModel.apply {
       allCores.observe(this@GetCoresFragment, observer)
@@ -72,12 +75,13 @@ class GetCoresFragment : Fragment(), KodeinAware {
   }
 
   private fun getData() {
-    when (args) {
+    pbGetCores.show()
+    when (args.coresToGetArgs) {
       1 -> viewModel.getAllCapsules()
       2 -> viewModel.getPastCores()
       3 -> viewModel.getUpcomingCores()
       else -> {
-        Snackbar.make(srlGetCores, "Cannot retrieve data", Snackbar.LENGTH_LONG).show()
+        srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
         findNavController().popBackStack()
       }
     }

@@ -16,6 +16,8 @@
   <string name="active">Active</string>
   <string name="home_port">Home Port</string>
   <string name="landings">Landings</string>
+  <string name="info">Info</string>
+  <string name="history">History</string>
 
   <string name="drawer_menu_ships">Ships</string>
   <string name="drawer_menu_capsules">Capsules</string>
@@ -32,6 +34,7 @@
   <string name="rocket_details_metrics_kg_lb">%1$skg/%2$slb</string>
 
   <string name="successful_attempted">%1$d/%2$d</string>
+  <string name="error_retrieving_data">Cannot retrieve data</string>
 
   <!-- TODO: Remove or change this placeholder text -->
   <string name="hello_blank_fragment">Hello blank fragment</string>

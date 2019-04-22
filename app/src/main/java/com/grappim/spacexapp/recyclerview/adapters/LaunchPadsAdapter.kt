@@ -1,45 +1,42 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.recyclerview.viewholders.ShipsViewHolder
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.recyclerview.viewholders.LaunchPadViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
-class ShipsAdapter(
-  val context: Context?,
-  val onClick: (ShipModel) -> Unit
-) : RecyclerView.Adapter<ShipsViewHolder>() {
-
-  private var items: List<ShipModel> = emptyList()
+class LaunchPadsAdapter(
+  val onClick: (LaunchPadModel) -> Unit
+) : RecyclerView.Adapter<LaunchPadViewHolder>() {
+  private var items: List<LaunchPadModel> = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): ShipsViewHolder =
-    ShipsViewHolder(
+  ): LaunchPadViewHolder =
+    LaunchPadViewHolder(
       parent
         .context
-        .inflateLayout(R.layout.layout_ship_item, parent)
+        .inflateLayout(R.layout.layout_launch_pad_item, parent)
     )
 
   override fun getItemCount(): Int = items.size
 
   override fun onBindViewHolder(
-    holder: ShipsViewHolder,
+    holder: LaunchPadViewHolder,
     position: Int
   ) {
     holder.apply {
-      ship = items[position]
+      launchPad = items[position]
       itemView.setOnClickListener {
         onClick(items[position])
       }
     }
   }
 
-  fun loadItems(newItems: List<ShipModel>) {
+  fun loadItems(newItems: List<LaunchPadModel>) {
     items = newItems
     notifyDataSetChanged()
   }

@@ -43,14 +43,6 @@ fun View.hideKeyboard(): Boolean {
   }
 }
 
-fun Boolean.asInt(): Int {
-  return if (this) 1 else 0
-}
-
-fun Int.asBoolean(): Boolean {
-  return (this == 1)
-}
-
 inline fun <reified T : Activity> Context?.startActivity() =
   this?.startActivity(Intent(this, T::class.java))
 
@@ -118,7 +110,7 @@ fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> 
   return this
 }
 
-fun View.showSnackbar(text: String, timeLength: Int) {
+fun View.showSnackbar(text: String, timeLength: Int = Snackbar.LENGTH_LONG) {
   Snackbar.make(this, text, timeLength).show()
 }
 
@@ -131,6 +123,16 @@ fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
       withContext(Dispatchers.Main) {
         response.body()?.let { mld.value = it }
       }
+    }
+  }
+}
+
+fun <T> fetchNetworkData(req: Deferred<Response<T>>, mld: MutableLiveData<Response<T>>) {
+  Timber.d("Extensions - fetchData")
+  CoroutineScope(Dispatchers.IO).launch {
+    val response = req.await()
+    withContext(Dispatchers.Main) {
+      mld.value = response
     }
   }
 }

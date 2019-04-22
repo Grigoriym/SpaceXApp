@@ -5,21 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.util.PARCELABLE_HISTORY_MODEL
 import kotlinx.android.synthetic.main.fragment_history_details.*
 import timber.log.Timber
 
 class HistoryDetailsFragment : Fragment() {
 
-  private var args: HistoryModel? = null
+  private val args: HistoryDetailsFragmentArgs by navArgs()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getParcelable(PARCELABLE_HISTORY_MODEL)
     return inflater.inflate(R.layout.fragment_history_details, container, false)
   }
 
@@ -27,7 +25,7 @@ class HistoryDetailsFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("HistoryDetailsFragment - onViewCreated")
 
-    args?.let {
+    args.historyModel.let {
       tvHistoryDetailsTitle.text = it.title
       tvHistoryDetailsDate.text = it.eventDateUtc
       tvHistoryDetailsDetails.text = it.details

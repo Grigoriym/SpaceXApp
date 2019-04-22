@@ -13,13 +13,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.TimelineHistoryAdapter
-import com.grappim.spacexapp.util.PARCELABLE_HISTORY_MODEL
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 
 class HistoryFragment : Fragment(), KodeinAware {
 
@@ -29,9 +30,13 @@ class HistoryFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: HistoryViewModelFactory by instance()
 
-  private val observer = Observer<List<HistoryModel>> {
+  private val observer = Observer<Response<List<HistoryModel>>> {
     pbFragmentHistory.gone()
-    hAdapter.loadItems(it)
+    if (it.isSuccessful) {
+      it.body()?.let { items -> hAdapter.loadItems(items) }
+    } else {
+      rvFragmentHistory.showSnackbar(getString(R.string.error_retrieving_data))
+    }
   }
 
   private val viewModel: HistoryViewModel by lazy {
@@ -65,9 +70,7 @@ class HistoryFragment : Fragment(), KodeinAware {
 
   private fun bindAdapter() {
     hAdapter = TimelineHistoryAdapter {
-      val args = Bundle()
-      args.putParcelable(PARCELABLE_HISTORY_MODEL, it)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(HistoryFragmentDirections.nextFragment(it))
     }
     rvFragmentHistory.apply {
       layoutManager = LinearLayoutManager(context)

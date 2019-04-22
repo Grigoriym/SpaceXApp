@@ -24,7 +24,7 @@ data class ShipModel(
   @SerializedName("imo")
   val imo: Int?,
   @SerializedName("missions")
-  val missions: List<Mission?>?,
+  val missions: List<Mission>?,
   @SerializedName("mmsi")
   val mmsi: Int?,
   @SerializedName("position")

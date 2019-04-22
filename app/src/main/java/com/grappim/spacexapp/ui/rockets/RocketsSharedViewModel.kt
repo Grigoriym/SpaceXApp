@@ -6,18 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.util.fetchData
+import com.grappim.spacexapp.util.fetchNetworkData
+import retrofit2.Response
 
 class RocketsSharedViewModel(
   private val api: API
 ) : ViewModel(), LifecycleObserver {
 
-  private val _allRockets = MutableLiveData<List<RocketModel>>()
-  val allRockets: LiveData<List<RocketModel>>
+  private val _allRockets = MutableLiveData<Response<List<RocketModel>>>()
+  val allRockets: LiveData<Response<List<RocketModel>>>
     get() = _allRockets
 
   fun getAllRockets() {
-    fetchData(api.getAllRockets(), _allRockets)
+    fetchNetworkData(api.getAllRockets(), _allRockets)
   }
 
 }

@@ -9,20 +9,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
-import com.grappim.spacexapp.util.CAPSULES_ARGS
-import com.grappim.spacexapp.util.PARCELABLE_CAPSULE_MODEL
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.showSnackbar
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import retrofit2.Response
 import timber.log.Timber
 
 class GetCapsulesFragment : Fragment(), KodeinAware {
@@ -33,38 +33,39 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: CapsuleSharedViewModelFactory by instance()
 
-  private val observer = Observer<List<CapsuleModel>> {
+  private val args: GetCapsulesFragmentArgs by navArgs()
+
+  private val observerWithResponse = Observer<Response<List<CapsuleModel>>> {
     Timber.d("GetCapsulesFragment - observer")
     pbGetCapsules.gone()
-    cAdapter.loadItems(it)
+    if (it.isSuccessful) {
+      it.body()?.let { items -> cAdapter.loadItems(items) }
+    } else {
+      srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
+    }
     rvGetCapsules.scheduleLayoutAnimation()
   }
 
-  private var args: Int? = null
-
   private val viewModel: CapsuleSharedViewModel by lazy {
     ViewModelProviders
-        .of(this, viewModelFactory)
-        .get(CapsuleSharedViewModel::class.java)
+      .of(this, viewModelFactory)
+      .get(CapsuleSharedViewModel::class.java)
   }
 
   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getInt(CAPSULES_ARGS)
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
   }
 
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
     Timber.d("GetCapsulesFragment - onActivityCreated")
-    pbGetCapsules.show()
-
     viewModel.apply {
-      allCapsules.observe(this@GetCapsulesFragment, observer)
-      upcomingCapsules.observe(this@GetCapsulesFragment, observer)
-      pastCapsules.observe(this@GetCapsulesFragment, observer)
+      allCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
+      upcomingCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
+      pastCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
     }
 
     bindAdapter()
@@ -83,12 +84,13 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private fun getData() {
     Timber.d("GetCapsulesFragment - getData")
-    when (args) {
+    pbGetCapsules.show()
+    when (args.capsulesToGetArgs) {
       0 -> viewModel.getAllCapsules()
       1 -> viewModel.getUpcomingCapsules()
       2 -> viewModel.getPastCapsules()
       else -> {
-        Snackbar.make(srlGetCapsules, "Cannot retrieve data", Snackbar.LENGTH_LONG).show()
+        srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
         findNavController().popBackStack()
       }
     }
@@ -96,15 +98,13 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private fun bindAdapter() {
     cAdapter = CapsulesAdapter {
-      val args = Bundle()
-      args.putParcelable(PARCELABLE_CAPSULE_MODEL, it)
-      findNavController().navigate(R.id.nextFragment, args)
+      findNavController().navigate(GetCapsulesFragmentDirections.nextFragment(it))
     }
     rvGetCapsules.apply {
       layoutManager = LinearLayoutManager(context)
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-          .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = cAdapter
     }
   }

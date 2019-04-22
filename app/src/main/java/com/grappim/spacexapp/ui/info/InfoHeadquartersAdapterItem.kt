@@ -14,6 +14,5 @@ class InfoHeadquartersAdapterItem(
       tvElvInfoHeadquartersCity.text = body.headquarters?.city
       tvElvInfoHeadquartersState.text = body.headquarters?.state
     }
-
   }
 }

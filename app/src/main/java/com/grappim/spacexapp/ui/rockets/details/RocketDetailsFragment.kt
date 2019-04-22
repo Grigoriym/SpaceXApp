@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.ui.ScopedFragment
+import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
 import com.grappim.spacexapp.util.setMyImageResource
@@ -15,13 +15,12 @@ import kotlinx.android.synthetic.main.fragment_rocket_details.*
 
 class RocketDetailsFragment : ScopedFragment() {
 
-  private var args: RocketModel? = null
+  private val args: RocketDetailsFragmentArgs by navArgs()
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    args = arguments?.getParcelable("model")
     return inflater.inflate(R.layout.fragment_rocket_details, container, false)
   }
 
@@ -32,7 +31,7 @@ class RocketDetailsFragment : ScopedFragment() {
       activity?.onBackPressed()
     }
 
-    args?.let {
+    args.rocketModel.let {
       tvRocketDetailsBoosters.text = it.boosters.toString()
       tvRocketDetailsCompany.text = it.company
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
@@ -66,9 +65,6 @@ class RocketDetailsFragment : ScopedFragment() {
               view,
               it
             ).fillItemsWithData()
-          },
-          onGroupClick = {
-
           }
         )
       )

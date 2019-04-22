@@ -18,7 +18,11 @@
       app:enterAnim="@anim/slide_in_right"
       app:exitAnim="@anim/slide_out_left"
       app:popEnterAnim="@anim/slide_in_left"
-      app:popExitAnim="@anim/slide_out_right"/>
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="capsulesToGetArgs"
+        app:argType="integer"/>
+    </action>
   </fragment>
 
   <fragment
@@ -32,7 +36,14 @@
       app:enterAnim="@anim/slide_in_right"
       app:exitAnim="@anim/slide_out_left"
       app:popEnterAnim="@anim/slide_in_left"
-      app:popExitAnim="@anim/slide_out_right"/>
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="capsuleModel"
+        app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel"/>
+    </action>
+    <argument
+      android:name="capsulesToGetArgs"
+      app:argType="integer"/>
   </fragment>
 
   <fragment
@@ -46,14 +57,25 @@
       app:enterAnim="@anim/slide_in_right"
       app:exitAnim="@anim/slide_out_left"
       app:popEnterAnim="@anim/slide_in_left"
-      app:popExitAnim="@anim/slide_out_right"/>
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="missionArgs"
+        app:argType="com.grappim.spacexapp.model.capsule.Mission"/>
+    </action>
+    <argument
+      android:name="capsuleModel"
+      app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel"/>
   </fragment>
 
   <fragment
     android:id="@+id/missionFragment"
     android:label="Missions"
     android:name="com.grappim.spacexapp.ui.missionspayloads.MissionFragment"
-    tools:layout="@layout/fragment_mission"/>
+    tools:layout="@layout/fragment_mission">
+    <argument
+      android:name="missionArgs"
+      app:argType="com.grappim.spacexapp.model.capsule.Mission"/>
+  </fragment>
 
   <!--ROCKETS-->
 
@@ -74,25 +96,37 @@
     tools:layout="@layout/fragment_get_rockets">
     <action
       android:id="@+id/nextFragment"
-      app:destination="@id/rocketDetailsFragment"/>
+      app:destination="@id/rocketDetailsFragment">
+      <argument
+        android:name="rocketModel"
+        app:argType="com.grappim.spacexapp.model.rocket.RocketModel"/>
+    </action>
   </fragment>
 
   <fragment
     android:id="@+id/rocketDetailsFragment"
     android:label="Rocket Details"
     android:name="com.grappim.spacexapp.ui.rockets.details.RocketDetailsFragment"
-    tools:layout="@layout/fragment_rocket_details"/>
+    tools:layout="@layout/fragment_rocket_details">
+    <argument
+      android:name="rocketModel"
+      app:argType="com.grappim.spacexapp.model.rocket.RocketModel"/>
+  </fragment>
 
   <!--CORES-->
 
   <fragment
     android:id="@+id/coreFragment"
-    android:label="fragment_core"
+    android:label="Cores"
     android:name="com.grappim.spacexapp.ui.cores.CoreFragment"
     tools:layout="@layout/fragment_core">
     <action
       android:id="@+id/nextFragment"
-      app:destination="@id/getCoresFragment"/>
+      app:destination="@id/getCoresFragment">
+      <argument
+        android:name="coresToGetArgs"
+        app:argType="integer"/>
+    </action>
   </fragment>
 
   <fragment
@@ -100,6 +134,9 @@
     android:label="Get Cores"
     android:name="com.grappim.spacexapp.ui.cores.GetCoresFragment"
     tools:layout="@layout/fragment_get_cores">
+    <argument
+      android:name="coresToGetArgs"
+      app:argType="integer"/>
   </fragment>
 
   <!--SHIPS-->
@@ -121,7 +158,11 @@
     tools:layout="@layout/fragment_get_ships">
     <action
       android:id="@+id/nextFragment"
-      app:destination="@id/shipDetailsFragment"/>
+      app:destination="@id/shipDetailsFragment">
+      <argument
+        android:name="shipModel"
+        app:argType="com.grappim.spacexapp.model.ships.ShipModel"/>
+    </action>
   </fragment>
 
   <fragment
@@ -131,31 +172,81 @@
     tools:layout="@layout/fragment_ship_details">
     <action
       android:id="@+id/nextFragment"
-      app:destination="@id/missionFragment"/>
+      app:destination="@id/missionFragment">
+      <argument
+        android:name="missionArgs"
+        app:argType="com.grappim.spacexapp.model.capsule.Mission"/>
+    </action>
+    <argument
+      android:name="shipModel"
+      app:argType="com.grappim.spacexapp.model.ships.ShipModel"/>
   </fragment>
 
   <!--Info-->
   <fragment
     android:id="@+id/infoFragment"
-    android:name="com.grappim.spacexapp.ui.info.InfoFragment"
     android:label="Info"
+    android:name="com.grappim.spacexapp.ui.info.InfoFragment"
     tools:layout="@layout/fragment_info"/>
 
   <!--History-->
   <fragment
     android:id="@+id/historyFragment"
-    android:name="com.grappim.spacexapp.ui.history.HistoryFragment"
     android:label="History"
+    android:name="com.grappim.spacexapp.ui.history.HistoryFragment"
     tools:layout="@layout/fragment_history">
     <action
       android:id="@+id/nextFragment"
-      app:destination="@id/historyDetailsFragment"/>
+      app:destination="@id/historyDetailsFragment">
+      <argument
+        android:name="historyModel"
+        app:argType="com.grappim.spacexapp.model.history.HistoryModel"/>
+    </action>
   </fragment>
 
   <fragment
     android:id="@+id/historyDetailsFragment"
-    android:name="com.grappim.spacexapp.ui.history.details.HistoryDetailsFragment"
     android:label="History details"
-    tools:layout="@layout/fragment_history_details"/>
+    android:name="com.grappim.spacexapp.ui.history.details.HistoryDetailsFragment"
+    tools:layout="@layout/fragment_history_details">
+    <argument
+      android:name="historyModel"
+      app:argType="com.grappim.spacexapp.model.history.HistoryModel"/>
+  </fragment>
+
+  <!--Launch Pads-->
+  <fragment
+    android:id="@+id/launchPadFragment"
+    android:label="Launch Pads"
+    android:name="com.grappim.spacexapp.ui.launchpads.LaunchPadFragment"
+    tools:layout="@layout/fragment_launch_pad">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getLaunchPadsFragment"/>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getLaunchPadsFragment"
+    android:label="Get Launch Pads"
+    android:name="com.grappim.spacexapp.ui.launchpads.GetLaunchPadsFragment"
+    tools:layout="@layout/fragment_get_launch_pads">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/launchPadDetailsFragment">
+      <argument
+        android:name="launchPadModel"
+        app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel"/>
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/launchPadDetailsFragment"
+    android:label="Launch Pad Details"
+    android:name="com.grappim.spacexapp.ui.launchpads.details.LaunchPadDetailsFragment"
+    tools:layout="@layout/fragment_launch_pad_details">
+    <argument
+      android:name="launchPadModel"
+      app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel"/>
+  </fragment>
 
 </navigation>
