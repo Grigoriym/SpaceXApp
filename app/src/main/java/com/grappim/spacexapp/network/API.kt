@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.network
 
-// import okhttp3.logging.HttpLoggingInterceptor
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel

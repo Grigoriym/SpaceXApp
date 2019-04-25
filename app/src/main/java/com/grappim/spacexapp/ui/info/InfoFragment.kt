@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.util.CustomExpandableListAdapter
+import com.grappim.spacexapp.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import com.grappim.spacexapp.util.showSnackbar
@@ -47,15 +49,16 @@ class InfoFragment : Fragment(), KodeinAware {
 
         elvInfo.setAdapter(
           CustomExpandableListAdapter(
-            context!!,
+            context,
             elvInfo,
             "Headquarters",
             it,
             R.layout.layout_elv_info_headquarters,
             listAdapterItemInit = { view ->
               InfoHeadquartersAdapterItem(
-                view, it
-              ).fillItemWithData()
+                view,
+                it
+              ).fillItemsWithData()
             }
           )
         )
@@ -63,6 +66,7 @@ class InfoFragment : Fragment(), KodeinAware {
     } else {
       clFragmentInfo.gone()
       clFragmentInfo.showSnackbar(getString(R.string.error_retrieving_data))
+      findNavController().popBackStack()
     }
   }
 
@@ -85,8 +89,6 @@ class InfoFragment : Fragment(), KodeinAware {
     clFragmentInfo.gone()
     pbInfo.show()
     viewModel.info.observe(this, observer)
-
     viewModel.getInfo()
   }
-
 }

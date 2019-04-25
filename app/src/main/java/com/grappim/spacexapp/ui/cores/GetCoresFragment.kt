@@ -38,6 +38,7 @@ class GetCoresFragment : Fragment(), KodeinAware {
       it.body()?.let { items -> coreAdapter.loadItems(items) }
     } else {
       srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
+      findNavController().popBackStack()
     }
     rvGetCores.scheduleLayoutAnimation()
   }
@@ -81,6 +82,7 @@ class GetCoresFragment : Fragment(), KodeinAware {
       2 -> viewModel.getPastCores()
       3 -> viewModel.getUpcomingCores()
       else -> {
+        pbGetCores.gone()
         srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
         findNavController().popBackStack()
       }

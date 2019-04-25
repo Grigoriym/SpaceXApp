@@ -1,17 +1,21 @@
 package com.grappim.spacexapp.ui.rockets.details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.ScopedFragment
-import com.grappim.spacexapp.util.CustomExpandableListAdapter
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
 import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
+import timber.log.Timber
 
 class RocketDetailsFragment : ScopedFragment() {
 
@@ -24,14 +28,34 @@ class RocketDetailsFragment : ScopedFragment() {
     return inflater.inflate(R.layout.fragment_rocket_details, container, false)
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    tlbrRocketDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
-    tlbrRocketDetails.setNavigationOnClickListener {
-      activity?.onBackPressed()
+  private fun initToolbar() {
+    setHasOptionsMenu(true)
+    tlbrRocketDetails.inflateMenu(R.menu.toolbar_menu_wiki)
+    tlbrRocketDetails
+      .setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
+    tlbrRocketDetails
+      .setNavigationOnClickListener {
+        activity?.onBackPressed()
+      }
+    tlbrRocketDetails.setOnMenuItemClickListener { item ->
+      when (item.itemId) {
+        R.id.wiki -> {
+          val i = Intent(Intent.ACTION_VIEW)
+          i.data = Uri.parse(args.rocketModel.wikipedia)
+          activity?.startActivity(i)
+        }
+      }
+      false
     }
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    Timber.d("RocketDetailsFragment - onViewCreated")
+    super.onViewCreated(view, savedInstanceState)
+    initToolbar()
 
     args.rocketModel.let {
+      tlbrRocketDetails.title = it.rocketName
       tvRocketDetailsBoosters.text = it.boosters.toString()
       tvRocketDetailsCompany.text = it.company
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
@@ -55,7 +79,7 @@ class RocketDetailsFragment : ScopedFragment() {
 
       elvRocketDetailsMetrics.setAdapter(
         CustomExpandableListAdapter(
-          context!!,
+          context,
           elvRocketDetailsMetrics,
           "Metrics",
           it,

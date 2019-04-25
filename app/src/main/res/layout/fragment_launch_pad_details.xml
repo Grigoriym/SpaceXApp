@@ -45,6 +45,7 @@
       android:text="Launches"
       app:layout_constraintStart_toStartOf="@+id/tvLaunchPadDetailsDetails"
       app:layout_constraintTop_toBottomOf="@+id/tvLaunchPadDetailsDetails"/>
+
     <TextView
       android:id="@+id/tvLaunchPadDetailsLaunches"
       android:layout_width="wrap_content"

@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.util
+package com.grappim.spacexapp.elv
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -12,12 +12,12 @@ import com.grappim.spacexapp.R
 import timber.log.Timber
 
 class CustomExpandableListAdapter(
-  val context: Context,
+  private val context: Context?,
   private val expandableListView: ExpandableListView,
   private val header: String = "Header",
-  private val body: Any,
+  private val model: Any,
   @LayoutRes private val childLayout: Int,
-  val listAdapterItemInit: (view: View) -> Unit = {},
+  private val listAdapterItemInit: (view: View) -> Unit = {},
   private val onGroupClick: () -> Unit = {}
 ) : BaseExpandableListAdapter() {
 
@@ -29,8 +29,11 @@ class CustomExpandableListAdapter(
 
   override fun getChildrenCount(groupPosition: Int): Int = 1
 
-  override fun getChild(groupPosition: Int, childPosition: Int): Any =
-    body
+  override fun getChild(
+    groupPosition: Int,
+    childPosition: Int
+  ): Any =
+    model
 
   override fun getGroupId(groupPosition: Int): Long = groupPosition.toLong()
 
@@ -40,7 +43,7 @@ class CustomExpandableListAdapter(
     isLastChild: Boolean,
     convertView: View?,
     parent: ViewGroup?
-  ): View {
+  ): View? {
     var cv: View? = convertView
     if (cv == null) {
       cv = LayoutInflater.from(context).inflate(childLayout, null)
@@ -48,10 +51,13 @@ class CustomExpandableListAdapter(
     cv?.apply {
       listAdapterItemInit(this)
     }
-    return cv!!
+    return cv
   }
 
-  override fun getChildId(groupPosition: Int, childPosition: Int): Long = childPosition.toLong()
+  override fun getChildId(
+    groupPosition: Int,
+    childPosition: Int
+  ): Long = childPosition.toLong()
 
   override fun getGroupCount(): Int = 1
 
@@ -63,16 +69,16 @@ class CustomExpandableListAdapter(
     isExpanded: Boolean,
     convertView: View?,
     parent: ViewGroup?
-  ): View {
+  ): View? {
     var cv: View? = convertView
     if (cv == null) {
       cv = LayoutInflater.from(context).inflate(R.layout.layout_elv_group_item, null)
     }
-    cv?.findViewById<TextView>(R.id.tvElvGroupTitle)
+    cv
+      ?.findViewById<TextView>(R.id.tvElvGroupTitle)
       ?.apply {
         text = header
         setOnClickListener {
-          Timber.d("On group Click")
           if (expandableListView.isGroupExpanded(groupPosition)) {
             expandableListView.collapseGroup(groupPosition)
           } else {
@@ -81,6 +87,6 @@ class CustomExpandableListAdapter(
           onGroupClick
         }
       }
-    return cv!!
+    return cv
   }
 }
