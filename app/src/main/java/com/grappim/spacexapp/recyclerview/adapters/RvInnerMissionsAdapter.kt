@@ -8,9 +8,9 @@ import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class RvInnerMissionsAdapter(
-  val onClick: (Mission) -> Unit
+  val onClick: (Mission?) -> Unit
 ) : RecyclerView.Adapter<RvInnerMissionsViewHolder>() {
-  private var items: List<Mission> = emptyList()
+  private var items: List<Mission?>? = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup, viewType: Int
@@ -21,18 +21,18 @@ class RvInnerMissionsAdapter(
         .inflateLayout(R.layout.layout_inner_rv_details_mission_item, parent)
     )
 
-  override fun getItemCount(): Int = items.size
+  override fun getItemCount(): Int = items?.size ?: 0
 
   override fun onBindViewHolder(holder: RvInnerMissionsViewHolder, position: Int) {
     holder.apply {
-      mission = items[position]
+      mission = items?.get(position)
       itemView.setOnClickListener {
-        onClick(items[position])
+        onClick(items?.get(position))
       }
     }
   }
 
-  fun loadItems(newItems: List<Mission>) {
+  fun loadItems(newItems: List<Mission?>?) {
     items = newItems
     notifyDataSetChanged()
   }

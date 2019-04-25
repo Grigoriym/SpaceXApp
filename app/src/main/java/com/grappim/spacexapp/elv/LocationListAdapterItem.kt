@@ -1,7 +1,6 @@
-package com.grappim.spacexapp.ui.launchpads.details
+package com.grappim.spacexapp.elv
 
 import android.view.View
-import com.grappim.spacexapp.ElvAdapterItem
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import kotlinx.android.synthetic.main.layout_elv_launch_pad_details_location.view.*
 

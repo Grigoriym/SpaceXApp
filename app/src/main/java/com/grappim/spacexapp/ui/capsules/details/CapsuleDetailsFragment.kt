@@ -51,13 +51,15 @@ class CapsuleDetailsFragment : ScopedFragment() {
       tvCapsuleDetailsReuseCount.text = it.reuseCount.toString()
       tvCapsuleDetailsType.text = it.type?.capitalize()
       tvCapsuleDetailsStatus.text = it.status?.capitalize()
-      mAdapter.loadItems(it.missions!!)
+      mAdapter.loadItems(it.missions)
     }
   }
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      findNavController().navigate(CapsuleDetailsFragmentDirections.nextFragment(it))
+      if (it != null) {
+        findNavController().navigate(CapsuleDetailsFragmentDirections.nextFragment(it))
+      }
     }
     rvCapsuleDetails.apply {
       layoutManager = LinearLayoutManager(this.context)

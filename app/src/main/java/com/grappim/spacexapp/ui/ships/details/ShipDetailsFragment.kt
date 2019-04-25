@@ -1,9 +1,12 @@
 package com.grappim.spacexapp.ui.ships.details
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,12 +31,32 @@ class ShipDetailsFragment : ScopedFragment() {
     return inflater.inflate(R.layout.fragment_ship_details, container, false)
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
+  private fun initToolbar() {
+    setHasOptionsMenu(true)
+    if (args.shipModel.url != null) {
+      tlbrShipDetails.inflateMenu(R.menu.toolbar_menu_wiki)
+      tlbrShipDetails.menu[0].title = "URL"
+      tlbrShipDetails
+        .setOnMenuItemClickListener { item->
+          when(item.itemId){
+            R.id.wiki ->{
+              val i = Intent(Intent.ACTION_VIEW)
+              i.data = Uri.parse(args.shipModel.url)
+              activity?.startActivity(i)
+            }
+          }
+          false
+        }
+    }
     tlbrShipDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
     tlbrShipDetails.setNavigationOnClickListener {
       activity?.onBackPressed()
     }
+  }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    initToolbar()
     bindAdapter()
     args.shipModel.let {
       GlideApp.with(this)
@@ -64,7 +87,9 @@ class ShipDetailsFragment : ScopedFragment() {
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      findNavController().navigate(ShipDetailsFragmentDirections.nextFragment(it))
+      if (it != null) {
+        findNavController().navigate(ShipDetailsFragmentDirections.nextFragment(it))
+      }
     }
     rvShipDetailsMissions.apply {
       layoutManager = LinearLayoutManager(context)
@@ -72,5 +97,4 @@ class ShipDetailsFragment : ScopedFragment() {
       adapter = mAdapter
     }
   }
-
 }

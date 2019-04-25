@@ -91,10 +91,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   override fun onSupportNavigateUp() =
     findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
 
-  override fun onNavigationItemSelected(p0: MenuItem): Boolean {
-    p0.isChecked = true
+  override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    item.isChecked = true
     drawerLayout.closeDrawers()
-    return displaySelectedScreen(p0.itemId)
+    return displaySelectedScreen(item.itemId)
   }
 
   private fun displaySelectedScreen(itemId: Int): Boolean {

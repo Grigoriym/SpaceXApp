@@ -1,7 +1,6 @@
-package com.grappim.spacexapp.ui.rockets.details
+package com.grappim.spacexapp.elv
 
 import android.view.View
-import com.grappim.spacexapp.ElvAdapterItem
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import kotlinx.android.synthetic.main.layout_elv_rocket_details_metrics.view.*

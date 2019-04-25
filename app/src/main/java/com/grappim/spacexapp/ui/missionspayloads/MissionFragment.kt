@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
@@ -44,7 +45,7 @@ class MissionFragment : Fragment(), KodeinAware {
 
         elvMission.setAdapter(
           CustomExpandableListAdapter(
-            context!!,
+            context,
             elvMission,
             "Orbit Params",
             it!!,
@@ -87,5 +88,4 @@ class MissionFragment : Fragment(), KodeinAware {
       )
     viewModel.onePayload.observe(this, observer)
   }
-
 }

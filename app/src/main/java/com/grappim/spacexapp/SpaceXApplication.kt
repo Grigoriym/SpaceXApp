@@ -17,7 +17,6 @@ import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
 import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.squareup.leakcanary.LeakCanary
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -50,18 +49,10 @@ class SpaceXApplication : Application(), KodeinAware {
 
   override fun onCreate() {
     super.onCreate()
-    leakCanaryInit()
     timberInit()
     Timber.d("Application - onCreate")
     AndroidThreeTen.init(this)
     enableTLS12OnPreLollipop()
-  }
-
-  private fun leakCanaryInit() {
-    if (LeakCanary.isInAnalyzerProcess(this)) {
-      return
-    }
-    LeakCanary.install(this)
   }
 
   private fun timberInit() {

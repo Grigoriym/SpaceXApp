@@ -15,7 +15,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
-        versionName "1.8.6"
+        versionName "1.8.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         archivesBaseName = "$applicationId-v$versionCode($versionName)"
     }
@@ -84,9 +84,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
 
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
-
-    //    LeakCanary
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0-alpha03'
