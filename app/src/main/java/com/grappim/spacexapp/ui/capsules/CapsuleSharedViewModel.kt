@@ -4,8 +4,10 @@ import androidx.lifecycle.*
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
-import com.grappim.spacexapp.util.fetchData
 import com.grappim.spacexapp.util.fetchNetworkData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import retrofit2.Response
 import timber.log.Timber
 
@@ -38,10 +40,23 @@ class CapsuleSharedViewModel(
     fetchNetworkData(api.getUpcomingCapsules(), _upcomingCapsules)
   }
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getAllCapsules() {
-    Timber.d("CapsuleSharedViewModel - getAllCapsules")
-    fetchNetworkData(api.getAllCapsules(), _allCapsules)
+//  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+//  fun getAllCapsules() {
+//    Timber.d("CapsuleSharedViewModel - getAllCapsules")
+//    fetchNetworkData(api.getAllCapsules(), _allCapsules)
+//  }
+
+  fun launchAllCaps(){
+    viewModelScope.launch {
+      getAllCaps()
+    }
+  }
+
+  private suspend fun getAllCaps() = withContext(Dispatchers.IO){
+    val response = api.getAllCapsules().await()
+    withContext(Dispatchers.Main){
+      _allCapsules.value = response
+    }
   }
 
 }

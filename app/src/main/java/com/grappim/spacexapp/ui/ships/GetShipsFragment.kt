@@ -35,7 +35,6 @@ class GetShipsFragment : Fragment(), KodeinAware {
     } else {
       srlGetShips.showSnackbar(getString(R.string.error_retrieving_data))
     }
-
     rvGetShips.scheduleLayoutAnimation()
   }
   private val viewModelFactory: ShipsSharedViewModelFactory by instance()
@@ -55,8 +54,6 @@ class GetShipsFragment : Fragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    pbGetShips.show()
-
     viewModel.apply {
       allShips.observe(this@GetShipsFragment, observer)
     }
@@ -70,6 +67,7 @@ class GetShipsFragment : Fragment(), KodeinAware {
   }
 
   private fun getData() {
+    pbGetShips.show()
     viewModel.getAllShips()
   }
 

@@ -42,6 +42,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       it.body()?.let { items -> cAdapter.loadItems(items) }
     } else {
       srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
+      findNavController().popBackStack()
     }
     rvGetCapsules.scheduleLayoutAnimation()
   }
@@ -59,9 +60,10 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    Timber.d("GetCapsulesFragment - onActivityCreated")
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    Timber.d("GetCapsulesFragment - onViewCreated")
+
     viewModel.apply {
       allCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
       upcomingCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
@@ -77,16 +79,12 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     }
   }
 
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    Timber.d("GetCapsulesFragment - onViewCreated")
-  }
-
   private fun getData() {
     Timber.d("GetCapsulesFragment - getData")
     pbGetCapsules.show()
     when (args.capsulesToGetArgs) {
-      0 -> viewModel.getAllCapsules()
+//      0 -> viewModel.getAllCapsules()
+      0 -> viewModel.launchAllCaps()
       1 -> viewModel.getUpcomingCapsules()
       2 -> viewModel.getPastCapsules()
       else -> {
