@@ -8,9 +8,9 @@
   tools:context=".ui.ships.details.ShipDetailsFragment">
 
   <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/mainAppbar"
+    android:id="@+id/appBar"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="150dp"
     android:fitsSystemWindows="true"
     android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
@@ -30,13 +30,6 @@
         android:fitsSystemWindows="true"
         android:scaleType="centerCrop"
         app:layout_collapseMode="parallax"/>
-
-      <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tlbrShipDetails"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:layout_collapseMode="pin"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"/>
 
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 

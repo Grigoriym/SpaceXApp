@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       ), drawerLayout
     )
 
+    setSupportActionBar(toolbar)
     navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     setupActionBarWithNavController(navController, appBarConfiguration)
     navigationView.setupWithNavController(navController)
