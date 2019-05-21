@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -35,6 +36,8 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val args: GetCapsulesFragmentArgs by navArgs()
 
+  private val viewModel by viewModels<CapsuleSharedViewModel> { viewModelFactory }
+
   private val observerWithResponse = Observer<Response<List<CapsuleModel>>> {
     Timber.d("GetCapsulesFragment - observer")
     pbGetCapsules.gone()
@@ -45,12 +48,6 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       findNavController().popBackStack()
     }
     rvGetCapsules.scheduleLayoutAnimation()
-  }
-
-  private val viewModel: CapsuleSharedViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(CapsuleSharedViewModel::class.java)
   }
 
   override fun onCreateView(
