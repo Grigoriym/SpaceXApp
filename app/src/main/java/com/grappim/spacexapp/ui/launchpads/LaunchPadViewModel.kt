@@ -17,9 +17,9 @@ class LaunchPadViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllLaunchPads() {
-    Timber.d("LaunchPadViewModel - getAllLaunchPads()")
+    Timber.d("LaunchPadViewModel - getAllLaunchPadsFromApi()")
     viewModelScope.launch {
-      _allLaunchPads.value = repository.getAllLaunchPads().value
+      _allLaunchPads.value = repository.getAllLaunchPadsFromApi().value
     }
   }
 }

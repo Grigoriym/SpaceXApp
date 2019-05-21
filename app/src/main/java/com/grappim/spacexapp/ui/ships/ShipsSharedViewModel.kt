@@ -2,12 +2,12 @@ package com.grappim.spacexapp.ui.ships
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.util.fetchNetworkData
+import com.grappim.spacexapp.repository.SpaceXRepository
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class ShipsSharedViewModel(
-  private val api: API
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _allShips = MutableLiveData<Response<List<ShipModel>>>()
@@ -16,6 +16,8 @@ class ShipsSharedViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllShips() {
-    fetchNetworkData(api.getAllShips(), _allShips)
+    viewModelScope.launch {
+      _allShips.value = repository.getAllShipsFromApi().value
+    }
   }
 }

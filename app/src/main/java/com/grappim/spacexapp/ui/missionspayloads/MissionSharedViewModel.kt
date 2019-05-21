@@ -3,11 +3,13 @@ package com.grappim.spacexapp.ui.missionspayloads
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.network.API
+import com.grappim.spacexapp.repository.SpaceXRepository
 import com.grappim.spacexapp.util.fetchNetworkData
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class MissionSharedViewModel(
-  private val api: API
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _allPayloads = MutableLiveData<Response<List<PayloadModel>>>()
@@ -20,11 +22,15 @@ class MissionSharedViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllPayloads() {
-    fetchNetworkData(api.getAllPayloads(), _allPayloads)
+    viewModelScope.launch {
+      _allPayloads.value = repository.getAllPayloadsFromApi().value
+    }
   }
 
-  // @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getPayloadById(payloadId: String?) {
-    fetchNetworkData(api.getPayloadById(payloadId), _onePayload)
+    viewModelScope.launch {
+      _onePayload.value = repository.getPayloadByIdFromApi(payloadId).value
+    }
   }
 }

@@ -6,7 +6,9 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
+import com.grappim.spacexapp.model.ships.ShipModel
 import retrofit2.Response
 
 interface SpaceXRepository {
@@ -25,6 +27,11 @@ interface SpaceXRepository {
 
   suspend fun getInfoFromApi(): LiveData<Response<InfoModel>>
 
-  suspend fun getAllLaunchPads(): LiveData<Response<List<LaunchPadModel>>>
+  suspend fun getAllLaunchPadsFromApi(): LiveData<Response<List<LaunchPadModel>>>
+
+  suspend fun getAllShipsFromApi(): LiveData<Response<List<ShipModel>>>
+
+  suspend fun getAllPayloadsFromApi(): LiveData<Response<List<PayloadModel>>>
+  suspend fun getPayloadByIdFromApi(payloadId: String?): LiveData<Response<PayloadModel>>
 
 }
