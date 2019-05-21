@@ -3,6 +3,7 @@ package com.grappim.spacexapp.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.capsule.CapsuleModel
+import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.network.API
 import kotlinx.coroutines.Deferred
@@ -25,20 +26,28 @@ class SpaceXRepositoryImpl(
     return data
   }
 
-  override suspend fun getAllCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
-    return generalRequest(api.getAllCapsules())
-  }
+  override suspend fun getAllCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> =
+    generalRequest(api.getAllCapsules())
 
-  override suspend fun getPastCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
-    return generalRequest(api.getPastCapsules())
-  }
+  override suspend fun getPastCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> =
+    generalRequest(api.getPastCapsules())
 
-  override suspend fun getUpcomingCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
-    return generalRequest(api.getUpcomingCapsules())
-  }
 
-  override suspend fun getAllRocketsFromApi(): LiveData<Response<List<RocketModel>>> {
-    return generalRequest(api.getAllRockets())
-  }
+  override suspend fun getUpcomingCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> =
+    generalRequest(api.getUpcomingCapsules())
 
+  override suspend fun getAllRocketsFromApi(): LiveData<Response<List<RocketModel>>> =
+    generalRequest(api.getAllRockets())
+
+
+  override suspend fun getAllCoresFromApi(): LiveData<Response<List<CoreModel>>> =
+    generalRequest(api.getAllCores())
+
+
+  override suspend fun getPastCoresFromApi(): LiveData<Response<List<CoreModel>>> =
+    generalRequest(api.getPastCores())
+
+
+  override suspend fun getUpcomingCoresFromApi(): LiveData<Response<List<CoreModel>>> =
+    generalRequest(api.getUpcomingCores())
 }
