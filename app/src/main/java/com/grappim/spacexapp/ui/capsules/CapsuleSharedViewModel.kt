@@ -4,16 +4,12 @@ import androidx.lifecycle.*
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
-import com.grappim.spacexapp.util.fetchNetworkData
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 import timber.log.Timber
 
 class CapsuleSharedViewModel(
-  private val api: API,
-  private val repository: SpaceXRepository
+    private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _allCapsules = MutableLiveData<Response<List<CapsuleModel>>>()
@@ -31,31 +27,24 @@ class CapsuleSharedViewModel(
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getPastCapsules() {
     Timber.d("CapsuleSharedViewModel - getPastCapsules")
-    fetchNetworkData(api.getPastCapsules(), _pastCapsules)
+    viewModelScope.launch {
+      _allCapsules.value = repository.getAllCapsulesFromApi().value
+    }
   }
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getUpcomingCapsules() {
     Timber.d("CapsuleSharedViewModel - getUpcomingCapsules")
-    fetchNetworkData(api.getUpcomingCapsules(), _upcomingCapsules)
-  }
-
-//  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-//  fun getAllCapsules() {
-//    Timber.d("CapsuleSharedViewModel - getAllCapsules")
-//    fetchNetworkData(api.getAllCapsules(), _allCapsules)
-//  }
-
-  fun launchAllCaps(){
     viewModelScope.launch {
-      getAllCaps()
+      _upcomingCapsules.value = repository.getUpcomingCapsulesFromApi().value
     }
   }
 
-  private suspend fun getAllCaps() = withContext(Dispatchers.IO){
-    val response = api.getAllCapsules().await()
-    withContext(Dispatchers.Main){
-      _allCapsules.value = response
+  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+  fun getAllCapsules() {
+    Timber.d("CapsuleSharedViewModel - getAllCapsules")
+    viewModelScope.launch {
+      _allCapsules.value = repository.getAllCapsulesFromApi().value
     }
   }
 

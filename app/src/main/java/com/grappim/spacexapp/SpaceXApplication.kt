@@ -37,7 +37,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from singleton { API(instance()) }
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
-    bind() from provider { CapsuleSharedViewModelFactory(instance(), instance()) }
+    bind() from provider { CapsuleSharedViewModelFactory(instance()) }
     bind() from provider { RocketsSharedViewModelFactory(instance()) }
     bind() from provider { CoreSharedViewModelFactory(instance()) }
     bind() from provider { ShipsSharedViewModelFactory(instance()) }

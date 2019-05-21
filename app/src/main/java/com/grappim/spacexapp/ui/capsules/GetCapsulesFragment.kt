@@ -83,8 +83,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     Timber.d("GetCapsulesFragment - getData")
     pbGetCapsules.show()
     when (args.capsulesToGetArgs) {
-//      0 -> viewModel.getAllCapsules()
-      0 -> viewModel.launchAllCaps()
+      0 -> viewModel.getAllCapsules()
       1 -> viewModel.getUpcomingCapsules()
       2 -> viewModel.getPastCapsules()
       else -> {

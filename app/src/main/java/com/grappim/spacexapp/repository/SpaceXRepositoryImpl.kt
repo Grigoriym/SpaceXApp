@@ -4,15 +4,43 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.API
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import timber.log.Timber
+import kotlinx.coroutines.withContext
+import retrofit2.Response
 
 class SpaceXRepositoryImpl(
-  val api: API
+    val api: API
 ) : SpaceXRepository {
-  override fun getCapsules(): LiveData<List<CapsuleModel>> {
-    TODO()
+  override suspend fun getAllCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
+    val data: MutableLiveData<Response<List<CapsuleModel>>> = MutableLiveData()
+    withContext(Dispatchers.IO) {
+      val response = api.getAllCapsules().await()
+      withContext(Dispatchers.Main) {
+        data.value = response
+      }
+    }
+    return data
+  }
+
+  override suspend fun getPastCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
+    val data: MutableLiveData<Response<List<CapsuleModel>>> = MutableLiveData()
+    withContext(Dispatchers.IO) {
+      val response = api.getPastCapsules().await()
+      withContext(Dispatchers.Main) {
+        data.value = response
+      }
+    }
+    return data
+  }
+
+  override suspend fun getUpcomingCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>> {
+    val data: MutableLiveData<Response<List<CapsuleModel>>> = MutableLiveData()
+    withContext(Dispatchers.IO) {
+      val response = api.getUpcomingCapsules().await()
+      withContext(Dispatchers.Main) {
+        data.value = response
+      }
+    }
+    return data
   }
 }
