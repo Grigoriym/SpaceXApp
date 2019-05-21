@@ -6,6 +6,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.network.API
 import kotlinx.coroutines.Deferred
@@ -58,4 +59,7 @@ class SpaceXRepositoryImpl(
 
   override suspend fun getInfoFromApi(): LiveData<Response<InfoModel>> =
     generalRequest(api.getInfo())
+
+  override suspend fun getAllLaunchPads(): LiveData<Response<List<LaunchPadModel>>> =
+    generalRequest(api.getAllLaunchPads())
 }

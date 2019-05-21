@@ -1,15 +1,14 @@
 package com.grappim.spacexapp.ui.launchpads
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
@@ -29,6 +28,8 @@ class GetLaunchPadsFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: LaunchPadViewModelFactory by instance()
 
+  private val viewModel by viewModels<LaunchPadViewModel> { viewModelFactory }
+
   private lateinit var lAdapter: LaunchPadsAdapter
   private val observer = Observer<Response<List<LaunchPadModel>>> {
     pbGetLaunchPads.gone()
@@ -37,12 +38,6 @@ class GetLaunchPadsFragment : Fragment(), KodeinAware {
     } else {
       srlGetLaunchPads.showSnackbar(getString(R.string.error_retrieving_data))
     }
-  }
-
-  private val viewModel: LaunchPadViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(LaunchPadViewModel::class.java)
   }
 
   override fun onCreateView(

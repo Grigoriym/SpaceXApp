@@ -5,10 +5,8 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import retrofit2.Response
 
 interface SpaceXRepository {
@@ -26,5 +24,7 @@ interface SpaceXRepository {
   suspend fun getAllHistoryFromApi(): LiveData<Response<List<HistoryModel>>>
 
   suspend fun getInfoFromApi(): LiveData<Response<InfoModel>>
+
+  suspend fun getAllLaunchPads(): LiveData<Response<List<LaunchPadModel>>>
 
 }
