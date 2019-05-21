@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,8 @@ class HistoryFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: HistoryViewModelFactory by instance()
 
+  private val viewModel by viewModels<HistoryViewModel> { viewModelFactory }
+
   private val observer = Observer<Response<List<HistoryModel>>> {
     pbFragmentHistory.gone()
     if (it.isSuccessful) {
@@ -37,12 +40,6 @@ class HistoryFragment : Fragment(), KodeinAware {
     } else {
       rvFragmentHistory.showSnackbar(getString(R.string.error_retrieving_data))
     }
-  }
-
-  private val viewModel: HistoryViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(HistoryViewModel::class.java)
   }
 
   override fun onCreateView(

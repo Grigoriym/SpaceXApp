@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.history.HistoryModel
+import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.network.API
 import kotlinx.coroutines.Deferred
@@ -50,4 +52,10 @@ class SpaceXRepositoryImpl(
 
   override suspend fun getUpcomingCoresFromApi(): LiveData<Response<List<CoreModel>>> =
     generalRequest(api.getUpcomingCores())
+
+  override suspend fun getAllHistoryFromApi(): LiveData<Response<List<HistoryModel>>> =
+    generalRequest(api.getHistory())
+
+  override suspend fun getInfoFromApi(): LiveData<Response<InfoModel>> =
+    generalRequest(api.getInfo())
 }

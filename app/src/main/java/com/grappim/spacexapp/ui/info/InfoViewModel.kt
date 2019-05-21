@@ -2,13 +2,13 @@ package com.grappim.spacexapp.ui.info
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.util.fetchNetworkData
+import com.grappim.spacexapp.repository.SpaceXRepository
+import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
 
 class InfoViewModel(
-  private val api: API
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _info = MutableLiveData<Response<InfoModel>>()
@@ -18,6 +18,8 @@ class InfoViewModel(
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getInfo() {
     Timber.d("InfoViewModel - getInfo()")
-    fetchNetworkData(api.getInfo(), _info)
+    viewModelScope.launch {
+      _info.value = repository.getInfoFromApi().value
+    }
   }
 }
