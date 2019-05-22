@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -12,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.MutableLiveData
@@ -71,6 +73,12 @@ inline fun <reified T : Any> Context.launchActivity(
   } else {
     startActivity(intent)
   }
+}
+
+fun Fragment.startBrowser(uriString: String?) {
+  val i = Intent(Intent.ACTION_VIEW)
+  i.data = Uri.parse(uriString)
+  activity?.startActivity(i)
 }
 
 inline fun <reified T : Any> newIntent(context: Context): Intent =

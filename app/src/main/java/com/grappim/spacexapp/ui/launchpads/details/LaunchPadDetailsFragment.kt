@@ -1,15 +1,14 @@
 package com.grappim.spacexapp.ui.launchpads.details
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.elv.LocationListAdapterItem
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.elv.LocationListAdapterItem
+import com.grappim.spacexapp.util.startBrowser
 import kotlinx.android.synthetic.main.fragment_launch_pad_details.*
 import timber.log.Timber
 
@@ -31,11 +30,9 @@ class LaunchPadDetailsFragment : Fragment() {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when(item.itemId){
+    when (item.itemId) {
       R.id.wiki -> {
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(args.launchPadModel.wikipedia)
-        activity?.startActivity(i)
+        startBrowser(args.launchPadModel.wikipedia)
       }
     }
     return super.onOptionsItemSelected(item)

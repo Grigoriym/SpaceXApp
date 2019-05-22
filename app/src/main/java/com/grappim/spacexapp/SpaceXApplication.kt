@@ -5,9 +5,11 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.network.API
+import com.grappim.spacexapp.network.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
+import com.grappim.spacexapp.repository.TwitterRepositoryImpl
 import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
 import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
 import com.grappim.spacexapp.ui.history.HistoryViewModelFactory
@@ -16,6 +18,7 @@ import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModelFactory
 import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
 import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
+import com.grappim.spacexapp.ui.twitter.TwitterViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -37,6 +40,9 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from singleton { API(instance()) }
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
+    bind() from singleton { TwitterApi(instance()) }
+    bind() from singleton { TwitterRepositoryImpl(instance()) }
+
     bind() from provider { CapsuleSharedViewModelFactory(instance()) }
     bind() from provider { RocketsSharedViewModelFactory(instance()) }
     bind() from provider { CoreSharedViewModelFactory(instance()) }
@@ -45,6 +51,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from provider { InfoViewModelFactory(instance()) }
     bind() from provider { HistoryViewModelFactory(instance()) }
     bind() from provider { LaunchPadViewModelFactory(instance()) }
+    bind() from provider { TwitterViewModelFactory(instance()) }
   }
 
   override fun onCreate() {

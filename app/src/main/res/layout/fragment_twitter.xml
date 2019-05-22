@@ -3,10 +3,10 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.launchpads.GetLaunchPadsFragment">
+  tools:context=".ui.twitter.TwitterFragment">
 
   <ProgressBar
-    android:id="@+id/pbGetLaunchPads"
+    android:id="@+id/pbTwitter"
     style="?android:attr/progressBarStyleHorizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,12 +14,12 @@
     android:visibility="gone"/>
 
   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/srlGetLaunchPads"
+    android:id="@+id/srlTwitter"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rvGetLaunchPads"
+      android:id="@+id/rvTwitter"
       android:layout_width="match_parent"
       android:layout_height="match_parent"/>
 

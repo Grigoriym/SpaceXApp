@@ -26,6 +26,10 @@ android {
             versionNameSuffix "-R"
         }
         debug {
+            buildConfigField 'String', "ApiKey", twitter_api_key
+            buildConfigField 'String', "SecretApiKey", twitter_api_secret_key
+            buildConfigField 'String', "AccessToken", twitter_api_access_token
+            buildConfigField 'String', "AccessTokenSecret", twitter_api_access_token_secret
             minifyEnabled true
             versionNameSuffix "-T"
         }
@@ -38,7 +42,7 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
-    dataBinding{
+    dataBinding {
         enabled = true
     }
 }

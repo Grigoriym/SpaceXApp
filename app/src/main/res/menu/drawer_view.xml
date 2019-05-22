@@ -36,6 +36,10 @@
     <item
       android:id="@+id/nav_history"
       android:title="@string/history"/>
+
+    <item
+      android:id="@+id/nav_twitter"
+      android:title="Twitter News"/>
   </group>
 
 </menu>
