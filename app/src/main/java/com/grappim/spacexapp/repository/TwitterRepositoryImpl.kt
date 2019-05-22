@@ -11,9 +11,9 @@ import retrofit2.Response
 
 class TwitterRepositoryImpl(
   val api: TwitterApi
-) : TwitterRepository {
+) : TwitterRepository, RepositoryHelper {
 
-  private suspend fun <T> generalRequest(liveData: Deferred<T>): LiveData<T> {
+  override suspend fun <T> generalRequest(liveData: Deferred<T>): LiveData<T> {
     val data: MutableLiveData<T> = MutableLiveData()
     withContext(Dispatchers.IO) {
       val response = liveData.await()
@@ -25,5 +25,5 @@ class TwitterRepositoryImpl(
   }
 
   override suspend fun getUserTimelineFromApi(): LiveData<Response<List<UserTimelineModel>>> =
-    generalRequest(api.getUserTimeline())
+    generalRequest(api.getUserTimelineAsync())
 }

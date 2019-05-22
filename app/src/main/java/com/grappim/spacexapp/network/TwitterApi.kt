@@ -53,7 +53,7 @@ interface TwitterApi {
         "oauth_signature=\"F6DyBFF1LhYzi9Ty%2BICeRUnuHKk%3D\""
   )
   @GET("statuses/user_timeline.json")
-  fun getUserTimeline(
+  fun getUserTimelineAsync(
     @Query("user_id") userId: String? = null,
     @Query("screen_name") screenName: String? = "SpaceX"
   ): Deferred<Response<List<UserTimelineModel>>>
