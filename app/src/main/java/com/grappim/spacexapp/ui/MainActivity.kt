@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   private lateinit var switcher: SwitchCompat
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    Timber.d("MainActivity - onCreate")
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_main)
@@ -78,10 +79,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.coreFragment,
         R.id.infoFragment,
         R.id.historyFragment,
-        R.id.launchPadFragment
+        R.id.launchPadFragment,
+        R.id.twitterFragment
       ), drawerLayout
     )
 
+    setSupportActionBar(toolbar)
     navController = Navigation.findNavController(this, R.id.nav_host_fragment)
     setupActionBarWithNavController(navController, appBarConfiguration)
     navigationView.setupWithNavController(navController)
@@ -110,6 +113,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       R.id.nav_info -> navController.navigate(R.id.infoFragment)
       R.id.nav_history -> navController.navigate(R.id.historyFragment)
       R.id.nav_launch_pads -> navController.navigate(R.id.launchPadFragment)
+      R.id.nav_twitter -> navController.navigate(R.id.twitterFragment)
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true

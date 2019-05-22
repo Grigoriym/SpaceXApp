@@ -4,26 +4,27 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
-import com.grappim.spacexapp.ui.ScopedFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import timber.log.Timber
 
-class CapsuleDetailsFragment : ScopedFragment() {
+class CapsuleDetailsFragment : Fragment() {
 
   private val args: CapsuleDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
+      inflater: LayoutInflater,
+      container: ViewGroup?,
+      savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_capsule_details, container, false)
   }
@@ -31,19 +32,14 @@ class CapsuleDetailsFragment : ScopedFragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     Timber.d("CapsuleDetailsFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
-    tlbrCapsuleDetails.setNavigationIcon(com.google.android.material.R.drawable.abc_ic_ab_back_material)
-    tlbrCapsuleDetails.setNavigationOnClickListener {
-      activity?.onBackPressed()
-    }
 
     bindAdapter()
 
     GlideApp.with(this)
-      .load(capsuleImageList["default"])
-      .into(ivCapsuleDetailsToolbar)
+        .load(capsuleImageList["default"])
+        .into(ivCapsuleDetailsToolbar)
 
     args.capsuleModel.let {
-      tlbrCapsuleDetails.title = it.capsuleSerial
       tvCapsuleDetailsDetails.text = it.details
       tvCapsuleDetailsLandings.text = it.landings.toString()
       tvCapsuleDetailsOriginalLaunch.text = it.originalLaunch

@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +35,8 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val args: GetCapsulesFragmentArgs by navArgs()
 
+  private val viewModel by viewModels<CapsuleSharedViewModel> { viewModelFactory }
+
   private val observerWithResponse = Observer<Response<List<CapsuleModel>>> {
     Timber.d("GetCapsulesFragment - observer")
     pbGetCapsules.gone()
@@ -42,14 +44,9 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       it.body()?.let { items -> cAdapter.loadItems(items) }
     } else {
       srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
+      findNavController().popBackStack()
     }
     rvGetCapsules.scheduleLayoutAnimation()
-  }
-
-  private val viewModel: CapsuleSharedViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(CapsuleSharedViewModel::class.java)
   }
 
   override fun onCreateView(
@@ -59,9 +56,10 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
     return inflater.inflate(R.layout.fragment_get_capsules, container, false)
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    Timber.d("GetCapsulesFragment - onActivityCreated")
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    Timber.d("GetCapsulesFragment - onViewCreated")
+
     viewModel.apply {
       allCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
       upcomingCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
@@ -75,11 +73,6 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
       getData()
       srlGetCapsules.isRefreshing = false
     }
-  }
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    Timber.d("GetCapsulesFragment - onViewCreated")
   }
 
   private fun getData() {

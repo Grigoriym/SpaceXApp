@@ -2,13 +2,12 @@ package com.grappim.spacexapp.ui.history
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.util.fetchData
-import com.grappim.spacexapp.util.fetchNetworkData
+import com.grappim.spacexapp.repository.SpaceXRepository
+import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class HistoryViewModel(
-  private val api: API
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _allHistory = MutableLiveData<Response<List<HistoryModel>>>()
@@ -17,6 +16,8 @@ class HistoryViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllHistory() {
-    fetchNetworkData(api.getHistory(), _allHistory)
+    viewModelScope.launch {
+      _allHistory.value = repository.getAllHistoryFromApi().value
+    }
   }
 }

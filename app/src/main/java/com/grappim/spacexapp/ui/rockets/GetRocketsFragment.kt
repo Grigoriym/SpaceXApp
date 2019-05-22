@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -31,6 +31,8 @@ class GetRocketsFragment : Fragment(), KodeinAware {
 
   private lateinit var rAdapter: RocketsAdapter
 
+  private val viewModel by viewModels<RocketsSharedViewModel> { viewModelFactory }
+
   private val observer = Observer<Response<List<RocketModel>>> {
     pbGetRockets.gone()
     if (it.isSuccessful) {
@@ -41,12 +43,6 @@ class GetRocketsFragment : Fragment(), KodeinAware {
       srlGetRockets.showSnackbar(getString(R.string.error_retrieving_data))
     }
     rvGetRockets.scheduleLayoutAnimation()
-  }
-
-  private val viewModel: RocketsSharedViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(RocketsSharedViewModel::class.java)
   }
 
   override fun onCreateView(

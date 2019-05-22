@@ -2,12 +2,12 @@ package com.grappim.spacexapp.ui.ships
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.grappim.spacexapp.network.API
+import com.grappim.spacexapp.repository.SpaceXRepository
 
 class ShipsSharedViewModelFactory(
-  private val api: API
+  private val repository: SpaceXRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
   override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-    ShipsSharedViewModel(api) as T
+    ShipsSharedViewModel(repository) as T
 }

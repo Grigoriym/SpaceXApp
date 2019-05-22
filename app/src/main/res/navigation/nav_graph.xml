@@ -249,4 +249,10 @@
       app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel"/>
   </fragment>
 
+  <fragment
+    android:id="@+id/twitterFragment"
+    android:name="com.grappim.spacexapp.ui.twitter.TwitterFragment"
+    android:label="fragment_twitter"
+    tools:layout="@layout/fragment_twitter" />
+
 </navigation>

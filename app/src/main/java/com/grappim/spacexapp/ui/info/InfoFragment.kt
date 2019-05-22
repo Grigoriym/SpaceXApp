@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,8 @@ class InfoFragment : Fragment(), KodeinAware {
   override val kodein by kodein()
 
   private val viewModelFactory: InfoViewModelFactory by instance()
+
+  private val viewModel by viewModels<InfoViewModel> { viewModelFactory }
 
   private val observer = Observer<Response<InfoModel>> { response ->
     pbInfo.gone()
@@ -68,12 +71,6 @@ class InfoFragment : Fragment(), KodeinAware {
       clFragmentInfo.showSnackbar(getString(R.string.error_retrieving_data))
       findNavController().popBackStack()
     }
-  }
-
-  private val viewModel: InfoViewModel by lazy {
-    ViewModelProviders
-      .of(this, viewModelFactory)
-      .get(InfoViewModel::class.java)
   }
 
   override fun onCreateView(
