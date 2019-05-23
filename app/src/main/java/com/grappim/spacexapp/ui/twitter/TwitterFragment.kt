@@ -36,7 +36,7 @@ class TwitterFragment : Fragment(), KodeinAware {
       it.body()?.let { items -> uAdapter.loadItems(items) }
     } else {
       srlTwitter.showSnackbar(getString(R.string.error_retrieving_data))
-      findNavController().popBackStack()
+//      findNavController().popBackStack()
     }
     rvTwitter.scheduleLayoutAnimation()
   }

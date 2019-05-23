@@ -2,9 +2,7 @@ package com.grappim.spacexapp.ui.rockets
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
-import com.grappim.spacexapp.util.fetchNetworkData
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber

@@ -35,7 +35,7 @@ class GetCapsulesFragment : Fragment(), KodeinAware {
 
   private val args: GetCapsulesFragmentArgs by navArgs()
 
-  private val viewModel by viewModels<CapsuleSharedViewModel> { viewModelFactory }
+  private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }
 
   private val observerWithResponse = Observer<Response<List<CapsuleModel>>> {
     Timber.d("GetCapsulesFragment - observer")

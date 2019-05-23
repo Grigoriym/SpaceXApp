@@ -2,14 +2,13 @@ package com.grappim.spacexapp.ui.capsules
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import timber.log.Timber
 
-class CapsuleSharedViewModel(
-    private val repository: SpaceXRepository
+class CapsulesViewModel(
+  private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 
   private val _allCapsules = MutableLiveData<Response<List<CapsuleModel>>>()
@@ -26,7 +25,7 @@ class CapsuleSharedViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getPastCapsules() {
-    Timber.d("CapsuleSharedViewModel - getPastCapsules")
+    Timber.d("CapsulesViewModel - getPastCapsules")
     viewModelScope.launch {
       _allCapsules.value = repository.getAllCapsulesFromApi().value
     }
@@ -34,7 +33,7 @@ class CapsuleSharedViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getUpcomingCapsules() {
-    Timber.d("CapsuleSharedViewModel - getUpcomingCapsules")
+    Timber.d("CapsulesViewModel - getUpcomingCapsules")
     viewModelScope.launch {
       _upcomingCapsules.value = repository.getUpcomingCapsulesFromApi().value
     }
@@ -42,7 +41,7 @@ class CapsuleSharedViewModel(
 
   @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
   fun getAllCapsules() {
-    Timber.d("CapsuleSharedViewModel - getAllCapsules")
+    Timber.d("CapsulesViewModel - getAllCapsules")
     viewModelScope.launch {
       _allCapsules.value = repository.getAllCapsulesFromApi().value
     }

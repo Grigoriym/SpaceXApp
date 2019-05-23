@@ -2,10 +2,7 @@ package com.grappim.spacexapp.ui.cores
 
 import androidx.lifecycle.*
 import com.grappim.spacexapp.model.cores.CoreModel
-import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
-import com.grappim.spacexapp.util.fetchData
-import com.grappim.spacexapp.util.fetchNetworkData
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
