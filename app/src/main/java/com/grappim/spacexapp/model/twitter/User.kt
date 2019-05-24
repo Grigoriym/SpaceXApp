@@ -1,43 +1,91 @@
 package com.grappim.spacexapp.model.twitter
 
+
+import com.google.gson.annotations.SerializedName
+
 data class User(
-  val `protected`: Boolean,
-  val contributors_enabled: Boolean,
-  val created_at: String,
-  val default_profile: Boolean,
-  val default_profile_image: Boolean,
-  val description: String,
-  val favourites_count: Int,
-  val follow_request_sent: Any,
-  val followers_count: Int,
-  val following: Any,
-  val friends_count: Int,
-  val geo_enabled: Boolean,
-  val id: Long,
-  val id_str: String,
-  val is_translator: Boolean,
-  val lang: String,
-  val listed_count: Int,
-  val location: String,
-  val name: String,
-  val notifications: Any,
-  val profile_background_color: String,
-  val profile_background_image_url: String,
-  val profile_background_image_url_https: String,
-  val profile_background_tile: Any,
-  val profile_banner_url: String,
-  val profile_image_url: String,
-  val profile_image_url_https: String,
-  val profile_link_color: String,
-  val profile_sidebar_border_color: String,
-  val profile_sidebar_fill_color: String,
-  val profile_text_color: String,
-  val profile_use_background_image: Any,
-  val screen_name: String,
-  val statuses_count: Int,
-  val time_zone: Any,
-  val translator_type: String,
-  val url: String,
-  val utc_offset: Any,
-  val verified: Boolean
+  @SerializedName("protected")
+  val `protected`: Boolean?,
+  @SerializedName("contributors_enabled")
+  val contributorsEnabled: Boolean?,
+  @SerializedName("created_at")
+  val createdAt: String?,
+  @SerializedName("default_profile")
+  val defaultProfile: Boolean?,
+  @SerializedName("default_profile_image")
+  val defaultProfileImage: Boolean?,
+  @SerializedName("description")
+  val description: String?,
+  @SerializedName("entities")
+  val entities: EntitiesX?,
+  @SerializedName("favourites_count")
+  val favouritesCount: Int?,
+  @SerializedName("follow_request_sent")
+  val followRequestSent: Boolean?,
+  @SerializedName("followers_count")
+  val followersCount: Int?,
+  @SerializedName("following")
+  val following: Boolean?,
+  @SerializedName("friends_count")
+  val friendsCount: Int?,
+  @SerializedName("geo_enabled")
+  val geoEnabled: Boolean?,
+  @SerializedName("has_extended_profile")
+  val hasExtendedProfile: Boolean?,
+  @SerializedName("id")
+  val id: Int?,
+  @SerializedName("id_str")
+  val idStr: String?,
+  @SerializedName("is_translation_enabled")
+  val isTranslationEnabled: Boolean?,
+  @SerializedName("is_translator")
+  val isTranslator: Boolean?,
+  @SerializedName("lang")
+  val lang: Any?,
+  @SerializedName("listed_count")
+  val listedCount: Int?,
+  @SerializedName("location")
+  val location: String?,
+  @SerializedName("name")
+  val name: String?,
+  @SerializedName("notifications")
+  val notifications: Boolean?,
+  @SerializedName("profile_background_color")
+  val profileBackgroundColor: String?,
+  @SerializedName("profile_background_image_url")
+  val profileBackgroundImageUrl: String?,
+  @SerializedName("profile_background_image_url_https")
+  val profileBackgroundImageUrlHttps: String?,
+  @SerializedName("profile_background_tile")
+  val profileBackgroundTile: Boolean?,
+  @SerializedName("profile_banner_url")
+  val profileBannerUrl: String?,
+  @SerializedName("profile_image_url")
+  val profileImageUrl: String?,
+  @SerializedName("profile_image_url_https")
+  val profileImageUrlHttps: String?,
+  @SerializedName("profile_link_color")
+  val profileLinkColor: String?,
+  @SerializedName("profile_sidebar_border_color")
+  val profileSidebarBorderColor: String?,
+  @SerializedName("profile_sidebar_fill_color")
+  val profileSidebarFillColor: String?,
+  @SerializedName("profile_text_color")
+  val profileTextColor: String?,
+  @SerializedName("profile_use_background_image")
+  val profileUseBackgroundImage: Boolean?,
+  @SerializedName("screen_name")
+  val screenName: String?,
+  @SerializedName("statuses_count")
+  val statusesCount: Int?,
+  @SerializedName("time_zone")
+  val timeZone: Any?,
+  @SerializedName("translator_type")
+  val translatorType: String?,
+  @SerializedName("url")
+  val url: String?,
+  @SerializedName("utc_offset")
+  val utcOffset: Any?,
+  @SerializedName("verified")
+  val verified: Boolean?
 )

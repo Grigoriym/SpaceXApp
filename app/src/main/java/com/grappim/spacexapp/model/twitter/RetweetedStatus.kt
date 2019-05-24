@@ -3,7 +3,7 @@ package com.grappim.spacexapp.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class UserTimelineModel(
+data class RetweetedStatus(
   @SerializedName("contributors")
   val contributors: Any?,
   @SerializedName("coordinates")
@@ -13,7 +13,7 @@ data class UserTimelineModel(
   @SerializedName("display_text_range")
   val displayTextRange: List<Int?>?,
   @SerializedName("entities")
-  val entities: Entities?,
+  val entities: EntitiesX?,
   @SerializedName("extended_entities")
   val extendedEntities: ExtendedEntities?,
   @SerializedName("favorite_count")
@@ -46,24 +46,12 @@ data class UserTimelineModel(
   val place: Any?,
   @SerializedName("possibly_sensitive")
   val possiblySensitive: Boolean?,
-  @SerializedName("quoted_status")
-  val quotedStatus: QuotedStatus?,
-  @SerializedName("quoted_status_id")
-  val quotedStatusId: Long?,
-  @SerializedName("quoted_status_id_str")
-  val quotedStatusIdStr: String?,
-  @SerializedName("quoted_status_permalink")
-  val quotedStatusPermalink: QuotedStatusPermalink?,
   @SerializedName("retweet_count")
   val retweetCount: Int?,
   @SerializedName("retweeted")
   val retweeted: Boolean?,
-  @SerializedName("retweeted_status")
-  val retweetedStatus: RetweetedStatus?,
   @SerializedName("source")
   val source: String?,
-  @SerializedName("text")
-  val text: String?,
   @SerializedName("truncated")
   val truncated: Boolean?,
   @SerializedName("user")

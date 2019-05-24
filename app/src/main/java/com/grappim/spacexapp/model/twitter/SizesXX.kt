@@ -3,13 +3,13 @@ package com.grappim.spacexapp.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class SizesX(
+data class SizesXX(
   @SerializedName("large")
-  val large: LargeX?,
+  val large: Large?,
   @SerializedName("medium")
-  val medium: MediumX?,
+  val medium: Medium?,
   @SerializedName("small")
-  val small: SmallX?,
+  val small: Small?,
   @SerializedName("thumb")
   val thumb: Thumb?
 )

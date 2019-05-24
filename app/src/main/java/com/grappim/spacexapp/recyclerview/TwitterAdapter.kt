@@ -9,11 +9,14 @@ import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.getTwitterDate
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.roundCorners
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterAdapter(
-  val onClick: (UserTimelineModel) -> Unit
+  val onClick: (UserTimelineModel) -> Unit,
+  val onImageClick: (UserTimelineModel) -> Unit
 ) : RecyclerView.Adapter<TwitterViewHolder>() {
 
   private var items: List<UserTimelineModel> = emptyList()
@@ -32,11 +35,21 @@ class TwitterAdapter(
       userTimelineModel = items[position]
       itemView.setOnClickListener { onClick(items[position]) }
       GlideApp.with(profileImage.context)
-        .load(items[position].user.profile_image_url_https)
+        .load(items[position].user?.profileImageUrlHttps)
         .transition(DrawableTransitionOptions.withCrossFade())
         .centerCrop()
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(profileImage)
+
+      if (items[position].extendedEntities?.media?.get(0) != null) {
+        GlideApp.with(mediaImage.context)
+          .load(items[position].extendedEntities?.media?.get(0)?.mediaUrlHttps)
+          .transition(DrawableTransitionOptions.withCrossFade())
+          .centerCrop()
+          .roundCorners(16)
+          .into(mediaImage)
+        mediaImage.setOnClickListener { onImageClick(items[position]) }
+      }
     }
   }
 
@@ -50,13 +63,20 @@ class TwitterViewHolder(
   private val view: View
 ) : RecyclerView.ViewHolder(view) {
   val profileImage: ImageView = view.ivTwitterItemProfileImage
+  val mediaImage: ImageView = view.ivTwitterItemMedia
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
       field = value
       view.apply {
-        tvTwitterItemCreatedAt.text = value?.created_at
-        tvTwitterItemScreenName.text = "@${value?.user?.screen_name}"
-        tvTwitterItemText.text = value?.text
+        tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
+        tvTwitterItemScreenName.text = "@${value?.user?.screenName}"
+        tvTwitterItemText.text = value?.fullText
+        tvTwitterName.text = value?.user?.name
+        if (value?.extendedEntities?.media?.get(0) == null) {
+          mediaImage.visibility = View.GONE
+        }else{
+          mediaImage.visibility = View.VISIBLE
+        }
       }
     }
 }

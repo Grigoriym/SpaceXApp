@@ -3,7 +3,7 @@ package com.grappim.spacexapp.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class Media(
+data class MediaXX(
   @SerializedName("display_url")
   val displayUrl: String?,
   @SerializedName("expanded_url")
@@ -19,7 +19,7 @@ data class Media(
   @SerializedName("media_url_https")
   val mediaUrlHttps: String?,
   @SerializedName("sizes")
-  val sizes: Sizes?,
+  val sizes: SizesXX?,
   @SerializedName("type")
   val type: String?,
   @SerializedName("url")

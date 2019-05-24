@@ -1,7 +1,13 @@
 package com.grappim.spacexapp.model.twitter
 
+
+import com.google.gson.annotations.SerializedName
+
 data class QuotedStatusPermalink(
-  val display: String,
-  val expanded: String,
-  val url: String
+  @SerializedName("display")
+  val display: String?,
+  @SerializedName("expanded")
+  val expanded: String?,
+  @SerializedName("url")
+  val url: String?
 )

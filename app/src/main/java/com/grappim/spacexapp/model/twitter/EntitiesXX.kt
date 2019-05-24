@@ -3,13 +3,15 @@ package com.grappim.spacexapp.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class Entities(
+data class EntitiesXX(
   @SerializedName("hashtags")
   val hashtags: List<Any?>?,
+  @SerializedName("media")
+  val media: List<MediaXX?>?,
   @SerializedName("symbols")
   val symbols: List<Any?>?,
   @SerializedName("urls")
-  val urls: List<Any?>?,
+  val urls: List<UrlXX?>?,
   @SerializedName("user_mentions")
-  val userMentions: List<Any?>?
+  val userMentions: List<UserMention?>?
 )

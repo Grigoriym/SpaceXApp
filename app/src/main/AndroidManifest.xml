@@ -3,8 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   package="com.grappim.spacexapp">
 
-  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+  <uses-permission android:name="android.permission.INTERNET" />
 
   <application
     android:name=".SpaceXApplication"
@@ -15,20 +15,21 @@
     android:supportsRtl="true"
     android:theme="@style/DayNightAppTheme"
     tools:ignore="GoogleAppIndexingWarning">
-
-    <activity android:name=".ui.SplashActivity"
+    <activity
+      android:name=".ui.FullScreenImageActivity"
+      android:theme="@style/DayNightAppTheme"/>
+    <activity
+      android:name=".ui.SplashActivity"
       android:theme="@style/DayNightAppTheme">
       <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
+        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER"/>
+        <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-
-    <activity android:name=".ui.MainActivity"
-      android:theme="@style/DayNightAppTheme">
-    </activity>
-
+    <activity
+      android:name=".ui.MainActivity"
+      android:theme="@style/DayNightAppTheme"></activity>
   </application>
 
 </manifest>

@@ -23,14 +23,26 @@
       tools:src="@tools:sample/avatars" />
 
     <TextView
-      android:id="@+id/tvTwitterItemScreenName"
+      android:id="@+id/tvTwitterName"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginLeft="8dp"
+      android:textStyle="bold"
       app:layout_constraintStart_toEndOf="@+id/ivTwitterItemProfileImage"
       app:layout_constraintTop_toTopOf="@+id/ivTwitterItemProfileImage"
-      tools:text="TextView" />
+      tools:text="SpaceX" />
+
+    <TextView
+      android:id="@+id/tvTwitterItemScreenName"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="4dp"
+      android:layout_marginLeft="4dp"
+      android:textColor="@color/gray_for_twitter"
+      app:layout_constraintStart_toEndOf="@+id/tvTwitterName"
+      app:layout_constraintTop_toTopOf="@+id/tvTwitterName"
+      tools:text="\@SpaceX" />
 
     <TextView
       android:id="@+id/tvTwitterItemCreatedAt"
@@ -38,23 +50,38 @@
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
       android:layout_marginLeft="8dp"
+      android:textColor="@color/gray_for_twitter"
       app:layout_constraintStart_toEndOf="@+id/tvTwitterItemScreenName"
       app:layout_constraintTop_toTopOf="@+id/tvTwitterItemScreenName"
-      tools:text="TextView" />
+      tools:text="May 19" />
+
+    <ImageView
+      android:id="@+id/ivTwitterItemMedia"
+      android:layout_width="0dp"
+      android:layout_height="200dp"
+      android:layout_marginStart="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginTop="4dp"
+      android:layout_marginEnd="8dp"
+      android:layout_marginRight="8dp"
+      android:scaleType="fitXY"
+      android:visibility="gone"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toEndOf="@+id/ivTwitterItemProfileImage"
+      app:layout_constraintTop_toBottomOf="@+id/tvTwitterItemScreenName" />
 
     <TextView
       android:id="@+id/tvTwitterItemText"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
+      android:layout_marginTop="4dp"
       android:layout_marginEnd="8dp"
       android:layout_marginRight="8dp"
       android:layout_marginBottom="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="@+id/tvTwitterItemScreenName"
-      app:layout_constraintTop_toBottomOf="@+id/tvTwitterItemScreenName"
-      app:layout_constraintVertical_bias="0.0"
+      app:layout_constraintStart_toStartOf="@+id/tvTwitterName"
+      app:layout_constraintTop_toBottomOf="@+id/ivTwitterItemMedia"
       tools:text="TextView" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

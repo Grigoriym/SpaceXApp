@@ -63,6 +63,6 @@ interface TwitterApi {
     @Query("user_id") userId: String? = null,
     @Query("screen_name") screenName: String? = "SpaceX",
     @Query("count") count: Int? = 50,
-    @Query("include_entities") includeEntities: Boolean? = true
+    @Query("tweet_mode") tweetMode: String? = "extended"
   ): Deferred<Response<List<UserTimelineModel>>>
 }
