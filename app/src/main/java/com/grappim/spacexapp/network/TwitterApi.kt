@@ -62,7 +62,8 @@ interface TwitterApi {
   fun getUserTimelineAsync(
     @Query("user_id") userId: String? = null,
     @Query("screen_name") screenName: String? = "SpaceX",
-    @Query("count") count: Int? = 50,
-    @Query("tweet_mode") tweetMode: String? = "extended"
+    @Query("count") count: Int? = 15,
+    @Query("tweet_mode") tweetMode: String? = "extended",
+    @Query("page") page: Int? = 1
   ): Deferred<Response<List<UserTimelineModel>>>
 }
