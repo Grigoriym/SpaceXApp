@@ -1,8 +1,11 @@
 package com.grappim.spacexapp.model.twitter
 
+
+import com.google.gson.annotations.SerializedName
+
 data class EntitiesX(
-  val hashtags: List<Any>,
-  val symbols: List<Any>,
-  val urls: List<UrlXX>,
-  val user_mentions: List<Any>
+  @SerializedName("description")
+  val description: Description?,
+  @SerializedName("url")
+  val url: Url?
 )

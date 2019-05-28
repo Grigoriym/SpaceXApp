@@ -1,15 +1,27 @@
 package com.grappim.spacexapp.model.twitter
 
+
+import com.google.gson.annotations.SerializedName
+
 data class MediaX(
-  val display_url: String,
-  val expanded_url: String,
-  val id: Long,
-  val id_str: String,
-  val indices: List<Int>,
-  val media_url: String,
-  val media_url_https: String,
-  val sizes: SizesX,
-  val type: String,
-  val url: String,
-  val video_info: VideoInfo
+  @SerializedName("display_url")
+  val displayUrl: String?,
+  @SerializedName("expanded_url")
+  val expandedUrl: String?,
+  @SerializedName("id")
+  val id: Long?,
+  @SerializedName("id_str")
+  val idStr: String?,
+  @SerializedName("indices")
+  val indices: List<Int?>?,
+  @SerializedName("media_url")
+  val mediaUrl: String?,
+  @SerializedName("media_url_https")
+  val mediaUrlHttps: String?,
+  @SerializedName("sizes")
+  val sizes: SizesX?,
+  @SerializedName("type")
+  val type: String?,
+  @SerializedName("url")
+  val url: String?
 )

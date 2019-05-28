@@ -6,5 +6,5 @@ import retrofit2.Response
 
 interface TwitterRepository {
 
-  suspend fun getUserTimelineFromApi(): LiveData<Response<List<UserTimelineModel>>>
+  suspend fun getUserTimelineFromApi(screenName: String? = "SpaceX"): LiveData<Response<List<UserTimelineModel>>>
 }

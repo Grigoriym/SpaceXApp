@@ -3,7 +3,7 @@ package com.grappim.spacexapp.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class UrlXXX(
+data class UrlXXXX(
   @SerializedName("display_url")
   val displayUrl: String?,
   @SerializedName("expanded_url")

@@ -2,7 +2,6 @@ package com.grappim.spacexapp.ui.capsules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.repository.SpaceXRepository
 
 class CapsuleSharedViewModelFactory(
@@ -10,6 +9,6 @@ class CapsuleSharedViewModelFactory(
 ) : ViewModelProvider.NewInstanceFactory() {
 
   override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-    CapsuleSharedViewModel(repository) as T
+    CapsulesViewModel(repository) as T
 
 }

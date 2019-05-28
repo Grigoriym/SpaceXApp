@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.recyclerview.TwitterAdapter
+import com.grappim.spacexapp.ui.FullScreenImageActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.kodein.di.KodeinAware
@@ -36,7 +37,7 @@ class TwitterFragment : Fragment(), KodeinAware {
       it.body()?.let { items -> uAdapter.loadItems(items) }
     } else {
       srlTwitter.showSnackbar(getString(R.string.error_retrieving_data))
-      findNavController().popBackStack()
+//      findNavController().popBackStack()
     }
     rvTwitter.scheduleLayoutAnimation()
   }
@@ -69,9 +70,16 @@ class TwitterFragment : Fragment(), KodeinAware {
   }
 
   private fun bindAdapter() {
-    uAdapter = TwitterAdapter {
-      startBrowser("$TWITTER_FOR_BROWSER_URI${it.id_str}")
-    }
+    uAdapter = TwitterAdapter(
+      onClick = {
+        startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
+      },
+      onImageClick = {
+        context?.launchActivity<FullScreenImageActivity> {
+          putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
+        }
+      }
+    )
     rvTwitter.apply {
       layoutManager = LinearLayoutManager(context)
       layoutAnimation = AnimationUtils

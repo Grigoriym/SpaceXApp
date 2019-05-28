@@ -252,7 +252,8 @@
   <fragment
     android:id="@+id/twitterFragment"
     android:name="com.grappim.spacexapp.ui.twitter.TwitterFragment"
-    android:label="fragment_twitter"
-    tools:layout="@layout/fragment_twitter" />
+    android:label="Recent News"
+    tools:layout="@layout/fragment_twitter">
+  </fragment>
 
 </navigation>

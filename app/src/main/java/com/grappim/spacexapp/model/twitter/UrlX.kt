@@ -1,9 +1,15 @@
 package com.grappim.spacexapp.model.twitter
 
+
+import com.google.gson.annotations.SerializedName
+
 data class UrlX(
-  val display_url: String,
-  val expanded_url: String,
-  val indices: List<Int>,
-  val unwound: UnwoundX,
-  val url: String
+  @SerializedName("display_url")
+  val displayUrl: String?,
+  @SerializedName("expanded_url")
+  val expandedUrl: String?,
+  @SerializedName("indices")
+  val indices: List<Int?>?,
+  @SerializedName("url")
+  val url: String?
 )

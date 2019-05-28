@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.fragment.findNavController
-
 import com.grappim.spacexapp.R
 import kotlinx.android.synthetic.main.fragment_rocket.*
 
@@ -25,7 +22,7 @@ class RocketFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
 
     btnGetAllRockets.setOnClickListener {
-     findNavController().navigate(R.id.nextFragment)
+      findNavController().navigate(R.id.nextFragment)
     }
   }
 }
