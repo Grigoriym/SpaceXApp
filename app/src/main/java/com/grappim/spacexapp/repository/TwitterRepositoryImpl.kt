@@ -24,6 +24,10 @@ class TwitterRepositoryImpl(
     return data
   }
 
-  override suspend fun getUserTimelineFromApi(screenName: String?): LiveData<Response<List<UserTimelineModel>>> =
+  override suspend fun getUserTimelineFromApi(
+    screenName: String?
+  ): LiveData<Response<List<UserTimelineModel>>> =
     generalRequest(api.getUserTimelineAsync(screenName = screenName))
+
+
 }
