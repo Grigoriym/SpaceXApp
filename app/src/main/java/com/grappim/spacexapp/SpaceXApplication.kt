@@ -53,7 +53,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from provider { InfoViewModelFactory(instance()) }
     bind() from provider { HistoryViewModelFactory(instance()) }
     bind() from provider { LaunchPadViewModelFactory(instance()) }
-    bind() from provider { TwitterViewModelFactory(instance(), instance()) }
+    bind() from provider { TwitterViewModelFactory(instance(), instance(), instance()) }
   }
 
   override fun onCreate() {

@@ -20,7 +20,6 @@ class FullScreenImageActivity : AppCompatActivity() {
     intent.apply {
       args = getStringExtra("asd")
     }
-    println(args)
 
     args?.apply {
       GlideApp.with(baseContext)

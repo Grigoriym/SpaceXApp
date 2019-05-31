@@ -31,7 +31,7 @@ class TwitterFragment : Fragment(), KodeinAware {
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
 
-//  private lateinit var testAdapter: TwitterPaginationAdapter
+  private lateinit var testAdapter: TwitterPaginationAdapter
 
   private val observerWithResponse = Observer<Response<List<UserTimelineModel>>> {
     Timber.d("TwitterFragment - observer")
@@ -56,11 +56,14 @@ class TwitterFragment : Fragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
-      userTimeline.observe(this@TwitterFragment, observerWithResponse)
+//      userTimeline.observe(this@TwitterFragment, observerWithResponse)
 //      testUserTimeline.observe(this@TwitterFragment, Observer<PagedList<UserTimelineModel>>{
 //        Timber.d("TwitterFragment - testUserTimeline - observer")
 //        testAdapter.submitList(it)
 //      })
+      newTimelines.observe(this@TwitterFragment, Observer{
+        testAdapter.submitList(it)
+      })
     }
 
     bindAdapter()
@@ -73,29 +76,29 @@ class TwitterFragment : Fragment(), KodeinAware {
 
   private fun getData() {
     pbTwitter.show()
-    viewModel.getUserTimeline()
+//    viewModel.getUserTimeline()
 //    viewModel.getTestUserTimeline()
   }
 
   private fun bindAdapter() {
-    uAdapter = TwitterAdapter(
-      onClick = {
-        startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
-      },
-      onImageClick = {
-        context?.launchActivity<FullScreenImageActivity> {
-          putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
-        }
-      }
-    )
-//    testAdapter = TwitterPaginationAdapter(onClick = {}, onImageClick = {})
+//    uAdapter = TwitterAdapter(
+//      onClick = {
+//        startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
+//      },
+//      onImageClick = {
+//        context?.launchActivity<FullScreenImageActivity> {
+//          putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
+//        }
+//      }
+//    )
+    testAdapter = TwitterPaginationAdapter(onClick = {}, onImageClick = {})
 
     rvTwitter.apply {
       layoutManager = LinearLayoutManager(context)
       layoutAnimation = AnimationUtils
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
-      adapter = uAdapter
-//      adapter = testAdapter
+//      adapter = uAdapter
+      adapter = testAdapter
     }
   }
 

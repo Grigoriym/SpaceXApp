@@ -50,6 +50,7 @@ class SplashActivity : AppCompatActivity() {
   }
 
   override fun onDestroy() {
+    Timber.d("SplashActivity - onDestroy")
     if (delayHandler != null) {
       delayHandler?.removeCallbacks(runnable)
     }

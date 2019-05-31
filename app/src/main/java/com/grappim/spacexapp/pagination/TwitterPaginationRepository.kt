@@ -30,11 +30,9 @@ class TwitterPaginationRepository(
     return livePagedList
   }
 
-//  fun timelines02() : LivePagedListBuilder<Long, UserTimelineModel>{
   fun timelines02() : LiveData<PagedList<UserTimelineModel>>{
     Timber.d("TwitterPaginationRepository - timelines02")
     val sourceFactory = TwitterDataSourceFactory(api)
-//    val sourceFactory = TwitterDataSource(api)
     val config = PagedList.Config.Builder()
       .setPageSize(30)
       .setEnablePlaceholders(false)
@@ -45,6 +43,16 @@ class TwitterPaginationRepository(
       sourceFactory,
       config
     )
-    return livePageListBuilder.setFetchExecutor(Executors.newFixedThreadPool(5)).build()
+
+    val testlplb = sourceFactory.toLiveData(
+      config = Config(
+        pageSize = 30,
+        enablePlaceholders = false,
+        initialLoadSizeHint = 60,
+        prefetchDistance = 10
+      )
+    )
+    return testlplb
+//    return livePageListBuilder.setFetchExecutor(Executors.newFixedThreadPool(5)).build()
   }
 }

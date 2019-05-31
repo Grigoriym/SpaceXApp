@@ -10,7 +10,7 @@ class TwitterDataSourceFactory(
   private val api: TwitterApi
 ) : DataSource.Factory<Long, UserTimelineModel>() {
 
-  val sourceLiveData = MutableLiveData<TwitterDataSource>()
+  private val sourceLiveData = MutableLiveData<TwitterDataSource>()
 
   override fun create(): DataSource<Long, UserTimelineModel> {
     Timber.d("TwitterDataSourceFactory - create")
