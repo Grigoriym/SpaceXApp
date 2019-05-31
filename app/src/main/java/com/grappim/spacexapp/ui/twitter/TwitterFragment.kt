@@ -8,9 +8,11 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.recyclerview.TwitterAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
 import com.grappim.spacexapp.util.*
@@ -28,6 +30,8 @@ class TwitterFragment : Fragment(), KodeinAware {
   private lateinit var uAdapter: TwitterAdapter
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
+
+//  private lateinit var testAdapter: TwitterPaginationAdapter
 
   private val observerWithResponse = Observer<Response<List<UserTimelineModel>>> {
     Timber.d("TwitterFragment - observer")
@@ -53,6 +57,10 @@ class TwitterFragment : Fragment(), KodeinAware {
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
       userTimeline.observe(this@TwitterFragment, observerWithResponse)
+//      testUserTimeline.observe(this@TwitterFragment, Observer<PagedList<UserTimelineModel>>{
+//        Timber.d("TwitterFragment - testUserTimeline - observer")
+//        testAdapter.submitList(it)
+//      })
     }
 
     bindAdapter()
@@ -66,6 +74,7 @@ class TwitterFragment : Fragment(), KodeinAware {
   private fun getData() {
     pbTwitter.show()
     viewModel.getUserTimeline()
+//    viewModel.getTestUserTimeline()
   }
 
   private fun bindAdapter() {
@@ -79,11 +88,14 @@ class TwitterFragment : Fragment(), KodeinAware {
         }
       }
     )
+//    testAdapter = TwitterPaginationAdapter(onClick = {}, onImageClick = {})
+
     rvTwitter.apply {
       layoutManager = LinearLayoutManager(context)
       layoutAnimation = AnimationUtils
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = uAdapter
+//      adapter = testAdapter
     }
   }
 
