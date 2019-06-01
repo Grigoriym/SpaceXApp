@@ -8,7 +8,6 @@ import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.network.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
-import com.grappim.spacexapp.pagination.TwitterPaginationRepository
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
 import com.grappim.spacexapp.repository.TwitterRepositoryImpl
 import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
@@ -43,7 +42,6 @@ class SpaceXApplication : Application(), KodeinAware {
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterRepositoryImpl(instance()) }
-    bind() from singleton { TwitterPaginationRepository(instance()) }
 
     bind() from provider { CapsuleSharedViewModelFactory(instance()) }
     bind() from provider { RocketsSharedViewModelFactory(instance()) }
@@ -53,7 +51,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from provider { InfoViewModelFactory(instance()) }
     bind() from provider { HistoryViewModelFactory(instance()) }
     bind() from provider { LaunchPadViewModelFactory(instance()) }
-    bind() from provider { TwitterViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { TwitterViewModelFactory(instance()) }
   }
 
   override fun onCreate() {
