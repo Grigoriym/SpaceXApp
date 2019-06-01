@@ -19,13 +19,11 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadInitial")
     CoroutineScope(Dispatchers.IO).launch {
       val response = api.testPagination().await()
-//      withContext(Dispatchers.Main){
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadInitial - response.isSuccessful")
         val items = response.body() ?: emptyList()
         callback.onResult(items)
       }
-//      }
     }
   }
 
@@ -33,19 +31,28 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadAfter")
     CoroutineScope(Dispatchers.IO).launch {
       val response = api.testPagination(
-        sinceId = params.key
+        maxId = params.key - 1
       ).await()
-//      withContext(Dispatchers.Main){
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadAfter - response.isSuccessful")
         val items = response.body() ?: emptyList()
         callback.onResult(items)
       }
-//      }
     }
   }
 
   override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<UserTimelineModel>) {
+    Timber.d("TwitterDataSource - loadBefore")
+    CoroutineScope(Dispatchers.IO).launch {
+      val response = api.testPagination(
+        sinceId = params.key
+      ).await()
+      if (response.isSuccessful) {
+        Timber.d("TwitterDataSource - loadBefore - response.isSuccessful")
+        val items = response.body() ?: emptyList()
+        callback.onResult(items)
+      }
+    }
   }
 
   override fun getKey(item: UserTimelineModel): Long = item.id ?: 0

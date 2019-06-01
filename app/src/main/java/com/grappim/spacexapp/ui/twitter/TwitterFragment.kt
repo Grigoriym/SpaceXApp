@@ -56,13 +56,14 @@ class TwitterFragment : Fragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
-//      userTimeline.observe(this@TwitterFragment, observerWithResponse)
+      //      userTimeline.observe(this@TwitterFragment, observerWithResponse)
 //      testUserTimeline.observe(this@TwitterFragment, Observer<PagedList<UserTimelineModel>>{
 //        Timber.d("TwitterFragment - testUserTimeline - observer")
 //        testAdapter.submitList(it)
 //      })
-      newTimelines.observe(this@TwitterFragment, Observer{
+      newTimelines.observe(this@TwitterFragment, Observer<PagedList<UserTimelineModel>> {
         testAdapter.submitList(it)
+        pbTwitter.gone()
       })
     }
 
@@ -91,7 +92,13 @@ class TwitterFragment : Fragment(), KodeinAware {
 //        }
 //      }
 //    )
-    testAdapter = TwitterPaginationAdapter(onClick = {}, onImageClick = {})
+    testAdapter = TwitterPaginationAdapter(onClick = {
+      startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
+    }, onImageClick = {
+      context?.launchActivity<FullScreenImageActivity> {
+        putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
+      }
+    })
 
     rvTwitter.apply {
       layoutManager = LinearLayoutManager(context)

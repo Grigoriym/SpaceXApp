@@ -19,7 +19,8 @@ import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel) -> Unit,
   val onImageClick: (UserTimelineModel) -> Unit
-) : PagedListAdapter<UserTimelineModel, TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
+) : PagedListAdapter<UserTimelineModel,
+    TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
 
   companion object {
     val MY_DIFF_UTIL = object : DiffUtil.ItemCallback<UserTimelineModel>() {
@@ -37,8 +38,6 @@ class TwitterPaginationAdapter(
     }
   }
 
-  private var items: List<UserTimelineModel> = emptyList()
-
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TwitterPaginationViewHolder =
     TwitterPaginationViewHolder(
       parent
@@ -46,34 +45,27 @@ class TwitterPaginationAdapter(
         .inflateLayout(R.layout.layout_twitter_item, parent)
     )
 
-  override fun getItemCount(): Int = items.size
-
   override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
     holder.apply {
-      userTimelineModel = items[position]
-      itemView.setOnClickListener { onClick(items[position]) }
+      userTimelineModel = getItem(position)
+      itemView.setOnClickListener { onClick(getItem(position)!!) }
       GlideApp.with(profileImage.context)
-        .load(items[position].user?.profileImageUrlHttps)
+        .load(getItem(position)?.user?.profileImageUrlHttps)
         .transition(DrawableTransitionOptions.withCrossFade())
         .centerCrop()
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(profileImage)
 
-      if (items[position].extendedEntities?.media?.get(0) != null) {
+      if (getItem(position)?.extendedEntities?.media?.get(0) != null) {
         GlideApp.with(mediaImage.context)
-          .load(items[position].extendedEntities?.media?.get(0)?.mediaUrlHttps)
+          .load(getItem(position)?.extendedEntities?.media?.get(0)?.mediaUrlHttps)
           .transition(DrawableTransitionOptions.withCrossFade())
           .centerCrop()
           .roundCorners(16)
           .into(mediaImage)
-        mediaImage.setOnClickListener { onImageClick(items[position]) }
+        mediaImage.setOnClickListener { onImageClick(getItem(position)!!) }
       }
     }
-  }
-
-  fun loadItems(newItems: List<UserTimelineModel>) {
-    items = newItems
-    notifyDataSetChanged()
   }
 }
 

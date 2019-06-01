@@ -25,7 +25,7 @@ interface TwitterApi {
       connectivityInterceptor: ConnectivityInterceptor
     ): TwitterApi {
       val logging = HttpLoggingInterceptor()
-      logging.level = HttpLoggingInterceptor.Level.BODY
+      logging.level = HttpLoggingInterceptor.Level.BASIC
 
       fun getOauthKeys() = OauthKeys(
         consumerKey = BuildConfig.ApiKey,
