@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.reddit
+package com.grappim.spacexapp.ui.social_media.reddit
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

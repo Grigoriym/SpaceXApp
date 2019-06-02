@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.twitter
+package com.grappim.spacexapp.ui.social_media.twitter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,7 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
 import com.grappim.spacexapp.util.*
@@ -47,18 +48,29 @@ class TwitterFragment : Fragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
-      timelines.observe(this@TwitterFragment, observer)
+      tweets.observe(this@TwitterFragment, observer)
+      refreshState.observe(this@TwitterFragment, Observer{
+        srlTwitter.isRefreshing = it == NetworkState.LOADING
+      })
+      networkState.observe(this@TwitterFragment, Observer {
+        when(it){
+          NetworkState.LOADING ->{}
+          NetworkState.LOADED ->{}
+        }
+      })
     }
     bindAdapter()
     getData()
     srlTwitter.setOnRefreshListener {
       getData()
+      viewModel.refresh()
       srlTwitter.isRefreshing = false
     }
   }
 
   private fun getData() {
     pbTwitter.show()
+    viewModel.showTweets("SpaceX")
   }
 
   private fun bindAdapter() {

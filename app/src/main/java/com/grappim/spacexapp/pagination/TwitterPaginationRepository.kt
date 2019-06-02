@@ -1,0 +1,40 @@
+package com.grappim.spacexapp.pagination
+
+import androidx.lifecycle.Transformations
+import androidx.paging.Config
+import androidx.paging.toLiveData
+import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.network.TwitterApi
+import timber.log.Timber
+
+class TwitterPaginationRepository(
+  private val api: TwitterApi
+) {
+
+  fun getTweets(screenName: String): Listing<UserTimelineModel> {
+    Timber.d("TwitterPaginationRepository - getTweets - $screenName")
+    val sourceFactory = TwitterDataSourceFactory(api)
+    val livePagedList = sourceFactory.toLiveData(
+      config = Config(
+        pageSize = 30,
+        enablePlaceholders = false,
+        initialLoadSizeHint = 60,
+        prefetchDistance = 15
+      )
+    )
+
+    val refreshState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      it.initialLoad
+    }
+
+    return Listing(
+      pagedList = livePagedList,
+      networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+        it.networkState
+      },
+      retry = {},
+      refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
+      refreshState = refreshState
+    )
+  }
+}

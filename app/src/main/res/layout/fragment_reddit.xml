@@ -3,7 +3,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.reddit.RedditFragment">
+  tools:context=".ui.social_media.reddit.RedditFragment">
 
   <!-- TODO: Update blank fragment layout -->
   <TextView
