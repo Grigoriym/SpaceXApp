@@ -49,14 +49,12 @@ class TwitterFragment : Fragment(), KodeinAware {
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
       tweets.observe(this@TwitterFragment, observer)
-      refreshState.observe(this@TwitterFragment, Observer {
-        srlTwitter.isRefreshing = it == NetworkState.LOADING
-      })
       networkState.observe(this@TwitterFragment, Observer {
 
       })
-      refreshState.observe(this@TwitterFragment, Observer{
-        when(it){
+      refreshState.observe(this@TwitterFragment, Observer {
+        srlTwitter.isRefreshing = it == NetworkState.LOADING
+        when (it) {
           NetworkState.LOADING -> {
             pbTwitter.show()
             Timber.d("TwitterFragment - NetworkState.Loading")
