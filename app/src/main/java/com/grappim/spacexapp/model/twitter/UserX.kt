@@ -33,7 +33,7 @@ data class UserX(
   @SerializedName("has_extended_profile")
   val hasExtendedProfile: Boolean?,
   @SerializedName("id")
-  val id: Int?,
+  val id: Long?,
   @SerializedName("id_str")
   val idStr: String?,
   @SerializedName("is_translation_enabled")

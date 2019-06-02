@@ -10,7 +10,8 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class TwitterDataSource(
-  private val api: TwitterApi
+  private val api: TwitterApi,
+  private val screenName: String? = null
 ) : ItemKeyedDataSource<Long, UserTimelineModel>() {
 
   val networkState = MutableLiveData<NetworkState>()
@@ -24,7 +25,7 @@ class TwitterDataSource(
     networkState.postValue(NetworkState.LOADING)
     initialLoad.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.testPagination().await()
+      val response = api.getUserTimelineAsync(screenName = screenName).await()
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadInitial - response.isSuccessful")
         val items = response.body() ?: emptyList()
@@ -32,7 +33,11 @@ class TwitterDataSource(
         networkState.postValue(NetworkState.LOADED)
         initialLoad.postValue(NetworkState.LOADED)
       } else {
-        networkState.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
+        networkState.postValue(
+          NetworkState.error(
+            response.errorBody()?.string() ?: "unknown error"
+          )
+        )
         initialLoad.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
       }
     }
@@ -42,7 +47,8 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadAfter")
     networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.testPagination(
+      val response = api.getUserTimelineAsync(
+        screenName = screenName,
         maxId = params.key - 1
       ).await()
       if (response.isSuccessful) {
@@ -51,7 +57,11 @@ class TwitterDataSource(
         callback.onResult(items)
         networkState.postValue(NetworkState.LOADED)
       } else {
-        networkState.postValue((NetworkState.error(response.errorBody()?.string() ?: "unknown error")))
+        networkState.postValue(
+          (NetworkState.error(
+            response.errorBody()?.string() ?: "unknown error"
+          ))
+        )
       }
     }
   }
@@ -60,7 +70,8 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadBefore")
     networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.testPagination(
+      val response = api.getUserTimelineAsync(
+        screenName = screenName,
         sinceId = params.key
       ).await()
       if (response.isSuccessful) {
@@ -69,7 +80,11 @@ class TwitterDataSource(
         callback.onResult(items)
         networkState.postValue(NetworkState.LOADED)
       } else {
-        networkState.postValue((NetworkState.error(response.errorBody()?.string() ?: "unknown error")))
+        networkState.postValue(
+          (NetworkState.error(
+            response.errorBody()?.string() ?: "unknown error"
+          ))
+        )
       }
     }
   }

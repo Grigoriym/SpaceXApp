@@ -34,7 +34,6 @@ class TwitterFragment : Fragment(), KodeinAware {
   private val observer = Observer<PagedList<UserTimelineModel>> {
     Timber.d("TwitterFragment - observer")
     uAdapter.submitList(it)
-    pbTwitter.gone()
   }
 
   override fun onCreateView(
@@ -53,17 +52,7 @@ class TwitterFragment : Fragment(), KodeinAware {
 
       })
       refreshState.observe(this@TwitterFragment, Observer {
-        srlTwitter.isRefreshing = it == NetworkState.LOADING
-        when (it) {
-          NetworkState.LOADING -> {
-            pbTwitter.show()
-            Timber.d("TwitterFragment - NetworkState.Loading")
-          }
-          NetworkState.LOADED -> {
-            pbTwitter.gone()
-            Timber.d("TwitterFragment - NetworkState.Loaded")
-          }
-        }
+        pbTwitter.showIf { it == NetworkState.LOADING }
       })
     }
     bindAdapter()
@@ -76,8 +65,7 @@ class TwitterFragment : Fragment(), KodeinAware {
   }
 
   private fun getData() {
-    pbTwitter.show()
-    viewModel.showTweets("SpaceX")
+    viewModel.showTweets("Spacex")
   }
 
   private fun bindAdapter() {

@@ -111,6 +111,15 @@ fun View.show(): View {
   return this
 }
 
+inline fun View.showIf(condition: () -> Boolean): View {
+  visibility = if (visibility != View.VISIBLE && condition()) {
+    View.VISIBLE
+  } else {
+    View.GONE
+  }
+  return this
+}
+
 fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
   itemView.setOnClickListener {
     event.invoke(adapterPosition, itemViewType)

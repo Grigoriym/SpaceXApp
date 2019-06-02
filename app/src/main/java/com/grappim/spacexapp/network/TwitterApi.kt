@@ -69,17 +69,4 @@ interface TwitterApi {
     @Query("max_id") maxId: Long? = null,
     @Query("since_id") sinceId: Long? = null
   ): Deferred<Response<List<UserTimelineModel>>>
-
-  @GET(TWITTER_USER_TIMELINE_GET)
-  fun testPagination(
-    @Query("user_id") userId: String? = null,
-    @Query("screen_name") screenName: String? = "SpaceX",
-    @Query("count") count: Int? = 30,
-    @Query("tweet_mode") tweetMode: String? = "extended",
-    @Query("page") page: Int? = null,
-    @Query("include_rts") includeRts: String? = "false",
-    @Query("exclude_replies") excludeReplies: String? = "true",
-    @Query("max_id") maxId: Long? = null,
-    @Query("since_id") sinceId: Long? = null
-  ): Deferred<Response<List<UserTimelineModel>>>
 }

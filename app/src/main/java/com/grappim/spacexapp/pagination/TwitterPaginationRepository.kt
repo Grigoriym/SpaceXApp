@@ -13,13 +13,13 @@ class TwitterPaginationRepository(
 
   fun getTweets(screenName: String): Listing<UserTimelineModel> {
     Timber.d("TwitterPaginationRepository - getTweets - $screenName")
-    val sourceFactory = TwitterDataSourceFactory(api)
+    val sourceFactory = TwitterDataSourceFactory(api, screenName)
     val livePagedList = sourceFactory.toLiveData(
       config = Config(
         pageSize = 30,
         enablePlaceholders = false,
         initialLoadSizeHint = 60,
-        prefetchDistance = 15
+        prefetchDistance = 20
       )
     )
 
