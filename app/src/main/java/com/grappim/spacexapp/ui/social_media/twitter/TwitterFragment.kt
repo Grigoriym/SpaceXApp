@@ -49,13 +49,22 @@ class TwitterFragment : Fragment(), KodeinAware {
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
       tweets.observe(this@TwitterFragment, observer)
-      refreshState.observe(this@TwitterFragment, Observer{
+      refreshState.observe(this@TwitterFragment, Observer {
         srlTwitter.isRefreshing = it == NetworkState.LOADING
       })
       networkState.observe(this@TwitterFragment, Observer {
+
+      })
+      refreshState.observe(this@TwitterFragment, Observer{
         when(it){
-          NetworkState.LOADING ->{}
-          NetworkState.LOADED ->{}
+          NetworkState.LOADING -> {
+            pbTwitter.show()
+            Timber.d("TwitterFragment - NetworkState.Loading")
+          }
+          NetworkState.LOADED -> {
+            pbTwitter.gone()
+            Timber.d("TwitterFragment - NetworkState.Loaded")
+          }
         }
       })
     }
@@ -79,7 +88,7 @@ class TwitterFragment : Fragment(), KodeinAware {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
       }, onImageClick = {
         context?.launchActivity<FullScreenImageActivity> {
-          putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
+          putExtra(PARCELABLE_TWITTER_IMAGES, it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
         }
       })
 

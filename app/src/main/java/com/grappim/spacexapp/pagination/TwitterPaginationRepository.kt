@@ -32,7 +32,6 @@ class TwitterPaginationRepository(
       networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
         it.networkState
       },
-      retry = {},
       refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
       refreshState = refreshState
     )

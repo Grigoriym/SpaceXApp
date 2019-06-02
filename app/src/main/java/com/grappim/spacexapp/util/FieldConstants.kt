@@ -13,3 +13,5 @@ const val TWITTER_API_BASE_URL = "https://api.twitter.com/1.1/"
 const val TWITTER_FOR_BROWSER_URI = "https://twitter.com/i/web/status/"
 
 const val TWITTER_USER_TIMELINE_GET = "statuses/user_timeline.json"
+
+const val PARCELABLE_TWITTER_IMAGES = "parcelable twitter images"

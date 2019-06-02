@@ -7,6 +7,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.PARCELABLE_TWITTER_IMAGES
 import kotlinx.android.synthetic.main.activity_full_screen_image.*
 
 class FullScreenImageActivity : AppCompatActivity() {
@@ -18,7 +19,7 @@ class FullScreenImageActivity : AppCompatActivity() {
     setContentView(R.layout.activity_full_screen_image)
 
     intent.apply {
-      args = getStringExtra("asd")
+      args = getStringExtra(PARCELABLE_TWITTER_IMAGES)
     }
 
     args?.apply {

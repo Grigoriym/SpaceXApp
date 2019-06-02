@@ -13,7 +13,6 @@ class TwitterDataSource(
   private val api: TwitterApi
 ) : ItemKeyedDataSource<Long, UserTimelineModel>() {
 
-  private var retry: (() -> Any)? = null
   val networkState = MutableLiveData<NetworkState>()
   val initialLoad = MutableLiveData<NetworkState>()
 
@@ -29,14 +28,10 @@ class TwitterDataSource(
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadInitial - response.isSuccessful")
         val items = response.body() ?: emptyList()
-        retry = null
         callback.onResult(items)
         networkState.postValue(NetworkState.LOADED)
         initialLoad.postValue(NetworkState.LOADED)
       } else {
-        retry = {
-          loadInitial(params, callback)
-        }
         networkState.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
         initialLoad.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
       }
@@ -53,13 +48,9 @@ class TwitterDataSource(
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadAfter - response.isSuccessful")
         val items = response.body() ?: emptyList()
-        retry = null
         callback.onResult(items)
         networkState.postValue(NetworkState.LOADED)
       } else {
-        retry = {
-          loadAfter(params, callback)
-        }
         networkState.postValue((NetworkState.error(response.errorBody()?.string() ?: "unknown error")))
       }
     }
@@ -75,12 +66,9 @@ class TwitterDataSource(
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadBefore - response.isSuccessful")
         val items = response.body() ?: emptyList()
-        retry = null
         callback.onResult(items)
+        networkState.postValue(NetworkState.LOADED)
       } else {
-        retry = {
-          loadBefore(params, callback)
-        }
         networkState.postValue((NetworkState.error(response.errorBody()?.string() ?: "unknown error")))
       }
     }
