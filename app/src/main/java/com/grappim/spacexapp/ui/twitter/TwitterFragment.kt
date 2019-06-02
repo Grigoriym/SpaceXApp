@@ -28,10 +28,11 @@ class TwitterFragment : Fragment(), KodeinAware {
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
 
-  private lateinit var testAdapter: TwitterPaginationAdapter
+  private lateinit var uAdapter: TwitterPaginationAdapter
 
   private val observer = Observer<PagedList<UserTimelineModel>> {
-    testAdapter.submitList(it)
+    Timber.d("TwitterFragment - observer")
+    uAdapter.submitList(it)
     pbTwitter.gone()
   }
 
@@ -46,9 +47,8 @@ class TwitterFragment : Fragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
-      newTimelines.observe(this@TwitterFragment, observer)
+      timelines.observe(this@TwitterFragment, observer)
     }
-
     bindAdapter()
     getData()
     srlTwitter.setOnRefreshListener {
@@ -62,7 +62,7 @@ class TwitterFragment : Fragment(), KodeinAware {
   }
 
   private fun bindAdapter() {
-    testAdapter = TwitterPaginationAdapter(
+    uAdapter = TwitterPaginationAdapter(
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
       }, onImageClick = {
@@ -75,8 +75,7 @@ class TwitterFragment : Fragment(), KodeinAware {
       layoutManager = LinearLayoutManager(context)
       layoutAnimation = AnimationUtils
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
-      adapter = testAdapter
+      adapter = uAdapter
     }
   }
-
 }

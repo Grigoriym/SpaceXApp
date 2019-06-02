@@ -1,5 +1,6 @@
 package com.grappim.spacexapp.pagination
 
+import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.network.TwitterApi
@@ -12,23 +13,30 @@ class TwitterDataSource(
   private val api: TwitterApi
 ) : ItemKeyedDataSource<Long, UserTimelineModel>() {
 
+  val networkState = MutableLiveData<NetworkState>()
+
   override fun loadInitial(
     params: LoadInitialParams<Long>,
     callback: LoadInitialCallback<UserTimelineModel>
   ) {
     Timber.d("TwitterDataSource - loadInitial")
+    networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
       val response = api.testPagination().await()
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadInitial - response.isSuccessful")
         val items = response.body() ?: emptyList()
         callback.onResult(items)
+        networkState.postValue(NetworkState.LOADED)
+      } else {
+        networkState.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
       }
     }
   }
 
   override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<UserTimelineModel>) {
     Timber.d("TwitterDataSource - loadAfter")
+    networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
       val response = api.testPagination(
         maxId = params.key - 1
@@ -37,6 +45,9 @@ class TwitterDataSource(
         Timber.d("TwitterDataSource - loadAfter - response.isSuccessful")
         val items = response.body() ?: emptyList()
         callback.onResult(items)
+        networkState.postValue(NetworkState.LOADED)
+      } else {
+        networkState.postValue((NetworkState.error(response.errorBody()?.string() ?: "unknown error")))
       }
     }
   }
