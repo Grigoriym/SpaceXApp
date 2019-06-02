@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 
   private fun setupThemeChange() {
+    Timber.d("mainActivity - setupThemeChange")
     val sp = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
 
     val menu = navigationView.menu

@@ -15,12 +15,14 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.Response
+import timber.log.Timber
 
 class SpaceXRepositoryImpl(
   val api: API
 ) : SpaceXRepository, RepositoryHelper {
 
   override suspend fun <T> generalRequest(liveData: Deferred<T>): LiveData<T> {
+    Timber.d("SpaceXRepositoryImpl generalRequest")
     val data: MutableLiveData<T> = MutableLiveData()
     withContext(Dispatchers.IO) {
       val response = liveData.await()

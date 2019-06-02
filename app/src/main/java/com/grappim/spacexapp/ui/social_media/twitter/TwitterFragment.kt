@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.twitter
+package com.grappim.spacexapp.ui.social_media.twitter
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,38 +8,32 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.recyclerview.TwitterAdapter
+import com.grappim.spacexapp.pagination.NetworkState
+import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
 import timber.log.Timber
 
 class TwitterFragment : Fragment(), KodeinAware {
 
   override val kodein by kodein()
 
-  private lateinit var uAdapter: TwitterAdapter
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
 
-  private val observerWithResponse = Observer<Response<List<UserTimelineModel>>> {
+  private lateinit var uAdapter: TwitterPaginationAdapter
+
+  private val observer = Observer<PagedList<UserTimelineModel>> {
     Timber.d("TwitterFragment - observer")
-    pbTwitter.gone()
-    if (it.isSuccessful) {
-      it.body()?.let { items -> uAdapter.loadItems(items) }
-    } else {
-      srlTwitter.showSnackbar(getString(R.string.error_retrieving_data))
-//      findNavController().popBackStack()
-    }
-    rvTwitter.scheduleLayoutAnimation()
+    uAdapter.submitList(it)
   }
 
   override fun onCreateView(
@@ -53,33 +47,37 @@ class TwitterFragment : Fragment(), KodeinAware {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     viewModel.apply {
-      userTimeline.observe(this@TwitterFragment, observerWithResponse)
-    }
+      tweets.observe(this@TwitterFragment, observer)
+      networkState.observe(this@TwitterFragment, Observer {
 
+      })
+      refreshState.observe(this@TwitterFragment, Observer {
+        pbTwitter.showIf { it == NetworkState.LOADING }
+      })
+    }
     bindAdapter()
     getData()
     srlTwitter.setOnRefreshListener {
       getData()
+      viewModel.refresh()
       srlTwitter.isRefreshing = false
     }
   }
 
   private fun getData() {
-    pbTwitter.show()
-    viewModel.getUserTimeline()
+    viewModel.showTweets("Spacex")
   }
 
   private fun bindAdapter() {
-    uAdapter = TwitterAdapter(
+    uAdapter = TwitterPaginationAdapter(
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
-      },
-      onImageClick = {
+      }, onImageClick = {
         context?.launchActivity<FullScreenImageActivity> {
-          putExtra("asd", it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
+          putExtra(PARCELABLE_TWITTER_IMAGES, it.extendedEntities?.media?.get(0)?.mediaUrlHttps)
         }
-      }
-    )
+      })
+
     rvTwitter.apply {
       layoutManager = LinearLayoutManager(context)
       layoutAnimation = AnimationUtils
@@ -87,5 +85,4 @@ class TwitterFragment : Fragment(), KodeinAware {
       adapter = uAdapter
     }
   }
-
 }

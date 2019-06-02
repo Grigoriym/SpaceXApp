@@ -8,8 +8,8 @@ import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.network.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
+import com.grappim.spacexapp.pagination.TwitterPaginationRepository
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
-import com.grappim.spacexapp.repository.TwitterRepositoryImpl
 import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
 import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
 import com.grappim.spacexapp.ui.history.HistoryViewModelFactory
@@ -18,7 +18,7 @@ import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModelFactory
 import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
 import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
-import com.grappim.spacexapp.ui.twitter.TwitterViewModelFactory
+import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -41,7 +41,7 @@ class SpaceXApplication : Application(), KodeinAware {
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
-    bind() from singleton { TwitterRepositoryImpl(instance()) }
+    bind() from singleton { TwitterPaginationRepository(instance()) }
 
     bind() from provider { CapsuleSharedViewModelFactory(instance()) }
     bind() from provider { RocketsSharedViewModelFactory(instance()) }

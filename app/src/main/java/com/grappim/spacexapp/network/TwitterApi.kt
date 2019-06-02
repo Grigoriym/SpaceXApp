@@ -16,7 +16,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
 import java.util.concurrent.TimeUnit
 
 interface TwitterApi {
@@ -26,7 +25,7 @@ interface TwitterApi {
       connectivityInterceptor: ConnectivityInterceptor
     ): TwitterApi {
       val logging = HttpLoggingInterceptor()
-      logging.level = HttpLoggingInterceptor.Level.BODY
+      logging.level = HttpLoggingInterceptor.Level.BASIC
 
       fun getOauthKeys() = OauthKeys(
         consumerKey = BuildConfig.ApiKey,
@@ -62,8 +61,12 @@ interface TwitterApi {
   fun getUserTimelineAsync(
     @Query("user_id") userId: String? = null,
     @Query("screen_name") screenName: String? = "SpaceX",
-    @Query("count") count: Int? = 15,
+    @Query("count") count: Int? = 30,
     @Query("tweet_mode") tweetMode: String? = "extended",
-    @Query("page") page: Int? = 1
+    @Query("page") page: Int? = null,
+    @Query("include_rts") includeRts: String? = "false",
+    @Query("exclude_replies") excludeReplies: String? = "true",
+    @Query("max_id") maxId: Long? = null,
+    @Query("since_id") sinceId: Long? = null
   ): Deferred<Response<List<UserTimelineModel>>>
 }

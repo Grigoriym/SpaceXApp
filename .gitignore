@@ -36,3 +36,5 @@ captures/
 .externalNativeBuild
 
 *.jks
+
+/api-keys.gradle.kts
