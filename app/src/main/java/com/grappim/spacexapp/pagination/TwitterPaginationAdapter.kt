@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.util.GlideApp
-import com.grappim.spacexapp.util.getTwitterDate
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.roundCorners
+import com.grappim.spacexapp.recyclerview.MarginItemDecorator
+import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterPaginationAdapter(
@@ -43,7 +44,9 @@ class TwitterPaginationAdapter(
       parent
         .context
         .inflateLayout(R.layout.layout_twitter_item, parent)
-    )
+    ) {
+      onImageClick
+    }
 
   override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
     holder.apply {
@@ -55,38 +58,90 @@ class TwitterPaginationAdapter(
         .centerCrop()
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(profileImage)
-
-      if (getItem(position)?.extendedEntities?.media?.get(0) != null) {
-        GlideApp.with(mediaImage.context)
-          .load(getItem(position)?.extendedEntities?.media?.get(0)?.mediaUrlHttps)
-          .transition(DrawableTransitionOptions.withCrossFade())
-          .centerCrop()
-          .roundCorners(16)
-          .into(mediaImage)
-        mediaImage.setOnClickListener { onImageClick(getItem(position)!!) }
-      }
     }
   }
 }
 
 class TwitterPaginationViewHolder(
-  private val view: View
+  private val view: View,
+  private val onImageClick: (UserTimelineModel) -> Unit
 ) : RecyclerView.ViewHolder(view) {
   val profileImage: ImageView = view.ivTwitterItemProfileImage
-  val mediaImage: ImageView = view.ivTwitterItemMedia
+  //  val mediaImage: ImageView = view.ivTwitterItemMedia
+  val rv: RecyclerView = view.rlTwitterItemMedia
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
       field = value
       view.apply {
+        setInnerRv(this, value)
         tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
         tvTwitterItemScreenName.text = "@${value?.user?.screenName}"
         tvTwitterItemText.text = value?.fullText
         tvTwitterName.text = value?.user?.name
-        if (value?.extendedEntities?.media?.get(0) == null) {
-          mediaImage.visibility = View.GONE
-        } else {
-          mediaImage.visibility = View.VISIBLE
-        }
       }
     }
+
+  private fun setInnerRv(view: View, value: UserTimelineModel?) {
+    if (value?.extendedEntities?.media?.get(0) != null) {
+      rv.show()
+      val mediaList = value.extendedEntities.media
+      val listOfStrings = mutableListOf<String>()
+
+      for (i in mediaList) {
+        listOfStrings.add(i?.mediaUrlHttps ?: "")
+      }
+      when (listOfStrings.size) {
+        1 -> {
+          rv.layoutManager = GridLayoutManager(view.context, 1)
+        }
+        2 -> {
+          val glm = GridLayoutManager(
+            view.context,
+            2
+          )
+          rv.layoutManager = glm
+          rv.addItemDecoration(MarginItemDecorator(isHorizontal = true))
+        }
+        3 -> {
+          val glm = GridLayoutManager(
+            view.context,
+            2
+          )
+          glm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+              return when (position) {
+                0 -> {
+                  2
+                }
+                1 -> {
+                  1
+                }
+                else -> {
+                  1
+                }
+              }
+            }
+          }
+          rv.layoutManager = glm
+        }
+        4 -> {
+          val glm = GridLayoutManager(
+            view.context,
+            2
+          )
+          rv.layoutManager = glm
+        }
+        else -> {
+          rv.layoutManager = LinearLayoutManager(view.context)
+        }
+      }
+
+      val iAdapter = TwitterItemImageAdapter(onImageClick = { onImageClick })
+      rv.adapter = iAdapter
+
+      iAdapter.loadItems(listOfStrings)
+    } else {
+      rv.gone()
+    }
+  }
 }

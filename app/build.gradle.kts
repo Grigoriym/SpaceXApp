@@ -13,7 +13,7 @@ android {
     minSdkVersion(16)
     targetSdkVersion(28)
     versionCode = 1
-    versionName = "1.9.0"
+    versionName = "1.9.1"
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     val archivesBaseName = "$applicationId-v$versionCode($versionName)"
   }
@@ -25,9 +25,13 @@ android {
     }
     getByName("debug") {
       buildConfigField("String", "ApiKey", extra.get("twitter_api_key").toString())
-      buildConfigField("String", "SecretApiKey",  extra.get("twitter_api_secret_key").toString())
-      buildConfigField("String", "AccessToken",  extra.get("twitter_api_access_token").toString())
-      buildConfigField("String", "AccessTokenSecret",  extra.get("twitter_api_access_token_secret").toString())
+      buildConfigField("String", "SecretApiKey", extra.get("twitter_api_secret_key").toString())
+      buildConfigField("String", "AccessToken", extra.get("twitter_api_access_token").toString())
+      buildConfigField(
+        "String",
+        "AccessTokenSecret",
+        extra.get("twitter_api_access_token_secret").toString()
+      )
       isMinifyEnabled = true
       versionNameSuffix = "-T"
     }
@@ -60,6 +64,7 @@ dependencies {
   implementation("androidx.core:core-ktx:1.2.0-alpha01")
   implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta1")
   implementation("androidx.paging:paging-runtime-ktx:2.1.0")
+  implementation("androidx.viewpager2:viewpager2:1.0.0-alpha04")
 
   implementation("com.google.code.gson:gson:2.8.5")
 
