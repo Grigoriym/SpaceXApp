@@ -38,7 +38,7 @@
       android:title="@string/history"/>
 
     <item
-      android:id="@+id/nav_twitter"
+      android:id="@+id/nav_social_media"
       android:title="Social Media"/>
   </group>
 

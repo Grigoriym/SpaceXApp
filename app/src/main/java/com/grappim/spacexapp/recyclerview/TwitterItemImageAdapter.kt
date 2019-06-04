@@ -7,12 +7,14 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.px
+import com.grappim.spacexapp.util.roundCorners
 import kotlinx.android.synthetic.main.layout_twitter_item_image.view.*
-import timber.log.Timber
 
 class TwitterItemImageAdapter(
-  val onImageClick: () -> Unit
+  val onImageClick: (String) -> Unit
 ) : RecyclerView.Adapter<TwitterItemImageViewHolder>() {
 
   private var items: List<String> = emptyList()
@@ -46,13 +48,12 @@ class TwitterItemImageAdapter(
         .roundCorners(16)
         .into(twitterImage)
       twitterImage.setOnClickListener {
-        onImageClick()
+        onImageClick(items[position])
       }
     }
   }
 
   override fun getItemCount(): Int {
-    Timber.d("TwitterItemImageAdapter - getItemCount() = ${items.size}")
     return items.size
   }
 
@@ -63,7 +64,7 @@ class TwitterItemImageAdapter(
 }
 
 class TwitterItemImageViewHolder(
-  private val view: View
+  view: View
 ) : RecyclerView.ViewHolder(view) {
   val cl: ConstraintLayout = view.clTwitterItemImage
   val twitterImage: ImageView = view.ivTwitterItemImage

@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.infoFragment,
         R.id.historyFragment,
         R.id.launchPadFragment,
-        R.id.twitterFragment
+        R.id.socialMediaFragment
       ), drawerLayout
     )
 
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       R.id.nav_info -> navController.navigate(R.id.infoFragment)
       R.id.nav_history -> navController.navigate(R.id.historyFragment)
       R.id.nav_launch_pads -> navController.navigate(R.id.launchPadFragment)
-      R.id.nav_twitter -> navController.navigate(R.id.twitterFragment)
+      R.id.nav_social_media -> navController.navigate(R.id.socialMediaFragment)
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true

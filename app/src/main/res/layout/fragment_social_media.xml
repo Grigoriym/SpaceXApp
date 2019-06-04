@@ -6,15 +6,29 @@
   android:layout_height="match_parent"
   tools:context=".ui.social_media.SocialMediaFragment">
 
-  <com.google.android.material.tabs.TabLayout
-    android:id="@+id/tlSocialMedia"
+  <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:tabMode="scrollable" />
+    android:layout_height="match_parent">
 
-  <androidx.viewpager2.widget.ViewPager2
-    android:id="@+id/vpSocialMedia"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    <com.google.android.material.tabs.TabLayout
+      android:id="@+id/tlSocialMedia"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:tabMode="fixed" />
+
+    <androidx.viewpager.widget.ViewPager
+      android:id="@+id/vpSocialMedia"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/tlSocialMedia" />
+
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

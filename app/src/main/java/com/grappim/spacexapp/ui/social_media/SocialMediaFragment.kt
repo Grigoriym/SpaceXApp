@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
 import kotlinx.android.synthetic.main.fragment_social_media.*
+import timber.log.Timber
 
 class SocialMediaFragment : Fragment() {
 
@@ -18,13 +19,11 @@ class SocialMediaFragment : Fragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    Timber.d("SocialMediaFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
-    TabLayoutMediator(tlSocialMedia, vpSocialMedia) { tab, position ->
-      when (position) {
-        0 -> tab.text = "Twitter"
-        1 -> tab.text = "Reddit"
-      }
-    }.attach()
+    val smfpa = SocialMediaFragmentPagerAdapter(activity?.supportFragmentManager)
+    vpSocialMedia.adapter = smfpa
+    tlSocialMedia.setupWithViewPager(vpSocialMedia)
   }
 
 }

@@ -64,7 +64,6 @@ dependencies {
   implementation("androidx.core:core-ktx:1.2.0-alpha01")
   implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta1")
   implementation("androidx.paging:paging-runtime-ktx:2.1.0")
-  implementation("androidx.viewpager2:viewpager2:1.0.0-alpha04")
 
   implementation("com.google.code.gson:gson:2.8.5")
 
@@ -72,7 +71,7 @@ dependencies {
   implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01")
   implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01")
 
-  implementation("com.google.android.material:material:1.1.0-alpha06")
+  implementation("com.google.android.material:material:1.1.0-alpha07")
 
   //    Retrofit, okHttp-logging, retrofit-coroutines
   implementation("com.squareup.retrofit2:retrofit:2.5.0")

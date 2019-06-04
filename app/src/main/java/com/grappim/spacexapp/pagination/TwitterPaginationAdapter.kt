@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel) -> Unit,
-  val onImageClick: (UserTimelineModel) -> Unit
+  val onImageClickS: (String) -> Unit
 ) : PagedListAdapter<UserTimelineModel,
     TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
 
@@ -44,13 +44,14 @@ class TwitterPaginationAdapter(
       parent
         .context
         .inflateLayout(R.layout.layout_twitter_item, parent)
-    ) {
-      onImageClick
-    }
+    )
 
   override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
     holder.apply {
       userTimelineModel = getItem(position)
+      onImageClick = {
+        onImageClickS(it)
+      }
       itemView.setOnClickListener { onClick(getItem(position)!!) }
       GlideApp.with(profileImage.context)
         .load(getItem(position)?.user?.profileImageUrlHttps)
@@ -63,11 +64,10 @@ class TwitterPaginationAdapter(
 }
 
 class TwitterPaginationViewHolder(
-  private val view: View,
-  private val onImageClick: (UserTimelineModel) -> Unit
+  private val view: View
 ) : RecyclerView.ViewHolder(view) {
+  var onImageClick: (String) -> Unit = {}
   val profileImage: ImageView = view.ivTwitterItemProfileImage
-  //  val mediaImage: ImageView = view.ivTwitterItemMedia
   val rv: RecyclerView = view.rlTwitterItemMedia
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
@@ -123,6 +123,14 @@ class TwitterPaginationViewHolder(
             }
           }
           rv.layoutManager = glm
+          rv.addItemDecoration(
+            MarginItemDecorator(
+              isGridLayout = true,
+              spanCount = 2,
+              spacing = 8.px,
+              includeEdge = false
+            )
+          )
         }
         4 -> {
           val glm = GridLayoutManager(
@@ -130,13 +138,23 @@ class TwitterPaginationViewHolder(
             2
           )
           rv.layoutManager = glm
+          rv.addItemDecoration(
+            MarginItemDecorator(
+              isGridLayout = true,
+              spanCount = 2,
+              spacing = 8.px,
+              includeEdge = false
+            )
+          )
         }
         else -> {
           rv.layoutManager = LinearLayoutManager(view.context)
         }
       }
 
-      val iAdapter = TwitterItemImageAdapter(onImageClick = { onImageClick })
+      val iAdapter = TwitterItemImageAdapter(onImageClick = {
+        onImageClick(it)
+      })
       rv.adapter = iAdapter
 
       iAdapter.loadItems(listOfStrings)
