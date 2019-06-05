@@ -28,40 +28,48 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   private lateinit var switcher: SwitchCompat
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    setupNightMode()
     Timber.d("MainActivity - onCreate")
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_main)
     setSupportActionBar(toolbar)
     setupNavigation()
-    setupThemeChange()
+    setupSwitcher()
   }
 
-  private fun setupThemeChange() {
-    Timber.d("mainActivity - setupThemeChange")
+  private fun setupNightMode() {
+    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
+      .getBoolean(NIGHT_THEME_PREF_KEY, false)
+    AppCompatDelegate.setDefaultNightMode(
+      if (!prefs) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+    )
+  }
+
+  private fun setupSwitcher() {
+    Timber.d("mainActivity - setupSwitcher")
     val sp = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
 
     val menu = navigationView.menu
     val menuItem = menu.findItem(R.id.nav_switch_theme)
     val actionView = menuItem.actionView
+    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
+      .getBoolean(NIGHT_THEME_PREF_KEY, false)
 
     switcher = actionView.findViewById(R.id.drawerSwitch)
-    switcher.isChecked = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
-      .getBoolean(NIGHT_THEME_PREF_KEY, false)
-    delegate.localNightMode =
-      if (!switcher.isChecked) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+    switcher.isChecked = prefs
     switcher.setOnCheckedChangeListener { _, isChecked ->
       run {
         if (!isChecked) {
           Timber.d("Switcher !isChecked")
-          delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+          AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
           sp.edit().apply {
             putBoolean(NIGHT_THEME_PREF_KEY, false)
             apply()
           }
         } else {
           Timber.d("Switcher isChecked")
-          delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+          AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
           sp.edit().apply {
             putBoolean(NIGHT_THEME_PREF_KEY, true)
             apply()

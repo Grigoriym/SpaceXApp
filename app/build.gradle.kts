@@ -98,5 +98,5 @@ dependencies {
 
   testImplementation("junit:junit:4.13-beta-3")
   androidTestImplementation("androidx.test:runner:1.2.0-beta01")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0-beta01")
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }

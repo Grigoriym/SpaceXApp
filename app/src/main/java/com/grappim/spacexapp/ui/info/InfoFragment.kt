@@ -13,6 +13,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import com.grappim.spacexapp.util.showSnackbar
@@ -23,7 +24,7 @@ import org.kodein.di.generic.instance
 import retrofit2.Response
 import timber.log.Timber
 
-class InfoFragment : Fragment(), KodeinAware {
+class InfoFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 

@@ -8,9 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.SharedFragment
 import kotlinx.android.synthetic.main.fragment_ships.*
 
-class ShipsFragment : Fragment() {
+class ShipsFragment : SharedFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

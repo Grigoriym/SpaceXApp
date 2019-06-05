@@ -5,7 +5,6 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Spinner
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,12 +51,12 @@ class TwitterFragment : Fragment(), KodeinAware {
     val item = menu.findItem(R.id.twitter_menu_spinner)
     val spinner = item.actionView as AppCompatSpinner
 
-    val spinnerArrayAdaper = ArrayAdapter<String>(
+    val spinnerArrayAdapter = ArrayAdapter<String>(
       context!!,
       android.R.layout.simple_spinner_dropdown_item,
       arrayListOf("One", "Two")
     )
-    spinner.adapter = spinnerArrayAdaper
+    spinner.adapter = spinnerArrayAdapter
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }

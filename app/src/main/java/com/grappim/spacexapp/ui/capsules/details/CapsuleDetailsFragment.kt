@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import timber.log.Timber
 
-class CapsuleDetailsFragment : Fragment() {
+class CapsuleDetailsFragment : SharedFragment() {
 
   private val args: CapsuleDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter

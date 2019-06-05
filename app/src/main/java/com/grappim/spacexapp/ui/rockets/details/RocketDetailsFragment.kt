@@ -10,13 +10,14 @@ import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.MetricsListAdapterItem
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
 import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 import timber.log.Timber
 
-class RocketDetailsFragment : Fragment() {
+class RocketDetailsFragment : SharedFragment() {
 
   private val args: RocketDetailsFragmentArgs by navArgs()
 
