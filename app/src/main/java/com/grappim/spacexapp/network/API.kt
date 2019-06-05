@@ -49,98 +49,70 @@ interface API {
     }
   }
 
-  //CAPSULES
-  // https://api.spacexdata.com/v3/capsules
   @GET("capsules")
   fun getAllCapsules(): Deferred<Response<List<CapsuleModel>>>
 
-  //https://api.spacexdata.com/v3/capsules/upcoming
   @GET("capsules/upcoming")
   fun getUpcomingCapsules(): Deferred<Response<List<CapsuleModel>>>
 
-  //https://api.spacexdata.com/v3/capsules/past
   @GET("capsules/past")
   fun getPastCapsules(): Deferred<Response<List<CapsuleModel>>>
 
-  //https://api.spacexdata.com/v3/capsules/{{capsule_serial}}
   @GET("capsules/{capsuleSerial}")
   fun getOneCapsuleBySerial(
     @Path("capsuleSerial") capsuleSerial: String?
   ): Deferred<Response<CapsuleModel>>
 
-  //ROCKETS
-  //https://api.spacexdata.com/v3/rockets
   @GET("rockets")
   fun getAllRockets(): Deferred<Response<List<RocketModel>>>
 
-  //MISSIONS
-  //  https://api.spacexdata.com/v3/missions
   @GET("missions")
   fun getAllMissions(): Deferred<Response<List<MissionModel>>>
 
-  //https://api.spacexdata.com/v3/missions/{{mission_id}}
   @GET("missions/{missionId}")
   fun getOneMissionById(
     @Path("missionId") missionId: String?
   ): Deferred<Response<MissionModel>>
 
-  //CORES
-  //  https://api.spacexdata.com/v3/cores
   @GET("cores")
   fun getAllCores(): Deferred<Response<List<CoreModel>>>
 
-  //  https://api.spacexdata.com/v3/cores/upcoming
   @GET("cores/upcoming")
   fun getUpcomingCores(): Deferred<Response<List<CoreModel>>>
 
-  //  https://api.spacexdata.com/v3/cores/past
   @GET("cores/past")
   fun getPastCores(): Deferred<Response<List<CoreModel>>>
 
-  //  https://api.spacexdata.com/v3/cores/{{core_serial}}
   @GET("cores/{coreSerial}")
   fun getOneCoreBySerial(
     @Path("coreSerial") coreSerial: String?
   ): Deferred<Response<CoreModel>>
 
-  //  SHIPS
-  //https://api.spacexdata.com/v3/ships
   @GET("ships")
   fun getAllShips(): Deferred<Response<List<ShipModel>>>
 
-  //https://api.spacexdata.com/v3/ships/{{ship_id}}
   @GET("ships/{shipId}")
   fun getOneShipById(
     @Path("shipId") shipId: String?
   ): Deferred<Response<ShipModel>>
 
-  //  PAYLOADS
-  //  https://api.spacexdata.com/v3/payloads
   @GET("payloads")
   fun getAllPayloads(): Deferred<Response<List<PayloadModel>>>
 
-  //  https://api.spacexdata.com/v3/payloads/{{payload_id}}
   @GET("payloads/{payloadId}")
   fun getPayloadById(
     @Path("payloadId") payloadId: String?
   ): Deferred<Response<PayloadModel>>
 
-  //  INFO
-  //  https://api.spacexdata.com/v3/info
   @GET("info")
   fun getInfo(): Deferred<Response<InfoModel>>
 
-  //  HISTORY
-  //  https://api.spacexdata.com/v3/history
   @GET("history")
   fun getHistory(): Deferred<Response<List<HistoryModel>>>
 
-  // LaunchPads
-  //  https://api.spacexdata.com/v3/launchpads
   @GET("launchpads")
   fun getAllLaunchPads(): Deferred<Response<List<LaunchPadModel>>>
 
-  //  https://api.spacexdata.com/v3/launchpads/{{site_id}}
   @GET("launchpads/{site_id}")
   fun getLaunchPadBySiteId(
     @Path("site_id") siteId: String?

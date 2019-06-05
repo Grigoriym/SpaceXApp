@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
@@ -20,7 +21,7 @@ import org.kodein.di.generic.instance
 import retrofit2.Response
 import timber.log.Timber
 
-class MissionFragment : Fragment(), KodeinAware {
+class MissionFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 

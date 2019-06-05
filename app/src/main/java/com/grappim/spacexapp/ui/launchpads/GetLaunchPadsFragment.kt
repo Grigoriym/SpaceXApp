@@ -13,6 +13,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.LaunchPadsAdapter
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import com.grappim.spacexapp.util.showSnackbar
@@ -22,7 +23,7 @@ import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
 import retrofit2.Response
 
-class GetLaunchPadsFragment : Fragment(), KodeinAware {
+class GetLaunchPadsFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 

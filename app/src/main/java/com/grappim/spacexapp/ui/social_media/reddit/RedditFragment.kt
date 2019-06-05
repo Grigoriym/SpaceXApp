@@ -7,8 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.SharedFragment
 
-class RedditFragment : Fragment() {
+class RedditFragment : SharedFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

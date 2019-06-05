@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.SharedFragment
 import kotlinx.android.synthetic.main.fragment_launch_pad.*
 import timber.log.Timber
 
-class LaunchPadFragment : Fragment() {
+class LaunchPadFragment : SharedFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

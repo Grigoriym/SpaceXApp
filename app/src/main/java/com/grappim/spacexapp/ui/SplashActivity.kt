@@ -28,10 +28,11 @@ class SplashActivity : AppCompatActivity() {
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    initSharedPrefs()
     super.onCreate(savedInstanceState)
     Timber.d("SplashActivity - onCreate")
+
     setContentView(R.layout.activity_splash)
-    initSharedPrefs()
     GlideApp.with(this)
       .load(ContextCompat.getDrawable(this, R.drawable.logo))
       .into(ivSplash)
@@ -43,9 +44,9 @@ class SplashActivity : AppCompatActivity() {
     val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
     val restoredValue = prefs.getBoolean(NIGHT_THEME_PREF_KEY, false)
     if (!restoredValue) {
-      delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_YES
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     } else {
-      delegate.localNightMode = AppCompatDelegate.MODE_NIGHT_NO
+      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
   }
 

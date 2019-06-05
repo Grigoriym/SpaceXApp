@@ -3,11 +3,13 @@ package com.grappim.spacexapp.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -131,31 +133,41 @@ fun View.showSnackbar(text: String, timeLength: Int = Snackbar.LENGTH_LONG) {
   Snackbar.make(this, text, timeLength).show()
 }
 
-fun <T> fetchData(req: Deferred<Response<T>>, mld: MutableLiveData<T>) {
-  Timber.d("Extensions - fetchData")
-  CoroutineScope(Dispatchers.IO).launch {
-    val response = req.await()
-    if (response.isSuccessful) {
-      Timber.d("Extensions - fetchData - response is successful")
-      withContext(Dispatchers.Main) {
-        response.body()?.let { mld.value = it }
-      }
-    }
-  }
-}
-
-fun <T> fetchNetworkData(req: Deferred<Response<T>>, mld: MutableLiveData<Response<T>>) {
-  Timber.d("Extensions - fetchData")
-  CoroutineScope(Dispatchers.IO).launch {
-    val response = req.await()
-    withContext(Dispatchers.Main) {
-      mld.value = response
-    }
-  }
-}
-
 fun setMyImageResource(bool: Boolean?): Int =
   when (bool) {
     true -> R.drawable.ic_check_circle_black_24dp
     else -> R.drawable.ic_cancel_black_24dp
   }
+
+val Int.dp: Int
+  get() = (this / Resources.getSystem().displayMetrics.density).toInt()
+
+val Float.dp: Float
+  get() = (this / Resources.getSystem().displayMetrics.density)
+
+val Int.px: Int
+  get() = (this * Resources.getSystem().displayMetrics.density).toInt()
+
+val Float.px: Float
+  get() = (this * Resources.getSystem().displayMetrics.density)
+
+fun Context.actionBarSize(): Int {
+  var abr: Int = 0
+  val tv = TypedValue()
+  if (this.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+    abr =
+      TypedValue.complexToDimensionPixelSize(tv.data, this.resources.displayMetrics)
+  }
+  return abr
+}
+
+fun Context.statusBarHeight(): Int {
+  var result = 0
+  val resourceId = this
+    .resources
+    .getIdentifier("status_bar_height", "dimen", "android")
+  if (resourceId > 0) {
+    result = this.resources.getDimensionPixelSize(resourceId)
+  }
+  return result
+}

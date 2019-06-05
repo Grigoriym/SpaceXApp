@@ -15,6 +15,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
 import com.grappim.spacexapp.util.showSnackbar
@@ -25,7 +26,7 @@ import org.kodein.di.generic.instance
 import retrofit2.Response
 import timber.log.Timber
 
-class GetCapsulesFragment : Fragment(), KodeinAware {
+class GetCapsulesFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 

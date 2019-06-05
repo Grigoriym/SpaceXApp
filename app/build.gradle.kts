@@ -13,7 +13,7 @@ android {
     minSdkVersion(16)
     targetSdkVersion(28)
     versionCode = 1
-    versionName = "1.9.0"
+    versionName = "1.9.1"
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     val archivesBaseName = "$applicationId-v$versionCode($versionName)"
   }
@@ -25,9 +25,13 @@ android {
     }
     getByName("debug") {
       buildConfigField("String", "ApiKey", extra.get("twitter_api_key").toString())
-      buildConfigField("String", "SecretApiKey",  extra.get("twitter_api_secret_key").toString())
-      buildConfigField("String", "AccessToken",  extra.get("twitter_api_access_token").toString())
-      buildConfigField("String", "AccessTokenSecret",  extra.get("twitter_api_access_token_secret").toString())
+      buildConfigField("String", "SecretApiKey", extra.get("twitter_api_secret_key").toString())
+      buildConfigField("String", "AccessToken", extra.get("twitter_api_access_token").toString())
+      buildConfigField(
+        "String",
+        "AccessTokenSecret",
+        extra.get("twitter_api_access_token_secret").toString()
+      )
       isMinifyEnabled = true
       versionNameSuffix = "-T"
     }
@@ -67,7 +71,7 @@ dependencies {
   implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01")
   implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01")
 
-  implementation("com.google.android.material:material:1.1.0-alpha06")
+  implementation("com.google.android.material:material:1.1.0-alpha07")
 
   //    Retrofit, okHttp-logging, retrofit-coroutines
   implementation("com.squareup.retrofit2:retrofit:2.5.0")
@@ -94,5 +98,5 @@ dependencies {
 
   testImplementation("junit:junit:4.13-beta-3")
   androidTestImplementation("androidx.test:runner:1.2.0-beta01")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0-beta01")
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
 }

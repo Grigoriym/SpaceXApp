@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.SharedFragment
 import kotlinx.android.synthetic.main.fragment_rocket.*
 
-class RocketFragment : Fragment() {
+class RocketFragment : SharedFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
