@@ -1,6 +1,7 @@
 package com.grappim.spacexapp
 
 import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
@@ -32,7 +33,7 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-class SpaceXApplication : Application(), KodeinAware {
+class SpaceXApplication : MultiDexApplication(), KodeinAware {
   override val kodein by Kodein.lazy {
     import(androidXModule(this@SpaceXApplication))
 
