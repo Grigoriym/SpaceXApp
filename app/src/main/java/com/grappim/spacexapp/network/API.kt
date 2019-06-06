@@ -66,14 +66,6 @@ interface API {
   @GET("rockets")
   fun getAllRockets(): Deferred<Response<List<RocketModel>>>
 
-  @GET("missions")
-  fun getAllMissions(): Deferred<Response<List<MissionModel>>>
-
-  @GET("missions/{missionId}")
-  fun getOneMissionById(
-    @Path("missionId") missionId: String?
-  ): Deferred<Response<MissionModel>>
-
   @GET("cores")
   fun getAllCores(): Deferred<Response<List<CoreModel>>>
 
@@ -87,6 +79,16 @@ interface API {
   fun getOneCoreBySerial(
     @Path("coreSerial") coreSerial: String?
   ): Deferred<Response<CoreModel>>
+
+//  ********************************
+
+  @GET("missions")
+  fun getAllMissions(): Deferred<Response<List<MissionModel>>>
+
+  @GET("missions/{missionId}")
+  fun getOneMissionById(
+    @Path("missionId") missionId: String?
+  ): Deferred<Response<MissionModel>>
 
   @GET("ships")
   fun getAllShips(): Deferred<Response<List<ShipModel>>>

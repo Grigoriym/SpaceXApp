@@ -23,15 +23,15 @@ class CoreFragment : SharedFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     btnCoreAll.setOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(1))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(0))
     }
 
     btnCorePast.setOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(2))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(1))
     }
 
     btnCoreUpcoming.setOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(3))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(2))
     }
   }
 }

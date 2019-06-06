@@ -5,10 +5,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.network.*
-import com.grappim.spacexapp.network.gets.GetAllCapsules
-import com.grappim.spacexapp.network.gets.GetPastCapsules
-import com.grappim.spacexapp.network.gets.GetRockets
-import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
+import com.grappim.spacexapp.network.gets.*
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
@@ -48,7 +45,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
     bind() from singleton { NetworkHandler(instance()) }
-    bind<NewRepository>() with singleton { Network(instance(), instance()) }
+    bind<NewRepository>() with singleton { SpacexNetwork(instance(), instance()) }
     bind() from singleton { createRetrofit() }
     bind() from singleton { SpacexService(instance()) }
 
@@ -56,13 +53,16 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { GetAllCapsules(instance()) }
     bind() from singleton { GetPastCapsules(instance()) }
     bind() from singleton { GetUpcomingCapsules(instance()) }
+    bind() from singleton { GetAllCores(instance()) }
+    bind() from singleton { GetPastCores(instance()) }
+    bind() from singleton { GetUpcomingCores(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }
 
     bind() from provider { CapsuleViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { RocketsViewModelFactory(instance()) }
-    bind() from provider { CoreViewModelFactory(instance()) }
+    bind() from provider { CoreViewModelFactory(instance(), instance(), instance()) }
     bind() from provider { ShipsViewModelFactory(instance()) }
     bind() from provider { MissionViewModelFactory(instance()) }
     bind() from provider { InfoViewModelFactory(instance()) }

@@ -64,6 +64,7 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
       1 -> viewModel.loadUpcomingCapsules()
       2 -> viewModel.loadPastCapsules()
       else -> {
+        pbGetCapsules.gone()
         srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
         findNavController().popBackStack()
       }
@@ -78,7 +79,7 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
 
   private fun handleFailure(failure: Failure?) {
     when (failure) {
-      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.NetworkConnection -> renderFailure("SpacexNetwork Connection Error")
       is Failure.ServerError -> renderFailure("Server Error")
     }
   }

@@ -1,6 +1,7 @@
 package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
+import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.util.SPACE_X_BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -9,13 +10,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
-import retrofit2.http.Path
 import java.util.concurrent.TimeUnit
 
-class SpacexService(retrofit: Retrofit) : NewApi {
+class SpacexService(retrofit: Retrofit) : SpacexApi {
 
-  private val spacexApi by lazy { retrofit.create(NewApi::class.java) }
+  private val spacexApi by lazy { retrofit.create(SpacexApi::class.java) }
 
   override suspend fun getAllCapsules(): Response<List<CapsuleModel>> =
     spacexApi.getAllCapsules()
@@ -31,6 +30,18 @@ class SpacexService(retrofit: Retrofit) : NewApi {
 
   override suspend fun getAllRockets(): Response<List<RocketModel>> =
     spacexApi.getAllRockets()
+
+  override suspend fun getAllCores(): Response<List<CoreModel>> =
+    spacexApi.getAllCores()
+
+  override suspend fun getUpcomingCores(): Response<List<CoreModel>> =
+    spacexApi.getUpcomingCores()
+
+  override suspend fun getPastCores(): Response<List<CoreModel>> =
+    spacexApi.getPastCores()
+
+  override suspend fun getOneCoreBySerial(coreSerial: String?): Response<CoreModel> =
+    spacexApi.getOneCoreBySerial(coreSerial)
 }
 
 fun createRetrofit(): Retrofit = Retrofit.Builder()
@@ -50,25 +61,4 @@ fun createOkHttpClient(): OkHttpClient {
     .readTimeout(20, TimeUnit.SECONDS)
     .writeTimeout(20, TimeUnit.SECONDS)
     .build()
-}
-
-interface NewApi {
-
-  @GET("rockets")
-  suspend fun getAllRockets(): Response<List<RocketModel>>
-
-  @GET("capsules")
-  suspend fun getAllCapsules(): Response<List<CapsuleModel>>
-
-  @GET("capsules/upcoming")
-  suspend fun getUpcomingCapsules(): Response<List<CapsuleModel>>
-
-  @GET("capsules/past")
-  suspend fun getPastCapsules(): Response<List<CapsuleModel>>
-
-  @GET("capsules/{capsuleSerial}")
-  suspend fun getOneCapsuleBySerial(
-    @Path("capsuleSerial") capsuleSerial: String?
-  ): Response<CapsuleModel>
-
 }
