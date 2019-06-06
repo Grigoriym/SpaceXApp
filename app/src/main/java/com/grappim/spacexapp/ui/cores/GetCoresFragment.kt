@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,9 +32,9 @@ class GetCoresFragment : SharedFragment(), KodeinAware {
 
   private val args: GetCoresFragmentArgs by navArgs()
 
-  private val viewModelFactory: CoreSharedViewModelFactory by instance()
+  private val viewModelFactory: CoreViewModelFactory by instance()
 
-  private val viewModel by viewModels<CoresSharedViewModel> { viewModelFactory }
+  private val viewModel by viewModels<CoresViewModel> { viewModelFactory }
 
   private val observer = Observer<Response<List<CoreModel>>> {
     pbGetCores.gone()

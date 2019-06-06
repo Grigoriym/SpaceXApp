@@ -32,7 +32,7 @@ interface API {
       logging.level = HttpLoggingInterceptor.Level.BODY
 
       val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(connectivityInterceptor)
+//        .addInterceptor(connectivityInterceptor)
         .addInterceptor(logging)
         .connectTimeout(20, TimeUnit.SECONDS)
         .readTimeout(20, TimeUnit.SECONDS)

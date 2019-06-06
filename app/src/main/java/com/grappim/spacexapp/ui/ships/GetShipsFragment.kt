@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -29,9 +28,9 @@ class GetShipsFragment : SharedFragment(), KodeinAware {
   override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
 
-  private val viewModelFactory: ShipsSharedViewModelFactory by instance()
+  private val viewModelFactory: ShipsViewModelFactory by instance()
 
-  private val viewModel by viewModels<ShipsSharedViewModel> { viewModelFactory }
+  private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
 
   private val observer = Observer<Response<List<ShipModel>>> {
     pbGetShips.gone()

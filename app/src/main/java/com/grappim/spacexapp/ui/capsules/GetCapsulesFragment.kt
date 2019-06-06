@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,39 +14,20 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.ui.SharedFragment
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.show
-import com.grappim.spacexapp.util.showSnackbar
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
 import timber.log.Timber
 
 class GetCapsulesFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
-
   private lateinit var cAdapter: CapsulesAdapter
-
-  private val viewModelFactory: CapsuleSharedViewModelFactory by instance()
-
+  private val viewModelFactory: CapsuleViewModelFactory by instance()
   private val args: GetCapsulesFragmentArgs by navArgs()
-
   private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }
-
-  private val observerWithResponse = Observer<Response<List<CapsuleModel>>> {
-    Timber.d("GetCapsulesFragment - observer")
-    pbGetCapsules.gone()
-    if (it.isSuccessful) {
-      it.body()?.let { items -> cAdapter.loadItems(items) }
-    } else {
-      srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
-      findNavController().popBackStack()
-    }
-    rvGetCapsules.scheduleLayoutAnimation()
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -62,9 +41,10 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
     Timber.d("GetCapsulesFragment - onViewCreated")
 
     viewModel.apply {
-      allCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
-      upcomingCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
-      pastCapsules.observe(this@GetCapsulesFragment, observerWithResponse)
+      onObserve(allCapsules, ::renderCapsules)
+      onObserve(upcomingCapsules, ::renderCapsules)
+      onObserve(pastCapsules, ::renderCapsules)
+      onFailure(failure, ::handleFailure)
     }
 
     bindAdapter()
@@ -77,17 +57,36 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
   }
 
   private fun getData() {
-    Timber.d("GetCapsulesFragment - getData")
+    Timber.d("GetCapsulesFragment - getData - ${args.capsulesToGetArgs}")
     pbGetCapsules.show()
     when (args.capsulesToGetArgs) {
-      0 -> viewModel.getAllCapsules()
-      1 -> viewModel.getUpcomingCapsules()
-      2 -> viewModel.getPastCapsules()
+      0 -> viewModel.loadAllCapsules()
+      1 -> viewModel.loadUpcomingCapsules()
+      2 -> viewModel.loadPastCapsules()
       else -> {
         srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
         findNavController().popBackStack()
       }
     }
+  }
+
+  private fun renderCapsules(capsules: List<CapsuleModel>?) {
+    cAdapter.loadItems(capsules!!)//todo
+    pbGetCapsules.gone()
+    rvGetCapsules.scheduleLayoutAnimation()
+  }
+
+  private fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
+  }
+
+  private fun renderFailure(failureText: String) {
+    rvGetCapsules.showSnackbar(failureText)
+    pbGetCapsules.gone()
+    srlGetCapsules.isRefreshing = false
   }
 
   private fun bindAdapter() {

@@ -6,7 +6,7 @@ import com.grappim.spacexapp.repository.SpaceXRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class ShipsSharedViewModel(
+class ShipsViewModel(
   private val repository: SpaceXRepository
 ) : ViewModel(), LifecycleObserver {
 

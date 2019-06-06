@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -27,9 +26,9 @@ class MissionFragment : SharedFragment(), KodeinAware {
 
   private val args: MissionFragmentArgs by navArgs()
 
-  private val viewModelFactory: MissionSharedViewModelFactory by instance()
+  private val viewModelFactory: MissionViewModelFactory by instance()
 
-  private val viewModel by viewModels<MissionSharedViewModel> { viewModelFactory }
+  private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
 
   private val observer = Observer<Response<PayloadModel>> { response ->
     pbMission.gone()

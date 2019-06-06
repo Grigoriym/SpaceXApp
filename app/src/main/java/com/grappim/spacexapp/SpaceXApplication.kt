@@ -1,24 +1,27 @@
 package com.grappim.spacexapp
 
-import android.app.Application
 import androidx.multidex.MultiDexApplication
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.network.TwitterApi
+import com.grappim.spacexapp.network.*
+import com.grappim.spacexapp.network.gets.GetAllCapsules
+import com.grappim.spacexapp.network.gets.GetPastCapsules
+import com.grappim.spacexapp.network.gets.GetRockets
+import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
+import com.grappim.spacexapp.repository.NewRepository
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
-import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
-import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
+import com.grappim.spacexapp.ui.capsules.CapsuleViewModelFactory
+import com.grappim.spacexapp.ui.cores.CoreViewModelFactory
 import com.grappim.spacexapp.ui.history.HistoryViewModelFactory
 import com.grappim.spacexapp.ui.info.InfoViewModelFactory
 import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModelFactory
-import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
-import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
-import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
+import com.grappim.spacexapp.ui.missionspayloads.MissionViewModelFactory
+import com.grappim.spacexapp.ui.rockets.RocketsViewModelFactory
+import com.grappim.spacexapp.ui.ships.ShipsViewModelFactory
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModelFactory
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
@@ -33,6 +36,9 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
+//todo when no internet connection app crashes
+// todo retrofit coroutines adapter is now deprecated because of new version of retrofit
+
 class SpaceXApplication : MultiDexApplication(), KodeinAware {
   override val kodein by Kodein.lazy {
     import(androidXModule(this@SpaceXApplication))
@@ -41,14 +47,24 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { API(instance()) }
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
+    bind() from singleton { NetworkHandler(instance()) }
+    bind<NewRepository>() with singleton { Network(instance(), instance()) }
+    bind() from singleton { createRetrofit() }
+    bind() from singleton { SpacexService(instance()) }
+
+    bind() from singleton { GetRockets(instance()) }
+    bind() from singleton { GetAllCapsules(instance()) }
+    bind() from singleton { GetPastCapsules(instance()) }
+    bind() from singleton { GetUpcomingCapsules(instance()) }
+
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }
 
-    bind() from provider { CapsuleSharedViewModelFactory(instance()) }
-    bind() from provider { RocketsSharedViewModelFactory(instance()) }
-    bind() from provider { CoreSharedViewModelFactory(instance()) }
-    bind() from provider { ShipsSharedViewModelFactory(instance()) }
-    bind() from provider { MissionSharedViewModelFactory(instance()) }
+    bind() from provider { CapsuleViewModelFactory(instance(), instance(), instance()) }
+    bind() from provider { RocketsViewModelFactory(instance()) }
+    bind() from provider { CoreViewModelFactory(instance()) }
+    bind() from provider { ShipsViewModelFactory(instance()) }
+    bind() from provider { MissionViewModelFactory(instance()) }
     bind() from provider { InfoViewModelFactory(instance()) }
     bind() from provider { HistoryViewModelFactory(instance()) }
     bind() from provider { LaunchPadViewModelFactory(instance()) }
