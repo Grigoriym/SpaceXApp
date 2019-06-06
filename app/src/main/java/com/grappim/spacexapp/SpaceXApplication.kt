@@ -58,6 +58,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { GetUpcomingCores(instance()) }
     bind() from singleton { GetAllShips(instance()) }
     bind() from singleton { GetAllLaunchPads(instance()) }
+    bind() from singleton { GetInfo(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }

@@ -96,6 +96,9 @@ interface API {
     @Path("site_id") siteId: String?
   ): Deferred<Response<LaunchPadModel>>
 
+  @GET("info")
+  fun getInfo(): Deferred<Response<InfoModel>>
+
 //  ********************************
 
   @GET("missions")
@@ -113,9 +116,6 @@ interface API {
   fun getPayloadById(
     @Path("payloadId") payloadId: String?
   ): Deferred<Response<PayloadModel>>
-
-  @GET("info")
-  fun getInfo(): Deferred<Response<InfoModel>>
 
   @GET("history")
   fun getHistory(): Deferred<Response<List<HistoryModel>>>

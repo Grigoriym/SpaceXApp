@@ -33,4 +33,12 @@ data class InfoModel(
   val valuation: Long?,
   @SerializedName("vehicles")
   val vehicles: Int?
-)
+) {
+  companion object {
+    fun empty() = InfoModel(
+      "", "", "", "", 0,
+      0, "", null, 0, null, "",
+      "", 0, 0L, 0
+    )
+  }
+}

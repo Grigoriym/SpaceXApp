@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
@@ -58,5 +59,6 @@ interface SpacexApi {
     @Path("site_id") siteId: String?
   ): Response<LaunchPadModel>
 
-
+  @GET("info")
+  suspend fun getInfo(): Response<InfoModel>
 }

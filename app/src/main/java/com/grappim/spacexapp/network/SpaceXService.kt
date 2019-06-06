@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
@@ -56,6 +57,9 @@ class SpacexService(retrofit: Retrofit) : SpacexApi {
 
   override suspend fun getLaunchPadBySiteId(siteId: String?): Response<LaunchPadModel> =
     spacexApi.getLaunchPadBySiteId(siteId)
+
+  override suspend fun getInfo(): Response<InfoModel> =
+    spacexApi.getInfo()
 }
 
 fun createRetrofit(): Retrofit = Retrofit.Builder()

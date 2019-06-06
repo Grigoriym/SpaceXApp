@@ -16,7 +16,10 @@ class RocketsViewModel(
   val allRockets: LiveData<List<RocketModel>>
     get() = _allRockets
 
-  fun loadRockets() = getRockets(UseCase.None()) { it.either(::handleFailure, ::handleRockets) }
+  fun loadRockets() =
+    getRockets(UseCase.None()) {
+      it.either(::handleFailure, ::handleRockets)
+    }
 
   private fun handleRockets(rockets: List<RocketModel>) {
     this._allRockets.value = rockets

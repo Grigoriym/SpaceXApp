@@ -1,25 +1,28 @@
 package com.grappim.spacexapp.ui.info
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.repository.SpaceXRepository
-import kotlinx.coroutines.launch
-import retrofit2.Response
-import timber.log.Timber
+import com.grappim.spacexapp.network.gets.GetInfo
+import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.util.UseCase
 
 class InfoViewModel(
-  private val repository: SpaceXRepository
-) : ViewModel(), LifecycleObserver {
+  private val getInfo: GetInfo
+) : BaseViewModel(), LifecycleObserver {
 
-  private val _info = MutableLiveData<Response<InfoModel>>()
-  val info: LiveData<Response<InfoModel>>
+  private val _info = MutableLiveData<InfoModel>()
+  val info: LiveData<InfoModel>
     get() = _info
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getInfo() {
-    Timber.d("InfoViewModel - getInfo()")
-    viewModelScope.launch {
-      _info.value = repository.getInfoFromApi().value
-    }
+  private fun handleInfo(info: InfoModel) {
+    this._info.value = info
   }
+
+  fun loadInfo() =
+    getInfo(UseCase.None()) {
+      it.either(::handleFailure, ::handleInfo)
+    }
+
 }
