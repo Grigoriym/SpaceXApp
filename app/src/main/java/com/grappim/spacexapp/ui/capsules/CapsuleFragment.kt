@@ -37,4 +37,7 @@ class CapsuleFragment : SharedFragment() {
       findNavController().navigate(CapsuleFragmentDirections.nextFragment(2))
     }
   }
+
+  override fun renderFailure(failureText: String) {
+  }
 }

@@ -52,6 +52,9 @@ class CapsuleDetailsFragment : SharedFragment() {
     }
   }
 
+  override fun renderFailure(failureText: String) {
+  }
+
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
       if (it != null) {

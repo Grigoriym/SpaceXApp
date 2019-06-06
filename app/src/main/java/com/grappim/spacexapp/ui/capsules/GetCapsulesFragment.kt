@@ -77,14 +77,7 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
     rvGetCapsules.scheduleLayoutAnimation()
   }
 
-  private fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("SpacexNetwork Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
-    }
-  }
-
-  private fun renderFailure(failureText: String) {
+  override fun renderFailure(failureText: String) {
     rvGetCapsules.showSnackbar(failureText)
     pbGetCapsules.gone()
     srlGetCapsules.isRefreshing = false

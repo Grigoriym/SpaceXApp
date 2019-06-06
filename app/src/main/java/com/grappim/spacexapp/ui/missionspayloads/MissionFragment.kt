@@ -84,4 +84,7 @@ class MissionFragment : SharedFragment(), KodeinAware {
       )
     viewModel.onePayload.observe(this, observer)
   }
+
+  override fun renderFailure(failureText: String) {
+  }
 }

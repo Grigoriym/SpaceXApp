@@ -3,6 +3,7 @@ package com.grappim.spacexapp.network
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.rocket.RocketModel
+import com.grappim.spacexapp.model.ships.ShipModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -39,5 +40,13 @@ interface SpacexApi {
   suspend fun getOneCoreBySerial(
     @Path("coreSerial") coreSerial: String?
   ): Response<CoreModel>
+
+  @GET("ships")
+  suspend fun getAllShips(): Response<List<ShipModel>>
+
+  @GET("ships/{shipId}")
+  suspend fun getOneShipById(
+    @Path("shipId") shipId: String?
+  ): Response<ShipModel>
 
 }

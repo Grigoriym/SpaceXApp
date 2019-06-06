@@ -71,27 +71,20 @@ class GetCoresFragment : SharedFragment(), KodeinAware {
     }
   }
 
-  private fun renderCores(capsules: List<CoreModel>?) {
-    coreAdapter.loadItems(capsules!!)//todo
+  private fun renderCores(cores: List<CoreModel>?) {
+    coreAdapter.loadItems(cores!!)//todo
     pbGetCores.gone()
     rvGetCores.scheduleLayoutAnimation()
   }
 
-  private fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("SpacexNetwork Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
-    }
-  }
-
-  private fun renderFailure(failureText: String) {
+  override fun renderFailure(failureText: String) {
     rvGetCores.showSnackbar(failureText)
     pbGetCores.gone()
     srlGetCores.isRefreshing = false
   }
 
   private fun bindAdapter() {
-    coreAdapter = CoresAdapter {}
+    coreAdapter = CoresAdapter {}//todo ripple effect works strange on items
     rvGetCores.apply {
       layoutManager = LinearLayoutManager(context)
       addItemDecoration(MarginItemDecorator())

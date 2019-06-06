@@ -89,4 +89,7 @@ class RocketDetailsFragment : SharedFragment() {
       )
     }
   }
+
+  override fun renderFailure(failureText: String) {
+  }
 }

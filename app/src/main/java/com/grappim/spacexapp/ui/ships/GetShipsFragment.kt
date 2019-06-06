@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -14,33 +13,19 @@ import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
 import com.grappim.spacexapp.ui.SharedFragment
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.show
-import com.grappim.spacexapp.util.showSnackbar
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_ships.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
+import timber.log.Timber
 
 class GetShipsFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
-
   private val viewModelFactory: ShipsViewModelFactory by instance()
-
   private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
-
-  private val observer = Observer<Response<List<ShipModel>>> {
-    pbGetShips.gone()
-    if (it.isSuccessful) {
-      it.body()?.let { items -> shipAdapter.loadItems(items) }
-    } else {
-      srlGetShips.showSnackbar(getString(R.string.error_retrieving_data))
-    }
-    rvGetShips.scheduleLayoutAnimation()
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -51,12 +36,15 @@ class GetShipsFragment : SharedFragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("GetShipsFragment - onViewCreated")
     viewModel.apply {
-      allShips.observe(this@GetShipsFragment, observer)
+      onObserve(allShips, ::renderShips)
+      onFailure(failure, ::handleFailure)
     }
 
     bindAdapter()
     getData()
+
     srlGetShips.setOnRefreshListener {
       getData()
       srlGetShips.isRefreshing = false
@@ -65,7 +53,19 @@ class GetShipsFragment : SharedFragment(), KodeinAware {
 
   private fun getData() {
     pbGetShips.show()
-    viewModel.getAllShips()
+    viewModel.loadAllShips()
+  }
+
+  private fun renderShips(ships: List<ShipModel>?) {
+    shipAdapter.loadItems(ships!!)   //todo
+    pbGetShips.gone()
+    rvGetShips.scheduleLayoutAnimation()
+  }
+
+  override fun renderFailure(failureText: String) {
+    rvGetShips.showSnackbar(failureText)
+    pbGetShips.gone()
+    srlGetShips.isRefreshing = false
   }
 
   private fun bindAdapter() {

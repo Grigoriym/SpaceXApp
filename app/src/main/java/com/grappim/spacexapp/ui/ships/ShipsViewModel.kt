@@ -1,23 +1,28 @@
 package com.grappim.spacexapp.ui.ships
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.repository.SpaceXRepository
-import kotlinx.coroutines.launch
-import retrofit2.Response
+import com.grappim.spacexapp.network.gets.GetAllShips
+import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.util.UseCase
 
 class ShipsViewModel(
-  private val repository: SpaceXRepository
-) : ViewModel(), LifecycleObserver {
+  private val getAllShips: GetAllShips
+) : BaseViewModel(), LifecycleObserver {
 
-  private val _allShips = MutableLiveData<Response<List<ShipModel>>>()
-  val allShips: LiveData<Response<List<ShipModel>>>
+  private val _allShips = MutableLiveData<List<ShipModel>>()
+  val allShips: LiveData<List<ShipModel>>
     get() = _allShips
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getAllShips() {
-    viewModelScope.launch {
-      _allShips.value = repository.getAllShipsFromApi().value
-    }
+  private fun handleAllShips(ships: List<ShipModel>) {
+    this._allShips.value = ships
   }
+
+  fun loadAllShips() =
+    getAllShips(UseCase.None()) {
+      it.either(::handleFailure, ::handleAllShips)
+    }
+
 }

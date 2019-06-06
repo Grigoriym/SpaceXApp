@@ -76,4 +76,6 @@ class GetLaunchPadsFragment : SharedFragment(), KodeinAware {
     }
   }
 
+  override fun renderFailure(failureText: String) {
+  }
 }

@@ -24,9 +24,10 @@ class CoresViewModel(
     this._allCores.value = cores
   }
 
-  fun loadAllCores() = getAllCores(UseCase.None()) {
-    it.either(::handleFailure, ::handleAllCores)
-  }
+  fun loadAllCores() =
+    getAllCores(UseCase.None()) {
+      it.either(::handleFailure, ::handleAllCores)
+    }
 
   private val _pastCores = MutableLiveData<List<CoreModel>>()
   val pastCores: LiveData<List<CoreModel>>
@@ -37,7 +38,7 @@ class CoresViewModel(
   }
 
   fun loadPastCores() =
-    getAllCores(UseCase.None()) {
+    getPastCores(UseCase.None()) {
       it.either(::handleFailure, ::handlePastCores)
     }
 
@@ -49,8 +50,9 @@ class CoresViewModel(
     this._upcomingCores.value = cores
   }
 
-  fun loadUpcomingCores() = getAllCores(UseCase.None()) {
-    it.either(::handleFailure, ::handleupcomingCores)
-  }
+  fun loadUpcomingCores() =
+    getUpcomingCores(UseCase.None()) {
+      it.either(::handleFailure, ::handleupcomingCores)
+    }
 
 }

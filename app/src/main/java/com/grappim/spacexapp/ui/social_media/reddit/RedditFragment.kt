@@ -18,5 +18,6 @@ class RedditFragment : SharedFragment() {
     return inflater.inflate(R.layout.fragment_reddit, container, false)
   }
 
-
+  override fun renderFailure(failureText: String) {
+  }
 }

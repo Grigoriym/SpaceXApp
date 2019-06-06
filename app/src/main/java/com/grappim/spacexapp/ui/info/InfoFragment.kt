@@ -89,4 +89,7 @@ class InfoFragment : SharedFragment(), KodeinAware {
     viewModel.info.observe(this, observer)
     viewModel.getInfo()
   }
+
+  override fun renderFailure(failureText: String) {
+  }
 }

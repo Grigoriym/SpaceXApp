@@ -80,6 +80,14 @@ interface API {
     @Path("coreSerial") coreSerial: String?
   ): Deferred<Response<CoreModel>>
 
+  @GET("ships")
+  fun getAllShips(): Deferred<Response<List<ShipModel>>>
+
+  @GET("ships/{shipId}")
+  fun getOneShipById(
+    @Path("shipId") shipId: String?
+  ): Deferred<Response<ShipModel>>
+
 //  ********************************
 
   @GET("missions")
@@ -89,14 +97,6 @@ interface API {
   fun getOneMissionById(
     @Path("missionId") missionId: String?
   ): Deferred<Response<MissionModel>>
-
-  @GET("ships")
-  fun getAllShips(): Deferred<Response<List<ShipModel>>>
-
-  @GET("ships/{shipId}")
-  fun getOneShipById(
-    @Path("shipId") shipId: String?
-  ): Deferred<Response<ShipModel>>
 
   @GET("payloads")
   fun getAllPayloads(): Deferred<Response<List<PayloadModel>>>

@@ -9,7 +9,7 @@ import com.grappim.spacexapp.network.gets.*
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
-import com.grappim.spacexapp.repository.NewRepository
+import com.grappim.spacexapp.repository.NewSpaceXRepository
 import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
 import com.grappim.spacexapp.ui.capsules.CapsuleViewModelFactory
 import com.grappim.spacexapp.ui.cores.CoreViewModelFactory
@@ -45,7 +45,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
     bind() from singleton { NetworkHandler(instance()) }
-    bind<NewRepository>() with singleton { SpacexNetwork(instance(), instance()) }
+    bind<NewSpaceXRepository>() with singleton { SpacexNetwork(instance(), instance()) }
     bind() from singleton { createRetrofit() }
     bind() from singleton { SpacexService(instance()) }
 
@@ -56,6 +56,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { GetAllCores(instance()) }
     bind() from singleton { GetPastCores(instance()) }
     bind() from singleton { GetUpcomingCores(instance()) }
+    bind() from singleton { GetAllShips(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }

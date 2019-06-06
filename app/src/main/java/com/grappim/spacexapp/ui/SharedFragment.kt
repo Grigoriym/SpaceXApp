@@ -5,11 +5,14 @@ import android.view.Menu
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.util.Failure
 
 /**
  * This class is used to hide specific menu items in fragments
  */
-open class SharedFragment : Fragment() {
+abstract class SharedFragment : Fragment() {
+
+  abstract fun renderFailure(failureText: String)
 
   override fun onPrepareOptionsMenu(menu: Menu) {
     activity?.invalidateOptionsMenu()
@@ -23,5 +26,12 @@ open class SharedFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setHasOptionsMenu(true)
+  }
+
+  protected fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("NetworkConnection")
+      is Failure.ServerError -> renderFailure("ServerError")
+    }
   }
 }

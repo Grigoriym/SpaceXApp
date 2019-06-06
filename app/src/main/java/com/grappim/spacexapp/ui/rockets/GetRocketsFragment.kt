@@ -42,6 +42,7 @@ class GetRocketsFragment : SharedFragment(), KodeinAware {
 
     bindAdapter()
     getData()
+
     srlGetRockets.setOnRefreshListener {
       getData()
       srlGetRockets.isRefreshing = false
@@ -59,14 +60,7 @@ class GetRocketsFragment : SharedFragment(), KodeinAware {
     rvGetRockets.scheduleLayoutAnimation()
   }
 
-  private fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("NetworkConnection")
-      is Failure.ServerError -> renderFailure("ServerError")
-    }
-  }
-
-  private fun renderFailure(failureText: String) {
+  override fun renderFailure(failureText: String) {
     rvGetRockets.showSnackbar(failureText)
     pbGetRockets.gone()
     srlGetRockets.isRefreshing = false

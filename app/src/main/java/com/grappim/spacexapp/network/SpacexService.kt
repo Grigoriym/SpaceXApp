@@ -3,6 +3,7 @@ package com.grappim.spacexapp.network
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.rocket.RocketModel
+import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.util.SPACE_X_BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -42,6 +43,12 @@ class SpacexService(retrofit: Retrofit) : SpacexApi {
 
   override suspend fun getOneCoreBySerial(coreSerial: String?): Response<CoreModel> =
     spacexApi.getOneCoreBySerial(coreSerial)
+
+  override suspend fun getAllShips(): Response<List<ShipModel>> =
+    spacexApi.getAllShips()
+
+  override suspend fun getOneShipById(shipId: String?): Response<ShipModel> =
+    spacexApi.getOneShipById(shipId)
 }
 
 fun createRetrofit(): Retrofit = Retrofit.Builder()

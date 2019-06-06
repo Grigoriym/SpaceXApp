@@ -3,7 +3,8 @@ package com.grappim.spacexapp.network
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.repository.NewRepository
+import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.repository.NewSpaceXRepository
 import com.grappim.spacexapp.util.Either
 import com.grappim.spacexapp.util.Failure
 import retrofit2.Response
@@ -12,7 +13,7 @@ import timber.log.Timber
 class SpacexNetwork(
   private val networkHandler: NetworkHandler,
   private val service: SpacexService
-) : NewRepository {
+) : NewSpaceXRepository {
 
   override suspend fun allCapsules(): Either<Failure, List<CapsuleModel>> {
     return when (networkHandler.isConnected) {
@@ -63,11 +64,18 @@ class SpacexNetwork(
     }
   }
 
+  override suspend fun allShips(): Either<Failure, List<ShipModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getAllShips(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
   private fun <T> makeRequest(
     callResponse: Response<T>,
     default: T
   ): Either<Failure, T> {
-    Timber.d("NewRepository - makeRequest")
+    Timber.d("NewSpaceXRepository - makeRequest")
     return try {
       when (callResponse.isSuccessful) {
         true -> Either.Right(callResponse.body() ?: default)

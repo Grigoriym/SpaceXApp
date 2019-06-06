@@ -33,4 +33,6 @@ class HistoryDetailsFragment : SharedFragment() {
     }
   }
 
+  override fun renderFailure(failureText: String) {
+  }
 }
