@@ -45,7 +45,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
     bind() from singleton { NetworkHandler(instance()) }
-    bind<NewSpaceXRepository>() with singleton { SpacexNetwork(instance(), instance()) }
+    bind<NewSpaceXRepository>() with singleton { SpaceXNetwork(instance(), instance()) }
     bind() from singleton { createRetrofit() }
     bind() from singleton { SpacexService(instance()) }
 
@@ -57,6 +57,7 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { GetPastCores(instance()) }
     bind() from singleton { GetUpcomingCores(instance()) }
     bind() from singleton { GetAllShips(instance()) }
+    bind() from singleton { GetAllLaunchPads(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }

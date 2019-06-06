@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import retrofit2.Response
@@ -48,5 +49,14 @@ interface SpacexApi {
   suspend fun getOneShipById(
     @Path("shipId") shipId: String?
   ): Response<ShipModel>
+
+  @GET("launchpads")
+  suspend fun getAllLaunchPads(): Response<List<LaunchPadModel>>
+
+  @GET("launchpads/{site_id}")
+  suspend fun getLaunchPadBySiteId(
+    @Path("site_id") siteId: String?
+  ): Response<LaunchPadModel>
+
 
 }

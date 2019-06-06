@@ -2,6 +2,7 @@ package com.grappim.spacexapp.repository
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.util.Either
@@ -24,4 +25,6 @@ interface NewSpaceXRepository {
   suspend fun pastCores(): Either<Failure, List<CoreModel>>
 
   suspend fun allShips(): Either<Failure, List<ShipModel>>
+
+  suspend fun allLaunchPads(): Either<Failure, List<LaunchPadModel>>
 }

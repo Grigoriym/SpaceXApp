@@ -88,6 +88,14 @@ interface API {
     @Path("shipId") shipId: String?
   ): Deferred<Response<ShipModel>>
 
+  @GET("launchpads")
+  fun getAllLaunchPads(): Deferred<Response<List<LaunchPadModel>>>
+
+  @GET("launchpads/{site_id}")
+  fun getLaunchPadBySiteId(
+    @Path("site_id") siteId: String?
+  ): Deferred<Response<LaunchPadModel>>
+
 //  ********************************
 
   @GET("missions")
@@ -111,12 +119,4 @@ interface API {
 
   @GET("history")
   fun getHistory(): Deferred<Response<List<HistoryModel>>>
-
-  @GET("launchpads")
-  fun getAllLaunchPads(): Deferred<Response<List<LaunchPadModel>>>
-
-  @GET("launchpads/{site_id}")
-  fun getLaunchPadBySiteId(
-    @Path("site_id") siteId: String?
-  ): Deferred<Response<LaunchPadModel>>
 }
