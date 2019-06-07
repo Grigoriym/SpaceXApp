@@ -4,7 +4,7 @@ import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.network.TwitterApi
+import com.grappim.spacexapp.network.api.TwitterApi
 import timber.log.Timber
 
 class TwitterPaginationRepository(

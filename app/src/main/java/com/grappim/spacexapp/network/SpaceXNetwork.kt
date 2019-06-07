@@ -16,7 +16,7 @@ import timber.log.Timber
 
 class SpaceXNetwork(
   private val networkHandler: NetworkHandler,
-  private val service: SpacexService
+  private val service: SpaceXService
 ) : NewSpaceXRepository {
 
   override suspend fun allCapsules(): Either<Failure, List<CapsuleModel>> {

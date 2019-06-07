@@ -2,9 +2,7 @@ package com.grappim.spacexapp.ui.history
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.grappim.spacexapp.network.API
 import com.grappim.spacexapp.network.gets.GetHistory
-import com.grappim.spacexapp.repository.SpaceXRepository
 
 class HistoryViewModelFactory(
   private val getHistory: GetHistory

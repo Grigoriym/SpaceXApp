@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.network
+package com.grappim.spacexapp.network.api
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
@@ -12,7 +12,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface SpacexApi {
+interface SpaceXApi {
 
   @GET("rockets")
   suspend fun getAllRockets(): Response<List<RocketModel>>

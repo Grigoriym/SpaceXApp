@@ -7,6 +7,8 @@ import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.di.getModule
 import com.grappim.spacexapp.di.viewModelFactoryModule
 import com.grappim.spacexapp.network.*
+import com.grappim.spacexapp.network.api.API
+import com.grappim.spacexapp.network.api.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
@@ -40,11 +42,10 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     bind() from singleton { NetworkHandler(instance()) }
     bind<NewSpaceXRepository>() with singleton { SpaceXNetwork(instance(), instance()) }
     bind() from singleton { createRetrofit() }
-    bind() from singleton { SpacexService(instance()) }
+    bind() from singleton { SpaceXService(instance()) }
 
     bind() from singleton { TwitterApi(instance()) }
     bind() from singleton { TwitterPaginationRepository(instance()) }
-
   }
 
   override fun onCreate() {

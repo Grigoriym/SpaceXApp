@@ -2,7 +2,6 @@ package com.grappim.spacexapp.ui.launchpads.details
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
@@ -40,8 +39,9 @@ class LaunchPadDetailsFragment : SharedFragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("LaunchPadDetailsFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("LaunchPadDetailsFragment - onViewCreated")
+
     setHasOptionsMenu(true)
 
     args.launchPadModel.let {

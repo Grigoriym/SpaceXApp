@@ -8,6 +8,7 @@ import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.network.api.SpaceXApi
 import com.grappim.spacexapp.util.SPACE_X_BASE_URL
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
@@ -17,9 +18,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-class SpacexService(retrofit: Retrofit) : SpacexApi {
+class SpaceXService(retrofit: Retrofit) : SpaceXApi {
 
-  private val spaceXApi by lazy { retrofit.create(SpacexApi::class.java) }
+  private val spaceXApi by lazy { retrofit.create(SpaceXApi::class.java) }
 
   override suspend fun getAllCapsules(): Response<List<CapsuleModel>> =
     spaceXApi.getAllCapsules()

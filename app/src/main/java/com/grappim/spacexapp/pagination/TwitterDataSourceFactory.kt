@@ -3,7 +3,7 @@ package com.grappim.spacexapp.pagination
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.network.TwitterApi
+import com.grappim.spacexapp.network.api.TwitterApi
 import timber.log.Timber
 
 class TwitterDataSourceFactory(
