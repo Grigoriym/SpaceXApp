@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.payloads
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class OrbitParams(
   @SerializedName("apoapsis_km")
   val apoapsisKm: Double?,
@@ -29,4 +32,4 @@ data class OrbitParams(
   val regime: String?,
   @SerializedName("semi_major_axis_km")
   val semiMajorAxisKm: Double?
-)
+) : Parcelable

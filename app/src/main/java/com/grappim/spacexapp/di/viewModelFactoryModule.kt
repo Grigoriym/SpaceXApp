@@ -19,7 +19,7 @@ val viewModelFactoryModule = Kodein.Module("vmf") {
   bind() from provider { RocketsViewModelFactory(instance()) }
   bind() from provider { CoreViewModelFactory(instance(), instance(), instance()) }
   bind() from provider { ShipsViewModelFactory(instance()) }
-  bind() from provider { MissionViewModelFactory(instance()) }
+  bind() from provider { MissionViewModelFactory(instance(), instance()) }
   bind() from provider { InfoViewModelFactory(instance()) }
   bind() from provider { HistoryViewModelFactory(instance()) }
   bind() from provider { LaunchPadViewModelFactory(instance()) }

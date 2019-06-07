@@ -5,6 +5,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.repository.NewSpaceXRepository
@@ -91,6 +92,20 @@ class SpaceXNetwork(
   override suspend fun history(): Either<Failure, List<HistoryModel>> {
     return when (networkHandler.isConnected) {
       true -> makeRequest(service.getHistory(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun allPayloads(): Either<Failure, List<PayloadModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getAllPayloads(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getPayloadById(payloadId), PayloadModel.empty())
       false, null -> Either.Left(Failure.NetworkConnection)
     }
   }

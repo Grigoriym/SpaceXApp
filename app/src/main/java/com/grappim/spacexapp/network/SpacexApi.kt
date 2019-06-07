@@ -5,6 +5,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import retrofit2.Response
@@ -65,4 +66,12 @@ interface SpacexApi {
 
   @GET("history")
   suspend fun getHistory(): Response<List<HistoryModel>>
+
+  @GET("payloads")
+  suspend fun getAllPayloads(): Response<List<PayloadModel>>
+
+  @GET("payloads/{payloadId}")
+  suspend fun getPayloadById(
+    @Path("payloadId") payloadId: String?
+  ): Response<PayloadModel>
 }

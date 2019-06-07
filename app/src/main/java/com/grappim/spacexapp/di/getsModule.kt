@@ -18,4 +18,6 @@ val getModule = Kodein.Module("gets") {
   bind() from singleton { GetAllLaunchPads(instance()) }
   bind() from singleton { GetInfo(instance()) }
   bind() from singleton { GetHistory(instance()) }
+  bind() from singleton { GetAllPayloads(instance()) }
+  bind() from singleton { GetPayloadById(instance()) }
 }

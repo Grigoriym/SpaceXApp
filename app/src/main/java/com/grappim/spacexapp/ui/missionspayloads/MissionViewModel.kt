@@ -1,34 +1,43 @@
 package com.grappim.spacexapp.ui.missionspayloads
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.repository.SpaceXRepository
-import kotlinx.coroutines.launch
-import retrofit2.Response
+import com.grappim.spacexapp.network.gets.GetAllPayloads
+import com.grappim.spacexapp.network.gets.GetPayloadById
+import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.util.UseCase
 
 class MissionViewModel(
-  private val repository: SpaceXRepository
-) : ViewModel(), LifecycleObserver {
+  private val getAllPayloads: GetAllPayloads,
+  private val getPayloadById: GetPayloadById
+) : BaseViewModel(), LifecycleObserver {
 
-  private val _allPayloads = MutableLiveData<Response<List<PayloadModel>>>()
-  val allPayloads: LiveData<Response<List<PayloadModel>>>
+  private val _allPayloads = MutableLiveData<List<PayloadModel>>()
+  val allPayloads: LiveData<List<PayloadModel>>
     get() = _allPayloads
 
-  private val _onePayload = MutableLiveData<Response<PayloadModel>>()
-  val onePayload: LiveData<Response<PayloadModel>>
+  private val _onePayload = MutableLiveData<PayloadModel>()
+  val onePayload: LiveData<PayloadModel>
     get() = _onePayload
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getAllPayloads() {
-    viewModelScope.launch {
-      _allPayloads.value = repository.getAllPayloadsFromApi().value
-    }
+  private fun handleAllPayloads(payloads: List<PayloadModel>) {
+    this._allPayloads.value = payloads
   }
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getPayloadById(payloadId: String?) {
-    viewModelScope.launch {
-      _onePayload.value = repository.getPayloadByIdFromApi(payloadId).value
-    }
+  private fun handleOnePayload(payload: PayloadModel) {
+    this._onePayload.value = payload
   }
+
+  fun loadAllPayloads() =
+    getAllPayloads(UseCase.None()) {
+      it.either(::handleFailure, ::handleAllPayloads)
+    }
+
+  fun loadPayloadById(payloadId: String?) =
+    getPayloadById(GetPayloadById.Params(payloadId)) {
+      it.either(::handleFailure, ::handleOnePayload)
+    }
+
 }

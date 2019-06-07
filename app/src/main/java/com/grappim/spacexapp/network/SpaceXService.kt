@@ -5,6 +5,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.util.SPACE_X_BASE_URL
@@ -18,52 +19,58 @@ import java.util.concurrent.TimeUnit
 
 class SpacexService(retrofit: Retrofit) : SpacexApi {
 
-  private val spacexApi by lazy { retrofit.create(SpacexApi::class.java) }
+  private val spaceXApi by lazy { retrofit.create(SpacexApi::class.java) }
 
   override suspend fun getAllCapsules(): Response<List<CapsuleModel>> =
-    spacexApi.getAllCapsules()
+    spaceXApi.getAllCapsules()
 
   override suspend fun getUpcomingCapsules(): Response<List<CapsuleModel>> =
-    spacexApi.getUpcomingCapsules()
+    spaceXApi.getUpcomingCapsules()
 
   override suspend fun getPastCapsules(): Response<List<CapsuleModel>> =
-    spacexApi.getPastCapsules()
+    spaceXApi.getPastCapsules()
 
   override suspend fun getOneCapsuleBySerial(capsuleSerial: String?): Response<CapsuleModel> =
-    spacexApi.getOneCapsuleBySerial(capsuleSerial)
+    spaceXApi.getOneCapsuleBySerial(capsuleSerial)
 
   override suspend fun getAllRockets(): Response<List<RocketModel>> =
-    spacexApi.getAllRockets()
+    spaceXApi.getAllRockets()
 
   override suspend fun getAllCores(): Response<List<CoreModel>> =
-    spacexApi.getAllCores()
+    spaceXApi.getAllCores()
 
   override suspend fun getUpcomingCores(): Response<List<CoreModel>> =
-    spacexApi.getUpcomingCores()
+    spaceXApi.getUpcomingCores()
 
   override suspend fun getPastCores(): Response<List<CoreModel>> =
-    spacexApi.getPastCores()
+    spaceXApi.getPastCores()
 
   override suspend fun getOneCoreBySerial(coreSerial: String?): Response<CoreModel> =
-    spacexApi.getOneCoreBySerial(coreSerial)
+    spaceXApi.getOneCoreBySerial(coreSerial)
 
   override suspend fun getAllShips(): Response<List<ShipModel>> =
-    spacexApi.getAllShips()
+    spaceXApi.getAllShips()
 
   override suspend fun getOneShipById(shipId: String?): Response<ShipModel> =
-    spacexApi.getOneShipById(shipId)
+    spaceXApi.getOneShipById(shipId)
 
   override suspend fun getAllLaunchPads(): Response<List<LaunchPadModel>> =
-    spacexApi.getAllLaunchPads()
+    spaceXApi.getAllLaunchPads()
 
   override suspend fun getLaunchPadBySiteId(siteId: String?): Response<LaunchPadModel> =
-    spacexApi.getLaunchPadBySiteId(siteId)
+    spaceXApi.getLaunchPadBySiteId(siteId)
 
   override suspend fun getInfo(): Response<InfoModel> =
-    spacexApi.getInfo()
+    spaceXApi.getInfo()
 
   override suspend fun getHistory(): Response<List<HistoryModel>> =
-    spacexApi.getHistory()
+    spaceXApi.getHistory()
+
+  override suspend fun getAllPayloads(): Response<List<PayloadModel>> =
+    spaceXApi.getAllPayloads()
+
+  override suspend fun getPayloadById(payloadId: String?): Response<PayloadModel> =
+    spaceXApi.getPayloadById(payloadId)
 }
 
 fun createRetrofit(): Retrofit = Retrofit.Builder()

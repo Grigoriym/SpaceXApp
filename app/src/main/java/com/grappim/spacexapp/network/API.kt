@@ -102,6 +102,14 @@ interface API {
   @GET("history")
   fun getHistory(): Deferred<Response<List<HistoryModel>>>
 
+  @GET("payloads")
+  fun getAllPayloads(): Deferred<Response<List<PayloadModel>>>
+
+  @GET("payloads/{payloadId}")
+  fun getPayloadById(
+    @Path("payloadId") payloadId: String?
+  ): Deferred<Response<PayloadModel>>
+
 //  ********************************
 
   @GET("missions")
@@ -111,13 +119,5 @@ interface API {
   fun getOneMissionById(
     @Path("missionId") missionId: String?
   ): Deferred<Response<MissionModel>>
-
-  @GET("payloads")
-  fun getAllPayloads(): Deferred<Response<List<PayloadModel>>>
-
-  @GET("payloads/{payloadId}")
-  fun getPayloadById(
-    @Path("payloadId") payloadId: String?
-  ): Deferred<Response<PayloadModel>>
 
 }

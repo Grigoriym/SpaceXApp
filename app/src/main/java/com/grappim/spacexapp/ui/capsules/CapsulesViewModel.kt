@@ -7,7 +7,6 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.gets.GetAllCapsules
 import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
-import com.grappim.spacexapp.repository.SpaceXRepository
 import com.grappim.spacexapp.ui.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
@@ -22,7 +21,9 @@ class CapsulesViewModel(
     get() = _allCapsules
 
   fun loadAllCapsules() =
-    getAllCapsules(UseCase.None()) { it.either(::handleFailure, ::handleCapsules) }
+    getAllCapsules(UseCase.None()) {
+      it.either(::handleFailure, ::handleCapsules)
+    }
 
   private fun handleCapsules(capsules: List<CapsuleModel>) {
     this._allCapsules.value = capsules
@@ -33,7 +34,9 @@ class CapsulesViewModel(
     get() = _upcomingCapsules
 
   fun loadUpcomingCapsules() =
-    getUpcomingCapsules(UseCase.None()) { it.either(::handleFailure, ::handleUpcomingCapsules) }
+    getUpcomingCapsules(UseCase.None()) {
+      it.either(::handleFailure, ::handleUpcomingCapsules)
+    }
 
   private fun handleUpcomingCapsules(capsules: List<CapsuleModel>) {
     this._upcomingCapsules.value = capsules
@@ -44,7 +47,9 @@ class CapsulesViewModel(
     get() = _pastCapsules
 
   fun loadPastCapsules() =
-    getPastCapsules(UseCase.None()) { it.either(::handleFailure, ::handlePastCapsules) }
+    getPastCapsules(UseCase.None()) {
+      it.either(::handleFailure, ::handlePastCapsules)
+    }
 
   private fun handlePastCapsules(capsules: List<CapsuleModel>) {
     this._pastCapsules.value = capsules
