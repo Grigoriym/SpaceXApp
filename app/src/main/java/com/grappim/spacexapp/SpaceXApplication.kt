@@ -5,6 +5,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.di.getModule
+import com.grappim.spacexapp.di.mixBinds
 import com.grappim.spacexapp.di.viewModelFactoryModule
 import com.grappim.spacexapp.network.*
 import com.grappim.spacexapp.network.api.TwitterApi
@@ -30,20 +31,12 @@ import javax.net.ssl.SSLContext
 // todo retrofit coroutines adapter is now deprecated because of new version of retrofit
 
 class SpaceXApplication : MultiDexApplication(), KodeinAware {
+
   override val kodein by Kodein.lazy {
     import(androidXModule(this@SpaceXApplication))
     import(getModule)
     import(viewModelFactoryModule)
-
-    bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-
-    bind() from singleton { NetworkHandler(instance()) }
-    bind<SpaceXRepository>() with singleton { SpaceXNetwork(instance(), instance()) }
-    bind() from singleton { createRetrofit() }
-    bind() from singleton { SpaceXService(instance()) }
-
-    bind() from singleton { TwitterApi(instance()) }
-    bind() from singleton { TwitterPaginationRepository(instance()) }
+    import(mixBinds)
   }
 
   override fun onCreate() {
