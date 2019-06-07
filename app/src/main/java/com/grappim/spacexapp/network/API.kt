@@ -99,6 +99,9 @@ interface API {
   @GET("info")
   fun getInfo(): Deferred<Response<InfoModel>>
 
+  @GET("history")
+  fun getHistory(): Deferred<Response<List<HistoryModel>>>
+
 //  ********************************
 
   @GET("missions")
@@ -117,6 +120,4 @@ interface API {
     @Path("payloadId") payloadId: String?
   ): Deferred<Response<PayloadModel>>
 
-  @GET("history")
-  fun getHistory(): Deferred<Response<List<HistoryModel>>>
 }

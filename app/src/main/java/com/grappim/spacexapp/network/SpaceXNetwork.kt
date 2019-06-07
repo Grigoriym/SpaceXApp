@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
@@ -83,6 +84,13 @@ class SpaceXNetwork(
   override suspend fun info(): Either<Failure, InfoModel> {
     return when (networkHandler.isConnected) {
       true -> makeRequest(service.getInfo(), InfoModel.empty())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun history(): Either<Failure, List<HistoryModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getHistory(), emptyList())
       false, null -> Either.Left(Failure.NetworkConnection)
     }
   }

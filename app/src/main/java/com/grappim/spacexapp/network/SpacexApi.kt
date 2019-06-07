@@ -2,6 +2,7 @@ package com.grappim.spacexapp.network
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
@@ -61,4 +62,7 @@ interface SpacexApi {
 
   @GET("info")
   suspend fun getInfo(): Response<InfoModel>
+
+  @GET("history")
+  suspend fun getHistory(): Response<List<HistoryModel>>
 }

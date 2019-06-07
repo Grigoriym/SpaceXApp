@@ -6,7 +6,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
-val getModule = Kodein.Module("gets"){
+val getModule = Kodein.Module("gets") {
   bind() from singleton { GetRockets(instance()) }
   bind() from singleton { GetAllCapsules(instance()) }
   bind() from singleton { GetPastCapsules(instance()) }
@@ -17,4 +17,5 @@ val getModule = Kodein.Module("gets"){
   bind() from singleton { GetAllShips(instance()) }
   bind() from singleton { GetAllLaunchPads(instance()) }
   bind() from singleton { GetInfo(instance()) }
+  bind() from singleton { GetHistory(instance()) }
 }
