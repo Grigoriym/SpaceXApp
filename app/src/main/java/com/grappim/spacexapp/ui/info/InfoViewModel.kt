@@ -25,4 +25,9 @@ class InfoViewModel(
       it.either(::handleFailure, ::handleInfo)
     }
 
+  override fun onCleared() {
+    super.onCleared()
+    getInfo.unBind()
+  }
+
 }

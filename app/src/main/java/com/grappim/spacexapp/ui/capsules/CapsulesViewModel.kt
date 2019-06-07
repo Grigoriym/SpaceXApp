@@ -54,4 +54,11 @@ class CapsulesViewModel(
   private fun handlePastCapsules(capsules: List<CapsuleModel>) {
     this._pastCapsules.value = capsules
   }
+
+  override fun onCleared() {
+    super.onCleared()
+    getAllCapsules.unBind()
+    getPastCapsules.unBind()
+    getUpcomingCapsules.unBind()
+  }
 }

@@ -55,4 +55,11 @@ class CoresViewModel(
       it.either(::handleFailure, ::handleupcomingCores)
     }
 
+  override fun onCleared() {
+    super.onCleared()
+    getAllCores.unBind()
+    getPastCores.unBind()
+    getUpcomingCores.unBind()
+  }
+
 }

@@ -25,4 +25,9 @@ class ShipsViewModel(
       it.either(::handleFailure, ::handleAllShips)
     }
 
+  override fun onCleared() {
+    super.onCleared()
+    getAllShips.unBind()
+  }
+
 }

@@ -25,4 +25,9 @@ class LaunchPadViewModel(
       it.either(::handleFailure, ::handleAllLaunchPads)
     }
 
+  override fun onCleared() {
+    super.onCleared()
+    getAllLaunchPads.unBind()
+  }
+
 }

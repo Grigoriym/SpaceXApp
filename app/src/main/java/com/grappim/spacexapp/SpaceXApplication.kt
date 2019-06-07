@@ -10,6 +10,8 @@ import com.grappim.spacexapp.network.*
 import com.grappim.spacexapp.network.api.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
+import com.grappim.spacexapp.network.services.SpaceXService
+import com.grappim.spacexapp.network.services.createRetrofit
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
 import com.grappim.spacexapp.repository.SpaceXRepository
 import com.jakewharton.threetenabp.AndroidThreeTen

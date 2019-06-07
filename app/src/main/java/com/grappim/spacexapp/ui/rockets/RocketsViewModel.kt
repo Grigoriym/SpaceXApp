@@ -25,4 +25,9 @@ class RocketsViewModel(
     this._allRockets.value = rockets
   }
 
+  override fun onCleared() {
+    super.onCleared()
+    getRockets.unBind()
+  }
+
 }

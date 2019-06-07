@@ -40,4 +40,9 @@ class MissionViewModel(
       it.either(::handleFailure, ::handleOnePayload)
     }
 
+  override fun onCleared() {
+    super.onCleared()
+    getAllPayloads.unBind()
+    getPayloadById.unBind()
+  }
 }

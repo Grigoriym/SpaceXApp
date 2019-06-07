@@ -24,4 +24,9 @@ class HistoryViewModel(
     getHistory(UseCase.None()) {
       it.either(::handleFailure, ::handleHistory)
     }
+
+  override fun onCleared() {
+    super.onCleared()
+    getHistory.unBind()
+  }
 }
