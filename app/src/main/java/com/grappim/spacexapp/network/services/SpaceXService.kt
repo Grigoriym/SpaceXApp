@@ -10,14 +10,8 @@ import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.network.api.SpaceXApi
-import com.grappim.spacexapp.util.SPACE_X_BASE_URL
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 class SpaceXService(retrofit: Retrofit) : SpaceXApi {
 
@@ -81,21 +75,3 @@ class SpaceXService(retrofit: Retrofit) : SpaceXApi {
     spaceXApi.getOneMissionById(missionId)
 }
 
-fun createRetrofit(): Retrofit = Retrofit.Builder()
-  .baseUrl(SPACE_X_BASE_URL)
-  .client(createOkHttpClient())
-  .addCallAdapterFactory(CoroutineCallAdapterFactory())
-  .addConverterFactory(GsonConverterFactory.create())
-  .build()
-
-fun createOkHttpClient(): OkHttpClient {
-  val logging = HttpLoggingInterceptor()
-  logging.level = HttpLoggingInterceptor.Level.BASIC
-
-  return OkHttpClient.Builder()
-    .addInterceptor(logging)
-    .connectTimeout(20, TimeUnit.SECONDS)
-    .readTimeout(20, TimeUnit.SECONDS)
-    .writeTimeout(20, TimeUnit.SECONDS)
-    .build()
-}

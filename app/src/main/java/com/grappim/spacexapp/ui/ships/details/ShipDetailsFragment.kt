@@ -14,11 +14,13 @@ import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_ship_details.*
+import timber.log.Timber
 
-class ShipDetailsFragment : Fragment() {
+class ShipDetailsFragment : SharedFragment() {
 
   private val args: ShipDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter
@@ -50,6 +52,8 @@ class ShipDetailsFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("ShipDetailsFragment - onViewCreated")
+
     bindAdapter()
     args.shipModel.let {
       GlideApp.with(this)
@@ -89,5 +93,8 @@ class ShipDetailsFragment : Fragment() {
       addItemDecoration(MarginItemDecorator())
       adapter = mAdapter
     }
+  }
+
+  override fun renderFailure(failureText: String) {
   }
 }
