@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.repository
 
-import androidx.lifecycle.LiveData
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
@@ -9,29 +8,34 @@ import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
-import retrofit2.Response
+import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.util.Failure
 
 interface SpaceXRepository {
 
-  suspend fun getAllCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>>
-  suspend fun getPastCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>>
-  suspend fun getUpcomingCapsulesFromApi(): LiveData<Response<List<CapsuleModel>>>
+  suspend fun allRockets(): Either<Failure, List<RocketModel>>
 
-  suspend fun getAllRocketsFromApi(): LiveData<Response<List<RocketModel>>>
+  suspend fun allCapsules(): Either<Failure, List<CapsuleModel>>
 
-  suspend fun getAllCoresFromApi(): LiveData<Response<List<CoreModel>>>
-  suspend fun getPastCoresFromApi(): LiveData<Response<List<CoreModel>>>
-  suspend fun getUpcomingCoresFromApi(): LiveData<Response<List<CoreModel>>>
+  suspend fun upcomingCapsules(): Either<Failure, List<CapsuleModel>>
 
-  suspend fun getAllHistoryFromApi(): LiveData<Response<List<HistoryModel>>>
+  suspend fun pastCapsules(): Either<Failure, List<CapsuleModel>>
 
-  suspend fun getInfoFromApi(): LiveData<Response<InfoModel>>
+  suspend fun allCores(): Either<Failure, List<CoreModel>>
 
-  suspend fun getAllLaunchPadsFromApi(): LiveData<Response<List<LaunchPadModel>>>
+  suspend fun upcomingCores(): Either<Failure, List<CoreModel>>
 
-  suspend fun getAllShipsFromApi(): LiveData<Response<List<ShipModel>>>
+  suspend fun pastCores(): Either<Failure, List<CoreModel>>
 
-  suspend fun getAllPayloadsFromApi(): LiveData<Response<List<PayloadModel>>>
-  suspend fun getPayloadByIdFromApi(payloadId: String?): LiveData<Response<PayloadModel>>
+  suspend fun allShips(): Either<Failure, List<ShipModel>>
 
+  suspend fun allLaunchPads(): Either<Failure, List<LaunchPadModel>>
+
+  suspend fun info(): Either<Failure, InfoModel>
+
+  suspend fun history(): Either<Failure, List<HistoryModel>>
+
+  suspend fun allPayloads(): Either<Failure, List<PayloadModel>>
+
+  suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel>
 }

@@ -5,6 +5,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
@@ -72,6 +73,12 @@ class SpaceXService(retrofit: Retrofit) : SpaceXApi {
 
   override suspend fun getPayloadById(payloadId: String?): Response<PayloadModel> =
     spaceXApi.getPayloadById(payloadId)
+
+  override suspend fun getAllMissions(): Response<List<MissionModel>> =
+    spaceXApi.getAllMissions()
+
+  override suspend fun getOneMissionById(missionId: String?): Response<MissionModel> =
+    spaceXApi.getOneMissionById(missionId)
 }
 
 fun createRetrofit(): Retrofit = Retrofit.Builder()

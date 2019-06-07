@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.gets.GetAllPayloads
 import com.grappim.spacexapp.network.gets.GetPayloadById
-import com.grappim.spacexapp.repository.SpaceXRepository
 
 class MissionViewModelFactory(
   private val getAllPayloads: GetAllPayloads,

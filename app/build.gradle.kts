@@ -29,9 +29,21 @@ android {
     }
     getByName("debug") {
       multiDexEnabled = true
-      buildConfigField("String", "ApiKey", extra.get("twitter_api_key").toString())
-      buildConfigField("String", "SecretApiKey", extra.get("twitter_api_secret_key").toString())
-      buildConfigField("String", "AccessToken", extra.get("twitter_api_access_token").toString())
+      buildConfigField(
+        "String",
+        "ApiKey",
+        extra.get("twitter_api_key").toString()
+      )
+      buildConfigField(
+        "String",
+        "SecretApiKey",
+        extra.get("twitter_api_secret_key").toString()
+      )
+      buildConfigField(
+        "String",
+        "AccessToken",
+        extra.get("twitter_api_access_token").toString()
+      )
       buildConfigField(
         "String",
         "AccessTokenSecret",

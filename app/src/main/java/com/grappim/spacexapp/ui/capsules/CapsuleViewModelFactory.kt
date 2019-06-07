@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.gets.GetAllCapsules
 import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
-import com.grappim.spacexapp.repository.SpaceXRepository
 
 class CapsuleViewModelFactory(
   private val getAllCapsules: GetAllCapsules,

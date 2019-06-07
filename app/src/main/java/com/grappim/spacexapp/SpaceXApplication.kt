@@ -7,13 +7,11 @@ import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.di.getModule
 import com.grappim.spacexapp.di.viewModelFactoryModule
 import com.grappim.spacexapp.network.*
-import com.grappim.spacexapp.network.api.API
 import com.grappim.spacexapp.network.api.TwitterApi
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
 import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
-import com.grappim.spacexapp.repository.NewSpaceXRepository
-import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
+import com.grappim.spacexapp.repository.SpaceXRepository
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -36,11 +34,9 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     import(viewModelFactoryModule)
 
     bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-    bind() from singleton { API(instance()) }
-    bind() from singleton { SpaceXRepositoryImpl(instance()) }
 
     bind() from singleton { NetworkHandler(instance()) }
-    bind<NewSpaceXRepository>() with singleton { SpaceXNetwork(instance(), instance()) }
+    bind<SpaceXRepository>() with singleton { SpaceXNetwork(instance(), instance()) }
     bind() from singleton { createRetrofit() }
     bind() from singleton { SpaceXService(instance()) }
 

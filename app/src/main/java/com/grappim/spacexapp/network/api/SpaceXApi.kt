@@ -5,6 +5,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
@@ -74,4 +75,12 @@ interface SpaceXApi {
   suspend fun getPayloadById(
     @Path("payloadId") payloadId: String?
   ): Response<PayloadModel>
+
+  @GET("missions")
+  suspend fun getAllMissions(): Response<List<MissionModel>>
+
+  @GET("missions/{missionId}")
+  suspend fun getOneMissionById(
+    @Path("missionId") missionId: String?
+  ): Response<MissionModel>
 }
