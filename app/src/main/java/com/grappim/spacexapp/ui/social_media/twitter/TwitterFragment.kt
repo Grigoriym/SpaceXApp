@@ -53,7 +53,7 @@ class TwitterFragment : Fragment(), KodeinAware {
     val spinnerArrayAdapter = ArrayAdapter<String>(
       context!!,
       android.R.layout.simple_spinner_dropdown_item,
-      arrayListOf("One", "Two")
+      arrayListOf("SpaceX", "Elon Musk")
     )
     spinner.adapter = spinnerArrayAdapter
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -61,6 +61,14 @@ class TwitterFragment : Fragment(), KodeinAware {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (position) {
+          0 -> {
+            getData()
+          }
+          1 -> {
+            getData("elonmusk")
+          }
+        }
       }
     }
   }
@@ -99,8 +107,8 @@ class TwitterFragment : Fragment(), KodeinAware {
     }
   }
 
-  private fun getData() {
-    viewModel.showTweets("Spacex")
+  private fun getData(value: String? = null) {
+    viewModel.showTweets(value ?: "SpaceX")
   }
 
   private fun bindAdapter() {

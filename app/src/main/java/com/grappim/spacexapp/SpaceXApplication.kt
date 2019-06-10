@@ -4,9 +4,7 @@ import androidx.multidex.MultiDexApplication
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
-import com.grappim.spacexapp.di.getModule
-import com.grappim.spacexapp.di.mixBinds
-import com.grappim.spacexapp.di.viewModelFactoryModule
+import com.grappim.spacexapp.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -16,7 +14,6 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-//todo when no internet connection app crashes
 // todo retrofit coroutines adapter is now deprecated because of new version of retrofit
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
 
@@ -26,7 +23,9 @@ class SpaceXApplication : MultiDexApplication(), KodeinAware {
     import(androidXModule(this@SpaceXApplication))
     import(getModule)
     import(viewModelFactoryModule)
-    import(mixBinds)
+    import(spaceXModule)
+    import(twitterModule)
+    import(networkModule)
   }
 
   override fun onCreate() {

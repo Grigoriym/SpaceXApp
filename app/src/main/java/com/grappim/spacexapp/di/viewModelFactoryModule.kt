@@ -14,7 +14,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.instance
 import org.kodein.di.generic.provider
 
-val viewModelFactoryModule = Kodein.Module("vmfm") {
+val viewModelFactoryModule = Kodein.Module("viewModelFactoryModule") {
   bind() from provider { CapsuleViewModelFactory(instance(), instance(), instance()) }
   bind() from provider { RocketsViewModelFactory(instance()) }
   bind() from provider { CoreViewModelFactory(instance(), instance(), instance()) }
