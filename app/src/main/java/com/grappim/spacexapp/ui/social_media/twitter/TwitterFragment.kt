@@ -29,7 +29,6 @@ class TwitterFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
-
   private lateinit var uAdapter: TwitterPaginationAdapter
 
   private val observer = Observer<PagedList<UserTimelineModel>> {
@@ -57,7 +56,7 @@ class TwitterFragment : Fragment(), KodeinAware {
       arrayListOf("One", "Two")
     )
     spinner.adapter = spinnerArrayAdapter
-    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
@@ -67,8 +66,10 @@ class TwitterFragment : Fragment(), KodeinAware {
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when(item.itemId){
-
+    when (item.itemId) {
+      R.id.twitter_menu_refresh -> {
+        getData()
+      }
     }
     return super.onOptionsItemSelected(item)
   }
@@ -87,8 +88,10 @@ class TwitterFragment : Fragment(), KodeinAware {
         pbTwitter.showIf { it == NetworkState.LOADING }
       })
     }
+
     bindAdapter()
     getData()
+
     srlTwitter.setOnRefreshListener {
       getData()
       viewModel.refresh()
@@ -104,7 +107,8 @@ class TwitterFragment : Fragment(), KodeinAware {
     uAdapter = TwitterPaginationAdapter(
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
-      }, onImageClickS = {
+      },
+      onImageClickS = {
         context?.launchActivity<FullScreenImageActivity> {
           putExtra(PARCELABLE_TWITTER_IMAGES, it)
         }

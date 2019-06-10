@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
-import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
@@ -9,8 +8,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.ShipsViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class ShipsAdapter(
-  val context: Context?,
-  val onClick: (ShipModel) -> Unit
+  private inline val onClick: (ShipModel) -> Unit
 ) : RecyclerView.Adapter<ShipsViewHolder>() {
 
   private var items: List<ShipModel> = emptyList()

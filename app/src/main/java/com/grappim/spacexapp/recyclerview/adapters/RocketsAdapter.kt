@@ -16,8 +16,8 @@ import com.grappim.spacexapp.util.inflateLayout
 import com.grappim.spacexapp.util.show
 
 class RocketsAdapter(
-  private val context: Context?,
-  val onClick: (RocketModel) -> Unit
+  context: Context?,
+  private inline val onClick: (RocketModel) -> Unit
 ) : RecyclerView.Adapter<RocketsViewHolder>() {
 
   private var items: List<RocketModel> = emptyList()
@@ -47,7 +47,7 @@ class RocketsAdapter(
         onClick(items[position])
       }
 
-      GlideApp.with(context!!)
+      GlideApp.with(btnRocketItem.context)
         .load(items[position].flickrImages?.random())
         .transition(DrawableTransitionOptions.withCrossFade())
         .centerCrop()

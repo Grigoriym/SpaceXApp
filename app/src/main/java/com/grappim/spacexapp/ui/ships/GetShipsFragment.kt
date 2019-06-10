@@ -69,7 +69,7 @@ class GetShipsFragment : SharedFragment(), KodeinAware {
   }
 
   private fun bindAdapter() {
-    shipAdapter = ShipsAdapter(context = context, onClick = {
+    shipAdapter = ShipsAdapter(onClick = {
       findNavController().navigate(GetShipsFragmentDirections.nextFragment(it))
     })
     rvGetShips.apply {

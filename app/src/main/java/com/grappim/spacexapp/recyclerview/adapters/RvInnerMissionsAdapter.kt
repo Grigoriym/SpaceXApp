@@ -8,7 +8,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class RvInnerMissionsAdapter(
-  val onClick: (Mission?) -> Unit
+  private inline val onClick: (Mission?) -> Unit
 ) : RecyclerView.Adapter<RvInnerMissionsViewHolder>() {
   private var items: List<Mission?>? = emptyList()
 

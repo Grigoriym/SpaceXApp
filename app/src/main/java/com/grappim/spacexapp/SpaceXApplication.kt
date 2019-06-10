@@ -18,6 +18,7 @@ import javax.net.ssl.SSLContext
 
 //todo when no internet connection app crashes
 // todo retrofit coroutines adapter is now deprecated because of new version of retrofit
+//todo problems when starting the app, it needs ~1-3 seconds to show splash
 
 class SpaceXApplication : MultiDexApplication(), KodeinAware {
 

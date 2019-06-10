@@ -20,7 +20,7 @@ class TwitterViewModel(
   val networkState = switchMap(repoResult) { it.networkState }
   val refreshState = switchMap(repoResult) { it.refreshState }
 
-  fun refresh() {
+  fun refresh() {//todo I think it doesn't work
     Timber.d("TwitterViewModel - refresh")
     repoResult.value?.refresh?.invoke()
   }

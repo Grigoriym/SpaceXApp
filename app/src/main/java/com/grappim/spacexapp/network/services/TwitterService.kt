@@ -22,7 +22,7 @@ class TwitterService(retrofit: Retrofit) : TwitterApi {
     sinceId: Long?
   ): Deferred<Response<List<UserTimelineModel>>> = TODO()
 
-  override fun newGetUserTimelineAsync(
+  override suspend fun newGetUserTimelineAsync(
     userId: String?,
     screenName: String?,
     count: Int?,
