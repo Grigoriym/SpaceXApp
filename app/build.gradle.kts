@@ -112,7 +112,6 @@ dependencies {
   //    Retrofit, okHttp-logging, retrofit-coroutines
   implementation("com.squareup.retrofit2:retrofit:2.6.0")
   implementation("com.squareup.retrofit2:converter-gson:2.5.0")
-  implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
   implementation("com.squareup.okhttp3:logging-interceptor:3.12.1")
 
   implementation("com.jakewharton.timber:timber:4.7.1")
