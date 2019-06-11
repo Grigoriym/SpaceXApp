@@ -72,7 +72,9 @@ class GetCapsulesFragment : SharedFragment(), KodeinAware {
   }
 
   private fun renderCapsules(capsules: List<CapsuleModel>?) {
-    cAdapter.loadItems(capsules!!)//todo
+    capsules?.let {
+      cAdapter.loadItems(it)
+    }
     pbGetCapsules.gone()
     rvGetCapsules.scheduleLayoutAnimation()
   }

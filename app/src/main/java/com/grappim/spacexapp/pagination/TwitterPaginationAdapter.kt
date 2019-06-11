@@ -48,7 +48,6 @@ class TwitterPaginationAdapter(
     )
 
   override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
-    Timber.d("TwitterPaginationAdapter - onBindViewHolder")
     holder.apply {
       userTimelineModel = getItem(position)
       onImageClick = {

@@ -1,11 +1,8 @@
 package com.grappim.spacexapp.di
 
-import com.grappim.spacexapp.network.api.TwitterApi
 import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.createTwitterOauthInterceptor
-import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
-import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
 import com.grappim.spacexapp.network.services.TwitterService
 import com.grappim.spacexapp.pagination.TwitterPaginationRepository
 import com.grappim.spacexapp.util.KODEIN_TWITTER_INTERCEPTOR
@@ -18,6 +15,7 @@ import org.kodein.di.generic.instance
 import org.kodein.di.generic.singleton
 
 val twitterModule = Kodein.Module("twitterModule") {
+
   bind(tag = KODEIN_TWITTER_INTERCEPTOR) from singleton { createTwitterOauthInterceptor() }
   bind(tag = KODEIN_TWITTER_OK_HTTP_CLIENT) from singleton {
     createOkHttpClient(instance(tag = KODEIN_TWITTER_INTERCEPTOR))
@@ -28,11 +26,8 @@ val twitterModule = Kodein.Module("twitterModule") {
       instance(tag = KODEIN_TWITTER_OK_HTTP_CLIENT)
     )
   }
-  bind(tag = "twitterService") from singleton {
-    TwitterService(instance(tag = KODEIN_TWITTER_RETROFIT))
-  }
 
-  bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-  bind(tag = "Twitter Api") from singleton { TwitterApi(instance()) }
-  bind() from singleton { TwitterPaginationRepository(instance(tag = "Twitter Api")) }
+  bind() from singleton { TwitterService(instance(tag = KODEIN_TWITTER_RETROFIT)) }
+  bind() from singleton { TwitterPaginationRepository(instance()) }
+
 }

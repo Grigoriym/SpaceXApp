@@ -31,6 +31,8 @@ class TwitterFragment : Fragment(), KodeinAware {
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
   private lateinit var uAdapter: TwitterPaginationAdapter
 
+  private var currentScreenName: String? = null
+
   private val observer = Observer<PagedList<UserTimelineModel>> {
     Timber.d("TwitterFragment - observer")
     uAdapter.submitList(it)
@@ -63,10 +65,12 @@ class TwitterFragment : Fragment(), KodeinAware {
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         when (position) {
           0 -> {
+            currentScreenName = "SpaceX"
             getData()
           }
           1 -> {
-            getData("elonmusk")
+            currentScreenName = "elonmusk"
+            getData()
           }
         }
       }
@@ -90,10 +94,10 @@ class TwitterFragment : Fragment(), KodeinAware {
     viewModel.apply {
       tweets.observe(this@TwitterFragment, observer)
       networkState.observe(this@TwitterFragment, Observer {
-
-      })
-      refreshState.observe(this@TwitterFragment, Observer {
         pbTwitter.showIf { it == NetworkState.LOADING }
+      })
+      initialLoadState.observe(this@TwitterFragment, Observer {
+
       })
     }
 
@@ -107,8 +111,8 @@ class TwitterFragment : Fragment(), KodeinAware {
     }
   }
 
-  private fun getData(value: String? = null) {
-    viewModel.showTweets(value ?: "SpaceX")
+  private fun getData() {
+    viewModel.showTweets(currentScreenName ?: "SpaceX")
   }
 
   private fun bindAdapter() {

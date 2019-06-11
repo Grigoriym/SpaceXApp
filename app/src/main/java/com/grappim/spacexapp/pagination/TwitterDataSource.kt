@@ -3,19 +3,19 @@ package com.grappim.spacexapp.pagination
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.network.api.TwitterApi
+import com.grappim.spacexapp.network.services.TwitterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class TwitterDataSource(
-  private val api: TwitterApi,
+  private val service: TwitterService,
   private val screenName: String? = null
 ) : ItemKeyedDataSource<Long, UserTimelineModel>() {
 
   val networkState = MutableLiveData<NetworkState>()
-  val initialLoad = MutableLiveData<NetworkState>()
+  val initialLoadState = MutableLiveData<NetworkState>()
 
   override fun loadInitial(
     params: LoadInitialParams<Long>,
@@ -23,22 +23,22 @@ class TwitterDataSource(
   ) {
     Timber.d("TwitterDataSource - loadInitial")
     networkState.postValue(NetworkState.LOADING)
-    initialLoad.postValue(NetworkState.LOADING)
+    initialLoadState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.getUserTimelineAsync(screenName = screenName).await()
+      val response = service.getUserTimelineAsync(screenName = screenName)
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadInitial - response.isSuccessful")
         val items = response.body() ?: emptyList()
         callback.onResult(items)
         networkState.postValue(NetworkState.LOADED)
-        initialLoad.postValue(NetworkState.LOADED)
+        initialLoadState.postValue(NetworkState.LOADED)
       } else {
         networkState.postValue(
           NetworkState.error(
             response.errorBody()?.string() ?: "unknown error"
           )
         )
-        initialLoad.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
+        initialLoadState.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
       }
     }
   }
@@ -47,10 +47,10 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadAfter")
     networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.getUserTimelineAsync(
+      val response = service.getUserTimelineAsync(
         screenName = screenName,
         maxId = params.key - 1
-      ).await()
+      )
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadAfter - response.isSuccessful")
         val items = response.body() ?: emptyList()
@@ -70,10 +70,10 @@ class TwitterDataSource(
     Timber.d("TwitterDataSource - loadBefore")
     networkState.postValue(NetworkState.LOADING)
     CoroutineScope(Dispatchers.IO).launch {
-      val response = api.getUserTimelineAsync(
+      val response = service.getUserTimelineAsync(
         screenName = screenName,
         sinceId = params.key
-      ).await()
+      )
       if (response.isSuccessful) {
         Timber.d("TwitterDataSource - loadBefore - response.isSuccessful")
         val items = response.body() ?: emptyList()

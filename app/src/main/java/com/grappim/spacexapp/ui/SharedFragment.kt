@@ -33,8 +33,8 @@ abstract class SharedFragment : Fragment() {
 
   protected fun handleFailure(failure: Failure?) {
     when (failure) {
-      is Failure.NetworkConnection -> renderFailure("NetworkConnection")
-      is Failure.ServerError -> renderFailure("ServerError")
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
     }
   }
 }
