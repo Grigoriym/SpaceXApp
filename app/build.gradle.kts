@@ -126,6 +126,13 @@ dependencies {
   implementation("org.kodein.di:kodein-di-generic-jvm:6.1.0")
   implementation("org.kodein.di:kodein-di-framework-android-x:6.1.0")
 
+//  Koin
+  implementation("org.koin:koin-core:2.0.1")
+  implementation("org.koin:koin-core-ext:2.0.1")
+  implementation("org.koin:koin-android:2.0.1")
+  implementation("org.koin:koin-android-scope:2.0.1")
+  implementation("org.koin:koin-android-viewmodel:2.0.1")
+
   implementation("com.google.android.gms:play-services-auth:16.0.1")
 
   implementation("com.jakewharton.threetenabp:threetenabp:1.2.0")

@@ -21,13 +21,16 @@ import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class TwitterFragment : Fragment(), KodeinAware {
+class TwitterFragment : Fragment(), KoinComponent {
 
-  override val kodein by kodein()
+//  override val kodein by kodein()
 
-  private val viewModelFactory: TwitterViewModelFactory by instance()
+//  private val viewModelFactory: TwitterViewModelFactory by instance()
+  private val viewModelFactory:TwitterViewModelFactory by inject()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
   private lateinit var uAdapter: TwitterPaginationAdapter
 

@@ -19,13 +19,16 @@ import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class GetCapsulesFragment : SharedFragment(), KodeinAware {
+class GetCapsulesFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
+//  override val kodein by kodein()
   private lateinit var cAdapter: CapsulesAdapter
-  private val viewModelFactory: CapsuleViewModelFactory by instance()
+//  private val viewModelFactory: CapsuleViewModelFactory by instance()
+  private val viewModelFactory: CapsuleViewModelFactory by inject()
   private val args: GetCapsulesFragmentArgs by navArgs()
   private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }
 

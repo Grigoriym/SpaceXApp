@@ -16,12 +16,15 @@ import kotlinx.android.synthetic.main.fragment_info.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class InfoFragment : SharedFragment(), KodeinAware {
+class InfoFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
-  private val viewModelFactory: InfoViewModelFactory by instance()
+//  override val kodein by kodein()
+//  private val viewModelFactory: InfoViewModelFactory by instance()
+  private val viewModelFactory:InfoViewModelFactory by inject()
   private val viewModel by viewModels<InfoViewModel> { viewModelFactory }
 
   override fun onCreateView(

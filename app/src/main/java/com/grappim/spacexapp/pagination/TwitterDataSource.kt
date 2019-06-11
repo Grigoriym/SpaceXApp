@@ -7,12 +7,15 @@ import com.grappim.spacexapp.network.services.TwitterService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
 class TwitterDataSource(
-  private val service: TwitterService,
   private val screenName: String? = null
-) : ItemKeyedDataSource<Long, UserTimelineModel>() {
+) : ItemKeyedDataSource<Long, UserTimelineModel>(), KoinComponent {
+
+  private val service: TwitterService by inject()
 
   val networkState = MutableLiveData<NetworkState>()
   val initialLoadState = MutableLiveData<NetworkState>()
@@ -38,7 +41,11 @@ class TwitterDataSource(
             response.errorBody()?.string() ?: "unknown error"
           )
         )
-        initialLoadState.postValue(NetworkState.error(response.errorBody()?.string() ?: "unknown error"))
+        initialLoadState.postValue(
+          NetworkState.error(
+            response.errorBody()?.string() ?: "unknown error"
+          )
+        )
       }
     }
   }

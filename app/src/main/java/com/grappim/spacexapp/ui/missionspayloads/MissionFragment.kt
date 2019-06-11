@@ -17,17 +17,20 @@ import kotlinx.android.synthetic.main.fragment_mission.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import retrofit2.Response
 import timber.log.Timber
 
 //todo mission or payload?
 
-class MissionFragment : SharedFragment(), KodeinAware {
+class MissionFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
+//  override val kodein by kodein()
 
   private val args: MissionFragmentArgs by navArgs()
-  private val viewModelFactory: MissionViewModelFactory by instance()
+//  private val viewModelFactory: MissionViewModelFactory by instance()
+  private val viewModelFactory:MissionViewModelFactory by inject()
   private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
 
   override fun onCreateView(

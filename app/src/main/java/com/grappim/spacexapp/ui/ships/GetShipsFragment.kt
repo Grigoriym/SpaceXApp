@@ -18,13 +18,16 @@ import kotlinx.android.synthetic.main.fragment_get_ships.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class GetShipsFragment : SharedFragment(), KodeinAware {
+class GetShipsFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
+//  override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
-  private val viewModelFactory: ShipsViewModelFactory by instance()
+//  private val viewModelFactory: ShipsViewModelFactory by instance()
+  private val viewModelFactory:ShipsViewModelFactory by inject()
   private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
 
   override fun onCreateView(

@@ -17,11 +17,15 @@ import kotlinx.android.synthetic.main.fragment_get_launch_pads.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class GetLaunchPadsFragment : SharedFragment(), KodeinAware {
+class GetLaunchPadsFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
-  private val viewModelFactory: LaunchPadViewModelFactory by instance()
+//  override val kodein by kodein()
+//  private val viewModelFactory: LaunchPadViewModelFactory by instance()
+
+  private val viewModelFactory:LaunchPadViewModelFactory by inject()
   private val viewModel by viewModels<LaunchPadViewModel> { viewModelFactory }
   private lateinit var lAdapter: LaunchPadsAdapter
 

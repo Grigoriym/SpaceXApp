@@ -18,11 +18,14 @@ import kotlinx.android.synthetic.main.fragment_get_rockets.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 
-class GetRocketsFragment : SharedFragment(), KodeinAware {
+class GetRocketsFragment : SharedFragment(), KoinComponent {
 
-  override val kodein by kodein()
-  private val viewModelFactory: RocketsViewModelFactory by instance()
+//  override val kodein by kodein()
+//  private val viewModelFactory: RocketsViewModelFactory by instance()
+  private val viewModelFactory:RocketsViewModelFactory by inject()
   private lateinit var rAdapter: RocketsAdapter
   private val viewModel by viewModels<RocketsViewModel> { viewModelFactory }
 

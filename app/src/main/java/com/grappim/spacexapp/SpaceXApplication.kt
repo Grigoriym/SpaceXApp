@@ -9,6 +9,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
@@ -17,19 +19,31 @@ import javax.net.ssl.SSLContext
 // todo retrofit coroutines adapter is now deprecated because of new version of retrofit
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
 
-class SpaceXApplication : MultiDexApplication(), KodeinAware {
+class SpaceXApplication : MultiDexApplication() {
 
-  override val kodein by Kodein.lazy {
-    import(androidXModule(this@SpaceXApplication))
-    import(getModule)
-    import(viewModelFactoryModule)
-    import(spaceXModule)
-    import(twitterModule)
-    import(networkModule)
-  }
+//  override val kodein by Kodein.lazy {
+//    import(androidXModule(this@SpaceXApplication))
+//    import(getModule)
+//    import(viewModelFactoryModule)
+//    import(spaceXModule)
+//    import(twitterModule)
+//    import(networkModule)
+//  }
 
   override fun onCreate() {
     super.onCreate()
+    startKoin {
+      androidContext(this@SpaceXApplication)
+      modules(
+        listOf(
+          networkModule,
+          spaceXModule,
+          twitterModule,
+          viewModuleFactoryModule,
+          getModule
+        )
+      )
+    }
     timberInit()
     Timber.d("Application - onCreate")
     AndroidThreeTen.init(this)
