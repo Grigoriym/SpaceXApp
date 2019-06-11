@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -21,48 +20,15 @@ import org.kodein.di.generic.instance
 import retrofit2.Response
 import timber.log.Timber
 
+//todo mission or payload?
+
 class MissionFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 
   private val args: MissionFragmentArgs by navArgs()
-
-  private val viewModelFactory: MissionSharedViewModelFactory by instance()
-
-  private val viewModel by viewModels<MissionSharedViewModel> { viewModelFactory }
-
-  private val observer = Observer<Response<PayloadModel>> { response ->
-    pbMission.gone()
-    if (response.isSuccessful) {
-      response.body().let {
-        tvMissionPayloadId.text = it?.payloadId
-        tvMissionManufacturer.text = it?.manufacturer
-        tvMissionNationality.text = it?.nationality ?: "N/A"
-        ivMissionReused.setImageResource(setMyImageResource(it?.reused))
-
-        elvMission.setAdapter(
-          CustomExpandableListAdapter(
-            context,
-            elvMission,
-            "Orbit Params",
-            it!!,
-            R.layout.layout_elv_mission_item,
-            listAdapterItemInit = { view ->
-              MissionsPayloadsListAdapterItem(
-                view,
-                it
-              ).fillItemWithData()
-            }
-          )
-        )
-      }
-      clMissionFragment.show()
-    } else {
-      clMissionFragment.gone()
-      tvMissionPayloadId.showSnackbar(getString(R.string.error_retrieving_data))
-      findNavController().popBackStack()
-    }
-  }
+  private val viewModelFactory: MissionViewModelFactory by instance()
+  private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -72,17 +38,59 @@ class MissionFragment : SharedFragment(), KodeinAware {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("MissionFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("MissionFragment - onViewCreated")
+
     clMissionFragment.gone()
     pbMission.show()
 
+    viewModel.apply {
+      onObserve(onePayload, ::renderPayload)
+      onFailure(failure, ::handleFailure)
+    }
+
+    getData()
+  }
+
+  private fun getData() {
     val missionName = args.missionArgs.name
-    viewModel
-      .getPayloadById(
-        payloads[missionName]
-          ?: missionName
+    viewModel.loadPayloadById(
+      payloads[missionName]
+        ?: missionName
+    )
+  }
+
+  private fun renderPayload(payload: PayloadModel?) {
+    pbMission.gone()
+    clMissionFragment.show()
+
+    payload?.let {
+      tvMissionPayloadId.text = it.payloadId
+      tvMissionManufacturer.text = it.manufacturer
+      tvMissionNationality.text = it.nationality ?: "N/A"
+      ivMissionReused.setImageResource(setMyImageResource(it.reused))
+
+      elvMission.setAdapter(
+        CustomExpandableListAdapter(
+          context,
+          elvMission,
+          "Orbit Params",
+          it,
+          R.layout.layout_elv_mission_item,
+          listAdapterItemInit = { view ->
+            MissionsPayloadsListAdapterItem(
+              view,
+              it
+            ).fillItemWithData()
+          }
+        )
       )
-    viewModel.onePayload.observe(this, observer)
+    }
+  }
+
+  override fun renderFailure(failureText: String) {
+    tvMissionPayloadId.showSnackbar(failureText)
+    clMissionFragment.gone()
+    pbMission.gone()
   }
 }

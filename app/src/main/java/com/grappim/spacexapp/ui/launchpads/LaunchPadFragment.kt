@@ -29,4 +29,6 @@ class LaunchPadFragment : SharedFragment() {
     }
   }
 
+  override fun renderFailure(failureText: String) {
+  }
 }

@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,37 +14,21 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
 import com.grappim.spacexapp.ui.SharedFragment
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.show
-import com.grappim.spacexapp.util.showSnackbar
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_cores.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
+import timber.log.Timber
 
 class GetCoresFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
 
   private lateinit var coreAdapter: CoresAdapter
-
   private val args: GetCoresFragmentArgs by navArgs()
-
-  private val viewModelFactory: CoreSharedViewModelFactory by instance()
-
-  private val viewModel by viewModels<CoresSharedViewModel> { viewModelFactory }
-
-  private val observer = Observer<Response<List<CoreModel>>> {
-    pbGetCores.gone()
-    if (it.isSuccessful) {
-      it.body()?.let { items -> coreAdapter.loadItems(items) }
-    } else {
-      srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
-      findNavController().popBackStack()
-    }
-    rvGetCores.scheduleLayoutAnimation()
-  }
+  private val viewModelFactory: CoreViewModelFactory by instance()
+  private val viewModel by viewModels<CoresViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -58,15 +39,18 @@ class GetCoresFragment : SharedFragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("GetCoresFragment - onViewCreated")
 
     viewModel.apply {
-      allCores.observe(this@GetCoresFragment, observer)
-      upcomingCores.observe(this@GetCoresFragment, observer)
-      pastCores.observe(this@GetCoresFragment, observer)
+      onObserve(allCores, ::renderCores)
+      onObserve(upcomingCores, ::renderCores)
+      onObserve(pastCores, ::renderCores)
+      onFailure(failure, ::handleFailure)
     }
 
     bindAdapter()
     getData()
+
     srlGetCores.setOnRefreshListener {
       getData()
       srlGetCores.isRefreshing = false
@@ -76,9 +60,9 @@ class GetCoresFragment : SharedFragment(), KodeinAware {
   private fun getData() {
     pbGetCores.show()
     when (args.coresToGetArgs) {
-      1 -> viewModel.getAllCapsules()
-      2 -> viewModel.getPastCores()
-      3 -> viewModel.getUpcomingCores()
+      0 -> viewModel.loadAllCores()
+      1 -> viewModel.loadPastCores()
+      2 -> viewModel.loadUpcomingCores()
       else -> {
         pbGetCores.gone()
         srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
@@ -87,8 +71,20 @@ class GetCoresFragment : SharedFragment(), KodeinAware {
     }
   }
 
+  private fun renderCores(cores: List<CoreModel>?) {
+    coreAdapter.loadItems(cores!!)//todo
+    pbGetCores.gone()
+    rvGetCores.scheduleLayoutAnimation()
+  }
+
+  override fun renderFailure(failureText: String) {
+    rvGetCores.showSnackbar(failureText)
+    pbGetCores.gone()
+    srlGetCores.isRefreshing = false
+  }
+
   private fun bindAdapter() {
-    coreAdapter = CoresAdapter {}
+    coreAdapter = CoresAdapter {}//todo ripple effect works strange on items
     rvGetCores.apply {
       layoutManager = LinearLayoutManager(context)
       addItemDecoration(MarginItemDecorator())

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -18,7 +19,10 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -171,3 +175,14 @@ fun Context.statusBarHeight(): Int {
   }
   return result
 }
+
+
+val Context.networkInfo: NetworkInfo?
+  get() =
+    (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
+
+fun <T : Any, L : LiveData<T>> LifecycleOwner.onObserve(liveData: L, body: (T?) -> Unit) =
+  liveData.observe(this, Observer(body))
+
+fun <L : LiveData<Failure>> LifecycleOwner.onFailure(liveData: L, body: (Failure?) -> Unit) =
+  liveData.observe(this, Observer(body))

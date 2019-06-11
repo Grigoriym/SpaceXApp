@@ -6,6 +6,12 @@
     android:id="@+id/twitter_menu_spinner"
     android:title="Spinner"
     app:actionViewClass="androidx.appcompat.widget.AppCompatSpinner"
-    app:showAsAction="always"/>
+    app:showAsAction="always" />
+
+  <item
+    android:id="@+id/twitter_menu_refresh"
+    android:icon="@drawable/ic_refresh_black_24dp"
+    android:title="Refresh"
+    app:showAsAction="ifRoom" />
 
 </menu>

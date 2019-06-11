@@ -27,4 +27,7 @@ class ShipsFragment : SharedFragment() {
       findNavController().navigate(R.id.nextFragment)
     }
   }
+
+  override fun renderFailure(failureText: String) {
+  }
 }

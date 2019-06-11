@@ -20,4 +20,11 @@ data class HistoryModel(
   val links: Links?,
   @SerializedName("title")
   val title: String?
-) : Parcelable
+) : Parcelable {
+  companion object {
+    fun empty() = HistoryModel(
+      "", 0, "", 0,
+      0, null, ""
+    )
+  }
+}

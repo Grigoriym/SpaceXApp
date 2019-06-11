@@ -1,7 +1,10 @@
 package com.grappim.spacexapp.model.payloads
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class PayloadModel(
   @SerializedName("customers")
   val customers: List<String?>?,
@@ -25,4 +28,10 @@ data class PayloadModel(
   val payloadType: String?,
   @SerializedName("reused")
   val reused: Boolean?
-)
+) : Parcelable {
+  companion object {
+    fun empty() = PayloadModel(emptyList(),"","", emptyList(),
+      "",null, "",0.0,0.0,
+      "", false)
+  }
+}

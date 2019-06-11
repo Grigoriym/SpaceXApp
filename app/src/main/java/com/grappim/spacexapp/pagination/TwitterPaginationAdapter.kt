@@ -16,6 +16,7 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
+import timber.log.Timber
 
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel) -> Unit,

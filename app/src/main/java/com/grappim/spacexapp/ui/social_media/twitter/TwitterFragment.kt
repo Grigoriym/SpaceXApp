@@ -29,8 +29,9 @@ class TwitterFragment : Fragment(), KodeinAware {
 
   private val viewModelFactory: TwitterViewModelFactory by instance()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
-
   private lateinit var uAdapter: TwitterPaginationAdapter
+
+  private var currentScreenName: String? = null
 
   private val observer = Observer<PagedList<UserTimelineModel>> {
     Timber.d("TwitterFragment - observer")
@@ -54,21 +55,33 @@ class TwitterFragment : Fragment(), KodeinAware {
     val spinnerArrayAdapter = ArrayAdapter<String>(
       context!!,
       android.R.layout.simple_spinner_dropdown_item,
-      arrayListOf("One", "Two")
+      arrayListOf("SpaceX", "Elon Musk")
     )
     spinner.adapter = spinnerArrayAdapter
-    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
       }
 
       override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        when (position) {
+          0 -> {
+            currentScreenName = "SpaceX"
+            getData()
+          }
+          1 -> {
+            currentScreenName = "elonmusk"
+            getData()
+          }
+        }
       }
     }
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when(item.itemId){
-
+    when (item.itemId) {
+      R.id.twitter_menu_refresh -> {
+        getData()
+      }
     }
     return super.onOptionsItemSelected(item)
   }
@@ -81,14 +94,16 @@ class TwitterFragment : Fragment(), KodeinAware {
     viewModel.apply {
       tweets.observe(this@TwitterFragment, observer)
       networkState.observe(this@TwitterFragment, Observer {
-
-      })
-      refreshState.observe(this@TwitterFragment, Observer {
         pbTwitter.showIf { it == NetworkState.LOADING }
       })
+      initialLoadState.observe(this@TwitterFragment, Observer {
+
+      })
     }
+
     bindAdapter()
     getData()
+
     srlTwitter.setOnRefreshListener {
       getData()
       viewModel.refresh()
@@ -97,14 +112,15 @@ class TwitterFragment : Fragment(), KodeinAware {
   }
 
   private fun getData() {
-    viewModel.showTweets("Spacex")
+    viewModel.showTweets(currentScreenName ?: "SpaceX")
   }
 
   private fun bindAdapter() {
     uAdapter = TwitterPaginationAdapter(
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
-      }, onImageClickS = {
+      },
+      onImageClickS = {
         context?.launchActivity<FullScreenImageActivity> {
           putExtra(PARCELABLE_TWITTER_IMAGES, it)
         }

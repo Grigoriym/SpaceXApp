@@ -8,7 +8,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.LaunchPadViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class LaunchPadsAdapter(
-  val onClick: (LaunchPadModel) -> Unit
+  private inline val onClick: (LaunchPadModel) -> Unit
 ) : RecyclerView.Adapter<LaunchPadViewHolder>() {
   private var items: List<LaunchPadModel> = emptyList()
 

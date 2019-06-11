@@ -18,9 +18,9 @@ class TwitterViewModel(
   }
   val tweets = switchMap(repoResult) { it.pagedList }
   val networkState = switchMap(repoResult) { it.networkState }
-  val refreshState = switchMap(repoResult) { it.refreshState }
+  val initialLoadState = switchMap(repoResult) { it.initialLoadState }
 
-  fun refresh() {
+  fun refresh() {//todo what does it do?
     Timber.d("TwitterViewModel - refresh")
     repoResult.value?.refresh?.invoke()
   }

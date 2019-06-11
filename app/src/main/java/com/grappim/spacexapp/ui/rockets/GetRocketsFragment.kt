@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -15,36 +13,18 @@ import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RocketsAdapter
 import com.grappim.spacexapp.ui.SharedFragment
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.show
-import com.grappim.spacexapp.util.showSnackbar
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_rockets.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import org.kodein.di.generic.instance
-import retrofit2.Response
 
 class GetRocketsFragment : SharedFragment(), KodeinAware {
 
   override val kodein by kodein()
-
-  private val viewModelFactory: RocketsSharedViewModelFactory by instance()
-
+  private val viewModelFactory: RocketsViewModelFactory by instance()
   private lateinit var rAdapter: RocketsAdapter
-
-  private val viewModel by viewModels<RocketsSharedViewModel> { viewModelFactory }
-
-  private val observer = Observer<Response<List<RocketModel>>> {
-    pbGetRockets.gone()
-    if (it.isSuccessful) {
-      it.body()?.let { items ->
-        rAdapter.loadItems(items)
-      }
-    } else {
-      srlGetRockets.showSnackbar(getString(R.string.error_retrieving_data))
-    }
-    rvGetRockets.scheduleLayoutAnimation()
-  }
+  private val viewModel by viewModels<RocketsViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -55,14 +35,35 @@ class GetRocketsFragment : SharedFragment(), KodeinAware {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    pbGetRockets.show()
-    viewModel.allRockets.observe(this, observer)
+    viewModel.apply {
+      onObserve(allRockets, ::renderRockets)
+      onFailure(failure, ::handleFailure)
+    }
+
     bindAdapter()
-    viewModel.getAllRockets()
+    getData()
+
     srlGetRockets.setOnRefreshListener {
-      viewModel.getAllRockets()
+      getData()
       srlGetRockets.isRefreshing = false
     }
+  }
+
+  private fun getData() {
+    pbGetRockets.show()
+    viewModel.loadRockets()
+  }
+
+  private fun renderRockets(rockets: List<RocketModel>?) {
+    rAdapter.loadItems(rockets!!)   //todo
+    pbGetRockets.gone()
+    rvGetRockets.scheduleLayoutAnimation()
+  }
+
+  override fun renderFailure(failureText: String) {
+    rvGetRockets.showSnackbar(failureText)
+    pbGetRockets.gone()
+    srlGetRockets.isRefreshing = false
   }
 
   private fun bindAdapter() {

@@ -8,7 +8,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.CoreViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class CoresAdapter(
-  val onClick: (CoreModel) -> Unit
+  private inline val onClick: (CoreModel) -> Unit
 ) : RecyclerView.Adapter<CoreViewHolder>() {
   private var items: List<CoreModel> = emptyList()
 

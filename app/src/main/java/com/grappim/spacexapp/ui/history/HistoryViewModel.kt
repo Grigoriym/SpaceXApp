@@ -1,23 +1,32 @@
 package com.grappim.spacexapp.ui.history
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.repository.SpaceXRepository
-import kotlinx.coroutines.launch
-import retrofit2.Response
+import com.grappim.spacexapp.network.gets.GetHistory
+import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.util.UseCase
 
 class HistoryViewModel(
-  private val repository: SpaceXRepository
-) : ViewModel(), LifecycleObserver {
+  private val getHistory: GetHistory
+) : BaseViewModel(), LifecycleObserver {
 
-  private val _allHistory = MutableLiveData<Response<List<HistoryModel>>>()
-  val allHistory: LiveData<Response<List<HistoryModel>>>
+  private val _allHistory = MutableLiveData<List<HistoryModel>>()
+  val allHistory: LiveData<List<HistoryModel>>
     get() = _allHistory
 
-  @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-  fun getAllHistory() {
-    viewModelScope.launch {
-      _allHistory.value = repository.getAllHistoryFromApi().value
+  private fun handleHistory(history: List<HistoryModel>) {
+    this._allHistory.value = history
+  }
+
+  fun loadHistory() =
+    getHistory(UseCase.None()) {
+      it.either(::handleFailure, ::handleHistory)
     }
+
+  override fun onCleared() {
+    super.onCleared()
+    getHistory.unBind()
   }
 }

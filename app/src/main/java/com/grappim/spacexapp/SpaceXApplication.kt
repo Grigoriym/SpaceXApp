@@ -1,57 +1,31 @@
 package com.grappim.spacexapp
 
-import android.app.Application
+import androidx.multidex.MultiDexApplication
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
-import com.grappim.spacexapp.network.API
-import com.grappim.spacexapp.network.TwitterApi
-import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptor
-import com.grappim.spacexapp.network.interceptors.ConnectivityInterceptorImpl
-import com.grappim.spacexapp.pagination.TwitterPaginationRepository
-import com.grappim.spacexapp.repository.SpaceXRepositoryImpl
-import com.grappim.spacexapp.ui.capsules.CapsuleSharedViewModelFactory
-import com.grappim.spacexapp.ui.cores.CoreSharedViewModelFactory
-import com.grappim.spacexapp.ui.history.HistoryViewModelFactory
-import com.grappim.spacexapp.ui.info.InfoViewModelFactory
-import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModelFactory
-import com.grappim.spacexapp.ui.missionspayloads.MissionSharedViewModelFactory
-import com.grappim.spacexapp.ui.rockets.RocketsSharedViewModelFactory
-import com.grappim.spacexapp.ui.ships.ShipsSharedViewModelFactory
-import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModelFactory
+import com.grappim.spacexapp.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
 import timber.log.Timber
 import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-class SpaceXApplication : Application(), KodeinAware {
+// todo retrofit coroutines adapter is now deprecated because of new version of retrofit
+//todo problems when starting the app, it needs ~1-3 seconds to show splash
+
+class SpaceXApplication : MultiDexApplication(), KodeinAware {
+
   override val kodein by Kodein.lazy {
     import(androidXModule(this@SpaceXApplication))
-
-    bind<ConnectivityInterceptor>() with singleton { ConnectivityInterceptorImpl(instance()) }
-    bind() from singleton { API(instance()) }
-    bind() from singleton { SpaceXRepositoryImpl(instance()) }
-
-    bind() from singleton { TwitterApi(instance()) }
-    bind() from singleton { TwitterPaginationRepository(instance()) }
-
-    bind() from provider { CapsuleSharedViewModelFactory(instance()) }
-    bind() from provider { RocketsSharedViewModelFactory(instance()) }
-    bind() from provider { CoreSharedViewModelFactory(instance()) }
-    bind() from provider { ShipsSharedViewModelFactory(instance()) }
-    bind() from provider { MissionSharedViewModelFactory(instance()) }
-    bind() from provider { InfoViewModelFactory(instance()) }
-    bind() from provider { HistoryViewModelFactory(instance()) }
-    bind() from provider { LaunchPadViewModelFactory(instance()) }
-    bind() from provider { TwitterViewModelFactory(instance()) }
+    import(getModule)
+    import(viewModelFactoryModule)
+    import(spaceXModule)
+    import(twitterModule)
+    import(networkModule)
   }
 
   override fun onCreate() {

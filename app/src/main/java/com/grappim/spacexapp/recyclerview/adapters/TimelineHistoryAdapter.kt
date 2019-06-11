@@ -12,7 +12,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.TimelineHistoryViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class TimelineHistoryAdapter(
-  val onClick: (HistoryModel) -> Unit
+  private inline val onClick: (HistoryModel) -> Unit
 ) : RecyclerView.Adapter<TimelineHistoryViewHolder>() {
 
   private var items: List<HistoryModel> = emptyList()

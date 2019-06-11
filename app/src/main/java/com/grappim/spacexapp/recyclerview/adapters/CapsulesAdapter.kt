@@ -8,7 +8,7 @@ import com.grappim.spacexapp.recyclerview.viewholders.CapsuleViewHolder
 import com.grappim.spacexapp.util.inflateLayout
 
 class CapsulesAdapter(
-  val onClick: (CapsuleModel) -> Unit
+  private inline val onClick: (CapsuleModel) -> Unit
 ) : RecyclerView.Adapter<CapsuleViewHolder>() {
 
   private var items: List<CapsuleModel> = emptyList()

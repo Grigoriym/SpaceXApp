@@ -5,7 +5,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
@@ -22,8 +21,8 @@ class RocketDetailsFragment : SharedFragment() {
   private val args: RocketDetailsFragmentArgs by navArgs()
 
   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_rocket_details, container, false)
   }
@@ -46,8 +45,8 @@ class RocketDetailsFragment : SharedFragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("RocketDetailsFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("RocketDetailsFragment - onViewCreated")
 
     args.rocketModel.let {
       (activity as? AppCompatActivity)?.supportActionBar?.title = it.rocketName
@@ -55,11 +54,11 @@ class RocketDetailsFragment : SharedFragment() {
       tvRocketDetailsCompany.text = it.company
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
       tvRocketDetailsDateFirstFlight.text =
-          if (it.firstFlight != null) {
-            getFormattedyyyyMMdd(it.firstFlight)
-          } else {
-            "Unknown"
-          }
+        if (it.firstFlight != null) {
+          getFormattedyyyyMMdd(it.firstFlight)
+        } else {
+          "Unknown"
+        }
       tvRocketDetailsDescription.text = it.description
       tvRocketDetailsType.text = it.rocketName
       tvRocketDetailsCountry.text = it.country
@@ -68,25 +67,28 @@ class RocketDetailsFragment : SharedFragment() {
       ivRocketDetailsActive.setImageResource(setMyImageResource(it.active))
 
       GlideApp.with(this)
-          .load(it.flickrImages?.random())
-          .centerCrop()
-          .into(ivRocketDetails)
+        .load(it.flickrImages?.random())
+        .centerCrop()
+        .into(ivRocketDetails)
 
       elvRocketDetailsMetrics.setAdapter(
-          CustomExpandableListAdapter(
-              context,
-              elvRocketDetailsMetrics,
-              "Metrics",
-              it,
-              R.layout.layout_elv_rocket_details_metrics,
-              listAdapterItemInit = { view ->
-                MetricsListAdapterItem(
-                    view,
-                    it
-                ).fillItemsWithData()
-              }
-          )
+        CustomExpandableListAdapter(
+          context,
+          elvRocketDetailsMetrics,
+          "Metrics",
+          it,
+          R.layout.layout_elv_rocket_details_metrics,
+          listAdapterItemInit = { view ->
+            MetricsListAdapterItem(
+              view,
+              it
+            ).fillItemsWithData()
+          }
+        )
       )
     }
+  }
+
+  override fun renderFailure(failureText: String) {
   }
 }
