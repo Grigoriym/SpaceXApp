@@ -23,5 +23,7 @@ data class Media(
   @SerializedName("type")
   val type: String?,
   @SerializedName("url")
-  val url: String?
+  val url: String?,
+  @SerializedName("video_info")
+  val videoInfo: VideoInfo
 )

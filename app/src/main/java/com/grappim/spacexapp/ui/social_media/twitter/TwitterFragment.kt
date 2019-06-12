@@ -6,9 +6,9 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.Transformations
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -16,15 +16,17 @@ import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
+import com.grappim.spacexapp.ui.FullScreenVideoActivity
+import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class TwitterFragment : Fragment(), KoinComponent {
+class TwitterFragment : SharedFragment(), KoinComponent {
 
-  private val viewModelFactory:TwitterViewModelFactory by inject()
+  private val viewModelFactory: TwitterViewModelFactory by inject()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
   private lateinit var uAdapter: TwitterPaginationAdapter
 
@@ -74,6 +76,10 @@ class TwitterFragment : Fragment(), KoinComponent {
     }
   }
 
+  override fun onPrepareOptionsMenu(menu: Menu) {
+
+  }
+
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
       R.id.twitter_menu_refresh -> {
@@ -112,14 +118,29 @@ class TwitterFragment : Fragment(), KoinComponent {
     viewModel.showTweets(currentScreenName ?: "SpaceX")
   }
 
+  override fun renderFailure(failureText: String) {
+    rvTwitter.showSnackbar(failureText)
+    pbTwitter.gone()
+    srlTwitter.isRefreshing = false
+  }
+
   private fun bindAdapter() {
     uAdapter = TwitterPaginationAdapter(
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
       },
-      onImageClickS = {
-        context?.launchActivity<FullScreenImageActivity> {
-          putExtra(PARCELABLE_TWITTER_IMAGES, it)
+      onImageClickS = { url, isVideo ->
+        when (isVideo) {
+          true -> {
+            context?.launchActivity<FullScreenVideoActivity> {
+              putExtra(PARCELABLE_TWITTER_VIDEO, url)
+            }
+          }
+          false -> {
+            context?.launchActivity<FullScreenImageActivity> {
+              putExtra(PARCELABLE_TWITTER_IMAGES, url)
+            }
+          }
         }
       })
 

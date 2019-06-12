@@ -22,9 +22,7 @@ import timber.log.Timber
 
 class GetCapsulesFragment : SharedFragment(), KoinComponent {
 
-//  override val kodein by kodein()
   private lateinit var cAdapter: CapsulesAdapter
-//  private val viewModelFactory: CapsuleViewModelFactory by instance()
   private val viewModelFactory: CapsuleViewModelFactory by inject()
   private val args: GetCapsulesFragmentArgs by navArgs()
   private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }

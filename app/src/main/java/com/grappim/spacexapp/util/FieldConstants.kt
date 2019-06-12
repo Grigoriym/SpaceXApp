@@ -16,6 +16,8 @@ const val TWITTER_USER_TIMELINE_GET = "statuses/user_timeline.json"
 
 const val PARCELABLE_TWITTER_IMAGES = "parcelable twitter images"
 
+const val PARCELABLE_TWITTER_VIDEO = "parcelable twitter video"
+
 const val KODEIN_TWITTER_INTERCEPTOR = "kodeinTwitterInterceptor"
 
 const val KODEIN_TWITTER_OK_HTTP_CLIENT = "kodeinTwitterOkHttpClient"
