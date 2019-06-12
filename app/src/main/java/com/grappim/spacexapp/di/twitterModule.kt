@@ -4,7 +4,8 @@ import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.createTwitterOauthInterceptor
 import com.grappim.spacexapp.network.services.TwitterService
-import com.grappim.spacexapp.pagination.TwitterPaginationRepository
+import com.grappim.spacexapp.repository.TwitterPaginationRepository
+import com.grappim.spacexapp.repository.TwitterPaginationRepositoryImpl
 import com.grappim.spacexapp.util.KODEIN_TWITTER_INTERCEPTOR
 import com.grappim.spacexapp.util.KODEIN_TWITTER_OK_HTTP_CLIENT
 import com.grappim.spacexapp.util.KODEIN_TWITTER_RETROFIT
@@ -30,5 +31,5 @@ val twitterModule = module {
     )
   }
   single { TwitterService(get(named(KODEIN_TWITTER_RETROFIT))) }
-  single { TwitterPaginationRepository() }
+  single { TwitterPaginationRepositoryImpl() as TwitterPaginationRepository }
 }

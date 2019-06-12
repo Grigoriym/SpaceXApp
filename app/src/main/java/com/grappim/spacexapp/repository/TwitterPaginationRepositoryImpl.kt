@@ -1,15 +1,17 @@
-package com.grappim.spacexapp.pagination
+package com.grappim.spacexapp.repository
 
 import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.pagination.Listing
+import com.grappim.spacexapp.pagination.TwitterDataSourceFactory
 import timber.log.Timber
 
-class TwitterPaginationRepository {
+class TwitterPaginationRepositoryImpl : TwitterPaginationRepository {
 
-  fun getTweets(screenName: String): Listing<UserTimelineModel> {
-    Timber.d("TwitterPaginationRepository - getTweets - $screenName")
+  override fun getTweets(screenName: String): Listing<UserTimelineModel> {
+    Timber.d("TwitterPaginationRepositoryImpl - getTweets - $screenName")
     val sourceFactory = TwitterDataSourceFactory(screenName)
     val livePagedList = sourceFactory.toLiveData(
       config = Config(

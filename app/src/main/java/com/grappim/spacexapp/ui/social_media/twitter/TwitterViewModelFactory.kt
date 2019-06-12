@@ -2,7 +2,7 @@ package com.grappim.spacexapp.ui.social_media.twitter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.grappim.spacexapp.pagination.TwitterPaginationRepository
+import com.grappim.spacexapp.repository.TwitterPaginationRepository
 
 class TwitterViewModelFactory(
   private val repository: TwitterPaginationRepository

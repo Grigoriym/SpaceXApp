@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.network
+package com.grappim.spacexapp.repository
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
@@ -8,12 +8,15 @@ import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.network.NetworkHandler
+import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.SpaceXService
-import com.grappim.spacexapp.repository.SpaceXRepository
 import com.grappim.spacexapp.util.Either
 import com.grappim.spacexapp.util.Failure
 
-class SpaceXNetwork(
+//todo make one general function for every suspend
+
+class SpaceXRepositoryImpl(
   private val networkHandler: NetworkHandler,
   private val service: SpaceXService
 ) : SpaceXRepository, NetworkHelper {
