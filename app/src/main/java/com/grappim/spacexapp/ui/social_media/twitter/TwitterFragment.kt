@@ -8,11 +8,8 @@ import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.Transformations
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
@@ -31,11 +28,6 @@ class TwitterFragment : SharedFragment(), KoinComponent {
   private lateinit var uAdapter: TwitterPaginationAdapter
 
   private var currentScreenName: String? = null
-
-  private val observer = Observer<PagedList<UserTimelineModel>> {
-    Timber.d("TwitterFragment - observer")
-    uAdapter.submitList(it)
-  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -95,12 +87,14 @@ class TwitterFragment : SharedFragment(), KoinComponent {
     setHasOptionsMenu(true)
 
     viewModel.apply {
-      tweets.observe(this@TwitterFragment, observer)
-      networkState.observe(this@TwitterFragment, Observer {
-        pbTwitter.showIf { it == NetworkState.LOADING }
+      tweets.observe(this@TwitterFragment, Observer {
+        uAdapter.submitList(it)
       })
-      initialLoadState.observe(this@TwitterFragment, Observer {
-
+      networkState.observe(this@TwitterFragment, Observer {
+        when (it) {
+          NetworkState.LOADING -> pbTwitter.show()
+          NetworkState.LOADED -> pbTwitter.gone()
+        }
       })
     }
 
@@ -109,13 +103,13 @@ class TwitterFragment : SharedFragment(), KoinComponent {
 
     srlTwitter.setOnRefreshListener {
       getData()
-      viewModel.refresh()
       srlTwitter.isRefreshing = false
     }
   }
 
   private fun getData() {
     viewModel.showTweets(currentScreenName ?: "SpaceX")
+    viewModel.refresh()
   }
 
   override fun renderFailure(failureText: String) {
@@ -129,11 +123,12 @@ class TwitterFragment : SharedFragment(), KoinComponent {
       onClick = {
         startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
       },
-      onImageClickS = { url, isVideo ->
+      onImageClickS = { url, isVideo, videoDuration ->
         when (isVideo) {
           true -> {
             context?.launchActivity<FullScreenVideoActivity> {
               putExtra(PARCELABLE_TWITTER_VIDEO, url)
+              putExtra(PARCELABLE_TWITTER_VIDEO_DURATION, videoDuration)
             }
           }
           false -> {

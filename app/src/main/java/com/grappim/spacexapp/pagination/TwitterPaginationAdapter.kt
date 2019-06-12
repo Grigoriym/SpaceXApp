@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel) -> Unit,
-  val onImageClickS: (String, Boolean) -> Unit
+  val onImageClickS: (String, Boolean, Int?) -> Unit
 ) : PagedListAdapter<UserTimelineModel,
     TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
 
@@ -50,6 +50,7 @@ class TwitterPaginationAdapter(
     holder.apply {
       var isVideo = false
       var videoUrl: String? = ""
+      var videoDuration: Int? = null
       userTimelineModel = getItem(position)
       if (getItem(position)?.extendedEntities?.media?.get(0)?.type == "video") {
         val videoInfo = getItem(position)?.extendedEntities?.media?.get(0)?.videoInfo
@@ -58,15 +59,16 @@ class TwitterPaginationAdapter(
           if (i?.bitrate == 2176000) {
             videoUrl = i.url
             isVideo = true
+            videoDuration = videoInfo?.durationMillis
             break@loopi
           }
         }
       }
       onImageClick = {
         if (isVideo) {
-          onImageClickS(videoUrl!!, isVideo)
+          onImageClickS(videoUrl!!, isVideo, videoDuration)
         } else {
-          onImageClickS(it, isVideo)
+          onImageClickS(it, isVideo, null)
         }
       }
       itemView.setOnClickListener { onClick(getItem(position)!!) }

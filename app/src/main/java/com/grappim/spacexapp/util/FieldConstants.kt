@@ -18,6 +18,8 @@ const val PARCELABLE_TWITTER_IMAGES = "parcelable twitter images"
 
 const val PARCELABLE_TWITTER_VIDEO = "parcelable twitter video"
 
+const val PARCELABLE_TWITTER_VIDEO_DURATION = "parcelable twitter video duration"
+
 const val KODEIN_TWITTER_INTERCEPTOR = "kodeinTwitterInterceptor"
 
 const val KODEIN_TWITTER_OK_HTTP_CLIENT = "kodeinTwitterOkHttpClient"

@@ -20,18 +20,16 @@ class TwitterPaginationRepository {
       )
     )
 
-    val initialLoadState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-      it.initialLoadState
-    }
-
     return Listing(
       pagedList = livePagedList,
       networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
         it.networkState
       },
       refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
-      initialLoadState = initialLoadState,
-      failure = Transformations.switchMap(sourceFactory.sourceLiveData){
+      initialLoadState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+        it.initialLoadState
+      },
+      failure = Transformations.switchMap(sourceFactory.sourceLiveData) {
         it.failure
       }
     )
