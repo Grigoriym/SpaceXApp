@@ -16,20 +16,14 @@ import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
 import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_cores.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
 class GetCoresFragment : SharedFragment(), KoinComponent {
 
-//  override val kodein by kodein()
-
   private lateinit var coreAdapter: CoresAdapter
   private val args: GetCoresFragmentArgs by navArgs()
-//  private val viewModelFactory: CoreViewModelFactory by instance()
   private val viewModelFactory:CoreViewModelFactory by inject()
   private val viewModel by viewModels<CoresViewModel> { viewModelFactory }
 

@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
@@ -14,22 +12,15 @@ import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 import org.koin.core.KoinComponent
 import org.koin.core.inject
-import retrofit2.Response
 import timber.log.Timber
 
 //todo mission or payload?
 
 class MissionFragment : SharedFragment(), KoinComponent {
 
-//  override val kodein by kodein()
-
   private val args: MissionFragmentArgs by navArgs()
-//  private val viewModelFactory: MissionViewModelFactory by instance()
   private val viewModelFactory:MissionViewModelFactory by inject()
   private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
 

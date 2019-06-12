@@ -6,9 +6,6 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import org.kodein.di.Kodein
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.androidXModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -20,15 +17,6 @@ import javax.net.ssl.SSLContext
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
 
 class SpaceXApplication : MultiDexApplication() {
-
-//  override val kodein by Kodein.lazy {
-//    import(androidXModule(this@SpaceXApplication))
-//    import(getModule)
-//    import(viewModelFactoryModule)
-//    import(spaceXModule)
-//    import(twitterModule)
-//    import(networkModule)
-//  }
 
   override fun onCreate() {
     super.onCreate()

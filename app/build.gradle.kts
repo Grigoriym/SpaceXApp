@@ -122,10 +122,6 @@ dependencies {
   implementation("com.github.bumptech.glide:glide:4.9.0")
   kapt("com.github.bumptech.glide:compiler:4.9.0")
 
-  //    Kodein
-  implementation("org.kodein.di:kodein-di-generic-jvm:6.1.0")
-  implementation("org.kodein.di:kodein-di-framework-android-x:6.1.0")
-
 //  Koin
   implementation("org.koin:koin-core:2.0.1")
   implementation("org.koin:koin-core-ext:2.0.1")

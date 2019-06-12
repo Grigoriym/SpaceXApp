@@ -16,9 +16,6 @@ import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
