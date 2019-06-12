@@ -5,7 +5,7 @@ import com.grappim.spacexapp.util.Failure
 import retrofit2.Response
 import timber.log.Timber
 
-abstract class NetworkHelper {
+interface NetworkHelper {
 
   fun <T> makeRequest(
     callResponse: Response<T>,

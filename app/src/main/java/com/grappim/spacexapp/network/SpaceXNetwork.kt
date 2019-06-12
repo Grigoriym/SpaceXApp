@@ -16,7 +16,7 @@ import com.grappim.spacexapp.util.Failure
 class SpaceXNetwork(
   private val networkHandler: NetworkHandler,
   private val service: SpaceXService
-) : SpaceXRepository, NetworkHelper() {
+) : SpaceXRepository, NetworkHelper {
 
   override suspend fun allCapsules(): Either<Failure, List<CapsuleModel>> {
     return when (networkHandler.isConnected) {

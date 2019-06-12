@@ -26,9 +26,6 @@ class TwitterPaginationRepository {
         it.networkState
       },
       refresh = { sourceFactory.sourceLiveData.value?.invalidate() },
-      initialLoadState = Transformations.switchMap(sourceFactory.sourceLiveData) {
-        it.initialLoadState
-      },
       failure = Transformations.switchMap(sourceFactory.sourceLiveData) {
         it.failure
       }

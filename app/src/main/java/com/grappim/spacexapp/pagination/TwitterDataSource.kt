@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.network.NetworkHandler
+import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.TwitterService
 import com.grappim.spacexapp.util.Failure
 import kotlinx.coroutines.CoroutineScope
@@ -15,13 +16,12 @@ import timber.log.Timber
 
 class TwitterDataSource(
   private val screenName: String? = null
-) : ItemKeyedDataSource<Long, UserTimelineModel>(), KoinComponent {
+) : ItemKeyedDataSource<Long, UserTimelineModel>(), KoinComponent, NetworkHelper {
 
   private val service: TwitterService by inject()
   private val networkHandler: NetworkHandler by inject()
 
   val networkState = MutableLiveData<NetworkState>()
-  val initialLoadState = MutableLiveData<NetworkState>()
   val failure = MutableLiveData<Failure>()
 
   override fun loadInitial(
@@ -33,7 +33,6 @@ class TwitterDataSource(
     when (networkHandler.isConnected) {
       true -> {
         networkState.postValue(NetworkState.LOADING)
-        initialLoadState.postValue(NetworkState.LOADING)
         CoroutineScope(Dispatchers.IO).launch {
           val response = service.getUserTimelineAsync(screenName = screenName)
           try {
@@ -43,7 +42,6 @@ class TwitterDataSource(
                 val items = response.body() ?: emptyList()
                 callback.onResult(items)
                 networkState.postValue(NetworkState.LOADED)
-                initialLoadState.postValue(NetworkState.LOADED)
               }
               false -> {
                 failure.postValue(Failure.ServerError)
