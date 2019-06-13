@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.missionspayloads
+package com.grappim.spacexapp.ui.missions_payloads
 
 import android.os.Bundle
 import android.view.LayoutInflater

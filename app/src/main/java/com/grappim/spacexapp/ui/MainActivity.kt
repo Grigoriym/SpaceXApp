@@ -89,7 +89,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         R.id.infoFragment,
         R.id.historyFragment,
         R.id.launchPadFragment,
-        R.id.socialMediaFragment
+        R.id.socialMediaFragment,
+        R.id.launchesFragment
       ), drawerLayout
     )
 
@@ -123,6 +124,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       R.id.nav_history -> navController.navigate(R.id.historyFragment)
       R.id.nav_launch_pads -> navController.navigate(R.id.launchPadFragment)
       R.id.nav_social_media -> navController.navigate(R.id.socialMediaFragment)
+      R.id.nav_launches -> navController.navigate(R.id.launchesFragment)
     }
     drawerLayout.closeDrawer(GravityCompat.START)
     return true

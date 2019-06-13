@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.ui.full_screen
 
 import android.os.Bundle
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions

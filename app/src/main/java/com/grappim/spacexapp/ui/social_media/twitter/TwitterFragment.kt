@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
-import com.grappim.spacexapp.ui.FullScreenImageActivity
-import com.grappim.spacexapp.ui.FullScreenVideoActivity
+import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
+import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.koin.core.KoinComponent
@@ -37,8 +37,10 @@ class TwitterFragment : Fragment(), KoinComponent {
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     super.onCreateOptionsMenu(menu, inflater)
     Timber.d("TwitterFragment - onCreateOptionsMenu")
+//    activity?.invalidateOptionsMenu()
     menu.clear()
     activity?.menuInflater?.inflate(R.menu.twitter_menu, menu)
+
     val item = menu.findItem(R.id.twitter_menu_spinner)
     val spinner = item.actionView as AppCompatSpinner
 
@@ -69,6 +71,11 @@ class TwitterFragment : Fragment(), KoinComponent {
         }
       }
     }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    Timber.d("TwitterFragment - onDestroy")
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {

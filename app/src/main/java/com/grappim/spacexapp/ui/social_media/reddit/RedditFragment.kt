@@ -20,4 +20,9 @@ class RedditFragment : SharedFragment() {
 
   override fun renderFailure(failureText: String) {
   }
+
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    setHasOptionsMenu(true)
+  }
 }

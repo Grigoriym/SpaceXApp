@@ -4,6 +4,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
@@ -73,5 +74,23 @@ class SpaceXService(retrofit: Retrofit) : SpaceXApi {
 
   override suspend fun getOneMissionById(missionId: String?): Response<MissionModel> =
     spaceXApi.getOneMissionById(missionId)
+
+  override suspend fun getAllLaunches(): Response<List<LaunchModel>> =
+    spaceXApi.getAllLaunches()
+
+  override suspend fun getPastLaunches(): Response<List<LaunchModel>> =
+    spaceXApi.getPastLaunches()
+
+  override suspend fun getUpcomingLaunches(): Response<List<LaunchModel>> =
+    spaceXApi.getUpcomingLaunches()
+
+  override suspend fun getNextLaunch(): Response<LaunchModel> =
+    spaceXApi.getNextLaunch()
+
+  override suspend fun getLatestLaunch(): Response<LaunchModel> =
+    spaceXApi.getLatestLaunch()
+
+  override suspend fun getOneLaunch(flightNumber: Int?): Response<LaunchModel> =
+    spaceXApi.getOneLaunch(flightNumber)
 }
 

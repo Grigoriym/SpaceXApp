@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.ui.full_screen
 
 import android.os.Build
 import android.os.Bundle

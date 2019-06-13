@@ -87,7 +87,7 @@ class TwitterPaginationViewHolder(
 ) : RecyclerView.ViewHolder(view) {
   var onImageClick: (String) -> Unit = {}
   val profileImage: ImageView = view.ivTwitterItemProfileImage
-  val rv: RecyclerView = view.rlTwitterItemMedia
+  private val rv: RecyclerView = view.rlTwitterItemMedia
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
       field = value

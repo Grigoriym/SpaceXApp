@@ -4,6 +4,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
@@ -14,6 +15,26 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface SpaceXApi {
+
+  @GET("launches")
+  suspend fun getAllLaunches(): Response<List<LaunchModel>>
+
+  @GET("launches/past")
+  suspend fun getPastLaunches(): Response<List<LaunchModel>>
+
+  @GET("launches/upcoming")
+  suspend fun getUpcomingLaunches(): Response<List<LaunchModel>>
+
+  @GET("launches/next")
+  suspend fun getNextLaunch(): Response<LaunchModel>
+
+  @GET("launches/latest")
+  suspend fun getLatestLaunch(): Response<LaunchModel>
+
+  @GET("launches/{flightNumber}")
+  suspend fun getOneLaunch(
+    @Path("flightNumber") flightNumber: Int?
+  ): Response<LaunchModel>
 
   @GET("rockets")
   suspend fun getAllRockets(): Response<List<RocketModel>>

@@ -13,8 +13,8 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-// todo retrofit coroutines adapter is now deprecated because of new version of retrofit
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
+//todo big problems with menu in the appbar
 
 class SpaceXApplication : MultiDexApplication() {
 

@@ -17,4 +17,10 @@ val getModule = module {
   single { GetHistory(get()) }
   single { GetAllPayloads(get()) }
   single { GetPayloadById(get()) }
+  single { GetAllLaunches(get()) }
+  single { GetLatestLaunch(get()) }
+  single { GetNextLaunch(get()) }
+  single { GetOneLaunchByFlightNumber(get()) }
+  single { GetPastLaunches(get()) }
+  single { GetUpcomingLaunches(get()) }
 }
