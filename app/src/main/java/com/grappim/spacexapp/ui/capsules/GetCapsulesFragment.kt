@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -20,7 +21,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class GetCapsulesFragment : SharedFragment(), KoinComponent {
+open class GetCapsulesFragment : Fragment(), KoinComponent {
 
   private lateinit var cAdapter: CapsulesAdapter
   private val viewModelFactory: CapsuleViewModelFactory by inject()
@@ -54,6 +55,13 @@ class GetCapsulesFragment : SharedFragment(), KoinComponent {
     }
   }
 
+  private fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
+  }
+
   private fun getData() {
     Timber.d("GetCapsulesFragment - getData - ${args.capsulesToGetArgs}")
     pbGetCapsules.show()
@@ -77,7 +85,7 @@ class GetCapsulesFragment : SharedFragment(), KoinComponent {
     rvGetCapsules.scheduleLayoutAnimation()
   }
 
-  override fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvGetCapsules.showSnackbar(failureText)
     pbGetCapsules.gone()
     srlGetCapsules.isRefreshing = false

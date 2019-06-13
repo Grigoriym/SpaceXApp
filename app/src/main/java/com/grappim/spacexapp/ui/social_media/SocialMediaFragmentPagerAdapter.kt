@@ -11,7 +11,6 @@ class SocialMediaFragmentPagerAdapter(
   fragmentManager: FragmentManager?
 ) : FragmentStatePagerAdapter(fragmentManager!!, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
   override fun getItem(position: Int): Fragment {
-    Timber.d("SocialMediaFragmentPagerAdapter - getItem- $position")
     return when (position) {
       0 -> TwitterFragment()
       else -> RedditFragment()
@@ -20,7 +19,6 @@ class SocialMediaFragmentPagerAdapter(
   override fun getCount(): Int = 2
 
   override fun getPageTitle(position: Int): CharSequence? {
-    Timber.d("SocialMediaFragmentPagerAdapter - getPageTitle - $position")
     return when (position) {
       0 -> "Twitter"
       else -> "Reddit"

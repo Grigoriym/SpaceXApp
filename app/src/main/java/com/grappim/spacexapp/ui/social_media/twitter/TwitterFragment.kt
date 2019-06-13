@@ -37,10 +37,30 @@ class TwitterFragment : Fragment(), KoinComponent {
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     super.onCreateOptionsMenu(menu, inflater)
     Timber.d("TwitterFragment - onCreateOptionsMenu")
-//    activity?.invalidateOptionsMenu()
     menu.clear()
     activity?.menuInflater?.inflate(R.menu.twitter_menu, menu)
+  }
 
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    super.onPrepareOptionsMenu(menu)
+    initMenu(menu)
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    Timber.d("TwitterFragment - onDestroy")
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      R.id.twitter_menu_refresh -> {
+        viewModel.refresh()
+      }
+    }
+    return super.onOptionsItemSelected(item)
+  }
+
+  private fun initMenu(menu:Menu){
     val item = menu.findItem(R.id.twitter_menu_spinner)
     val spinner = item.actionView as AppCompatSpinner
 
@@ -73,24 +93,10 @@ class TwitterFragment : Fragment(), KoinComponent {
     }
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
-    Timber.d("TwitterFragment - onDestroy")
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    when (item.itemId) {
-      R.id.twitter_menu_refresh -> {
-        viewModel.refresh()
-      }
-    }
-    return super.onOptionsItemSelected(item)
-  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
-    setHasOptionsMenu(true)
+//    setHasOptionsMenu(true)
 
     viewModel.apply {
       tweets.observe(this@TwitterFragment, Observer {
