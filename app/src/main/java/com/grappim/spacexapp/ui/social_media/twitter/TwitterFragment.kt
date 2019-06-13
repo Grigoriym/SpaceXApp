@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,20 +15,17 @@ import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.FullScreenImageActivity
 import com.grappim.spacexapp.ui.FullScreenVideoActivity
-import com.grappim.spacexapp.ui.SharedFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_twitter.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class TwitterFragment : SharedFragment(), KoinComponent {
+class TwitterFragment : Fragment(), KoinComponent {
 
   private val viewModelFactory: TwitterViewModelFactory by inject()
   private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
   private lateinit var uAdapter: TwitterPaginationAdapter
-
-  private var currentScreenName: String? = null
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +36,7 @@ class TwitterFragment : SharedFragment(), KoinComponent {
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     super.onCreateOptionsMenu(menu, inflater)
+    Timber.d("TwitterFragment - onCreateOptionsMenu")
     menu.clear()
     activity?.menuInflater?.inflate(R.menu.twitter_menu, menu)
     val item = menu.findItem(R.id.twitter_menu_spinner)
@@ -51,31 +50,31 @@ class TwitterFragment : SharedFragment(), KoinComponent {
     spinner.adapter = spinnerArrayAdapter
     spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
+        Timber.d("TwitterFragment - onNothingSelected")
       }
 
-      override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+      override fun onItemSelected(
+        parent: AdapterView<*>?,
+        view: View?, position: Int,
+        id: Long
+      ) {
+        Timber.d("TwitterFragment - onItemSelected - $position")
         when (position) {
           0 -> {
-            currentScreenName = "SpaceX"
-            getData()
+            viewModel.setCurrentScreenName("SpaceX")
           }
           1 -> {
-            currentScreenName = "elonmusk"
-            getData()
+            viewModel.setCurrentScreenName("elonmusk")
           }
         }
       }
     }
   }
 
-  override fun onPrepareOptionsMenu(menu: Menu) {
-
-  }
-
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
       R.id.twitter_menu_refresh -> {
-        getData()
+        viewModel.refresh()
       }
     }
     return super.onOptionsItemSelected(item)
@@ -96,23 +95,28 @@ class TwitterFragment : SharedFragment(), KoinComponent {
           NetworkState.LOADED -> pbTwitter.gone()
         }
       })
+      currentScreenName.observe(this@TwitterFragment, Observer {
+        showTweets()
+      })
+      onFailure(failure, ::handleFailure)
     }
 
     bindAdapter()
-    getData()
 
     srlTwitter.setOnRefreshListener {
-      getData()
+      viewModel.refresh()
       srlTwitter.isRefreshing = false
     }
   }
 
-  private fun getData() {
-    viewModel.showTweets(currentScreenName ?: "SpaceX")
-    viewModel.refresh()
+  fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
   }
 
-  override fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvTwitter.showSnackbar(failureText)
     pbTwitter.gone()
     srlTwitter.isRefreshing = false
