@@ -8,10 +8,7 @@ import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_launches.*
 import timber.log.Timber
 
-class LaunchesFragment : BaseFragment () {
-
-  override fun renderFailure(failureText: String) {
-  }
+class LaunchesFragment : Fragment () {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
