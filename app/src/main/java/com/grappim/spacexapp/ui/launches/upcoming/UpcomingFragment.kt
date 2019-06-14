@@ -1,9 +1,7 @@
 package com.grappim.spacexapp.ui.launches.upcoming
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,6 +27,12 @@ class UpcomingFragment : BaseFragment(), KoinComponent {
     savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_upcoming, container, false)
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    inflater.inflate(R.menu.search_menu, menu)
+
+    super.onCreateOptionsMenu(menu, inflater)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

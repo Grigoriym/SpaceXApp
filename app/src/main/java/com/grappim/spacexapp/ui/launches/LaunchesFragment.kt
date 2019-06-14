@@ -1,15 +1,17 @@
 package com.grappim.spacexapp.ui.launches
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_launches.*
 import timber.log.Timber
 
-class LaunchesFragment : Fragment() {
+class LaunchesFragment : BaseFragment () {
+
+  override fun renderFailure(failureText: String) {
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

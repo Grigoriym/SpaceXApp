@@ -36,15 +36,11 @@ class TwitterFragment : Fragment(), KoinComponent {
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    super.onCreateOptionsMenu(menu, inflater)
     Timber.d("TwitterFragment - onCreateOptionsMenu")
     menu.clear()
     activity?.menuInflater?.inflate(R.menu.twitter_menu, menu)
-  }
-
-  override fun onPrepareOptionsMenu(menu: Menu) {
-    super.onPrepareOptionsMenu(menu)
     initMenu(menu)
+    super.onCreateOptionsMenu(menu, inflater)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -100,6 +96,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     setHasOptionsMenu(true)
+    activity?.invalidateOptionsMenu()
 
     viewModel.apply {
       tweets.observe(this@TwitterFragment, Observer {
