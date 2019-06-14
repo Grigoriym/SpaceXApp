@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.network.gets.GetInfo
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class InfoViewModel(

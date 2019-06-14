@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.network.gets.GetAllShips
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class ShipsViewModel(

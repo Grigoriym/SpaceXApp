@@ -9,7 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
 import org.koin.core.KoinComponent
@@ -18,7 +18,7 @@ import timber.log.Timber
 
 //todo mission or payload?
 
-class MissionFragment : SharedFragment(), KoinComponent {
+class MissionFragment : BaseFragment(), KoinComponent {
 
   private val args: MissionFragmentArgs by navArgs()
   private val viewModelFactory:MissionViewModelFactory by inject()

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.network.gets.GetPastLaunches
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class CompletedViewModel(

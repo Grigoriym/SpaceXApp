@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui
+package com.grappim.spacexapp.ui.base
 
 import android.os.Bundle
 import android.view.Menu
@@ -12,12 +12,12 @@ import timber.log.Timber
 /**
  * This class is used to hide specific menu items in fragments
  */
-abstract class SharedFragment : Fragment() {
+abstract class BaseFragment : Fragment() {
 
   abstract fun renderFailure(failureText: String)//todo maybe make it open rather than abstract
 
   override fun onPrepareOptionsMenu(menu: Menu) {
-    Timber.d("SharedFragment - onPrepareOptionsMenu")
+    Timber.d("BaseFragment - onPrepareOptionsMenu")
     activity?.invalidateOptionsMenu()
     val item = menu.findItem(R.id.twitter_menu_spinner)
     if (item != null) {

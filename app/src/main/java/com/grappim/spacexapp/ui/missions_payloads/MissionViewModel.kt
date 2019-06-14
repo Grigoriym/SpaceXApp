@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.network.gets.GetAllPayloads
 import com.grappim.spacexapp.network.gets.GetPayloadById
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class MissionViewModel(

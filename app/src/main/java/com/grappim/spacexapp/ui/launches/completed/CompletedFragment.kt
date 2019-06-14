@@ -11,14 +11,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_completed.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class CompletedFragment : SharedFragment(), KoinComponent {
+class CompletedFragment : BaseFragment(), KoinComponent {
 
   private lateinit var lAdapter: LaunchesAdapter
   private val viewModelFactory: CompletedViewModelFactory by inject()

@@ -15,6 +15,7 @@ import javax.net.ssl.SSLContext
 
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
 //todo big problems with menu in the appbar
+//todo delete some one-button-fragments
 
 class SpaceXApplication : MultiDexApplication() {
 

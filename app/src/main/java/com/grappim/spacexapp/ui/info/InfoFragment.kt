@@ -9,14 +9,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_info.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class InfoFragment : SharedFragment(), KoinComponent {
+class InfoFragment : BaseFragment(), KoinComponent {
 
   private val viewModelFactory:InfoViewModelFactory by inject()
   private val viewModel by viewModels<InfoViewModel> { viewModelFactory }

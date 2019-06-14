@@ -12,14 +12,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_ships.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class GetShipsFragment : SharedFragment(), KoinComponent {
+class GetShipsFragment : BaseFragment(), KoinComponent {
 
   private lateinit var shipAdapter: ShipsAdapter
   private val viewModelFactory:ShipsViewModelFactory by inject()
