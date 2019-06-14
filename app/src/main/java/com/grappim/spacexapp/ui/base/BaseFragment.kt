@@ -18,7 +18,7 @@ abstract class BaseFragment : Fragment() {
 
   override fun onPrepareOptionsMenu(menu: Menu) {
     Timber.d("BaseFragment - onPrepareOptionsMenu")
-    activity?.invalidateOptionsMenu()
+
     val item = menu.findItem(R.id.twitter_menu_spinner)
     if (item != null) {
       item.isVisible = false
@@ -30,7 +30,8 @@ abstract class BaseFragment : Fragment() {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-//    setHasOptionsMenu(false)
+    setHasOptionsMenu(true)
+    activity?.invalidateOptionsMenu()
   }
 
   protected fun handleFailure(failure: Failure?) {
