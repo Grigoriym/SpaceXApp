@@ -25,6 +25,10 @@ abstract class BaseFragment : Fragment() {
     }
     val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
     item2?.isVisible = false
+
+    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
+    item3?.isVisible = false
+
     super.onPrepareOptionsMenu(menu)
   }
 

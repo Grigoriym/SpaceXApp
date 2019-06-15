@@ -1,7 +1,5 @@
 package com.grappim.spacexapp.ui.launches.upcoming
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -13,7 +11,6 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_upcoming.*
 import org.koin.core.KoinComponent
@@ -34,15 +31,16 @@ class UpcomingFragment : Fragment(), KoinComponent {
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    Timber.d("UpcomingFragment - onCreateOptionsMenu")
     menu.clear()
     inflater.inflate(R.menu.search_menu, menu)
     initSearchView(menu)
     super.onCreateOptionsMenu(menu, inflater)
   }
 
-  private fun initSearchView(menu: Menu){
-    val searchView : SearchView? = menu.findItem(R.id.searchMenu).actionView as? SearchView
-    searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+  private fun initSearchView(menu: Menu) {
+    val searchView: SearchView? = menu.findItem(R.id.searchMenu).actionView as? SearchView
+    searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
       override fun onQueryTextSubmit(query: String?): Boolean {
         lAdapter.filter.filter(query)
         return true
@@ -92,14 +90,14 @@ class UpcomingFragment : Fragment(), KoinComponent {
     }
   }
 
-  protected fun handleFailure(failure: Failure?) {
+  private fun handleFailure(failure: Failure?) {
     when (failure) {
       is Failure.NetworkConnection -> renderFailure("Network Connection Error")
       is Failure.ServerError -> renderFailure("Server Error")
     }
   }
 
-   fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvUpcomingLaunches.showSnackbar(failureText)
     pbUpcomingLaunches.gone()
     srlUpcomingLaunches.isRefreshing = false

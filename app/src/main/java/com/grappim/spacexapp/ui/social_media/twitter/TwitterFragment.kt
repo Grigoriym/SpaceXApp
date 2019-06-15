@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
-import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
 import com.grappim.spacexapp.util.*
@@ -96,7 +95,6 @@ class TwitterFragment : Fragment(), KoinComponent {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
     setHasOptionsMenu(true)
-    activity?.invalidateOptionsMenu()
 
     viewModel.apply {
       tweets.observe(this@TwitterFragment, Observer {
