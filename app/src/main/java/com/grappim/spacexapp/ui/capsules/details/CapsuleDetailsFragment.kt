@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import timber.log.Timber
 
-class CapsuleDetailsFragment : SharedFragment() {
+class CapsuleDetailsFragment : BaseFragment() {
 
   private val args: CapsuleDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter

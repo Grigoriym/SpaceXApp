@@ -4,30 +4,32 @@ import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.createTwitterOauthInterceptor
 import com.grappim.spacexapp.network.services.TwitterService
-import com.grappim.spacexapp.pagination.TwitterPaginationRepository
-import com.grappim.spacexapp.util.KODEIN_TWITTER_INTERCEPTOR
-import com.grappim.spacexapp.util.KODEIN_TWITTER_OK_HTTP_CLIENT
-import com.grappim.spacexapp.util.KODEIN_TWITTER_RETROFIT
+import com.grappim.spacexapp.repository.TwitterPaginationRepository
+import com.grappim.spacexapp.repository.TwitterPaginationRepositoryImpl
+import com.grappim.spacexapp.util.KOIN_TWITTER_INTERCEPTOR
+import com.grappim.spacexapp.util.KOIN_TWITTER_OK_HTTP_CLIENT
+import com.grappim.spacexapp.util.KOIN_TWITTER_RETROFIT
 import com.grappim.spacexapp.util.TWITTER_API_BASE_URL
-import org.kodein.di.Kodein
-import org.kodein.di.generic.bind
-import org.kodein.di.generic.instance
-import org.kodein.di.generic.singleton
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
-val twitterModule = Kodein.Module("twitterModule") {
-
-  bind(tag = KODEIN_TWITTER_INTERCEPTOR) from singleton { createTwitterOauthInterceptor() }
-  bind(tag = KODEIN_TWITTER_OK_HTTP_CLIENT) from singleton {
-    createOkHttpClient(instance(tag = KODEIN_TWITTER_INTERCEPTOR))
-  }
-  bind(tag = KODEIN_TWITTER_RETROFIT) from singleton {
-    createRetrofit(
-      TWITTER_API_BASE_URL,
-      instance(tag = KODEIN_TWITTER_OK_HTTP_CLIENT)
+val twitterModule = module {
+  single(named(KOIN_TWITTER_INTERCEPTOR)) { createTwitterOauthInterceptor() }
+  single(named(KOIN_TWITTER_OK_HTTP_CLIENT)) {
+    createOkHttpClient(
+      get(
+        named(
+          KOIN_TWITTER_INTERCEPTOR
+        )
+      )
     )
   }
-
-  bind() from singleton { TwitterService(instance(tag = KODEIN_TWITTER_RETROFIT)) }
-  bind() from singleton { TwitterPaginationRepository(instance()) }
-
+  single(named(KOIN_TWITTER_RETROFIT)) {
+    createRetrofit(
+      TWITTER_API_BASE_URL,
+      get(named(KOIN_TWITTER_OK_HTTP_CLIENT))
+    )
+  }
+  single { TwitterService(get(named(KOIN_TWITTER_RETROFIT))) }
+  single { TwitterPaginationRepositoryImpl() as TwitterPaginationRepository }
 }

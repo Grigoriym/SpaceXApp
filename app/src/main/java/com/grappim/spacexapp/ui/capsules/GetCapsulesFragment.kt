@@ -13,19 +13,17 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class GetCapsulesFragment : SharedFragment(), KodeinAware {
+open class GetCapsulesFragment : BaseFragment(), KoinComponent {
 
-  override val kodein by kodein()
   private lateinit var cAdapter: CapsulesAdapter
-  private val viewModelFactory: CapsuleViewModelFactory by instance()
+  private val viewModelFactory: CapsuleViewModelFactory by inject()
   private val args: GetCapsulesFragmentArgs by navArgs()
   private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }
 

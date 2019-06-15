@@ -69,7 +69,7 @@
 
   <fragment
     android:id="@+id/missionFragment"
-    android:name="com.grappim.spacexapp.ui.missionspayloads.MissionFragment"
+    android:name="com.grappim.spacexapp.ui.missions_payloads.MissionFragment"
     android:label="Missions"
     tools:layout="@layout/fragment_mission">
     <argument
@@ -260,5 +260,11 @@
     android:name="com.grappim.spacexapp.ui.social_media.SocialMediaFragment"
     android:label="Social Media"
     tools:layout="@layout/fragment_social_media" />
+
+  <fragment
+    android:id="@+id/launchesFragment"
+    android:name="com.grappim.spacexapp.ui.launches.LaunchesFragment"
+    android:label="Launches"
+    tools:layout="@layout/fragment_launches" />
 
 </navigation>

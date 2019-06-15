@@ -5,7 +5,6 @@ import com.grappim.spacexapp.BuildConfig
 import com.grappim.spacexapp.network.interceptors.Oauth1SigningInterceptor
 import com.grappim.spacexapp.network.interceptors.OauthKeys
 import com.grappim.spacexapp.util.networkInfo
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -20,7 +19,6 @@ class NetworkHandler(private val context: Context) {
 fun createRetrofit(baseUrl: String, client: OkHttpClient): Retrofit = Retrofit.Builder()
   .baseUrl(baseUrl)
   .client(client)
-  .addCallAdapterFactory(CoroutineCallAdapterFactory())
   .addConverterFactory(GsonConverterFactory.create())
   .build()
 

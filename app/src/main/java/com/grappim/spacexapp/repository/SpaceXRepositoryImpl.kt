@@ -1,22 +1,26 @@
-package com.grappim.spacexapp.network
+package com.grappim.spacexapp.repository
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.network.NetworkHandler
+import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.SpaceXService
-import com.grappim.spacexapp.repository.SpaceXRepository
 import com.grappim.spacexapp.util.Either
 import com.grappim.spacexapp.util.Failure
 
-class SpaceXNetwork(
+//todo make one general function for every suspend
+
+class SpaceXRepositoryImpl(
   private val networkHandler: NetworkHandler,
   private val service: SpaceXService
-) : SpaceXRepository, NetworkHelper() {
+) : SpaceXRepository, NetworkHelper {
 
   override suspend fun allCapsules(): Either<Failure, List<CapsuleModel>> {
     return when (networkHandler.isConnected) {
@@ -109,4 +113,45 @@ class SpaceXNetwork(
     }
   }
 
+  override suspend fun allLaunches(): Either<Failure, List<LaunchModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getAllLaunches(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun pastLaunches(): Either<Failure, List<LaunchModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getPastLaunches(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun upcomingLaunches(): Either<Failure, List<LaunchModel>> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getUpcomingLaunches(), emptyList())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun nextLaunch(): Either<Failure, LaunchModel> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getNextLaunch(), LaunchModel.empty())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun latestLaunch(): Either<Failure, LaunchModel> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getLatestLaunch(), LaunchModel.empty())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
+
+  override suspend fun oneLaunch(flightNumber: Int?): Either<Failure, LaunchModel> {
+    return when (networkHandler.isConnected) {
+      true -> makeRequest(service.getOneLaunch(flightNumber), LaunchModel.empty())
+      false, null -> Either.Left(Failure.NetworkConnection)
+    }
+  }
 }

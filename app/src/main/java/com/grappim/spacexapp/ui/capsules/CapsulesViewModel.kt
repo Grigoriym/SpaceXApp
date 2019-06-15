@@ -7,7 +7,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.network.gets.GetAllCapsules
 import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class CapsulesViewModel(

@@ -16,12 +16,16 @@ const val TWITTER_USER_TIMELINE_GET = "statuses/user_timeline.json"
 
 const val PARCELABLE_TWITTER_IMAGES = "parcelable twitter images"
 
-const val KODEIN_TWITTER_INTERCEPTOR = "kodeinTwitterInterceptor"
+const val PARCELABLE_TWITTER_VIDEO = "parcelable twitter video"
 
-const val KODEIN_TWITTER_OK_HTTP_CLIENT = "kodeinTwitterOkHttpClient"
+const val PARCELABLE_TWITTER_VIDEO_DURATION = "parcelable twitter video duration"
 
-const val KODEIN_TWITTER_RETROFIT = "kodeinTwitterRetrofit"
+const val KOIN_TWITTER_INTERCEPTOR = "kodeinTwitterInterceptor"
 
-const val KODEIN_SPACEX_OK_HTTP_CLIENT = "kodeinSpaceXOkHttpClient"
+const val KOIN_TWITTER_OK_HTTP_CLIENT = "kodeinTwitterOkHttpClient"
 
-const val KODEIN_SPACEX_RETROFIT = "kodeinSpaceXKodein"
+const val KOIN_TWITTER_RETROFIT = "kodeinTwitterRetrofit"
+
+const val KOIN_SPACEX_OK_HTTP_CLIENT = "kodeinSpaceXOkHttpClient"
+
+const val KOIN_SPACEX_RETROFIT = "kodeinSpaceXKodein"

@@ -5,7 +5,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/black"
-  tools:context=".ui.FullScreenImageActivity">
+  tools:context=".ui.full_screen.FullScreenImageActivity">
 
   <ImageView
     android:id="@+id/ivFulScreen"

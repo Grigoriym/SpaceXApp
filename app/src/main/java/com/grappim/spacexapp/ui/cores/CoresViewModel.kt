@@ -7,7 +7,7 @@ import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.network.gets.GetAllCores
 import com.grappim.spacexapp.network.gets.GetPastCores
 import com.grappim.spacexapp.network.gets.GetUpcomingCores
-import com.grappim.spacexapp.ui.BaseViewModel
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
 
 class CoresViewModel(

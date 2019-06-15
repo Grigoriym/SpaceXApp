@@ -16,7 +16,10 @@
     android:theme="@style/DayNightAppTheme"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
     <activity
-      android:name=".ui.FullScreenImageActivity"
+      android:name=".ui.full_screen.FullScreenVideoActivity"
+      android:theme="@style/DayNightAppTheme" />
+    <activity
+      android:name=".ui.full_screen.FullScreenImageActivity"
       android:theme="@style/DayNightAppTheme" />
     <activity
       android:name=".ui.SplashActivity"

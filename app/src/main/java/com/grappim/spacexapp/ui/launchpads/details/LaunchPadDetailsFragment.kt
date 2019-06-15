@@ -7,12 +7,12 @@ import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.LocationListAdapterItem
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.startBrowser
 import kotlinx.android.synthetic.main.fragment_launch_pad_details.*
 import timber.log.Timber
 
-class LaunchPadDetailsFragment : SharedFragment() {
+class LaunchPadDetailsFragment : BaseFragment() {
 
   private val args: LaunchPadDetailsFragmentArgs by navArgs()
 

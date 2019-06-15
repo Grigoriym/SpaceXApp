@@ -2,23 +2,24 @@ package com.grappim.spacexapp.ui.capsules
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
 
-class CapsuleFragment : SharedFragment() {
+class CapsuleFragment : BaseFragment() {
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
     return inflater.inflate(R.layout.fragment_capsule, container, false)
+  }
+
+  override fun renderFailure(failureText: String) {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,8 +37,5 @@ class CapsuleFragment : SharedFragment() {
     btnGetPastCapsules.setOnClickListener {
       findNavController().navigate(CapsuleFragmentDirections.nextFragment(2))
     }
-  }
-
-  override fun renderFailure(failureText: String) {
   }
 }

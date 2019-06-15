@@ -38,4 +38,7 @@
 
   <string name="capsule_details_image_content_description">Image of capsule</string>
 
+  <!-- TODO: Remove or change this placeholder text -->
+  <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

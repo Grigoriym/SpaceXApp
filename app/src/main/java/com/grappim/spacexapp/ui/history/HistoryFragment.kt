@@ -11,20 +11,17 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.TimelineHistoryAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_history.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class HistoryFragment : SharedFragment(), KodeinAware {
-
-  override val kodein by kodein()
+class HistoryFragment : BaseFragment(), KoinComponent {
 
   private lateinit var hAdapter: TimelineHistoryAdapter
-  private val viewModelFactory: HistoryViewModelFactory by instance()
+  private val viewModelFactory:HistoryViewModelFactory by inject()
   private val viewModel by viewModels<HistoryViewModel> { viewModelFactory }
 
   override fun onCreateView(

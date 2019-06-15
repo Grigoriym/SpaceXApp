@@ -5,23 +5,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_info.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class InfoFragment : SharedFragment(), KodeinAware {
+class InfoFragment : BaseFragment(), KoinComponent {
 
-  override val kodein by kodein()
-  private val viewModelFactory: InfoViewModelFactory by instance()
+  private val viewModelFactory:InfoViewModelFactory by inject()
   private val viewModel by viewModels<InfoViewModel> { viewModelFactory }
 
   override fun onCreateView(

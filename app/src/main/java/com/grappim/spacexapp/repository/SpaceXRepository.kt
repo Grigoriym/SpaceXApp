@@ -4,6 +4,7 @@ import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
@@ -38,4 +39,16 @@ interface SpaceXRepository {
   suspend fun allPayloads(): Either<Failure, List<PayloadModel>>
 
   suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel>
+
+  suspend fun allLaunches(): Either<Failure, List<LaunchModel>>
+
+  suspend fun pastLaunches(): Either<Failure, List<LaunchModel>>
+
+  suspend fun upcomingLaunches(): Either<Failure, List<LaunchModel>>
+
+  suspend fun nextLaunch(): Either<Failure, LaunchModel>
+
+  suspend fun latestLaunch(): Either<Failure, LaunchModel>
+
+  suspend fun oneLaunch(flightNumber: Int?): Either<Failure, LaunchModel>
 }

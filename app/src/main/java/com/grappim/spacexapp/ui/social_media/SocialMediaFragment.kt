@@ -19,8 +19,8 @@ class SocialMediaFragment : Fragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("SocialMediaFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("SocialMediaFragment - onViewCreated")
     val smfpa = SocialMediaFragmentPagerAdapter(activity?.supportFragmentManager)
     vpSocialMedia.adapter = smfpa
     tlSocialMedia.setupWithViewPager(vpSocialMedia)

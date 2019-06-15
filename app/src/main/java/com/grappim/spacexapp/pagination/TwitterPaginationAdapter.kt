@@ -16,11 +16,10 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
-import timber.log.Timber
 
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel) -> Unit,
-  val onImageClickS: (String) -> Unit
+  val onImageClickS: (String, Boolean, Int?) -> Unit
 ) : PagedListAdapter<UserTimelineModel,
     TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
 
@@ -49,9 +48,28 @@ class TwitterPaginationAdapter(
 
   override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
     holder.apply {
+      var isVideo = false
+      var videoUrl: String? = ""
+      var videoDuration: Int? = null
       userTimelineModel = getItem(position)
+      if (getItem(position)?.extendedEntities?.media?.get(0)?.type == "video") {
+        val videoInfo = getItem(position)?.extendedEntities?.media?.get(0)?.videoInfo
+        val videoVariants = videoInfo?.variants
+        loopi@ for (i in videoVariants.orEmpty()) {
+          if (i?.bitrate == 2176000) {
+            videoUrl = i.url
+            isVideo = true
+            videoDuration = videoInfo?.durationMillis
+            break@loopi
+          }
+        }
+      }
       onImageClick = {
-        onImageClickS(it)
+        if (isVideo) {
+          onImageClickS(videoUrl!!, isVideo, videoDuration)
+        } else {
+          onImageClickS(it, isVideo, null)
+        }
       }
       itemView.setOnClickListener { onClick(getItem(position)!!) }
       GlideApp.with(profileImage.context)
@@ -69,7 +87,7 @@ class TwitterPaginationViewHolder(
 ) : RecyclerView.ViewHolder(view) {
   var onImageClick: (String) -> Unit = {}
   val profileImage: ImageView = view.ivTwitterItemProfileImage
-  val rv: RecyclerView = view.rlTwitterItemMedia
+  private val rv: RecyclerView = view.rlTwitterItemMedia
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
       field = value

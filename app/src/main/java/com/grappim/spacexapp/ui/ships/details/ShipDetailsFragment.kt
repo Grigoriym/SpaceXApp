@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,13 +13,13 @@ import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_ship_details.*
 import timber.log.Timber
 
-class ShipDetailsFragment : SharedFragment() {
+class ShipDetailsFragment : BaseFragment() {
 
   private val args: ShipDetailsFragmentArgs by navArgs()
   private lateinit var mAdapter: RvInnerMissionsAdapter

@@ -1,33 +1,27 @@
-package com.grappim.spacexapp.ui.missionspayloads
+package com.grappim.spacexapp.ui.missions_payloads
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_mission.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
-import retrofit2.Response
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
 //todo mission or payload?
 
-class MissionFragment : SharedFragment(), KodeinAware {
-
-  override val kodein by kodein()
+class MissionFragment : BaseFragment(), KoinComponent {
 
   private val args: MissionFragmentArgs by navArgs()
-  private val viewModelFactory: MissionViewModelFactory by instance()
+  private val viewModelFactory:MissionViewModelFactory by inject()
   private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
 
   override fun onCreateView(

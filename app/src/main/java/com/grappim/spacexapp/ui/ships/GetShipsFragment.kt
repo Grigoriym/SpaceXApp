@@ -12,19 +12,17 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
-import com.grappim.spacexapp.ui.SharedFragment
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_ships.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.x.kodein
-import org.kodein.di.generic.instance
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class GetShipsFragment : SharedFragment(), KodeinAware {
+class GetShipsFragment : BaseFragment(), KoinComponent {
 
-  override val kodein by kodein()
   private lateinit var shipAdapter: ShipsAdapter
-  private val viewModelFactory: ShipsViewModelFactory by instance()
+  private val viewModelFactory:ShipsViewModelFactory by inject()
   private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
 
   override fun onCreateView(
