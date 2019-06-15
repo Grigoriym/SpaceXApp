@@ -41,19 +41,18 @@ class UpcomingFragment : Fragment(), KoinComponent {
   }
 
   private fun initSearchView(menu: Menu){
-    val searchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as? SearchManager
     val searchView : SearchView? = menu.findItem(R.id.searchMenu).actionView as? SearchView
     searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-      override fun onQueryTextSubmit(query: String?): Boolean = false
+      override fun onQueryTextSubmit(query: String?): Boolean {
+        lAdapter.filter.filter(query)
+        return true
+      }
 
       override fun onQueryTextChange(newText: String?): Boolean {
-
+        lAdapter.filter.filter(newText)
+        return true
       }
     })
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return super.onOptionsItemSelected(item)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
