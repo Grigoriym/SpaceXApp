@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -14,13 +13,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-open class GetCapsulesFragment : Fragment(), KoinComponent {
+open class GetCapsulesFragment : BaseFragment(), KoinComponent {
 
   private lateinit var cAdapter: CapsulesAdapter
   private val viewModelFactory: CapsuleViewModelFactory by inject()
@@ -54,13 +54,6 @@ open class GetCapsulesFragment : Fragment(), KoinComponent {
     }
   }
 
-  private fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
-    }
-  }
-
   private fun getData() {
     Timber.d("GetCapsulesFragment - getData - ${args.capsulesToGetArgs}")
     pbGetCapsules.show()
@@ -84,7 +77,7 @@ open class GetCapsulesFragment : Fragment(), KoinComponent {
     rvGetCapsules.scheduleLayoutAnimation()
   }
 
-  fun renderFailure(failureText: String) {
+  override fun renderFailure(failureText: String) {
     rvGetCapsules.showSnackbar(failureText)
     pbGetCapsules.gone()
     srlGetCapsules.isRefreshing = false

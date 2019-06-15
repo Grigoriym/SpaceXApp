@@ -35,20 +35,11 @@ class TwitterFragment : Fragment(), KoinComponent {
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    super.onCreateOptionsMenu(menu, inflater)
     Timber.d("TwitterFragment - onCreateOptionsMenu")
     menu.clear()
-    activity?.menuInflater?.inflate(R.menu.twitter_menu, menu)
-  }
-
-  override fun onPrepareOptionsMenu(menu: Menu) {
-    super.onPrepareOptionsMenu(menu)
+    inflater.inflate(R.menu.twitter_menu, menu)
     initMenu(menu)
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    Timber.d("TwitterFragment - onDestroy")
+    super.onCreateOptionsMenu(menu, inflater)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -60,7 +51,14 @@ class TwitterFragment : Fragment(), KoinComponent {
     return super.onOptionsItemSelected(item)
   }
 
-  private fun initMenu(menu:Menu){
+  private fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
+  }
+
+  private fun initMenu(menu: Menu) {
     val item = menu.findItem(R.id.twitter_menu_spinner)
     val spinner = item.actionView as AppCompatSpinner
 
@@ -96,7 +94,7 @@ class TwitterFragment : Fragment(), KoinComponent {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("TwitterFragment - onViewCreated")
-//    setHasOptionsMenu(true)
+    setHasOptionsMenu(true)
 
     viewModel.apply {
       tweets.observe(this@TwitterFragment, Observer {
@@ -122,14 +120,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     }
   }
 
-  fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
-    }
-  }
-
-  fun renderFailure(failureText: String) {
+   fun renderFailure(failureText: String) {
     rvTwitter.showSnackbar(failureText)
     pbTwitter.gone()
     srlTwitter.isRefreshing = false
