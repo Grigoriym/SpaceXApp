@@ -14,7 +14,6 @@ import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
-//todo delete some one-button-fragments
 //todo twitter images (corners, spacing)
 
 class SpaceXApplication : MultiDexApplication() {

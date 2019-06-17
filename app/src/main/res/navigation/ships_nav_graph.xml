@@ -3,19 +3,9 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/ships_nav_graph"
-  app:startDestination="@id/shipsFragment">
+  app:startDestination="@id/getShipsFragment">
 
   <include app:graph="@navigation/payload_mission_nav_graph" />
-
-  <fragment
-    android:id="@+id/shipsFragment"
-    android:name="com.grappim.spacexapp.ui.ships.ShipsFragment"
-    android:label="Ships"
-    tools:layout="@layout/fragment_ships">
-    <action
-      android:id="@+id/nextFragment"
-      app:destination="@id/getShipsFragment" />
-  </fragment>
 
   <fragment
     android:id="@+id/getShipsFragment"

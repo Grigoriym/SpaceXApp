@@ -83,11 +83,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       setOf(
         R.id.capsuleFragment,
         R.id.rocketFragment,
-        R.id.shipsFragment,
+        R.id.getShipsFragment,
         R.id.coreFragment,
         R.id.infoFragment,
         R.id.historyFragment,
-        R.id.launchPadFragment,
+        R.id.getLaunchPadsFragment,
         R.id.socialMediaFragment,
         R.id.launchesFragment
       ), drawerLayout
