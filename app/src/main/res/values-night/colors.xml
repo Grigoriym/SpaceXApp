@@ -21,4 +21,7 @@
   <color name="timelineMarker">#5C6BC0</color>
 
   <color name="gray_for_twitter">#9E9E9E</color>
+
+  <color name="tab_layout_text_color">@color/gray</color>
+  <color name="tab_layout_selected_text_color">@color/white</color>
 </resources>

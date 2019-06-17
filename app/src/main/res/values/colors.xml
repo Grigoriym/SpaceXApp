@@ -22,4 +22,6 @@
 
   <color name="gray_for_twitter">#9E9E9E</color>
 
+  <color name="tab_layout_text_color">@color/gray</color>
+  <color name="tab_layout_selected_text_color">@color/colorPrimary</color>
 </resources>
