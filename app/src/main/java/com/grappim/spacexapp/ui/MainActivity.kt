@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     switcher.isChecked = prefs
     switcher.setOnCheckedChangeListener { _, isChecked ->
       run {
+        invalidateOptionsMenu()
         if (!isChecked) {
           Timber.d("Switcher !isChecked")
           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)

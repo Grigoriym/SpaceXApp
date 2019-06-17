@@ -6,7 +6,6 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -60,16 +59,16 @@ class TwitterFragment : Fragment(), KoinComponent {
   }
 
   private fun initMenu(menu: Menu) {
-    val item = menu.findItem(R.id.twitter_menu_spinner)
-    val spinner = item.actionView as AppCompatSpinner
+    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+    val spinner = item?.actionView as? AppCompatSpinner
 
-    val spinnerArrayAdapter = ArrayAdapter<String>(
+    val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
       context!!,
-     R.layout.layout_spinner_item,
+      R.layout.layout_spinner_item,
       arrayListOf("SpaceX", "Elon Musk")
     )
-    spinner.adapter = spinnerArrayAdapter
-    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    spinner?.adapter = spinnerArrayAdapter
+    spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
         Timber.d("TwitterFragment - onNothingSelected")
       }
@@ -123,7 +122,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     }
   }
 
-   fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvTwitter.showSnackbar(failureText)
     pbTwitter.gone()
     srlTwitter.isRefreshing = false

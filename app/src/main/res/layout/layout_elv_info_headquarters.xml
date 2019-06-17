@@ -12,8 +12,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:text="Address"
+    android:text="@string/address"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -22,7 +21,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
-    android:layout_marginRight="8dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintTop_toTopOf="@+id/textView39"
     tools:text="Rocket Road"/>
@@ -32,7 +30,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:text="City"
+    android:text="@string/city"
     app:layout_constraintStart_toStartOf="@+id/textView39"
     app:layout_constraintTop_toBottomOf="@+id/textView39"/>
 
@@ -50,7 +48,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="8dp"
-    android:text="State"
+    android:text="@string/state"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="@+id/textView44"
     app:layout_constraintTop_toBottomOf="@+id/textView44"/>
