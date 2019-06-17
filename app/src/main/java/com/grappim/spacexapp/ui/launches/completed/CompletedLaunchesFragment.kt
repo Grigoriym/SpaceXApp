@@ -12,6 +12,7 @@ import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
+import com.grappim.spacexapp.ui.launches.details.LaunchDetailsActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_completed_launches.*
 import org.koin.core.KoinComponent
@@ -56,7 +57,9 @@ class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
 
   private fun bindAdapter() {
     lAdapter = LaunchesAdapter {
-
+      context?.launchActivity<LaunchDetailsActivity> {
+        putExtra(PARCELABLE_LAUNCH_MODEL, it)
+      }
     }
     rvCompletedLaunches.apply {
       layoutManager = LinearLayoutManager(context)

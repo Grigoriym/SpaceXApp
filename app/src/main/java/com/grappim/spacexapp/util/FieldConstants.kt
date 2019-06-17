@@ -8,6 +8,8 @@ const val NIGHT_THEME_PREF_KEY = "nightTheme"
 
 const val PARCELABLE_MISSION_MODEL = "parcelable mission model"
 
+const val PARCELABLE_LAUNCH_MODEL = "parcelable launch model"
+
 const val TWITTER_API_BASE_URL = "https://api.twitter.com/1.1/"
 
 const val TWITTER_FOR_BROWSER_URI = "https://twitter.com/i/web/status/"
