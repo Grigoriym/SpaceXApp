@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/capsules_nav_graph"
+  app:startDestination="@id/capsuleFragment">
+
+  <include app:graph="@navigation/payload_mission_nav_graph" />
+
+  <fragment
+    android:id="@+id/capsuleFragment"
+    android:name="com.grappim.spacexapp.ui.capsules.CapsuleFragment"
+    android:label="Capsules"
+    tools:layout="@layout/fragment_capsule">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getCapsulesFragment"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="capsulesToGetArgs"
+        app:argType="integer" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getCapsulesFragment"
+    android:name="com.grappim.spacexapp.ui.capsules.GetCapsulesFragment"
+    android:label="Get Capsules"
+    tools:layout="@layout/fragment_get_capsules">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/capsuleDetailsFragment"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="capsuleModel"
+        app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel" />
+    </action>
+    <argument
+      android:name="capsulesToGetArgs"
+      app:argType="integer" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/capsuleDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.capsules.details.CapsuleDetailsFragment"
+    android:label="Capsule Details"
+    tools:layout="@layout/fragment_capsule_details">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/payload_mission_nav_graph"
+      app:enterAnim="@anim/slide_in_right"
+      app:exitAnim="@anim/slide_out_left"
+      app:popEnterAnim="@anim/slide_in_left"
+      app:popExitAnim="@anim/slide_out_right">
+      <argument
+        android:name="missionArgs"
+        app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+    </action>
+    <argument
+      android:name="capsuleModel"
+      app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel" />
+  </fragment>
+
+</navigation>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  app:startDestination="@id/launchPadFragment"
+  android:id="@+id/launchpads_nav_graph">
+
+  <fragment
+    android:id="@+id/launchPadFragment"
+    android:name="com.grappim.spacexapp.ui.launchpads.LaunchPadFragment"
+    android:label="Launch Pads"
+    tools:layout="@layout/fragment_launch_pad">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getLaunchPadsFragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/getLaunchPadsFragment"
+    android:name="com.grappim.spacexapp.ui.launchpads.GetLaunchPadsFragment"
+    android:label="Get Launch Pads"
+    tools:layout="@layout/fragment_get_launch_pads">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/launchPadDetailsFragment">
+      <argument
+        android:name="launchPadModel"
+        app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/launchPadDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.launchpads.details.LaunchPadDetailsFragment"
+    android:label="Launch Pad Details"
+    tools:layout="@layout/fragment_launch_pad_details">
+    <argument
+      android:name="launchPadModel"
+      app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel" />
+  </fragment>
+
+</navigation>

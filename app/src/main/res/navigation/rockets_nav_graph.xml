@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/rockets_nav_graph"
+  app:startDestination="@id/rocketFragment">
+
+  <fragment
+    android:id="@+id/rocketFragment"
+    android:name="com.grappim.spacexapp.ui.rockets.RocketFragment"
+    android:label="Rockets"
+    tools:layout="@layout/fragment_rocket">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getRocketsFragment" />
+  </fragment>
+
+  <fragment
+    android:id="@+id/getRocketsFragment"
+    android:name="com.grappim.spacexapp.ui.rockets.GetRocketsFragment"
+    android:label="Get Rockets"
+    tools:layout="@layout/fragment_get_rockets">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/rocketDetailsFragment">
+      <argument
+        android:name="rocketModel"
+        app:argType="com.grappim.spacexapp.model.rocket.RocketModel" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/rocketDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.rockets.details.RocketDetailsFragment"
+    android:label="Rocket Details"
+    tools:layout="@layout/fragment_rocket_details">
+    <argument
+      android:name="rocketModel"
+      app:argType="com.grappim.spacexapp.model.rocket.RocketModel" />
+  </fragment>
+
+</navigation>
