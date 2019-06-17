@@ -49,7 +49,6 @@ class MarginItemDecorator(
           outRect.top = 0
           outRect.bottom = 0
         }
-
         return
       }
 

@@ -147,7 +147,7 @@ class TwitterPaginationViewHolder(
               isGridLayout = true,
               spanCount = 2,
               spacing = 8.px,
-              includeEdge = false
+              includeEdge = true
             )
           )
         }

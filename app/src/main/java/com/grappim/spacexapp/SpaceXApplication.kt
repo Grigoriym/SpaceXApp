@@ -15,7 +15,7 @@ import javax.net.ssl.SSLContext
 
 //todo problems when starting the app, it needs ~1-3 seconds to show splash
 //todo delete some one-button-fragments
-//todo separate/modularize nav_Graph
+//todo twitter images (corners, spacing)
 
 class SpaceXApplication : MultiDexApplication() {
 
