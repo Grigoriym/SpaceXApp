@@ -15,7 +15,7 @@
 
   <color name="windowBackground">#FFFFFF</color>
 
-  <color name="innerRvItem">#edd6d6</color>
+  <color name="innerRvItem"> #efeeee</color>
   <color name="drawableVector">#FF000000</color>
 
   <color name="timelineMarker">#3F51B5</color>
