@@ -19,9 +19,6 @@ class CapsuleFragment : BaseFragment() {
     return inflater.inflate(R.layout.fragment_capsule, container, false)
   }
 
-  override fun renderFailure(failureText: String) {
-  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("CapsuleFragment - onViewCreated")

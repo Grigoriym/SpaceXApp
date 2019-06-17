@@ -27,7 +27,4 @@ class LaunchPadFragment : BaseFragment() {
       findNavController().navigate(R.id.nextFragment)
     }
   }
-
-  override fun renderFailure(failureText: String) {
-  }
 }

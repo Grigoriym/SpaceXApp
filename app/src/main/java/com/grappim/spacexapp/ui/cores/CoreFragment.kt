@@ -33,7 +33,4 @@ class CoreFragment : BaseFragment() {
       findNavController().navigate(CoreFragmentDirections.nextFragment(2))
     }
   }
-
-  override fun renderFailure(failureText: String) {
-  }
 }

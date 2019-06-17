@@ -77,7 +77,4 @@ class LaunchPadDetailsFragment : BaseFragment() {
       )
     }
   }
-
-  override fun renderFailure(failureText: String) {
-  }
 }

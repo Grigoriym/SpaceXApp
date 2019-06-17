@@ -14,7 +14,7 @@ import timber.log.Timber
  */
 abstract class BaseFragment : Fragment() {
 
-  abstract fun renderFailure(failureText: String)//todo maybe make it open rather than abstract
+  open fun renderFailure(failureText: String){}
 
   override fun onPrepareOptionsMenu(menu: Menu) {
     Timber.d("BaseFragment - onPrepareOptionsMenu")

@@ -93,7 +93,4 @@ class ShipDetailsFragment : BaseFragment() {
       adapter = mAdapter
     }
   }
-
-  override fun renderFailure(failureText: String) {
-  }
 }

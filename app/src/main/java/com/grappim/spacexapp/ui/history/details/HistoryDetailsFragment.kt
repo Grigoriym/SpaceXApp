@@ -31,7 +31,4 @@ class HistoryDetailsFragment : BaseFragment() {
       tvHistoryDetailsDetails.text = it.details
     }
   }
-
-  override fun renderFailure(failureText: String) {
-  }
 }
