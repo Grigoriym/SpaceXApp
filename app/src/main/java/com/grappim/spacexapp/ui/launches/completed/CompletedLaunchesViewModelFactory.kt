@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.gets.GetPastLaunches
 
-class CompletedViewModelFactory(
+class CompletedLaunchesViewModelFactory(
   private val getPastLaunches: GetPastLaunches
 ) : ViewModelProvider.NewInstanceFactory() {
 
   override fun <T : ViewModel?> create(modelClass: Class<T>): T =
-    CompletedViewModel(getPastLaunches) as T
+    CompletedLaunchesViewModel(getPastLaunches) as T
 
 }

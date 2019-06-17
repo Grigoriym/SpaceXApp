@@ -12,26 +12,26 @@ import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.util.*
-import kotlinx.android.synthetic.main.fragment_upcoming.*
+import kotlinx.android.synthetic.main.fragment_upcoming_launches.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class UpcomingFragment : Fragment(), KoinComponent {
+class UpcomingLaunchesFragment : Fragment(), KoinComponent {
 
   private lateinit var lAdapter: LaunchesAdapter
-  private val viewModelFactory: UpcomingViewModelFactory by inject()
-  private val viewModel by viewModels<UpcomingViewModel> { viewModelFactory }
+  private val launchesViewModelFactory: UpcomingLaunchesViewModelFactory by inject()
+  private val viewModel by viewModels<UpcomingLaunchesViewModel> { launchesViewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_upcoming, container, false)
+    return inflater.inflate(R.layout.fragment_upcoming_launches, container, false)
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    Timber.d("UpcomingFragment - onCreateOptionsMenu")
+    Timber.d("UpcomingLaunchesFragment - onCreateOptionsMenu")
     menu.clear()
     inflater.inflate(R.menu.search_menu, menu)
     initSearchView(menu)
@@ -55,7 +55,7 @@ class UpcomingFragment : Fragment(), KoinComponent {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    Timber.d("UpcomingFragment - onViewCreated")
+    Timber.d("UpcomingLaunchesFragment - onViewCreated")
     setHasOptionsMenu(true)
 
     viewModel.apply {

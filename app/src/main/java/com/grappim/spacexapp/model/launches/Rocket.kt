@@ -1,8 +1,10 @@
 package com.grappim.spacexapp.model.launches
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Rocket(
   @SerializedName("fairings")
   val fairings: Fairings?,
@@ -16,4 +18,4 @@ data class Rocket(
   val rocketType: String?,
   @SerializedName("second_stage")
   val secondStage: SecondStage?
-)
+) : Parcelable

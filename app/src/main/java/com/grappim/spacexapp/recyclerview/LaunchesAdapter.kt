@@ -7,6 +7,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.util.getNextLaunchUtcTime
 import com.grappim.spacexapp.util.inflateLayout
 import kotlinx.android.synthetic.main.layout_launches_item.view.*
 
@@ -83,7 +84,7 @@ class LaunchesAdapter(
         view.apply {
           tvLaunchesFlightNumber.text = value?.flightNumber.toString()
           tvLaunchesMissionName.text = value?.missionName
-          tvLaunchesDate.text = value?.launchDateLocal
+          tvLaunchesDate.text = getNextLaunchUtcTime(value?.launchDateUtc)
         }
       }
   }

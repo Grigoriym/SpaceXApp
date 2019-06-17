@@ -265,6 +265,6 @@
     android:id="@+id/launchesFragment"
     android:name="com.grappim.spacexapp.ui.launches.LaunchesFragment"
     android:label="Launches"
-    tools:layout="@layout/fragment_launches" />
+    tools:layout="@layout/fragment_launches"/>
 
 </navigation>

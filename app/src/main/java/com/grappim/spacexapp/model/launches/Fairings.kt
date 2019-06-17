@@ -1,15 +1,17 @@
 package com.grappim.spacexapp.model.launches
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Fairings(
   @SerializedName("recovered")
-  val recovered: Any?,
+  val recovered: Boolean?,
   @SerializedName("recovery_attempt")
-  val recoveryAttempt: Any?,
+  val recoveryAttempt: Boolean?,
   @SerializedName("reused")
   val reused: Boolean?,
   @SerializedName("ship")
-  val ship: Any?
-)
+  val ship: String?
+):Parcelable

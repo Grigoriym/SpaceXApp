@@ -1,31 +1,33 @@
 package com.grappim.spacexapp.model.launches
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Links(
   @SerializedName("article_link")
-  val articleLink: Any?,
+  val articleLink: String?,
   @SerializedName("flickr_images")
-  val flickrImages: List<Any?>?,
+  val flickrImages: List<String?>?,
   @SerializedName("mission_patch")
-  val missionPatch: Any?,
+  val missionPatch: String?,
   @SerializedName("mission_patch_small")
-  val missionPatchSmall: Any?,
+  val missionPatchSmall: String?,
   @SerializedName("presskit")
-  val presskit: Any?,
+  val presskit: String?,
   @SerializedName("reddit_campaign")
-  val redditCampaign: Any?,
+  val redditCampaign: String?,
   @SerializedName("reddit_launch")
-  val redditLaunch: Any?,
+  val redditLaunch: String?,
   @SerializedName("reddit_media")
-  val redditMedia: Any?,
+  val redditMedia: String?,
   @SerializedName("reddit_recovery")
-  val redditRecovery: Any?,
+  val redditRecovery: String?,
   @SerializedName("video_link")
-  val videoLink: Any?,
+  val videoLink: String?,
   @SerializedName("wikipedia")
-  val wikipedia: Any?,
+  val wikipedia: String?,
   @SerializedName("youtube_id")
-  val youtubeId: Any?
-)
+  val youtubeId: String?
+) : Parcelable

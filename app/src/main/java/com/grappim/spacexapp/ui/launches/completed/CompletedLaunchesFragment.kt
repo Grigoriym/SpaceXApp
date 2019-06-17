@@ -13,27 +13,27 @@ import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
-import kotlinx.android.synthetic.main.fragment_completed.*
+import kotlinx.android.synthetic.main.fragment_completed_launches.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class CompletedFragment : BaseFragment(), KoinComponent {
+class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
 
   private lateinit var lAdapter: LaunchesAdapter
-  private val viewModelFactory: CompletedViewModelFactory by inject()
-  private val viewModel by viewModels<CompletedViewModel> { viewModelFactory }
+  private val launchesViewModelFactory: CompletedLaunchesViewModelFactory by inject()
+  private val viewModel by viewModels<CompletedLaunchesViewModel> { launchesViewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_completed, container, false)
+    return inflater.inflate(R.layout.fragment_completed_launches, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    Timber.d("CompletedFragment - onViewCreated")
+    Timber.d("CompletedLaunchesFragment - onViewCreated")
 
     viewModel.apply {
       onObserve(pastLaunches, ::renderLaunches)

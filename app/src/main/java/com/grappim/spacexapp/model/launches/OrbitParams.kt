@@ -1,37 +1,39 @@
 package com.grappim.spacexapp.model.launches
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class OrbitParams(
   @SerializedName("apoapsis_km")
-  val apoapsisKm: Any?,
+  val apoapsisKm: Double?,
   @SerializedName("arg_of_pericenter")
-  val argOfPericenter: Any?,
+  val argOfPericenter: Double?,
   @SerializedName("eccentricity")
-  val eccentricity: Any?,
+  val eccentricity: Double?,
   @SerializedName("epoch")
-  val epoch: Any?,
+  val epoch: String?,
   @SerializedName("inclination_deg")
-  val inclinationDeg: Any?,
+  val inclinationDeg: Double?,
   @SerializedName("lifespan_years")
   val lifespanYears: Double?,
   @SerializedName("longitude")
-  val longitude: Any?,
+  val longitude: Double?,
   @SerializedName("mean_anomaly")
-  val meanAnomaly: Any?,
+  val meanAnomaly: Double?,
   @SerializedName("mean_motion")
-  val meanMotion: Any?,
+  val meanMotion: Double?,
   @SerializedName("periapsis_km")
-  val periapsisKm: Any?,
+  val periapsisKm: Double?,
   @SerializedName("period_min")
-  val periodMin: Any?,
+  val periodMin: Double?,
   @SerializedName("raan")
-  val raan: Any?,
+  val raan: Double?,
   @SerializedName("reference_system")
   val referenceSystem: String?,
   @SerializedName("regime")
   val regime: String?,
   @SerializedName("semi_major_axis_km")
-  val semiMajorAxisKm: Any?
-)
+  val semiMajorAxisKm: Double?
+) : Parcelable
