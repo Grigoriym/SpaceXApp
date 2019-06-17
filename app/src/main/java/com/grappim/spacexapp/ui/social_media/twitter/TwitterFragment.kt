@@ -42,6 +42,15 @@ class TwitterFragment : Fragment(), KoinComponent {
     super.onCreateOptionsMenu(menu, inflater)
   }
 
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+    item?.isVisible = true
+    val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
+    item2?.isVisible = true
+
+    super.onPrepareOptionsMenu(menu)
+  }
+
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
       R.id.twitter_menu_refresh -> {

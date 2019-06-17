@@ -39,6 +39,13 @@ class UpcomingLaunchesFragment : Fragment(), KoinComponent {
     super.onCreateOptionsMenu(menu, inflater)
   }
 
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
+    item3?.isVisible = true
+
+    super.onPrepareOptionsMenu(menu)
+  }
+
   private fun initSearchView(menu: Menu) {
     val searchView: SearchView? = menu.findItem(R.id.searchMenu).actionView as? SearchView
     searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
