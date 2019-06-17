@@ -12,6 +12,7 @@
     android:id="@+id/twitter_menu_refresh"
     android:icon="@drawable/ic_refresh_black_24dp"
     android:title="Refresh"
+    app:iconTint="@color/white"
     app:showAsAction="ifRoom" />
 
 </menu>

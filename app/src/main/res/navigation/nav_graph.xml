@@ -28,7 +28,7 @@
   <fragment
     android:id="@+id/socialMediaFragment"
     android:name="com.grappim.spacexapp.ui.social_media.SocialMediaFragment"
-    android:label="Social Media"
+    android:label=""
     tools:layout="@layout/fragment_social_media" />
 
   <fragment

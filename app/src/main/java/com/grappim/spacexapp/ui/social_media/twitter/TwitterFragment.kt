@@ -6,6 +6,7 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -64,7 +65,7 @@ class TwitterFragment : Fragment(), KoinComponent {
 
     val spinnerArrayAdapter = ArrayAdapter<String>(
       context!!,
-      android.R.layout.simple_spinner_dropdown_item,
+     R.layout.layout_spinner_item,
       arrayListOf("SpaceX", "Elon Musk")
     )
     spinner.adapter = spinnerArrayAdapter
@@ -75,9 +76,11 @@ class TwitterFragment : Fragment(), KoinComponent {
 
       override fun onItemSelected(
         parent: AdapterView<*>?,
-        view: View?, position: Int,
+        view: View?,
+        position: Int,
         id: Long
       ) {
+
         Timber.d("TwitterFragment - onItemSelected - $position")
         when (position) {
           0 -> {
