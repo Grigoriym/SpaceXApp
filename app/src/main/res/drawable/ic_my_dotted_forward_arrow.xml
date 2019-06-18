@@ -6,12 +6,9 @@
   <path
     android:fillColor="#FF000000"
     android:pathData="
-    M 0,11
-    L 16,11
-    L 16,8
-    L 24,12
-    L 16,16
-    L 16,13
-    L 0,13
-    z" />
+    M 0,10 L 3,10 L 3,14 L 0,14 z
+    M 4,10 L 7,10 L 7,14 L 4,14 z
+    M 8,10 L 11,10 L 11,14 L 8,14 z
+    M 12,10 L 15,10 L 15,14 L 12,14 z
+    M 16,6 L 24,12 L 16,18 z" />
 </vector>
