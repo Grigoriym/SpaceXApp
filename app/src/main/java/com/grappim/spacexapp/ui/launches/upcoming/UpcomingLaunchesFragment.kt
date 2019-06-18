@@ -42,7 +42,6 @@ class UpcomingLaunchesFragment : Fragment(), KoinComponent {
   override fun onPrepareOptionsMenu(menu: Menu) {
     val item3: MenuItem? = menu.findItem(R.id.searchMenu)
     item3?.isVisible = true
-
     super.onPrepareOptionsMenu(menu)
   }
 

@@ -1,10 +1,10 @@
 package com.grappim.spacexapp.ui.launches.completed
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.appcompat.widget.SearchView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -19,7 +19,7 @@ import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
+class CompletedLaunchesFragment : Fragment(), KoinComponent {
 
   private lateinit var lAdapter: LaunchesAdapter
   private val launchesViewModelFactory: CompletedLaunchesViewModelFactory by inject()
@@ -32,9 +32,39 @@ class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
     return inflater.inflate(R.layout.fragment_completed_launches, container, false)
   }
 
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    Timber.d("CompletedLaunchesFragment - onCreateOptionsMenu")
+    menu.clear()
+    inflater.inflate(R.menu.search_menu, menu)
+    initSearchView(menu)
+    super.onCreateOptionsMenu(menu, inflater)
+  }
+
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
+    item3?.isVisible = true
+    super.onPrepareOptionsMenu(menu)
+  }
+
+  private fun initSearchView(menu: Menu) {
+    val searchView: SearchView? = menu.findItem(R.id.searchMenu).actionView as? SearchView
+    searchView?.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+      override fun onQueryTextSubmit(query: String?): Boolean {
+        lAdapter.filter.filter(query)
+        return true
+      }
+
+      override fun onQueryTextChange(newText: String?): Boolean {
+        lAdapter.filter.filter(newText)
+        return true
+      }
+    })
+  }
+
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("CompletedLaunchesFragment - onViewCreated")
+    setHasOptionsMenu(true)
 
     viewModel.apply {
       onObserve(pastLaunches, ::renderLaunches)
@@ -55,6 +85,13 @@ class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
     viewModel.loadPastLaunches()
   }
 
+  private fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
+  }
+
   private fun bindAdapter() {
     lAdapter = LaunchesAdapter {
       context?.launchActivity<LaunchDetailsActivity> {
@@ -70,7 +107,7 @@ class CompletedLaunchesFragment : BaseFragment(), KoinComponent {
     }
   }
 
-  override fun renderFailure(failureText: String) {
+  private fun renderFailure(failureText: String) {
     rvCompletedLaunches.showSnackbar(failureText)
     pbCompletedLaunches.gone()
     srlCompletedLaunches.isRefreshing = false
