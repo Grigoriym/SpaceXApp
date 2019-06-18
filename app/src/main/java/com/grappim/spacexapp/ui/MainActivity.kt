@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     appBarConfiguration = AppBarConfiguration(
       setOf(
         R.id.capsuleFragment,
-        R.id.rocketFragment,
+        R.id.getRocketsFragment,
         R.id.getShipsFragment,
         R.id.coreFragment,
         R.id.infoFragment,

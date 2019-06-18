@@ -42,6 +42,30 @@
       app:layout_constraintTop_toBottomOf="@+id/tvLaunchesMissionName"
       tools:text="22 Jul'19" />
 
+    <androidx.constraintlayout.widget.Group
+      android:id="@+id/groupLaunchesItem"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      app:constraint_referenced_ids="imageView2,ivLaunchesItemLaunchSuccess" />
+
+    <ImageView
+      android:id="@+id/imageView2"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginStart="8dp"
+      android:src="@drawable/ic_my_forward_arrow"
+      app:layout_constraintStart_toEndOf="@+id/tvLaunchesDate"
+      app:layout_constraintTop_toTopOf="@+id/tvLaunchesDate" />
+
+    <ImageView
+      android:id="@+id/ivLaunchesItemLaunchSuccess"
+      android:layout_width="24dp"
+      android:layout_height="24dp"
+      android:layout_marginStart="8dp"
+      app:layout_constraintStart_toEndOf="@+id/imageView2"
+      app:layout_constraintTop_toTopOf="@+id/imageView2" />
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

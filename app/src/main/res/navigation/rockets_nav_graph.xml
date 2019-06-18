@@ -3,17 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/rockets_nav_graph"
-  app:startDestination="@id/rocketFragment">
-
-  <fragment
-    android:id="@+id/rocketFragment"
-    android:name="com.grappim.spacexapp.ui.rockets.RocketFragment"
-    android:label="Rockets"
-    tools:layout="@layout/fragment_rocket">
-    <action
-      android:id="@+id/nextFragment"
-      app:destination="@id/getRocketsFragment" />
-  </fragment>
+  app:startDestination="@id/getRocketsFragment">
 
   <fragment
     android:id="@+id/getRocketsFragment"

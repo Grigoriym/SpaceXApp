@@ -11,7 +11,6 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.ui.launches.details.LaunchDetailsActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_completed_launches.*

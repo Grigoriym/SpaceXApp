@@ -78,7 +78,7 @@ class SpaceXService(retrofit: Retrofit) : SpaceXApi {
   override suspend fun getAllLaunches(): Response<List<LaunchModel>> =
     spaceXApi.getAllLaunches()
 
-  override suspend fun getPastLaunches(): Response<List<LaunchModel>> =
+  override suspend fun getPastLaunches(order: String?): Response<List<LaunchModel>> =
     spaceXApi.getPastLaunches()
 
   override suspend fun getUpcomingLaunches(): Response<List<LaunchModel>> =

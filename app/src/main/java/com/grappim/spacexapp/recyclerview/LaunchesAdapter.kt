@@ -9,6 +9,8 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.util.getNextLaunchUtcTime
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.util.show
 import kotlinx.android.synthetic.main.layout_launches_item.view.*
 
 class LaunchesAdapter(
@@ -85,6 +87,11 @@ class LaunchesAdapter(
           tvLaunchesFlightNumber.text = value?.flightNumber.toString()
           tvLaunchesMissionName.text = value?.missionName
           tvLaunchesDate.text = getNextLaunchUtcTime(value?.launchDateUtc)
+          if (value?.launchSuccess != null) {
+            groupLaunchesItem.show()
+            ivLaunchesItemLaunchSuccess
+              .setImageResource(setMyImageResource(value.launchSuccess))
+          }
         }
       }
   }
