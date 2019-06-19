@@ -16,6 +16,7 @@ import javax.net.ssl.SSLContext
 //todo twitter images (corners, spacing)
 //todo toolbar menu needs to be redone
 //todo splash screen is terrible - needs to be changed
+//todo though date/time works, it needs to be refactored
 
 class SpaceXApplication : MultiDexApplication() {
 
