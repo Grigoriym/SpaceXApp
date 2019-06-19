@@ -15,7 +15,7 @@
 
   <style name="SplashTheme" parent="DayNightAppTheme">
     <item name="android:windowTranslucentStatus">true</item>
-    <item name="android:windowBackground">@drawable/logo</item>
+    <item name="android:windowBackground">@drawable/background_splash</item>
   </style>
 
   <style name="MyMaterialButton" parent="Widget.MaterialComponents.Button">
