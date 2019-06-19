@@ -3,22 +3,22 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".ui.launches.upcoming.UpcomingFragment">
+  tools:context=".ui.launches.completed.CompletedLaunchesFragment">
 
   <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-    android:id="@+id/srlUpcomingLaunches"
+    android:id="@+id/srlCompletedLaunches"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-      android:id="@+id/rvUpcomingLaunches"
+      android:id="@+id/rvCompletedLaunches"
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
 
   </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
   <ProgressBar
-    android:id="@+id/pbUpcomingLaunches"
+    android:id="@+id/pbCompletedLaunches"
     style="?android:attr/progressBarStyleHorizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

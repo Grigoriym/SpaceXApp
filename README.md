@@ -8,4 +8,6 @@ Phil Olson (for twitter oauth 1.0: https://gist.github.com/polson/227e1a039a09f2
 
 Fernando Cejas (for interesting architecture features, such as Either, UseCase: https://fernandocejas.com/2018/05/07/architecting-android-reloaded/);
 
-SearchView and RecyclerView - https://codingwithmitch.com/blog/filtering-recyclerview-searchview/
+SearchView and RecyclerView: https://codingwithmitch.com/blog/filtering-recyclerview-searchview/
+
+Spinner items customization: https://android--code.blogspot.com/2015/08/android-spinner-text-color.html

@@ -41,3 +41,10 @@ private fun getZoneId(showLocal: Boolean): ZoneId {
 
 fun getTwitterDate(date: String?): String? =
   sdfTwitter.format(formatterTwitter.parse(date))
+
+private const val nextLaunchPattern = "dd MMM ''yy - HH:mm"
+private val nextLaunchFromFormatter = SimpleDateFormat(nextLaunchPattern, Locale.US)
+private val nextLaunchToFormatter = SimpleDateFormat(dateTimePattern, Locale.US)
+
+fun getNextLaunchUtcTime(value: String?): String =
+  nextLaunchFromFormatter.format(nextLaunchToFormatter.parse(value))

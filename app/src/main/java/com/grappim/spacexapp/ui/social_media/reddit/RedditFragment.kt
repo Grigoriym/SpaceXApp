@@ -17,9 +17,6 @@ class RedditFragment : BaseFragment() {
     return inflater.inflate(R.layout.fragment_reddit, container, false)
   }
 
-  override fun renderFailure(failureText: String) {
-  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setHasOptionsMenu(true)

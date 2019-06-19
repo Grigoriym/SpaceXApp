@@ -37,8 +37,44 @@
   <string name="error_retrieving_data">Cannot retrieve data</string>
 
   <string name="capsule_details_image_content_description">Image of capsule</string>
-
-  <!-- TODO: Remove or change this placeholder text -->
-  <string name="hello_blank_fragment">Hello blank fragment</string>
+  <string name="refresh">Refresh</string>
+  <string name="launch_pads">Launch Pads</string>
+  <string name="launches">Launches</string>
+  <string name="social_media">Social Media</string>
+  <string name="wikipedia">Wikipedia</string>
+  <string name="search">Search</string>
+  <string name="date_first_flight">Date first flight</string>
+  <string name="landing_successful">Landing Successful</string>
+  <string name="founder">Founder</string>
+  <string name="founded">Founded</string>
+  <string name="employees">Employees</string>
+  <string name="vehicles">Vehicles</string>
+  <string name="launch_sites">Launch sites</string>
+  <string name="test_sites">Test sites</string>
+  <string name="ceo">CEO</string>
+  <string name="cto">CTO</string>
+  <string name="coo">COO</string>
+  <string name="cto_propulsion">CTO propulsion</string>
+  <string name="valuation">Valuation</string>
+  <string name="cost_per_launch">Cost per launch</string>
+  <string name="success_rate">Success rate</string>
+  <string name="stages">Stages</string>
+  <string name="block">Block</string>
+  <string name="rtls_landings">RTLS landings</string>
+  <string name="asds_landings">ASDS landings</string>
+  <string name="water_landing">Water landing</string>
+  <string name="address">Address</string>
+  <string name="city">City</string>
+  <string name="state">State</string>
+  <string name="name">Name</string>
+  <string name="region">Region</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
+  <string name="reference_system">Reference system</string>
+  <string name="regime">Regime</string>
+  <string name="semi_major_axis_km">Semi Major Axis Km</string>
+  <string name="height">Height</string>
+  <string name="diameter">Diameter</string>
+  <string name="mass">Mass</string>
 
 </resources>

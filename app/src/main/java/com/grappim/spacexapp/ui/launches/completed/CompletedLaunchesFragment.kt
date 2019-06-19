@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.ui.launches.upcoming
+package com.grappim.spacexapp.ui.launches.completed
 
 import android.os.Bundle
 import android.view.*
@@ -11,31 +11,38 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
+import com.grappim.spacexapp.ui.launches.details.LaunchDetailsActivity
 import com.grappim.spacexapp.util.*
-import kotlinx.android.synthetic.main.fragment_upcoming.*
+import kotlinx.android.synthetic.main.fragment_completed_launches.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class UpcomingFragment : Fragment(), KoinComponent {
+class CompletedLaunchesFragment : Fragment(), KoinComponent {
 
   private lateinit var lAdapter: LaunchesAdapter
-  private val viewModelFactory: UpcomingViewModelFactory by inject()
-  private val viewModel by viewModels<UpcomingViewModel> { viewModelFactory }
+  private val launchesViewModelFactory: CompletedLaunchesViewModelFactory by inject()
+  private val viewModel by viewModels<CompletedLaunchesViewModel> { launchesViewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? {
-    return inflater.inflate(R.layout.fragment_upcoming, container, false)
+    return inflater.inflate(R.layout.fragment_completed_launches, container, false)
   }
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    Timber.d("UpcomingFragment - onCreateOptionsMenu")
+    Timber.d("CompletedLaunchesFragment - onCreateOptionsMenu")
     menu.clear()
     inflater.inflate(R.menu.search_menu, menu)
     initSearchView(menu)
     super.onCreateOptionsMenu(menu, inflater)
+  }
+
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
+    item3?.isVisible = true
+    super.onPrepareOptionsMenu(menu)
   }
 
   private fun initSearchView(menu: Menu) {
@@ -55,39 +62,26 @@ class UpcomingFragment : Fragment(), KoinComponent {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    Timber.d("UpcomingFragment - onViewCreated")
+    Timber.d("CompletedLaunchesFragment - onViewCreated")
     setHasOptionsMenu(true)
 
     viewModel.apply {
-      onObserve(upcomingLaunches, ::renderLaunches)
+      onObserve(pastLaunches, ::renderLaunches)
       onFailure(failure, ::handleFailure)
     }
 
     bindAdapter()
     getData()
 
-    srlUpcomingLaunches.setOnRefreshListener {
+    srlCompletedLaunches.setOnRefreshListener {
       getData()
-      srlUpcomingLaunches.isRefreshing = false
+      srlCompletedLaunches.isRefreshing = false
     }
   }
 
   private fun getData() {
-    pbUpcomingLaunches.show()
-    viewModel.loadAllLaunches()
-  }
-
-  private fun bindAdapter() {
-    lAdapter = LaunchesAdapter {
-
-    }
-    rvUpcomingLaunches.apply {
-      layoutManager = LinearLayoutManager(context)
-      addItemDecoration(MarginItemDecorator())
-      layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
-      adapter = lAdapter
-    }
+    pbCompletedLaunches.show()
+    viewModel.loadPastLaunches()
   }
 
   private fun handleFailure(failure: Failure?) {
@@ -97,17 +91,33 @@ class UpcomingFragment : Fragment(), KoinComponent {
     }
   }
 
-  fun renderFailure(failureText: String) {
-    rvUpcomingLaunches.showSnackbar(failureText)
-    pbUpcomingLaunches.gone()
-    srlUpcomingLaunches.isRefreshing = false
+  private fun bindAdapter() {
+    lAdapter = LaunchesAdapter {
+      context?.launchActivity<LaunchDetailsActivity> {
+        putExtra(PARCELABLE_LAUNCH_MODEL, it)
+      }
+    }
+    rvCompletedLaunches.apply {
+      layoutManager = LinearLayoutManager(context)
+      addItemDecoration(MarginItemDecorator())
+      layoutAnimation = AnimationUtils
+        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+      adapter = lAdapter
+    }
+  }
+
+  private fun renderFailure(failureText: String) {
+    rvCompletedLaunches.showSnackbar(failureText)
+    pbCompletedLaunches.gone()
+    srlCompletedLaunches.isRefreshing = false
   }
 
   private fun renderLaunches(launches: List<LaunchModel>?) {
     launches?.let {
       lAdapter.loadItems(it)
     }
-    pbUpcomingLaunches.gone()
-    rvUpcomingLaunches.scheduleLayoutAnimation()
+    pbCompletedLaunches.gone()
+    rvCompletedLaunches.scheduleLayoutAnimation()
   }
+
 }

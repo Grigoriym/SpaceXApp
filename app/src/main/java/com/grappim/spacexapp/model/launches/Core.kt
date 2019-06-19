@@ -1,27 +1,29 @@
 package com.grappim.spacexapp.model.launches
 
-
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Core(
   @SerializedName("block")
   val block: Int?,
   @SerializedName("core_serial")
-  val coreSerial: Any?,
+  val coreSerial: String?,
   @SerializedName("flight")
-  val flight: Any?,
+  val flight: Int?,
   @SerializedName("gridfins")
-  val gridfins: Any?,
+  val gridfins: Boolean?,
   @SerializedName("land_success")
-  val landSuccess: Any?,
+  val landSuccess: Boolean?,
   @SerializedName("landing_intent")
-  val landingIntent: Any?,
+  val landingIntent: Boolean?,
   @SerializedName("landing_type")
-  val landingType: Any?,
+  val landingType: String?,
   @SerializedName("landing_vehicle")
-  val landingVehicle: Any?,
+  val landingVehicle: String?,
   @SerializedName("legs")
-  val legs: Any?,
+  val legs: Boolean?,
   @SerializedName("reused")
   val reused: Boolean?
-)
+) : Parcelable

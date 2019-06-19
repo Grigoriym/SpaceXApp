@@ -12,8 +12,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
-    android:text="Name"
+    android:text="@string/name"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"/>
 
@@ -37,7 +36,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:text="Region"
+    android:text="@string/region"
     app:layout_constraintStart_toStartOf="@+id/textView42"
     app:layout_constraintTop_toBottomOf="@+id/textView42"/>
 
@@ -46,7 +45,6 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
     android:gravity="end"
     app:layout_constraintEnd_toEndOf="@+id/tvElvLaunchPadLocation"
     app:layout_constraintStart_toEndOf="@+id/textView54"
@@ -58,7 +56,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
-    android:text="Latitude"
+    android:text="@string/latitude"
     app:layout_constraintStart_toStartOf="@+id/textView54"
     app:layout_constraintTop_toBottomOf="@+id/textView54"/>
 
@@ -67,9 +65,7 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
     android:gravity="end"
-    android:text="TextView"
     app:layout_constraintEnd_toEndOf="@+id/tvElvLaunchPadRegion"
     app:layout_constraintStart_toEndOf="@+id/textView58"
     app:layout_constraintTop_toTopOf="@+id/textView58"
@@ -81,7 +77,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="16dp"
     android:layout_marginBottom="8dp"
-    android:text="Longitude"
+    android:text="@string/longitude"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintStart_toStartOf="@+id/textView58"
     app:layout_constraintTop_toBottomOf="@+id/textView58"/>
@@ -91,7 +87,6 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_marginStart="8dp"
-    android:layout_marginLeft="8dp"
     android:gravity="end"
     app:layout_constraintEnd_toEndOf="@+id/tvElvLaunchPadLatitude"
     app:layout_constraintStart_toEndOf="@+id/textView62"

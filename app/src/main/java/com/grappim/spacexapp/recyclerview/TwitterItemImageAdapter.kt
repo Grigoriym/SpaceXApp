@@ -41,6 +41,7 @@ class TwitterItemImageAdapter(
         }
       }
       twitterImage.layoutParams = lp
+
       GlideApp.with(cl.context)
         .load(items[position])
         .transition(DrawableTransitionOptions.withCrossFade())
@@ -66,6 +67,7 @@ class TwitterItemImageAdapter(
 class TwitterItemImageViewHolder(
   view: View
 ) : RecyclerView.ViewHolder(view) {
+
   val cl: ConstraintLayout = view.clTwitterItemImage
   val twitterImage: ImageView = view.ivTwitterItemImage
 

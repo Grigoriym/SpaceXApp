@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  app:startDestination="@id/historyFragment"
+  android:id="@+id/history_nav_graph">
+
+  <fragment
+    android:id="@+id/historyFragment"
+    android:name="com.grappim.spacexapp.ui.history.HistoryFragment"
+    tools:layout="@layout/fragment_history"
+    android:label="History">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/historyDetailsFragment">
+      <argument
+        android:name="historyModel"
+        app:argType="com.grappim.spacexapp.model.history.HistoryModel" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/historyDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.history.details.HistoryDetailsFragment"
+    tools:layout="@layout/fragment_history_details"
+    android:label="History details">
+    <argument
+      android:name="historyModel"
+      app:argType="com.grappim.spacexapp.model.history.HistoryModel" />
+  </fragment>
+
+</navigation>

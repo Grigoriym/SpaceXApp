@@ -1,8 +1,11 @@
 package com.grappim.spacexapp.model.launches
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class LaunchFailureDetails(
   @SerializedName("altitude")
   val altitude: Int?,
@@ -10,4 +13,4 @@ data class LaunchFailureDetails(
   val reason: String?,
   @SerializedName("time")
   val time: Int?
-)
+) : Parcelable

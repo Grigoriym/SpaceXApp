@@ -13,6 +13,7 @@ import com.grappim.spacexapp.model.ships.ShipModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface SpaceXApi {
 
@@ -20,7 +21,9 @@ interface SpaceXApi {
   suspend fun getAllLaunches(): Response<List<LaunchModel>>
 
   @GET("launches/past")
-  suspend fun getPastLaunches(): Response<List<LaunchModel>>
+  suspend fun getPastLaunches(
+    @Query("order") order: String? = "desc"
+  ): Response<List<LaunchModel>>
 
   @GET("launches/upcoming")
   suspend fun getUpcomingLaunches(): Response<List<LaunchModel>>

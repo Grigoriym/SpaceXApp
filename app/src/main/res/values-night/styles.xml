@@ -11,7 +11,11 @@
     <item name="android:textColorPrimary">@color/white</item>
 
     <item name="android:windowBackground">@color/windowBackground</item>
-    <item name="android:windowDisablePreview">true</item>
+  </style>
+
+  <style name="SplashTheme" parent="DayNightAppTheme">
+    <item name="android:windowTranslucentStatus">true</item>
+    <item name="android:windowBackground">@drawable/background_splash</item>
   </style>
 
   <style name="MyMaterialButton" parent="Widget.MaterialComponents.Button">

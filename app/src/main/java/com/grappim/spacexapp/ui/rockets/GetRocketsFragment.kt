@@ -76,5 +76,4 @@ class GetRocketsFragment : BaseFragment(), KoinComponent {
       adapter = rAdapter
     }
   }
-
 }

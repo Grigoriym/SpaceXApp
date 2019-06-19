@@ -42,6 +42,15 @@ class TwitterFragment : Fragment(), KoinComponent {
     super.onCreateOptionsMenu(menu, inflater)
   }
 
+  override fun onPrepareOptionsMenu(menu: Menu) {
+    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+    item?.isVisible = true
+    val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
+    item2?.isVisible = true
+
+    super.onPrepareOptionsMenu(menu)
+  }
+
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     when (item.itemId) {
       R.id.twitter_menu_refresh -> {
@@ -59,25 +68,27 @@ class TwitterFragment : Fragment(), KoinComponent {
   }
 
   private fun initMenu(menu: Menu) {
-    val item = menu.findItem(R.id.twitter_menu_spinner)
-    val spinner = item.actionView as AppCompatSpinner
+    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+    val spinner = item?.actionView as? AppCompatSpinner
 
-    val spinnerArrayAdapter = ArrayAdapter<String>(
+    val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
       context!!,
-      android.R.layout.simple_spinner_dropdown_item,
+      R.layout.layout_spinner_item,
       arrayListOf("SpaceX", "Elon Musk")
     )
-    spinner.adapter = spinnerArrayAdapter
-    spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+    spinner?.adapter = spinnerArrayAdapter
+    spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
         Timber.d("TwitterFragment - onNothingSelected")
       }
 
       override fun onItemSelected(
         parent: AdapterView<*>?,
-        view: View?, position: Int,
+        view: View?,
+        position: Int,
         id: Long
       ) {
+
         Timber.d("TwitterFragment - onItemSelected - $position")
         when (position) {
           0 -> {
@@ -120,7 +131,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     }
   }
 
-   fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvTwitter.showSnackbar(failureText)
     pbTwitter.gone()
     srlTwitter.isRefreshing = false

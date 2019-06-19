@@ -30,8 +30,8 @@ class CapsuleDetailsFragment : BaseFragment() {
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    Timber.d("CapsuleDetailsFragment - onViewCreated")
     super.onViewCreated(view, savedInstanceState)
+    Timber.d("CapsuleDetailsFragment - onViewCreated")
 
     bindAdapter()
 
@@ -49,9 +49,6 @@ class CapsuleDetailsFragment : BaseFragment() {
       tvCapsuleDetailsStatus.text = it.status?.capitalize()
       mAdapter.loadItems(it.missions)
     }
-  }
-
-  override fun renderFailure(failureText: String) {
   }
 
   private fun bindAdapter() {

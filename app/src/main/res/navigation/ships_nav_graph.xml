@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/ships_nav_graph"
+  app:startDestination="@id/getShipsFragment">
+
+  <include app:graph="@navigation/payload_mission_nav_graph" />
+
+  <fragment
+    android:id="@+id/getShipsFragment"
+    android:name="com.grappim.spacexapp.ui.ships.GetShipsFragment"
+    android:label="Get ships"
+    tools:layout="@layout/fragment_get_ships">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/shipDetailsFragment">
+      <argument
+        android:name="shipModel"
+        app:argType="com.grappim.spacexapp.model.ships.ShipModel" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/shipDetailsFragment"
+    android:name="com.grappim.spacexapp.ui.ships.details.ShipDetailsFragment"
+    android:label="Ship Details"
+    tools:layout="@layout/fragment_ship_details">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/payload_mission_nav_graph">
+      <argument
+        android:name="missionArgs"
+        app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+    </action>
+    <argument
+      android:name="shipModel"
+      app:argType="com.grappim.spacexapp.model.ships.ShipModel" />
+  </fragment>
+
+</navigation>

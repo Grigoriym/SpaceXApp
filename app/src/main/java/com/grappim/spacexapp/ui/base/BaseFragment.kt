@@ -14,15 +14,14 @@ import timber.log.Timber
  */
 abstract class BaseFragment : Fragment() {
 
-  abstract fun renderFailure(failureText: String)//todo maybe make it open rather than abstract
+  open fun renderFailure(failureText: String) {}
 
   override fun onPrepareOptionsMenu(menu: Menu) {
     Timber.d("BaseFragment - onPrepareOptionsMenu")
 
-    val item = menu.findItem(R.id.twitter_menu_spinner)
-    if (item != null) {
-      item.isVisible = false
-    }
+    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+    item?.isVisible = false
+
     val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
     item2?.isVisible = false
 

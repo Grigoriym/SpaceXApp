@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  app:startDestination="@id/missionFragment"
+  android:id="@+id/payload_mission_nav_graph">
+
+  <fragment
+    android:id="@+id/missionFragment"
+    android:name="com.grappim.spacexapp.ui.missions_payloads.MissionFragment"
+    tools:layout="@layout/fragment_mission"
+    android:label="Missions">
+    <argument
+      android:name="missionArgs"
+      app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+  </fragment>
+
+</navigation>

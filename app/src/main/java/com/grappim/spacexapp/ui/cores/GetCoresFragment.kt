@@ -61,9 +61,7 @@ class GetCoresFragment : BaseFragment(), KoinComponent {
       1 -> viewModel.loadPastCores()
       2 -> viewModel.loadUpcomingCores()
       else -> {
-        pbGetCores.gone()
-        srlGetCores.showSnackbar(getString(R.string.error_retrieving_data))
-        findNavController().popBackStack()
+        renderFailure(getString(R.string.error_retrieving_data))
       }
     }
   }

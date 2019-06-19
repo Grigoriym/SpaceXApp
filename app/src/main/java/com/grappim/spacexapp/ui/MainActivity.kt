@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     super.onCreate(savedInstanceState)
 
     setContentView(R.layout.activity_main)
-    setSupportActionBar(toolbar)
     setupNavigation()
     setupSwitcher()
   }
@@ -83,12 +82,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     appBarConfiguration = AppBarConfiguration(
       setOf(
         R.id.capsuleFragment,
-        R.id.rocketFragment,
-        R.id.shipsFragment,
+        R.id.getRocketsFragment,
+        R.id.getShipsFragment,
         R.id.coreFragment,
         R.id.infoFragment,
         R.id.historyFragment,
-        R.id.launchPadFragment,
+        R.id.getLaunchPadsFragment,
         R.id.socialMediaFragment,
         R.id.launchesFragment
       ), drawerLayout
@@ -112,17 +111,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
   private fun displaySelectedScreen(itemId: Int): Boolean {
     when (itemId) {
-      R.id.nav_capsules -> navController.navigate(R.id.capsuleFragment)
-      R.id.nav_rockets -> navController.navigate(R.id.rocketFragment)
-      R.id.nav_ships -> navController.navigate(R.id.shipsFragment)
-      R.id.nav_cores -> navController.navigate(R.id.coreFragment)
+      R.id.nav_capsules -> navController.navigate(R.id.capsules_nav_graph)
+      R.id.nav_rockets -> navController.navigate(R.id.rockets_nav_graph)
+      R.id.nav_ships -> navController.navigate(R.id.ships_nav_graph)
+      R.id.nav_cores -> navController.navigate(R.id.cores_nav_graph)
       R.id.nav_switch_theme -> {
         switcher.isChecked = !switcher.isChecked
         return false
       }
       R.id.nav_info -> navController.navigate(R.id.infoFragment)
-      R.id.nav_history -> navController.navigate(R.id.historyFragment)
-      R.id.nav_launch_pads -> navController.navigate(R.id.launchPadFragment)
+      R.id.nav_history -> navController.navigate(R.id.history_nav_graph)
+      R.id.nav_launch_pads -> navController.navigate(R.id.launchpads_nav_graph)
       R.id.nav_social_media -> navController.navigate(R.id.socialMediaFragment)
       R.id.nav_launches -> navController.navigate(R.id.launchesFragment)
     }

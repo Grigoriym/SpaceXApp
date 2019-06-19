@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/cores_nav_graph"
+  app:startDestination="@id/coreFragment">
+
+  <fragment
+    android:id="@+id/coreFragment"
+    android:name="com.grappim.spacexapp.ui.cores.CoreFragment"
+    android:label="Cores"
+    tools:layout="@layout/fragment_core">
+    <action
+      android:id="@+id/nextFragment"
+      app:destination="@id/getCoresFragment">
+      <argument
+        android:name="coresToGetArgs"
+        app:argType="integer" />
+    </action>
+  </fragment>
+
+  <fragment
+    android:id="@+id/getCoresFragment"
+    android:name="com.grappim.spacexapp.ui.cores.GetCoresFragment"
+    android:label="Get Cores"
+    tools:layout="@layout/fragment_get_cores">
+    <argument
+      android:name="coresToGetArgs"
+      app:argType="integer" />
+  </fragment>
+
+</navigation>

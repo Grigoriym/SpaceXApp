@@ -62,9 +62,7 @@ open class GetCapsulesFragment : BaseFragment(), KoinComponent {
       1 -> viewModel.loadUpcomingCapsules()
       2 -> viewModel.loadPastCapsules()
       else -> {
-        pbGetCapsules.gone()
-        srlGetCapsules.showSnackbar(getString(R.string.error_retrieving_data))
-        findNavController().popBackStack()
+        renderFailure(getString(R.string.error_retrieving_data))
       }
     }
   }

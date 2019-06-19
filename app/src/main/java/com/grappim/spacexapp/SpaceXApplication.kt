@@ -13,10 +13,10 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-//todo problems when starting the app, it needs ~1-3 seconds to show splash
-//todo big problems with menu in the appbar
-//todo delete some one-button-fragments
-//todo separate/modularize nav_Graph
+//todo twitter images (corners, spacing)
+//todo toolbar menu needs to be redone
+//todo splash screen is terrible - needs to be changed
+//todo though date/time works, it needs to be refactored
 
 class SpaceXApplication : MultiDexApplication() {
 

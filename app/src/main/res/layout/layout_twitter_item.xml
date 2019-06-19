@@ -16,7 +16,6 @@
       android:layout_width="48dp"
       android:layout_height="48dp"
       android:layout_marginStart="8dp"
-      android:layout_marginLeft="8dp"
       android:layout_marginTop="8dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +26,6 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:layout_marginLeft="8dp"
       android:textStyle="bold"
       app:layout_constraintStart_toEndOf="@+id/ivTwitterItemProfileImage"
       app:layout_constraintTop_toTopOf="@+id/ivTwitterItemProfileImage"
@@ -38,7 +36,6 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="4dp"
-      android:layout_marginLeft="4dp"
       android:textColor="@color/gray_for_twitter"
       app:layout_constraintStart_toEndOf="@+id/tvTwitterName"
       app:layout_constraintTop_toTopOf="@+id/tvTwitterName"
@@ -49,26 +46,10 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      android:layout_marginLeft="8dp"
       android:textColor="@color/gray_for_twitter"
       app:layout_constraintStart_toEndOf="@+id/tvTwitterItemScreenName"
       app:layout_constraintTop_toTopOf="@+id/tvTwitterItemScreenName"
       tools:text="May 19" />
-
-    <!--<ImageView-->
-    <!--android:id="@+id/ivTwitterItemMedia"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="200dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginLeft="8dp"-->
-    <!--android:layout_marginTop="4dp"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:scaleType="fitXY"-->
-    <!--android:visibility="gone"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toEndOf="@+id/ivTwitterItemProfileImage"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/tvTwitterItemScreenName" />-->
 
     <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rlTwitterItemMedia"
@@ -90,7 +71,6 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="4dp"
       android:layout_marginEnd="8dp"
-      android:layout_marginRight="8dp"
       android:layout_marginBottom="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"

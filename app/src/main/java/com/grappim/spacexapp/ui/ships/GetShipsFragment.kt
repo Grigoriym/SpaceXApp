@@ -78,5 +78,4 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
       adapter = shipAdapter
     }
   }
-
 }
