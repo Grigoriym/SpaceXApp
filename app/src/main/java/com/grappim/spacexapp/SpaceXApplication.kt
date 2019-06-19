@@ -17,6 +17,7 @@ import javax.net.ssl.SSLContext
 //todo toolbar menu needs to be redone
 //todo splash screen is terrible - needs to be changed
 //todo though date/time works, it needs to be refactored
+//todo make one class for sharedprefs and di it
 
 class SpaceXApplication : MultiDexApplication() {
 
