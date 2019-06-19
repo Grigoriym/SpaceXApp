@@ -13,9 +13,9 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-//todo problems when starting the app, it needs ~1-3 seconds to show splash
 //todo twitter images (corners, spacing)
 //todo toolbar menu needs to be redone
+//todo splash screen is terrible - needs to be changed
 
 class SpaceXApplication : MultiDexApplication() {
 
