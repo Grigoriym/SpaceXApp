@@ -37,8 +37,8 @@ class ShipsAdapter(
     }
   }
 
-  fun loadItems(newItems: List<ShipModel>) {
-    items = newItems
+  fun loadItems(newItems: List<ShipModel>?) {
+    items = newItems ?: emptyList()
     notifyDataSetChanged()
   }
 }

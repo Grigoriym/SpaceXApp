@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.reddit.RedditPaginationAdapter
-import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_reddit.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class RedditFragment : BaseFragment(), KoinComponent {
+class RedditFragment : Fragment(), KoinComponent {
 
   private val viewModelFactory: RedditViewModelFactory  by inject()
   private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
@@ -29,11 +28,13 @@ class RedditFragment : BaseFragment(), KoinComponent {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_reddit, container, false)
-  }
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_reddit, container, false)
+
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    Timber.d("RedditFragment - onCreateOptionsMenu")
     menu.clear()
     inflater.inflate(R.menu.twitter_menu, menu)
     initMenu(menu)
@@ -41,11 +42,12 @@ class RedditFragment : BaseFragment(), KoinComponent {
   }
 
   override fun onPrepareOptionsMenu(menu: Menu) {
-    super.onPrepareOptionsMenu(menu)
+    Timber.d("RedditFragment - onPrepareOptionsMenu")
     val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
     item?.isVisible = true
     val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
     item2?.isVisible = true
+    super.onPrepareOptionsMenu(menu)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,14 +59,14 @@ class RedditFragment : BaseFragment(), KoinComponent {
     return super.onOptionsItemSelected(item)
   }
 
-//  private fun handleFailure(failure: Failure?) {
-//    when (failure) {
-//      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-//      is Failure.ServerError -> renderFailure("Server Error")
-//    }
-//  }
+  private fun handleFailure(failure: Failure?) {
+    when (failure) {
+      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+      is Failure.ServerError -> renderFailure("Server Error")
+    }
+  }
 
-  override fun renderFailure(failureText: String) {
+  fun renderFailure(failureText: String) {
     rvReddit.showSnackbar(failureText)
     pbReddit.gone()
     srlReddit.isRefreshing = false
@@ -110,7 +112,7 @@ class RedditFragment : BaseFragment(), KoinComponent {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-//    setHasOptionsMenu(true)
+    setHasOptionsMenu(true)
 
     viewModel.apply {
       posts.observe(this@RedditFragment, Observer {
@@ -146,5 +148,11 @@ class RedditFragment : BaseFragment(), KoinComponent {
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = rAdapter
     }
+  }
+
+  override fun onPause() {
+//    setHasOptionsMenu(false)
+    viewModelStore.clear()
+    super.onPause()
   }
 }

@@ -2,6 +2,7 @@ package com.grappim.spacexapp.ui.base
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -28,13 +29,19 @@ abstract class BaseFragment : Fragment() {
     val item3: MenuItem? = menu.findItem(R.id.searchMenu)
     item3?.isVisible = false
 
-    super.onPrepareOptionsMenu(menu)
+//    super.onPrepareOptionsMenu(menu)
   }
+
+//  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//    menu.clear()
+//    super.onCreateOptionsMenu(menu, inflater)
+//  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    setHasOptionsMenu(true)
-    activity?.invalidateOptionsMenu()
+//    setMenuVisibility(false)
+//    setHasOptionsMenu(true)
+//    activity?.invalidateOptionsMenu()
   }
 
   protected fun handleFailure(failure: Failure?) {

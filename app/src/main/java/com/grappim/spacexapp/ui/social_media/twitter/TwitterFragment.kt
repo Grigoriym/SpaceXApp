@@ -30,9 +30,10 @@ class TwitterFragment : Fragment(), KoinComponent {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_twitter, container, false)
-  }
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_twitter, container, false)
+
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("TwitterFragment - onCreateOptionsMenu")
@@ -164,5 +165,11 @@ class TwitterFragment : Fragment(), KoinComponent {
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = uAdapter
     }
+  }
+
+  override fun onPause() {
+//    setHasOptionsMenu(false)
+    viewModelStore.clear()
+    super.onPause()
   }
 }

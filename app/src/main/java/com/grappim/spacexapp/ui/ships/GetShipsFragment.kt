@@ -1,9 +1,7 @@
 package com.grappim.spacexapp.ui.ships
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -55,7 +53,7 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderShips(ships: List<ShipModel>?) {
-    shipAdapter.loadItems(ships!!)   //todo
+    shipAdapter.loadItems(ships)
     pbGetShips.gone()
     rvGetShips.scheduleLayoutAnimation()
   }
