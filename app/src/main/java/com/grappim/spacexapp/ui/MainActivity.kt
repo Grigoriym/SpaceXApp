@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.ui
 
-import android.content.Context
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -16,16 +15,19 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.NIGHT_THEME_PREF_KEY
-import com.grappim.spacexapp.util.THEME_PREFS
+import com.grappim.spacexapp.util.PrefsManager
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
+  KoinComponent {
 
   private lateinit var navController: NavController
   private lateinit var appBarConfiguration: AppBarConfiguration
   private lateinit var switcher: SwitchCompat
+  private val prefsManager: PrefsManager by inject()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     setupNightMode()
@@ -38,41 +40,32 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 
   private fun setupNightMode() {
-    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
-      .getBoolean(NIGHT_THEME_PREF_KEY, false)
     AppCompatDelegate.setDefaultNightMode(
-      if (!prefs) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+      if (!prefsManager.isNightThemeEnabled())
+        AppCompatDelegate.MODE_NIGHT_YES
+      else AppCompatDelegate.MODE_NIGHT_NO
     )
   }
 
   private fun setupSwitcher() {
     Timber.d("mainActivity - setupSwitcher")
-    val sp = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
 
     val menu = navigationView.menu
     val menuItem = menu.findItem(R.id.nav_switch_theme)
     val actionView = menuItem.actionView
-    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
-      .getBoolean(NIGHT_THEME_PREF_KEY, false)
 
     switcher = actionView.findViewById(R.id.drawerSwitch)
-    switcher.isChecked = prefs
+    switcher.isChecked = prefsManager.isNightThemeEnabled()
     switcher.setOnCheckedChangeListener { _, isChecked ->
       run {
         if (!isChecked) {
           Timber.d("Switcher !isChecked")
           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-          sp.edit().apply {
-            putBoolean(NIGHT_THEME_PREF_KEY, false)
-            apply()
-          }
+          prefsManager.setNightTheme(false)
         } else {
           Timber.d("Switcher isChecked")
           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-          sp.edit().apply {
-            putBoolean(NIGHT_THEME_PREF_KEY, true)
-            apply()
-          }
+          prefsManager.setNightTheme(true)
         }
       }
     }
