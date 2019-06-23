@@ -3,6 +3,7 @@ package com.grappim.spacexapp.ui.ships
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,19 +21,25 @@ import timber.log.Timber
 class GetShipsFragment : BaseFragment(), KoinComponent {
 
   private lateinit var shipAdapter: ShipsAdapter
-  private val viewModelFactory:ShipsViewModelFactory by inject()
+  private val viewModelFactory: ShipsViewModelFactory by inject()
   private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_get_ships, container, false)
-  }
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_get_ships, container, false)
+
+//  override fun onPrepareOptionsMenu(menu: Menu) {
+//    menu.clear()
+//  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("GetShipsFragment - onViewCreated")
+//    setHasOptionsMenu(true)
+
     viewModel.apply {
       onObserve(allShips, ::renderShips)
       onFailure(failure, ::handleFailure)
@@ -51,6 +58,13 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
     pbGetShips.show()
     viewModel.loadAllShips()
   }
+
+//  protected fun handleFailure(failure: Failure?) {
+//    when (failure) {
+//      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+//      is Failure.ServerError -> renderFailure("Server Error")
+//    }
+//  }
 
   private fun renderShips(ships: List<ShipModel>?) {
     shipAdapter.loadItems(ships)

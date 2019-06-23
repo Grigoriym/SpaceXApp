@@ -20,14 +20,15 @@ abstract class BaseFragment : Fragment() {
   override fun onPrepareOptionsMenu(menu: Menu) {
     Timber.d("BaseFragment - onPrepareOptionsMenu")
 
-    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
-    item?.isVisible = false
-
-    val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
-    item2?.isVisible = false
-
-    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
-    item3?.isVisible = false
+//    val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
+//    item?.isVisible = false
+//
+//    val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
+//    item2?.isVisible = false
+//
+//    val item3: MenuItem? = menu.findItem(R.id.searchMenu)
+//    item3?.isVisible = false
+    menu.clear()
 
 //    super.onPrepareOptionsMenu(menu)
   }
@@ -40,7 +41,7 @@ abstract class BaseFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
 //    setMenuVisibility(false)
-//    setHasOptionsMenu(true)
+    setHasOptionsMenu(true)
 //    activity?.invalidateOptionsMenu()
   }
 
