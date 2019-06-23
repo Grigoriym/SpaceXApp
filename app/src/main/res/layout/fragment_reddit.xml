@@ -5,4 +5,24 @@
   android:layout_height="match_parent"
   tools:context=".ui.social_media.reddit.RedditFragment">
 
+  <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/srlReddit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rvReddit"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+
+  </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+  <ProgressBar
+    android:id="@+id/pbReddit"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:visibility="gone" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
