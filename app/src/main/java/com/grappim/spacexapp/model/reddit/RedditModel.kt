@@ -58,8 +58,8 @@ data class RedditModel(
   val domain: String?,
   @SerializedName("downs")
   val downs: Int?,
-  @SerializedName("edited")
-  val edited: Boolean?,
+//  @SerializedName("edited")
+//  val edited: Boolean?,
   @SerializedName("gilded")
   val gilded: Int?,
   @SerializedName("gildings")

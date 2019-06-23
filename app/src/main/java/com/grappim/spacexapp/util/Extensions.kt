@@ -176,7 +176,6 @@ fun Context.statusBarHeight(): Int {
   return result
 }
 
-
 val Context.networkInfo: NetworkInfo?
   get() =
     (this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo

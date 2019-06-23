@@ -3,6 +3,7 @@ package com.grappim.spacexapp.di
 import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.services.RedditService
+import com.grappim.spacexapp.repository.RedditRepository
 import com.grappim.spacexapp.repository.RedditRepositoryImpl
 import com.grappim.spacexapp.util.KOIN_REDDIT_OK_HTTP_CLIENT
 import com.grappim.spacexapp.util.KOIN_REDDIT_RETROFIT
@@ -21,5 +22,5 @@ val redditModule = module {
     )
   }
   single { RedditService(get(named(KOIN_REDDIT_RETROFIT))) }
-  single { RedditRepositoryImpl() }
+  single { RedditRepositoryImpl() as RedditRepository }
 }

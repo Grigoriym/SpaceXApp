@@ -31,5 +31,5 @@ val twitterModule = module {
     )
   }
   single { TwitterService(get(named(KOIN_TWITTER_RETROFIT))) }
-  single { TwitterPaginationRepositoryImpl() }
+  single { TwitterPaginationRepositoryImpl() as TwitterPaginationRepository }
 }

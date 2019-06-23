@@ -5,7 +5,6 @@ import android.content.Context
 class PrefsManager(
   val context: Context
 ) {
-
   private val pref = context.getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
   private val editor = pref.edit()
 

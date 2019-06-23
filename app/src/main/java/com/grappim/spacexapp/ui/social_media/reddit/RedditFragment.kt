@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.reddit.RedditPaginationAdapter
+import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_reddit.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
 
-class RedditFragment : Fragment(), KoinComponent {
+class RedditFragment : BaseFragment(), KoinComponent {
 
   private val viewModelFactory: RedditViewModelFactory  by inject()
   private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
@@ -40,12 +41,11 @@ class RedditFragment : Fragment(), KoinComponent {
   }
 
   override fun onPrepareOptionsMenu(menu: Menu) {
+    super.onPrepareOptionsMenu(menu)
     val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
     item?.isVisible = true
     val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
     item2?.isVisible = true
-
-    super.onPrepareOptionsMenu(menu)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -57,14 +57,14 @@ class RedditFragment : Fragment(), KoinComponent {
     return super.onOptionsItemSelected(item)
   }
 
-  private fun handleFailure(failure: Failure?) {
-    when (failure) {
-      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
-    }
-  }
+//  private fun handleFailure(failure: Failure?) {
+//    when (failure) {
+//      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
+//      is Failure.ServerError -> renderFailure("Server Error")
+//    }
+//  }
 
-  fun renderFailure(failureText: String) {
+  override fun renderFailure(failureText: String) {
     rvReddit.showSnackbar(failureText)
     pbReddit.gone()
     srlReddit.isRefreshing = false
@@ -77,7 +77,7 @@ class RedditFragment : Fragment(), KoinComponent {
     val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
       context!!,
       R.layout.layout_spinner_item,
-      arrayListOf("SpaceX", "Elon Musk")
+      arrayListOf("SpaceX", "Elon Musk", "SpaceXLounge")
     )
     spinner?.adapter = spinnerArrayAdapter
     spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -100,6 +100,9 @@ class RedditFragment : Fragment(), KoinComponent {
           1 -> {
             viewModel.setCurrentSubreddit("elonmusk")
           }
+          2 -> {
+            viewModel.setCurrentSubreddit("SpaceXLounge")
+          }
         }
       }
     }
@@ -107,7 +110,7 @@ class RedditFragment : Fragment(), KoinComponent {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    setHasOptionsMenu(true)
+//    setHasOptionsMenu(true)
 
     viewModel.apply {
       posts.observe(this@RedditFragment, Observer {
