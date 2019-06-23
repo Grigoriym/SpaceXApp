@@ -140,7 +140,7 @@ class TwitterFragment : Fragment(), KoinComponent {
   private fun bindAdapter() {
     uAdapter = TwitterPaginationAdapter(
       onClick = {
-        startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
+        startBrowser("$TWITTER_FOR_BROWSER_URI${it?.idStr}")
       },
       onImageClickS = { url, isVideo, videoDuration ->
         when (isVideo) {

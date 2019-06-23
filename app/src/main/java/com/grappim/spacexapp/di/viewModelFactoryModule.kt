@@ -10,6 +10,7 @@ import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModelFactory
 import com.grappim.spacexapp.ui.missions_payloads.MissionViewModelFactory
 import com.grappim.spacexapp.ui.rockets.RocketsViewModelFactory
 import com.grappim.spacexapp.ui.ships.ShipsViewModelFactory
+import com.grappim.spacexapp.ui.social_media.reddit.RedditViewModelFactory
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModelFactory
 import org.koin.dsl.module
 
@@ -25,4 +26,5 @@ val viewModuleFactoryModule = module {
   factory { TwitterViewModelFactory(get()) }
   factory { CompletedLaunchesViewModelFactory(get()) }
   factory { UpcomingLaunchesViewModelFactory(get()) }
+  factory { RedditViewModelFactory(get()) }
 }
