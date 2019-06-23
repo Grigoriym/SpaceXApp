@@ -25,16 +25,16 @@ class ShipDetailsFragment : BaseFragment() {
   private lateinit var mAdapter: RvInnerMissionsAdapter
 
   override fun onCreateView(
-      inflater: LayoutInflater, container: ViewGroup?,
-      savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_ship_details, container, false)
-  }
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_ship_details, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    super.onCreateOptionsMenu(menu, inflater)
     inflater.inflate(R.menu.toolbar_menu_wiki, menu)
     menu[0].title = "URL"
-    super.onCreateOptionsMenu(menu, inflater)
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -56,17 +56,17 @@ class ShipDetailsFragment : BaseFragment() {
     bindAdapter()
     args.shipModel.let {
       GlideApp.with(this)
-          .load(it.image)
-          .into(ivShipDetailsToolbar)
+        .load(it.image)
+        .into(ivShipDetailsToolbar)
       (activity as? AppCompatActivity)?.supportActionBar?.title = it.shipName
       tvShipDetailsName.text = it.shipName
       tvShipDetailsType.text = it.shipType
       tvShipDetailsHomePort.text = it.homePort
       tvShipDetailsStatus.text = it.status
       tvShipDetailsLandings.text = getString(
-          R.string.successful_attempted,
-          it.successfulLandings ?: 0,
-          it.attemptedLandings ?: 0
+        R.string.successful_attempted,
+        it.successfulLandings ?: 0,
+        it.attemptedLandings ?: 0
       )
       ivShipDetailsActive.setImageResource(setMyImageResource(it.active))
       mAdapter.loadItems(it.missions!!)

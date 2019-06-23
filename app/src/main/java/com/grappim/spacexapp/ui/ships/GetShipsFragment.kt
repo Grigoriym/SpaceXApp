@@ -1,9 +1,10 @@
 package com.grappim.spacexapp.ui.ships
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,14 +32,9 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
     inflater
       .inflate(R.layout.fragment_get_ships, container, false)
 
-//  override fun onPrepareOptionsMenu(menu: Menu) {
-//    menu.clear()
-//  }
-
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("GetShipsFragment - onViewCreated")
-//    setHasOptionsMenu(true)
 
     viewModel.apply {
       onObserve(allShips, ::renderShips)
@@ -58,13 +54,6 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
     pbGetShips.show()
     viewModel.loadAllShips()
   }
-
-//  protected fun handleFailure(failure: Failure?) {
-//    when (failure) {
-//      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-//      is Failure.ServerError -> renderFailure("Server Error")
-//    }
-//  }
 
   private fun renderShips(ships: List<ShipModel>?) {
     shipAdapter.loadItems(ships)
