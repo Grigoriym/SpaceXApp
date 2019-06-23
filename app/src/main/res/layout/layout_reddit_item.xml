@@ -22,7 +22,7 @@
       tools:src="@tools:sample/avatars" />
 
     <TextView
-      android:id="@+id/textView48"
+      android:id="@+id/tvRedditTitle"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
@@ -33,41 +33,43 @@
       tools:text="Stralink Infos from Tesla Shareholder Day" />
 
     <TextView
-      android:id="@+id/textView66"
+      android:id="@+id/tvRedditSelftext"
+      android:ellipsize="end"
+      android:maxLines="1"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
-      app:layout_constraintEnd_toEndOf="@+id/textView48"
-      app:layout_constraintStart_toStartOf="@+id/textView48"
-      app:layout_constraintTop_toBottomOf="@+id/textView48"
+      app:layout_constraintEnd_toEndOf="@+id/tvRedditTitle"
+      app:layout_constraintStart_toStartOf="@+id/tvRedditTitle"
+      app:layout_constraintTop_toBottomOf="@+id/tvRedditTitle"
       tools:text="Some facts from Elon. Most already know" />
 
     <TextView
-      android:id="@+id/textView68"
+      android:id="@+id/tvRedditCreatedUTC"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="8dp"
       android:layout_marginBottom="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintStart_toStartOf="@+id/textView66"
-      app:layout_constraintTop_toBottomOf="@+id/textView66"
+      app:layout_constraintStart_toStartOf="@+id/tvRedditSelftext"
+      app:layout_constraintTop_toBottomOf="@+id/tvRedditSelftext"
       tools:text="11 days ago" />
 
     <TextView
-      android:id="@+id/textView73"
+      android:id="@+id/tvRedditAuthor"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginStart="8dp"
-      app:layout_constraintStart_toEndOf="@+id/textView68"
-      app:layout_constraintTop_toTopOf="@+id/textView68"
+      app:layout_constraintStart_toEndOf="@+id/tvRedditCreatedUTC"
+      app:layout_constraintTop_toTopOf="@+id/tvRedditCreatedUTC"
       tools:text="hainzgrimmer" />
 
     <TextView
-      android:id="@+id/textView74"
+      android:id="@+id/tvRedditScore"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      app:layout_constraintEnd_toEndOf="@+id/textView66"
-      app:layout_constraintTop_toTopOf="@+id/textView73"
+      app:layout_constraintEnd_toEndOf="@+id/tvRedditSelftext"
+      app:layout_constraintTop_toTopOf="@+id/tvRedditAuthor"
       tools:text="+1249" />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

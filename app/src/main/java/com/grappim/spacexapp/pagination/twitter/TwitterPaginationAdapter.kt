@@ -18,7 +18,7 @@ import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterPaginationAdapter(
-  val onClick: (UserTimelineModel) -> Unit,
+  val onClick: (UserTimelineModel?) -> Unit,
   val onImageClickS: (String, Boolean, Int?) -> Unit
 ) : PagedListAdapter<UserTimelineModel,
     TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
@@ -39,7 +39,11 @@ class TwitterPaginationAdapter(
     }
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TwitterPaginationViewHolder =
+  override fun onCreateViewHolder(
+    parent: ViewGroup,
+    viewType: Int
+  )
+      : TwitterPaginationViewHolder =
     TwitterPaginationViewHolder(
       parent
         .context
@@ -71,7 +75,7 @@ class TwitterPaginationAdapter(
           onImageClickS(it, isVideo, null)
         }
       }
-      itemView.setOnClickListener { onClick(getItem(position)!!) }
+      itemView.setOnClickListener { onClick(getItem(position)) }
       GlideApp.with(profileImage.context)
         .load(getItem(position)?.user?.profileImageUrlHttps)
         .transition(DrawableTransitionOptions.withCrossFade())
