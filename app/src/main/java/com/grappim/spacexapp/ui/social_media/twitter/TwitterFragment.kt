@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
-import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
+import com.grappim.spacexapp.pagination.twitter.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
 import com.grappim.spacexapp.util.*

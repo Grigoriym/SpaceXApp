@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.pagination
+package com.grappim.spacexapp.pagination.twitter
 
 import android.view.View
 import android.view.ViewGroup
