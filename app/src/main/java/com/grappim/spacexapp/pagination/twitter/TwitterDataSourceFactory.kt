@@ -1,8 +1,9 @@
-package com.grappim.spacexapp.pagination
+package com.grappim.spacexapp.pagination.twitter
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.pagination.twitter.TwitterDataSource
 import timber.log.Timber
 
 class TwitterDataSourceFactory(

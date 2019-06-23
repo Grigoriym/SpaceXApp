@@ -2,6 +2,7 @@ package com.grappim.spacexapp.ui.base
 
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -18,23 +19,22 @@ abstract class BaseFragment : Fragment() {
 
   override fun onPrepareOptionsMenu(menu: Menu) {
     Timber.d("BaseFragment - onPrepareOptionsMenu")
+    menu.clear()
+  }
 
+  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
     item?.isVisible = false
-
     val item2: MenuItem? = menu.findItem(R.id.twitter_menu_refresh)
     item2?.isVisible = false
-
     val item3: MenuItem? = menu.findItem(R.id.searchMenu)
     item3?.isVisible = false
-
-    super.onPrepareOptionsMenu(menu)
+    super.onCreateOptionsMenu(menu, inflater)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     setHasOptionsMenu(true)
-    activity?.invalidateOptionsMenu()
   }
 
   protected fun handleFailure(failure: Failure?) {

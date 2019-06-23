@@ -22,19 +22,20 @@ import timber.log.Timber
 class GetShipsFragment : BaseFragment(), KoinComponent {
 
   private lateinit var shipAdapter: ShipsAdapter
-  private val viewModelFactory:ShipsViewModelFactory by inject()
+  private val viewModelFactory: ShipsViewModelFactory by inject()
   private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_get_ships, container, false)
-  }
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_get_ships, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("GetShipsFragment - onViewCreated")
+
     viewModel.apply {
       onObserve(allShips, ::renderShips)
       onFailure(failure, ::handleFailure)
@@ -55,7 +56,7 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderShips(ships: List<ShipModel>?) {
-    shipAdapter.loadItems(ships!!)   //todo
+    shipAdapter.loadItems(ships)
     pbGetShips.gone()
     rvGetShips.scheduleLayoutAnimation()
   }

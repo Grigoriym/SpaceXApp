@@ -17,6 +17,7 @@ import javax.net.ssl.SSLContext
 //todo toolbar menu needs to be redone
 //todo splash screen is terrible - needs to be changed
 //todo though date/time works, it needs to be refactored
+//todo OMFG this fucking stupid menu, why it can't just ffs work? Why it has to be always buggy as shit? I don't know what to do with this piece of stinky mf shit.
 
 class SpaceXApplication : MultiDexApplication() {
 
@@ -30,7 +31,9 @@ class SpaceXApplication : MultiDexApplication() {
           spaceXModule,
           twitterModule,
           viewModuleFactoryModule,
-          getModule
+          getModule,
+          mixNodule,
+          redditModule
         )
       )
     }

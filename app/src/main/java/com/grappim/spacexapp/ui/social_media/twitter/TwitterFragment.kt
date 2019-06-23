@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.pagination.NetworkState
-import com.grappim.spacexapp.pagination.TwitterPaginationAdapter
+import com.grappim.spacexapp.pagination.twitter.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
 import com.grappim.spacexapp.util.*
@@ -30,9 +30,10 @@ class TwitterFragment : Fragment(), KoinComponent {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_twitter, container, false)
-  }
+  ): View? =
+    inflater
+      .inflate(R.layout.fragment_twitter, container, false)
+
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("TwitterFragment - onCreateOptionsMenu")
@@ -140,7 +141,7 @@ class TwitterFragment : Fragment(), KoinComponent {
   private fun bindAdapter() {
     uAdapter = TwitterPaginationAdapter(
       onClick = {
-        startBrowser("$TWITTER_FOR_BROWSER_URI${it.idStr}")
+        startBrowser("$TWITTER_FOR_BROWSER_URI${it?.idStr}")
       },
       onImageClickS = { url, isVideo, videoDuration ->
         when (isVideo) {
@@ -164,5 +165,11 @@ class TwitterFragment : Fragment(), KoinComponent {
         .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
       adapter = uAdapter
     }
+  }
+
+  override fun onPause() {
+//    setHasOptionsMenu(false)
+    viewModelStore.clear()
+    super.onPause()
   }
 }

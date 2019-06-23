@@ -1,15 +1,17 @@
 package com.grappim.spacexapp.ui
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.grappim.spacexapp.util.NIGHT_THEME_PREF_KEY
-import com.grappim.spacexapp.util.THEME_PREFS
+import com.grappim.spacexapp.util.PrefsManager
 import com.grappim.spacexapp.util.launchActivity
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import timber.log.Timber
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity(), KoinComponent {
+
+  private val prefs: PrefsManager by inject()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     Timber.d("SplashActivity - onCreate")
@@ -24,9 +26,7 @@ class SplashActivity : AppCompatActivity() {
   }
 
   private fun initSharedPrefs() {
-    val prefs = getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
-    val restoredValue = prefs.getBoolean(NIGHT_THEME_PREF_KEY, false)
-    if (!restoredValue) {
+    if (!prefs.isNightThemeEnabled()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     } else {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

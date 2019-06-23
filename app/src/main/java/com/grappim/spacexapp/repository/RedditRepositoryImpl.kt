@@ -3,17 +3,13 @@ package com.grappim.spacexapp.repository
 import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.pagination.Listing
-import com.grappim.spacexapp.pagination.twitter.TwitterDataSourceFactory
-import timber.log.Timber
+import com.grappim.spacexapp.pagination.reddit.RedditDataSourceFactory
 
-class TwitterPaginationRepositoryImpl : TwitterPaginationRepository {
-
-  override fun getTweets(screenName: String): Listing<UserTimelineModel> {
-    Timber.d("TwitterPaginationRepositoryImpl - getTweets - $screenName")
-    val sourceFactory =
-      TwitterDataSourceFactory(screenName)
+class RedditRepositoryImpl : RedditRepository {
+  override fun getPostsBySubreddit(subreddit: String): Listing<RedditModel> {
+    val sourceFactory = RedditDataSourceFactory(subreddit)
     val livePagedList = sourceFactory.toLiveData(
       config = Config(
         pageSize = 30,
@@ -22,10 +18,11 @@ class TwitterPaginationRepositoryImpl : TwitterPaginationRepository {
         prefetchDistance = 20
       )
     )
-
     return Listing(
       pagedList = livePagedList,
-      networkState = Transformations.switchMap(sourceFactory.sourceLiveData) {
+      networkState = Transformations.switchMap(
+        sourceFactory.sourceLiveData
+      ) {
         it.networkState
       },
       refresh = { sourceFactory.sourceLiveData.value?.invalidate() },

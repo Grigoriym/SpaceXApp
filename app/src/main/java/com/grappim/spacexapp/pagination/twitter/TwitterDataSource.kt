@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.pagination
+package com.grappim.spacexapp.pagination.twitter
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
@@ -6,6 +6,7 @@ import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.TwitterService
+import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.util.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
