@@ -8,6 +8,9 @@ import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.RedditService
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.util.Failure
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
@@ -25,12 +28,104 @@ class RedditDataSource(
     params: LoadInitialParams<String>,
     callback: LoadInitialCallback<RedditModel>
   ) {
+    when (networkHandler.isConnected) {
+      true -> {
+        networkState.postValue(NetworkState.LOADING)
+        CoroutineScope(Dispatchers.IO).launch {
+          val response = service.getPostsBySubreddit(
+            subreddit = subreddit,
+            limit = params.requestedLoadSize
+          )
+          try {
+            when (response.isSuccessful) {
+              true -> {
+                val items = response.body()?.data?.children
+                  ?.map { it?.data } ?: emptyList()
+                callback.onResult(items)
+                networkState.postValue(NetworkState.LOADED)
+              }
+              false -> {
+                failure.postValue(Failure.ServerError)
+              }
+            }
+          } catch (exception: Throwable) {
+            failure.postValue(Failure.ServerError)
+          }
+        }
+      }
+      false, null -> {
+        failure.postValue(Failure.NetworkConnection)
+      }
+    }
   }
 
-  override fun loadAfter(params: LoadParams<String>, callback: LoadCallback<RedditModel>) {
+  override fun loadAfter(
+    params: LoadParams<String>,
+    callback: LoadCallback<RedditModel>
+  ) {
+    when (networkHandler.isConnected) {
+      true -> {
+        networkState.postValue(NetworkState.LOADING)
+        CoroutineScope(Dispatchers.IO).launch {
+          val response = service.getPostsBySubreddit(
+            subreddit = subreddit,
+            after = params.key,
+            limit = params.requestedLoadSize
+          )
+          try {
+            when (response.isSuccessful) {
+              true -> {
+                val items = response.body()?.data?.children
+                  ?.map { it?.data } ?: emptyList()
+                callback.onResult(items)
+                networkState.postValue(NetworkState.LOADED)
+              }
+              false -> {
+                failure.postValue(Failure.ServerError)
+              }
+            }
+          } catch (exception: Throwable) {
+            failure.postValue(Failure.ServerError)
+          }
+        }
+      }
+      false, null -> {
+        failure.postValue(Failure.NetworkConnection)
+      }
+    }
   }
 
   override fun loadBefore(params: LoadParams<String>, callback: LoadCallback<RedditModel>) {
+    when (networkHandler.isConnected) {
+      true -> {
+        networkState.postValue(NetworkState.LOADING)
+        CoroutineScope(Dispatchers.IO).launch {
+          val response = service.getPostsBySubreddit(
+            subreddit = subreddit,
+            before = params.key,
+            limit = params.requestedLoadSize
+          )
+          try {
+            when (response.isSuccessful) {
+              true -> {
+                val items = response.body()?.data?.children
+                  ?.map { it?.data } ?: emptyList()
+                callback.onResult(items)
+                networkState.postValue(NetworkState.LOADED)
+              }
+              false -> {
+                failure.postValue(Failure.ServerError)
+              }
+            }
+          } catch (exception: Throwable) {
+            failure.postValue(Failure.ServerError)
+          }
+        }
+      }
+      false, null -> {
+        failure.postValue(Failure.NetworkConnection)
+      }
+    }
   }
 
   override fun getKey(item: RedditModel): String = item.name ?: ""

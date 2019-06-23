@@ -12,7 +12,7 @@ class RedditService(
   private val redditApi by lazy { retrofit.create(RedditApi::class.java) }
 
   override suspend fun getPostsBySubreddit(
-    subreddit: String,
+    subreddit: String?,
     after: String?,
     before: String?,
     limit: Int?

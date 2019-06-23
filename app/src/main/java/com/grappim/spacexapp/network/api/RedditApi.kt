@@ -10,7 +10,7 @@ interface RedditApi {
 
   @GET("r/{subreddit}/hot.json")
   suspend fun getPostsBySubreddit(
-    @Path("subreddit") subreddit: String = "spacex",
+    @Path("subreddit") subreddit: String? = "spacex",
     @Query("after") after: String? = null,
     @Query("before") before: String? = null,
     @Query("limit") limit: Int? = null
