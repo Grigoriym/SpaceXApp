@@ -94,23 +94,23 @@ dependencies {
 
   implementation("androidx.multidex:multidex:2.0.1")
 
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.31")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.40")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
 
   //    Navigation
-  implementation("androidx.navigation:navigation-fragment-ktx:2.1.0-alpha05")
-  implementation("androidx.navigation:navigation-ui-ktx:2.1.0-alpha05")
+  implementation("androidx.navigation:navigation-fragment-ktx:2.1.0-alpha06")
+  implementation("androidx.navigation:navigation-ui-ktx:2.1.0-alpha06")
 
-  implementation("androidx.appcompat:appcompat:1.1.0-beta01")
+  implementation("androidx.appcompat:appcompat:1.1.0-rc01")
   implementation("androidx.core:core-ktx:1.2.0-alpha02")
-  implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta1")
+  implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta2")
   implementation("androidx.paging:paging-runtime-ktx:2.1.0")
 
   implementation("com.google.code.gson:gson:2.8.5")
 
   //    Lifecycle
-  implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha01")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha01")
+  implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02")
 
   implementation("com.google.android.material:material:1.1.0-alpha07")
 
@@ -134,7 +134,7 @@ dependencies {
   implementation("org.koin:koin-android-scope:2.0.1")
   implementation("org.koin:koin-android-viewmodel:2.0.1")
 
-  implementation("com.google.android.gms:play-services-auth:16.0.1")
+  implementation("com.google.android.gms:play-services-auth:17.0.0")
 
   implementation("com.jakewharton.threetenabp:threetenabp:1.2.0")
 
