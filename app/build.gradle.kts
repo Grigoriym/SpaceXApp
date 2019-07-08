@@ -11,12 +11,12 @@ plugins {
 }
 
 android {
-  compileSdkVersion(28)
+  compileSdkVersion(29)
 
   defaultConfig {
     applicationId = "com.grappim.spacexapp"
     minSdkVersion(19)
-    targetSdkVersion(28)
+    targetSdkVersion(29)
     versionCode = 1
     versionName = "1.9.4"
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -94,7 +94,7 @@ dependencies {
 
   implementation("androidx.multidex:multidex:2.0.1")
 
-  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.40")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.41")
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
 
   //    Navigation
