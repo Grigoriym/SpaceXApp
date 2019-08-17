@@ -104,19 +104,19 @@ dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.1.1")
 
   //    Navigation
-  implementation("androidx.navigation:navigation-fragment-ktx:2.1.0-beta02")
-  implementation("androidx.navigation:navigation-ui-ktx:2.1.0-beta02")
+  implementation("androidx.navigation:navigation-fragment-ktx:2.2.0-alpha01")
+  implementation("androidx.navigation:navigation-ui-ktx:2.2.0-alpha01")
 
   implementation("androidx.appcompat:appcompat:1.1.0-rc01")
-  implementation("androidx.core:core-ktx:1.2.0-alpha02")
+  implementation("androidx.core:core-ktx:1.2.0-alpha03")
   implementation("androidx.constraintlayout:constraintlayout:2.0.0-beta2")
   implementation("androidx.paging:paging-runtime-ktx:2.1.0")
 
   implementation("com.google.code.gson:gson:2.8.5")
 
   //    Lifecycle
-  implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha02")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha02")
+  implementation("androidx.lifecycle:lifecycle-extensions:2.2.0-alpha03")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0-alpha03")
 
   implementation("com.google.android.material:material:1.1.0-alpha08")
 
