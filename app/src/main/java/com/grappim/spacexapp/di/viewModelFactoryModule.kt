@@ -14,7 +14,7 @@ import com.grappim.spacexapp.ui.social_media.reddit.RedditViewModelFactory
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModelFactory
 import org.koin.dsl.module
 
-val viewModuleFactoryModule = module {
+val viewModelFactoryModule = module {
   factory { CapsuleViewModelFactory(get(), get(), get()) }
   factory { CoreViewModelFactory(get(), get(), get()) }
   factory { RocketsViewModelFactory(get()) }

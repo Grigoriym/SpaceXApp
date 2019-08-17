@@ -31,7 +31,7 @@ class SpaceXApplication : MultiDexApplication() {
           networkModule,
           spaceXModule,
           twitterModule,
-          viewModuleFactoryModule,
+          viewModelFactoryModule,
           getModule,
           mixNodule,
           redditModule
