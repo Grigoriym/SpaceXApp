@@ -12,9 +12,9 @@ data class InfoModel(
   @SerializedName("cto_propulsion")
   val ctoPropulsion: String?,
   @SerializedName("employees")
-  val employees: Int?,
+  val employees: Double?,
   @SerializedName("founded")
-  val founded: Int?,
+  val founded: Double?,
   @SerializedName("founder")
   val founder: String?,
   @SerializedName("headquarters")
@@ -30,15 +30,15 @@ data class InfoModel(
   @SerializedName("test_sites")
   val testSites: Int?,
   @SerializedName("valuation")
-  val valuation: Long?,
+  val valuation: Double?,
   @SerializedName("vehicles")
   val vehicles: Int?
 ) {
   companion object {
     fun empty() = InfoModel(
-      "", "", "", "", 0,
-      0, "", null, 0, null, "",
-      "", 0, 0L, 0
+      "", "", "", "", 0.0,
+      0.0, "", null, 0, null, "",
+      "", 0, 0.0, 0
     )
   }
 }

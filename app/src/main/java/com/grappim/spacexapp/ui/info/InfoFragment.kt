@@ -49,8 +49,8 @@ class InfoFragment : BaseFragment(), KoinComponent {
     item?.let {
       tvInfoName.text = it.name
       tvInfoFounder.text = it.founder
-      tvInfoFounded.text = it.founded.toString()
-      tvInfoEmployees.text = it.employees.toString()
+      tvInfoFounded.text = it.founded?.myFormat()
+      tvInfoEmployees.text = it.employees?.myFormat()
       tvInfoVehicles.text = it.vehicles.toString()
       tvInfoLaunchSItes.text = it.launchSites.toString()
       tvInfoTestSites.text = it.testSites.toString()
@@ -58,7 +58,7 @@ class InfoFragment : BaseFragment(), KoinComponent {
       tvInfoCto.text = it.cto
       tvInfoCoo.text = it.coo
       tvInfoCtoPropulsion.text = it.ctoPropulsion
-      tvInfoValuation.text = it.valuation.toString()
+      tvInfoValuation.text = it.valuation?.myFormat()
       tvInfoSummary.text = it.summary
 
       elvInfo.setAdapter(
