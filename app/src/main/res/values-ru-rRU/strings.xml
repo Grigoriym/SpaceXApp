@@ -64,7 +64,7 @@
   <string name="asds_landings">ASDS landings</string>
   <string name="water_landing">Water landing</string>
   <string name="address">Address</string>
-  <string name="city">City</string>
+  <string name="city">Город</string>
   <string name="state">State</string>
   <string name="name">Name</string>
   <string name="region">Region</string>
@@ -73,8 +73,10 @@
   <string name="reference_system">Reference system</string>
   <string name="regime">Regime</string>
   <string name="semi_major_axis_km">Semi Major Axis Km</string>
-  <string name="height">Height</string>
-  <string name="diameter">Diameter</string>
-  <string name="mass">Mass</string>
+  <string name="height">Высота</string>
+  <string name="diameter">Диаметр</string>
+  <string name="mass">Масса</string>
+
+  <string name="twitter_screen_name">/@%1$s</string>
 
 </resources>

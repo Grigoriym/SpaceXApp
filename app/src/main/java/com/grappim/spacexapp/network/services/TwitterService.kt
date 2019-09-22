@@ -21,6 +21,14 @@ class TwitterService(retrofit: Retrofit) : TwitterApi {
     sinceId: Long?
   ): Response<List<UserTimelineModel>> =
     twitterApi.getUserTimelineAsync(
-      userId, screenName, count, tweetMode, page, includeRts, excludeReplies, maxId, sinceId
+      userId,
+      screenName,
+      count,
+      tweetMode,
+      page,
+      includeRts,
+      excludeReplies,
+      maxId,
+      sinceId
     )
 }

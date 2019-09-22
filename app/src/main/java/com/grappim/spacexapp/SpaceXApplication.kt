@@ -15,7 +15,6 @@ import javax.net.ssl.SSLContext
 //todo twitter images (corners, spacing)
 //todo toolbar menu needs to be redone
 //todo splash screen is terrible - needs to be changed
-//todo though date/time works, it needs to be refactored
 //todo OMFG this fucking stupid menu, why it can't just ffs work? Why it has to be always buggy as shit? I don't know what to do with this piece of stinky mf shit.
 //todo maybe add some tesla stuff? There are some apis for this
 

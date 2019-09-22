@@ -42,8 +42,7 @@ class TwitterPaginationAdapter(
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  )
-      : TwitterPaginationViewHolder =
+  ): TwitterPaginationViewHolder =
     TwitterPaginationViewHolder(
       parent
         .context
@@ -98,7 +97,10 @@ class TwitterPaginationViewHolder(
       view.apply {
         setInnerRv(this, value)
         tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
-        tvTwitterItemScreenName.text = "@${value?.user?.screenName}"
+        tvTwitterItemScreenName.text = view.context.getString(
+          R.string.twitter_screen_name,
+          value?.user?.screenName
+        )
         tvTwitterItemText.text = value?.fullText
         tvTwitterName.text = value?.user?.name
       }

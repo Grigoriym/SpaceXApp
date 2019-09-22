@@ -30,7 +30,6 @@ class TwitterDataSource(
     callback: LoadInitialCallback<UserTimelineModel>
   ) {
     Timber.d("TwitterDataSource - loadInitial")
-
     when (networkHandler.isConnected) {
       true -> {
         networkState.postValue(NetworkState.LOADING)
@@ -57,12 +56,10 @@ class TwitterDataSource(
         failure.postValue(Failure.NetworkConnection)
       }
     }
-
   }
 
   override fun loadAfter(params: LoadParams<Long>, callback: LoadCallback<UserTimelineModel>) {
     Timber.d("TwitterDataSource - loadAfter")
-
     when (networkHandler.isConnected) {
       true -> {
         networkState.postValue(NetworkState.LOADING)
@@ -96,7 +93,6 @@ class TwitterDataSource(
 
   override fun loadBefore(params: LoadParams<Long>, callback: LoadCallback<UserTimelineModel>) {
     Timber.d("TwitterDataSource - loadBefore")
-
     when (networkHandler.isConnected) {
       true -> {
         networkState.postValue(NetworkState.LOADING)
