@@ -5,7 +5,6 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.common.GooglePlayServicesRepairableException
 import com.google.android.gms.security.ProviderInstaller
 import com.grappim.spacexapp.di.*
-import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -40,7 +39,6 @@ class SpaceXApplication : MultiDexApplication() {
     }
     timberInit()
     Timber.d("Application - onCreate")
-    AndroidThreeTen.init(this)
     enableTLS12OnPreLollipop()
   }
 

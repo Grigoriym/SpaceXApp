@@ -6,6 +6,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class RvInnerMissionsAdapter(
   private inline val onClick: (Mission?) -> Unit
@@ -26,7 +27,7 @@ class RvInnerMissionsAdapter(
   override fun onBindViewHolder(holder: RvInnerMissionsViewHolder, position: Int) {
     holder.apply {
       mission = items?.get(position)
-      itemView.setOnClickListener {
+      itemView.setSafeOnClickListener {
         onClick(items?.get(position))
       }
     }

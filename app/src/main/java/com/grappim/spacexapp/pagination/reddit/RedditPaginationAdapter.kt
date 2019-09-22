@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 import kotlinx.android.synthetic.main.layout_reddit_item.view.*
 
 class RedditPaginationAdapter(
@@ -27,7 +28,7 @@ class RedditPaginationAdapter(
   override fun onBindViewHolder(holder: RedditPaginationViewHolder, position: Int) {
     holder.apply {
       model = getItem(position)
-      itemView.setOnClickListener { onClick(getItem(position)) }
+      itemView.setSafeOnClickListener { onClick(getItem(position)) }
     }
   }
 

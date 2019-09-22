@@ -9,7 +9,6 @@ import android.net.NetworkInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -17,20 +16,12 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import kotlinx.coroutines.*
-import retrofit2.Response
-import timber.log.Timber
 
 inline val Context.connectivityManager: ConnectivityManager?
   get() = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -127,7 +118,7 @@ inline fun View.showIf(condition: () -> Boolean): View {
 }
 
 fun <T : RecyclerView.ViewHolder> T.listen(event: (position: Int, type: Int) -> Unit): T {
-  itemView.setOnClickListener {
+  itemView.setSafeOnClickListener {
     event.invoke(adapterPosition, itemViewType)
   }
   return this
@@ -185,3 +176,10 @@ fun <T : Any, L : LiveData<T>> LifecycleOwner.onObserve(liveData: L, body: (T?) 
 
 fun <L : LiveData<Failure>> LifecycleOwner.onFailure(liveData: L, body: (Failure?) -> Unit) =
   liveData.observe(this, Observer(body))
+
+fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
+  val safeClickListener = SafeClickListener {
+    onSafeClick(it)
+  }
+  setOnClickListener(safeClickListener)
+}

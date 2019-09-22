@@ -75,7 +75,7 @@ class TwitterPaginationAdapter(
           onImageClickS(it, isVideo, null)
         }
       }
-      itemView.setOnClickListener { onClick(getItem(position)) }
+      itemView.setSafeOnClickListener { onClick(getItem(position)) }
       GlideApp.with(profileImage.context)
         .load(getItem(position)?.user?.profileImageUrlHttps)
         .transition(DrawableTransitionOptions.withCrossFade())

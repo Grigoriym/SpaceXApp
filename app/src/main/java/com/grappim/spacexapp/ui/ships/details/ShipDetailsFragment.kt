@@ -28,8 +28,7 @@ class ShipDetailsFragment : BaseFragment() {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? =
-    inflater
-      .inflate(R.layout.fragment_ship_details, container, false)
+    inflater.inflate(R.layout.fragment_ship_details, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     super.onCreateOptionsMenu(menu, inflater)

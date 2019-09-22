@@ -9,7 +9,7 @@ import android.widget.ExpandableListView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.grappim.spacexapp.R
-import timber.log.Timber
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class CustomExpandableListAdapter(
   private val context: Context?,
@@ -32,8 +32,7 @@ class CustomExpandableListAdapter(
   override fun getChild(
     groupPosition: Int,
     childPosition: Int
-  ): Any =
-    model
+  ): Any = model
 
   override fun getGroupId(groupPosition: Int): Long = groupPosition.toLong()
 
@@ -61,8 +60,7 @@ class CustomExpandableListAdapter(
 
   override fun getGroupCount(): Int = 1
 
-  override fun getGroup(groupPosition: Int): Any =
-    header
+  override fun getGroup(groupPosition: Int): Any = header
 
   override fun getGroupView(
     groupPosition: Int,
@@ -78,7 +76,7 @@ class CustomExpandableListAdapter(
       ?.findViewById<TextView>(R.id.tvElvGroupTitle)
       ?.apply {
         text = header
-        setOnClickListener {
+        setSafeOnClickListener {
           if (expandableListView.isGroupExpanded(groupPosition)) {
             expandableListView.collapseGroup(groupPosition)
           } else {

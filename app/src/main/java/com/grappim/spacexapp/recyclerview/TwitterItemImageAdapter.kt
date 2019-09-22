@@ -7,10 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.GlideApp
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.px
-import com.grappim.spacexapp.util.roundCorners
+import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item_image.view.*
 
 class TwitterItemImageAdapter(
@@ -48,7 +45,7 @@ class TwitterItemImageAdapter(
         .centerCrop()
         .roundCorners(16)
         .into(twitterImage)
-      twitterImage.setOnClickListener {
+      twitterImage.setSafeOnClickListener {
         onImageClick(items[position])
       }
     }

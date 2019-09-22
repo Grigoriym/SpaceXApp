@@ -6,6 +6,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.viewholders.CapsuleViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class CapsulesAdapter(
   private inline val onClick: (CapsuleModel) -> Unit
@@ -28,8 +29,8 @@ class CapsulesAdapter(
   override fun onBindViewHolder(holder: CapsuleViewHolder, position: Int) {
     holder.apply {
       capsule = items[position]
-      itemView.setOnClickListener { onClick(items[position]) }
-      btnCapsuleSpecs.setOnClickListener { onClick(items[position]) }
+      itemView.setSafeOnClickListener { onClick(items[position]) }
+      btnCapsuleSpecs.setSafeOnClickListener { onClick(items[position]) }
     }
   }
 

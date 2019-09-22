@@ -9,7 +9,7 @@ class MissionsPayloadsListAdapterItem(
   private val body: PayloadModel
 ) {
   fun fillItemWithData() {
-    view.tvElvMissionItemLongitude.text = body.orbitParams?.longitude.toString()
+    view.tvElvMissionItemLongitude.text = body.orbitParams?.longitude?.toString() ?: "0"
     view.tvElvMissionItemReferenceSystem.text = body.orbitParams?.referenceSystem?.capitalize()
     view.tvElvMissionItemRegime.text = body.orbitParams?.regime?.capitalize()
     view.tvElvMissionItemSemiMajorAxisKm.text = body.orbitParams?.semiMajorAxisKm.toString()

@@ -28,9 +28,7 @@ class UpcomingLaunchesFragment : Fragment(), KoinComponent {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? =
-    inflater
-      .inflate(R.layout.fragment_upcoming_launches, container, false)
-
+    inflater.inflate(R.layout.fragment_upcoming_launches, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("UpcomingLaunchesFragment - onCreateOptionsMenu")

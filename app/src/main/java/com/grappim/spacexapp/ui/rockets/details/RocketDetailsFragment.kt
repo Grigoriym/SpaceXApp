@@ -23,9 +23,8 @@ class RocketDetailsFragment : BaseFragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_rocket_details, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_rocket_details, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     inflater.inflate(R.menu.toolbar_menu_wiki, menu)
