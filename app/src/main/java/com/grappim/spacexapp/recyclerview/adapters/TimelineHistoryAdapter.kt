@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
-import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -10,6 +9,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.viewholders.TimelineHistoryViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setMyColorFilter
 import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class TimelineHistoryAdapter(
@@ -18,9 +18,8 @@ class TimelineHistoryAdapter(
 
   private var items: List<HistoryModel> = emptyList()
 
-  override fun getItemViewType(position: Int): Int {
-    return TimelineView.getTimeLineViewType(position, itemCount)
-  }
+  override fun getItemViewType(position: Int): Int =
+    TimelineView.getTimeLineViewType(position, itemCount)
 
   override fun onCreateViewHolder(
     parent: ViewGroup,
@@ -29,8 +28,8 @@ class TimelineHistoryAdapter(
     TimelineHistoryViewHolder(
       parent
         .context
-        .inflateLayout(R.layout.layout_history_item, parent)
-      , viewType
+        .inflateLayout(R.layout.layout_history_item, parent),
+      viewType
     )
 
   override fun onBindViewHolder(
@@ -40,18 +39,8 @@ class TimelineHistoryAdapter(
     holder.apply {
       history = items[position]
       cl.setSafeOnClickListener { onClick(items[position]) }
-
       timeline.marker = setMarker(holder)
     }
-  }
-
-  private fun setMarker(holder: TimelineHistoryViewHolder): Drawable? {
-    val drawable = ContextCompat.getDrawable(holder.itemView.context, R.drawable.ic_marker)
-    drawable?.setColorFilter(
-      ContextCompat.getColor(holder.itemView.context, R.color.timelineMarker),
-      PorterDuff.Mode.SRC_IN
-    )
-    return drawable
   }
 
   override fun getItemCount(): Int = items.size
@@ -59,5 +48,12 @@ class TimelineHistoryAdapter(
   fun loadItems(newItems: List<HistoryModel>) {
     items = newItems
     notifyDataSetChanged()
+  }
+
+  private fun setMarker(holder: TimelineHistoryViewHolder): Drawable? {
+    val drawable = ContextCompat.getDrawable(holder.itemView.context, R.drawable.ic_marker)
+    val color = ContextCompat.getColor(holder.itemView.context, R.color.timelineMarker)
+    drawable?.setMyColorFilter(color)
+    return drawable
   }
 }

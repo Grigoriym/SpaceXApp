@@ -10,7 +10,11 @@ class NonScrollExpandableListView : ExpandableListView {
 
   constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-  constructor(context: Context, attr: AttributeSet, defStyle: Int) : super(context, attr, defStyle)
+  constructor(
+    context: Context,
+    attr: AttributeSet,
+    defStyle: Int
+  ) : super(context, attr, defStyle)
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
     val heightMeasureSpecCustom = MeasureSpec.makeMeasureSpec(

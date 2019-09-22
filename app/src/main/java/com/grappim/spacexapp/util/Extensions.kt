@@ -4,6 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.net.Uri
@@ -22,6 +26,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
+import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 inline val Context.connectivityManager: ConnectivityManager?
   get() = getSystemService(Context.CONNECTIVITY_SERVICE) as? ConnectivityManager
@@ -182,4 +189,21 @@ fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {
     onSafeClick(it)
   }
   setOnClickListener(safeClickListener)
+}
+
+fun Double.myFormat(): String {
+  val dfs = DecimalFormatSymbols(Locale.getDefault()).also {
+    it.decimalSeparator = ','
+    it.groupingSeparator = ' '
+  }
+  val df = DecimalFormat("#,###.##", dfs)
+  return df.format(this)
+}
+
+fun Drawable.setMyColorFilter(color: Int) {
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+    this.colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+  } else {
+    this.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+  }
 }
