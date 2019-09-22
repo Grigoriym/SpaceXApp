@@ -6,6 +6,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.viewholders.ShipsViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class ShipsAdapter(
   private inline val onClick: (ShipModel) -> Unit
@@ -31,7 +32,7 @@ class ShipsAdapter(
   ) {
     holder.apply {
       ship = items[position]
-      itemView.setOnClickListener {
+      itemView.setSafeOnClickListener {
         onClick(items[position])
       }
     }

@@ -10,10 +10,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.viewholders.RocketsViewHolder
-import com.grappim.spacexapp.util.GlideApp
-import com.grappim.spacexapp.util.gone
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.show
+import com.grappim.spacexapp.util.*
 
 class RocketsAdapter(
   context: Context?,
@@ -43,7 +40,7 @@ class RocketsAdapter(
   ) {
     holder.apply {
       rocket = items[position]
-      btnRocketItem.setOnClickListener {
+      btnRocketItem.setSafeOnClickListener {
         onClick(items[position])
       }
 
@@ -54,7 +51,7 @@ class RocketsAdapter(
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(ivGetRockets)
 
-      itemView.setOnClickListener {
+      itemView.setSafeOnClickListener {
         if (tvRocketDescription.isShown) {
           tvRocketDescription.startAnimation(animationUp)
           val countDownTimeStatic = object : CountDownTimer(200, 16) {

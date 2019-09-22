@@ -6,6 +6,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.recyclerview.viewholders.LaunchPadViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class LaunchPadsAdapter(
   private inline val onClick: (LaunchPadModel) -> Unit
@@ -30,7 +31,7 @@ class LaunchPadsAdapter(
   ) {
     holder.apply {
       launchPad = items[position]
-      itemView.setOnClickListener {
+      itemView.setSafeOnClickListener {
         onClick(items[position])
       }
     }

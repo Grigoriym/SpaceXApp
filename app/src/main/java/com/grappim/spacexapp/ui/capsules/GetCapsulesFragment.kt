@@ -30,9 +30,8 @@ open class GetCapsulesFragment : BaseFragment(), KoinComponent {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_get_capsules, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_get_capsules, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

@@ -31,9 +31,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? =
-    inflater
-      .inflate(R.layout.fragment_twitter, container, false)
-
+    inflater.inflate(R.layout.fragment_twitter, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("TwitterFragment - onCreateOptionsMenu")

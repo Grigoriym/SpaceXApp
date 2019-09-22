@@ -11,3 +11,5 @@ Fernando Cejas (for interesting architecture features, such as Either, UseCase: 
 SearchView and RecyclerView: https://codingwithmitch.com/blog/filtering-recyclerview-searchview/
 
 Spinner items customization: https://android--code.blogspot.com/2015/08/android-spinner-text-color.html
+
+Safe click listener: https://medium.com/@simonkarmy2004/solving-android-multiple-clicks-problem-kotlin-b99c06135da0

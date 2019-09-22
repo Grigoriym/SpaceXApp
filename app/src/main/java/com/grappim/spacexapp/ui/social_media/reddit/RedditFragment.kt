@@ -29,9 +29,7 @@ class RedditFragment : Fragment(), KoinComponent {
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
   ): View? =
-    inflater
-      .inflate(R.layout.fragment_reddit, container, false)
-
+    inflater.inflate(R.layout.fragment_reddit, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("RedditFragment - onCreateOptionsMenu")

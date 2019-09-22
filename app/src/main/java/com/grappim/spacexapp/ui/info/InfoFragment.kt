@@ -18,15 +18,14 @@ import timber.log.Timber
 
 class InfoFragment : BaseFragment(), KoinComponent {
 
-  private val viewModelFactory:InfoViewModelFactory by inject()
+  private val viewModelFactory: InfoViewModelFactory by inject()
   private val viewModel by viewModels<InfoViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_info, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_info, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

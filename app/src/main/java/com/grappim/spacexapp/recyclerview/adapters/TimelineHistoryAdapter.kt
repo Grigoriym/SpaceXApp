@@ -10,6 +10,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.viewholders.TimelineHistoryViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class TimelineHistoryAdapter(
   private inline val onClick: (HistoryModel) -> Unit
@@ -38,7 +39,7 @@ class TimelineHistoryAdapter(
   ) {
     holder.apply {
       history = items[position]
-      cl.setOnClickListener { onClick(items[position]) }
+      cl.setSafeOnClickListener { onClick(items[position]) }
 
       timeline.marker = setMarker(holder)
     }

@@ -19,9 +19,8 @@ class LaunchPadDetailsFragment : BaseFragment() {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_launch_pad_details, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_launch_pad_details, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     super.onCreateOptionsMenu(menu, inflater)

@@ -20,16 +20,15 @@ import org.koin.core.inject
 
 class GetRocketsFragment : BaseFragment(), KoinComponent {
 
-  private val viewModelFactory:RocketsViewModelFactory by inject()
+  private val viewModelFactory: RocketsViewModelFactory by inject()
   private lateinit var rAdapter: RocketsAdapter
   private val viewModel by viewModels<RocketsViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_get_rockets, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_get_rockets, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

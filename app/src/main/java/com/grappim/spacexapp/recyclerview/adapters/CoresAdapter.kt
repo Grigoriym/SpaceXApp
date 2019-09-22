@@ -6,6 +6,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.viewholders.CoreViewHolder
 import com.grappim.spacexapp.util.inflateLayout
+import com.grappim.spacexapp.util.setSafeOnClickListener
 
 class CoresAdapter(
   private inline val onClick: (CoreModel) -> Unit
@@ -24,7 +25,7 @@ class CoresAdapter(
   override fun onBindViewHolder(holder: CoreViewHolder, position: Int) {
     holder.apply {
       core = items[position]
-      itemView.setOnClickListener {
+      itemView.setSafeOnClickListener {
         onClick(items[position])
       }
     }

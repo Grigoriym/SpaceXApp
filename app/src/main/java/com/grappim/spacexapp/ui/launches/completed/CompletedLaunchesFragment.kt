@@ -27,9 +27,8 @@ class CompletedLaunchesFragment : Fragment(), KoinComponent {
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_completed_launches, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_completed_launches, container, false)
 
   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
     Timber.d("CompletedLaunchesFragment - onCreateOptionsMenu")
