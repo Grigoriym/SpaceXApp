@@ -18,7 +18,10 @@ class RedditService(
     limit: Int?
   ): Response<RedditListingResponse> =
     redditApi.getPostsBySubreddit(
-      subreddit, after, before, limit
+      subreddit,
+      after,
+      before,
+      limit
     )
 
 }
