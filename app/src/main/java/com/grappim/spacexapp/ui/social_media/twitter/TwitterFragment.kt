@@ -78,7 +78,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     spinner?.adapter = spinnerArrayAdapter
     spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
-        Timber.d("TwitterFragment - onNothingSelected")
+
       }
 
       override fun onItemSelected(
@@ -87,7 +87,6 @@ class TwitterFragment : Fragment(), KoinComponent {
         position: Int,
         id: Long
       ) {
-
         Timber.d("TwitterFragment - onItemSelected - $position")
         when (position) {
           0 -> {

@@ -20,39 +20,39 @@ class CapsulesViewModel(
   val allCapsules: LiveData<List<CapsuleModel>>
     get() = _allCapsules
 
+  private val _upcomingCapsules = MutableLiveData<List<CapsuleModel>>()
+  val upcomingCapsules: LiveData<List<CapsuleModel>>
+    get() = _upcomingCapsules
+
+  private val _pastCapsules = MutableLiveData<List<CapsuleModel>>()
+  val pastCapsules: LiveData<List<CapsuleModel>>
+    get() = _pastCapsules
+
   fun loadAllCapsules() =
     getAllCapsules(UseCase.None()) {
       it.either(::handleFailure, ::handleCapsules)
     }
-
-  private fun handleCapsules(capsules: List<CapsuleModel>) {
-    this._allCapsules.value = capsules
-  }
-
-  private val _upcomingCapsules = MutableLiveData<List<CapsuleModel>>()
-  val upcomingCapsules: LiveData<List<CapsuleModel>>
-    get() = _upcomingCapsules
 
   fun loadUpcomingCapsules() =
     getUpcomingCapsules(UseCase.None()) {
       it.either(::handleFailure, ::handleUpcomingCapsules)
     }
 
-  private fun handleUpcomingCapsules(capsules: List<CapsuleModel>) {
-    this._upcomingCapsules.value = capsules
-  }
-
-  private val _pastCapsules = MutableLiveData<List<CapsuleModel>>()
-  val pastCapsules: LiveData<List<CapsuleModel>>
-    get() = _pastCapsules
-
   fun loadPastCapsules() =
     getPastCapsules(UseCase.None()) {
       it.either(::handleFailure, ::handlePastCapsules)
     }
 
+  private fun handleUpcomingCapsules(capsules: List<CapsuleModel>) {
+    this._upcomingCapsules.value = capsules
+  }
+
   private fun handlePastCapsules(capsules: List<CapsuleModel>) {
     this._pastCapsules.value = capsules
+  }
+
+  private fun handleCapsules(capsules: List<CapsuleModel>) {
+    this._allCapsules.value = capsules
   }
 
   override fun onCleared() {

@@ -20,40 +20,40 @@ class CoresViewModel(
   val allCores: LiveData<List<CoreModel>>
     get() = _allCores
 
-  private fun handleAllCores(cores: List<CoreModel>) {
-    this._allCores.value = cores
-  }
+  private val _pastCores = MutableLiveData<List<CoreModel>>()
+  val pastCores: LiveData<List<CoreModel>>
+    get() = _pastCores
+
+  private val _upcomingCores = MutableLiveData<List<CoreModel>>()
+  val upcomingCores: LiveData<List<CoreModel>>
+    get() = _upcomingCores
 
   fun loadAllCores() =
     getAllCores(UseCase.None()) {
       it.either(::handleFailure, ::handleAllCores)
     }
 
-  private val _pastCores = MutableLiveData<List<CoreModel>>()
-  val pastCores: LiveData<List<CoreModel>>
-    get() = _pastCores
-
-  private fun handlePastCores(cores: List<CoreModel>) {
-    this._pastCores.value = cores
-  }
-
   fun loadPastCores() =
     getPastCores(UseCase.None()) {
       it.either(::handleFailure, ::handlePastCores)
     }
 
-  private val _upcomingCores = MutableLiveData<List<CoreModel>>()
-  val upcomingCores: LiveData<List<CoreModel>>
-    get() = _upcomingCores
+  fun loadUpcomingCores() =
+    getUpcomingCores(UseCase.None()) {
+      it.either(::handleFailure, ::handleupcomingCores)
+    }
+
+  private fun handlePastCores(cores: List<CoreModel>) {
+    this._pastCores.value = cores
+  }
 
   private fun handleupcomingCores(cores: List<CoreModel>) {
     this._upcomingCores.value = cores
   }
 
-  fun loadUpcomingCores() =
-    getUpcomingCores(UseCase.None()) {
-      it.either(::handleFailure, ::handleupcomingCores)
-    }
+  private fun handleAllCores(cores: List<CoreModel>) {
+    this._allCores.value = cores
+  }
 
   override fun onCleared() {
     super.onCleared()

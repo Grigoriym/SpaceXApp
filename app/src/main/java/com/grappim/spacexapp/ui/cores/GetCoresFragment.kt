@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -24,15 +23,14 @@ class GetCoresFragment : BaseFragment(), KoinComponent {
 
   private lateinit var coreAdapter: CoresAdapter
   private val args: GetCoresFragmentArgs by navArgs()
-  private val viewModelFactory:CoreViewModelFactory by inject()
+  private val viewModelFactory: CoreViewModelFactory by inject()
   private val viewModel by viewModels<CoresViewModel> { viewModelFactory }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
     savedInstanceState: Bundle?
-  ): View? {
-    return inflater.inflate(R.layout.fragment_get_cores, container, false)
-  }
+  ): View? =
+    inflater.inflate(R.layout.fragment_get_cores, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
