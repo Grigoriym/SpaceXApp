@@ -54,7 +54,6 @@ open class GetCapsulesFragment : BaseFragment(), KoinComponent {
   }
 
   private fun getData() {
-    Timber.d("GetCapsulesFragment - getData - ${args.capsulesToGetArgs}")
     pbGetCapsules.show()
     when (args.capsulesToGetArgs) {
       0 -> viewModel.loadAllCapsules()

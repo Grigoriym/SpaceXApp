@@ -7,12 +7,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.util.FAILURE_NETWORK_CONNECTION_ERROR
+import com.grappim.spacexapp.util.FAILURE_SERVER_ERROR
 import com.grappim.spacexapp.util.Failure
 import timber.log.Timber
 
 /**
  * This class is used to hide specific menu items in fragments
  */
+
 abstract class BaseFragment : Fragment() {
 
   open fun renderFailure(failureText: String) {}
@@ -39,8 +42,8 @@ abstract class BaseFragment : Fragment() {
 
   protected fun handleFailure(failure: Failure?) {
     when (failure) {
-      is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-      is Failure.ServerError -> renderFailure("Server Error")
+      is Failure.NetworkConnection -> renderFailure(FAILURE_NETWORK_CONNECTION_ERROR)
+      is Failure.ServerError -> renderFailure(FAILURE_SERVER_ERROR)
     }
   }
 }

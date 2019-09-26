@@ -18,6 +18,7 @@ class RedditViewModel(
   private val repoResult = map(_currentSubreddit) {
     repository.getPostsBySubreddit(it)
   }
+
   val posts = switchMap(repoResult) { it.pagedList }
   val networkState = switchMap(repoResult) { it.networkState }
   val failure = switchMap(repoResult) { it.failure }

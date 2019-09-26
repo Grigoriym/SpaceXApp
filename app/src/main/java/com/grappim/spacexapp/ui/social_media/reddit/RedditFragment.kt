@@ -21,7 +21,7 @@ import timber.log.Timber
 
 class RedditFragment : Fragment(), KoinComponent {
 
-  private val viewModelFactory: RedditViewModelFactory  by inject()
+  private val viewModelFactory: RedditViewModelFactory by inject()
   private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
   private lateinit var rAdapter: RedditPaginationAdapter
 
@@ -82,7 +82,7 @@ class RedditFragment : Fragment(), KoinComponent {
     spinner?.adapter = spinnerArrayAdapter
     spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
       override fun onNothingSelected(parent: AdapterView<*>?) {
-        Timber.d("RedditFragment - onNothingSelected")
+
       }
 
       override fun onItemSelected(
@@ -91,7 +91,6 @@ class RedditFragment : Fragment(), KoinComponent {
         position: Int,
         id: Long
       ) {
-
         Timber.d("RedditFragment - onItemSelected - $position")
         when (position) {
           0 -> {

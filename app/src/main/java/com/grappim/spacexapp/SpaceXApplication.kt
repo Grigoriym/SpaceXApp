@@ -17,6 +17,7 @@ import javax.net.ssl.SSLContext
 //todo splash screen is terrible - needs to be changed
 //todo OMFG this fucking stupid menu, why it can't just ffs work? Why it has to be always buggy as shit? I don't know what to do with this piece of stinky mf shit.
 //todo maybe add some tesla stuff? There are some apis for this
+//todo bug with back button behavior, api data does not load
 
 class SpaceXApplication : MultiDexApplication() {
 

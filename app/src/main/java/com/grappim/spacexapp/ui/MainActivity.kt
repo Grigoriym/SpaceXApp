@@ -48,8 +48,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 
   private fun setupSwitcher() {
-    Timber.d("mainActivity - setupSwitcher")
-
     val menu = navigationView.menu
     val menuItem = menu.findItem(R.id.nav_switch_theme)
     val actionView = menuItem.actionView
