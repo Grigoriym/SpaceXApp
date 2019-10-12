@@ -35,14 +35,14 @@
   <string name="rocket_details_metrics_kg_lb">%1$sкг/%2$slb</string>
 
   <string name="successful_attempted">%1$d/%2$d</string>
-  <string name="error_retrieving_data">Cannot retrieve data</string>
+  <string name="error_retrieving_data">Ошибка при получении данных</string>
   <string name="capsule_details_image_content_description">Image of capsule</string>
   <string name="refresh">Обновить</string>
   <string name="launch_pads">Launch Pads</string>
   <string name="launches">Launches</string>
   <string name="social_media">Social Media</string>
   <string name="wikipedia">Wikipedia</string>
-  <string name="search">Search</string>
+  <string name="search">Поиск</string>
   <string name="date_first_flight">Date first flight</string>
   <string name="landing_successful">Landing Successful</string>
   <string name="founder">Founder</string>
@@ -66,8 +66,8 @@
   <string name="address">Address</string>
   <string name="city">Город</string>
   <string name="state">State</string>
-  <string name="name">Name</string>
-  <string name="region">Region</string>
+  <string name="name">Наименование</string>
+  <string name="region">Регион</string>
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
   <string name="reference_system">Reference system</string>
