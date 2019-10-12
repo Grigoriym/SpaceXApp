@@ -18,38 +18,32 @@ import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 
 class TwitterPaginationAdapter(
-  val onClick: (UserTimelineModel?) -> Unit,
-  val onImageClickS: (String, Boolean, Int?) -> Unit
-) : PagedListAdapter<UserTimelineModel,
-    TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
+  val onClick: (UserTimelineModel?) -> Unit, val onImageClickS: (String, Boolean, Int?) -> Unit
+) : PagedListAdapter<UserTimelineModel, TwitterPaginationViewHolder>(MY_DIFF_UTIL) {
 
   companion object {
     val MY_DIFF_UTIL = object : DiffUtil.ItemCallback<UserTimelineModel>() {
       override fun areItemsTheSame(
-        oldItem: UserTimelineModel,
-        newItem: UserTimelineModel
-      ): Boolean =
-        oldItem == newItem
+        oldItem: UserTimelineModel, newItem: UserTimelineModel
+      ): Boolean = oldItem == newItem
 
       override fun areContentsTheSame(
-        oldItem: UserTimelineModel,
-        newItem: UserTimelineModel
-      ): Boolean =
-        oldItem.id == newItem.id
+        oldItem: UserTimelineModel, newItem: UserTimelineModel
+      ): Boolean = oldItem.id == newItem.id
     }
   }
 
   override fun onCreateViewHolder(
-    parent: ViewGroup,
-    viewType: Int
-  ): TwitterPaginationViewHolder =
-    TwitterPaginationViewHolder(
-      parent
-        .context
-        .inflateLayout(R.layout.layout_twitter_item, parent)
+    parent: ViewGroup, viewType: Int
+  ): TwitterPaginationViewHolder = TwitterPaginationViewHolder(
+    parent.context.inflateLayout(
+      R.layout.layout_twitter_item, parent
     )
+  )
 
-  override fun onBindViewHolder(holder: TwitterPaginationViewHolder, position: Int) {
+  override fun onBindViewHolder(
+    holder: TwitterPaginationViewHolder, position: Int
+  ) {
     holder.apply {
       var isVideo = false
       var videoUrl: String? = ""
@@ -69,16 +63,18 @@ class TwitterPaginationAdapter(
       }
       onImageClick = {
         if (isVideo) {
-          onImageClickS(videoUrl!!, isVideo, videoDuration)
+          onImageClickS(
+            videoUrl!!, isVideo, videoDuration
+          )
         } else {
-          onImageClickS(it, isVideo, null)
+          onImageClickS(
+            it, isVideo, null
+          )
         }
       }
       itemView.setSafeOnClickListener { onClick(getItem(position)) }
-      GlideApp.with(profileImage.context)
-        .load(getItem(position)?.user?.profileImageUrlHttps)
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .centerCrop()
+      GlideApp.with(profileImage.context).load(getItem(position)?.user?.profileImageUrlHttps)
+        .transition(DrawableTransitionOptions.withCrossFade()).centerCrop()
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(profileImage)
     }
@@ -95,42 +91,47 @@ class TwitterPaginationViewHolder(
     set(value) {
       field = value
       view.apply {
-        setInnerRv(this, value)
+        setInnerRv(
+          this, value
+        )
         tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
         tvTwitterItemScreenName.text = view.context.getString(
-          R.string.twitter_screen_name,
-          value?.user?.screenName
+          R.string.twitter_screen_name, value?.user?.screenName
         )
         tvTwitterItemText.text = value?.fullText
         tvTwitterName.text = value?.user?.name
       }
     }
 
-  private fun setInnerRv(view: View, value: UserTimelineModel?) {
+  private fun setInnerRv(
+    view: View, value: UserTimelineModel?
+  ) {
     if (value?.extendedEntities?.media?.get(0) != null) {
       rv.show()
       val mediaList = value.extendedEntities.media
       val listOfStrings = mutableListOf<String>()
 
       for (i in mediaList) {
-        listOfStrings.add(i?.mediaUrlHttps ?: "")
+        listOfStrings.add(
+          i?.mediaUrlHttps ?: ""
+        )
       }
       when (listOfStrings.size) {
         1 -> {
-          rv.layoutManager = GridLayoutManager(view.context, 1)
+          rv.layoutManager = GridLayoutManager(
+            view.context, 1
+          )
         }
         2 -> {
           val glm = GridLayoutManager(
-            view.context,
-            2
+            view.context, 2
           )
           rv.layoutManager = glm
           rv.addItemDecoration(MarginItemDecorator(isHorizontal = true))
         }
         3 -> {
           val glm = GridLayoutManager(
-            view.context,
-            2
+            view.context, 2
           )
           glm.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -150,25 +151,18 @@ class TwitterPaginationViewHolder(
           rv.layoutManager = glm
           rv.addItemDecoration(
             MarginItemDecorator(
-              isGridLayout = true,
-              spanCount = 2,
-              spacing = 8.px,
-              includeEdge = true
+              isGridLayout = true, spanCount = 2, spacing = 8.px, includeEdge = true
             )
           )
         }
         4 -> {
           val glm = GridLayoutManager(
-            view.context,
-            2
+            view.context, 2
           )
           rv.layoutManager = glm
           rv.addItemDecoration(
             MarginItemDecorator(
-              isGridLayout = true,
-              spanCount = 2,
-              spacing = 8.px,
-              includeEdge = false
+              isGridLayout = true, spanCount = 2, spacing = 8.px, includeEdge = false
             )
           )
         }

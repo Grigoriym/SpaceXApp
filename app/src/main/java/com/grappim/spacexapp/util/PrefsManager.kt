@@ -12,7 +12,6 @@ class PrefsManager(
     pref.getBoolean(NIGHT_THEME_PREF_KEY, false)
 
   fun setNightTheme(value: Boolean) {
-    editor.putBoolean(NIGHT_THEME_PREF_KEY, value)
-    editor.apply()
+    editor.putBoolean(NIGHT_THEME_PREF_KEY, value).apply()
   }
 }

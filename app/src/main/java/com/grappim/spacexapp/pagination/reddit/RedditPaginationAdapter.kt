@@ -2,11 +2,15 @@ package com.grappim.spacexapp.pagination.reddit
 
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.reddit.RedditModel
+import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.inflateLayout
 import com.grappim.spacexapp.util.setSafeOnClickListener
 import kotlinx.android.synthetic.main.layout_reddit_item.view.*
@@ -29,6 +33,13 @@ class RedditPaginationAdapter(
     holder.apply {
       model = getItem(position)
       itemView.setSafeOnClickListener { onClick(getItem(position)) }
+
+      GlideApp.with(imagePreview.context)
+        .load(getItem(adapterPosition)?.preview?.images?.get(0)?.source?.url ?: "")
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .centerCrop()
+        .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
+        .into(imagePreview)
     }
   }
 
@@ -46,6 +57,7 @@ class RedditPaginationAdapter(
 class RedditPaginationViewHolder(
   private val view: View
 ) : RecyclerView.ViewHolder(view) {
+  val imagePreview: AppCompatImageView = view.imagePreview
   var model: RedditModel? = null
     set(value) {
       field = value
