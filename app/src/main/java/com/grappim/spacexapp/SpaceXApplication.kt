@@ -12,6 +12,7 @@ import timber.log.Timber
 //todo check menu toolbar
 //todo maybe add some tesla stuff? There are some apis for this
 //todo bug with back button behavior, api data does not load
+//todo remove koin and implement dagger?
 
 class SpaceXApplication : MultiDexApplication() {
 
