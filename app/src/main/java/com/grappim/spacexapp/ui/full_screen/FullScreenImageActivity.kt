@@ -23,7 +23,6 @@ class FullScreenImageActivity : FullScreenBaseActivity() {
       GlideApp.with(baseContext)
         .load(this)
         .transition(DrawableTransitionOptions.withCrossFade())
-        .centerCrop()
         .into(ivFulScreen)
     }
   }
