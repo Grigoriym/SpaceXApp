@@ -75,7 +75,7 @@ class RedditFragment : Fragment(), KoinComponent {
     val spinner = item?.actionView as? AppCompatSpinner
 
     val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
-      context!!,
+      requireContext(),
       R.layout.layout_spinner_item,
       arrayListOf("SpaceX", "Elon Musk", "SpaceXLounge")
     )
@@ -140,9 +140,9 @@ class RedditFragment : Fragment(), KoinComponent {
       startBrowser("$REDDIT_FOR_BROWSER_URI${it?.permalink}")
     }
     rvReddit.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = rAdapter
     }
   }

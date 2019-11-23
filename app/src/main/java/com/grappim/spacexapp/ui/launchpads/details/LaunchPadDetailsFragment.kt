@@ -52,7 +52,7 @@ class LaunchPadDetailsFragment : BaseFragment() {
         it.attemptedLaunches ?: 0
       )
       for (item in it.vehiclesLaunched.orEmpty()) {
-        val chip = Chip(context)
+        val chip = Chip(requireContext())
         chip.text = item
         chip.isClickable = true
         chip.isCheckable = false
@@ -61,7 +61,7 @@ class LaunchPadDetailsFragment : BaseFragment() {
 
       elvLaunchPadDetailsLocation.setAdapter(
         CustomExpandableListAdapter(
-          context,
+          requireContext(),
           elvLaunchPadDetailsLocation,
           "Location",
           it,

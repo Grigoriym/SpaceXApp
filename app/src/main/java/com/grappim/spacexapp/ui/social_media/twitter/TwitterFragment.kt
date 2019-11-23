@@ -71,7 +71,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     val spinner = item?.actionView as? AppCompatSpinner
 
     val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
-      context!!,
+      requireContext(),
       R.layout.layout_spinner_item,
       arrayListOf("SpaceX", "Elon Musk")
     )
@@ -143,13 +143,13 @@ class TwitterFragment : Fragment(), KoinComponent {
       onImageClickS = { url, isVideo, videoDuration ->
         when (isVideo) {
           true -> {
-            context?.launchActivity<FullScreenVideoActivity> {
+            requireContext().launchActivity<FullScreenVideoActivity> {
               putExtra(PARCELABLE_TWITTER_VIDEO, url)
               putExtra(PARCELABLE_TWITTER_VIDEO_DURATION, videoDuration)
             }
           }
           false -> {
-            context?.launchActivity<FullScreenImageActivity> {
+            requireContext().launchActivity<FullScreenImageActivity> {
               putExtra(PARCELABLE_TWITTER_IMAGES, url)
             }
           }
@@ -157,9 +157,9 @@ class TwitterFragment : Fragment(), KoinComponent {
       })
 
     rvTwitter.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = uAdapter
     }
   }
