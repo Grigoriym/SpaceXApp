@@ -31,4 +31,4 @@ private val nextLaunchFromFormatter = SimpleDateFormat(nextLaunchPattern, Locale
 private val nextLaunchToFormatter = SimpleDateFormat(dateTimePattern, Locale.US)
 
 fun getNextLaunchUtcTime(value: String?): String =
-  nextLaunchFromFormatter.format(nextLaunchToFormatter.parse(value))
+  nextLaunchFromFormatter.format(nextLaunchToFormatter.parse(value) ?: Date())

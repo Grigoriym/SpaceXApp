@@ -14,17 +14,14 @@ class TwitterItemImageAdapter(
   val onImageClick: (String) -> Unit
 ) : RecyclerView.Adapter<TwitterItemImageViewHolder>() {
 
-  private var items: List<String> = emptyList()
+  private var items = mutableListOf<String>()
+  private var hashMap = mutableMapOf<String, Boolean>()
 
   override fun onCreateViewHolder(
-    parent: ViewGroup,
-    viewType: Int
-  ): TwitterItemImageViewHolder =
-    TwitterItemImageViewHolder(
-      parent
-        .context
-        .inflateLayout(R.layout.layout_twitter_item_image)
-    )
+    parent: ViewGroup, viewType: Int
+  ): TwitterItemImageViewHolder = TwitterItemImageViewHolder(
+    parent.context.inflateLayout(R.layout.layout_twitter_item_image)
+  )
 
   override fun onBindViewHolder(holder: TwitterItemImageViewHolder, position: Int) {
     holder.apply {
@@ -38,12 +35,14 @@ class TwitterItemImageAdapter(
         }
       }
       twitterImage.layoutParams = lp
+      hashMap.forEach {
+        if (it.value) {
+          videoLabel.show()
+        }
+      }
 
-      GlideApp.with(cl.context)
-        .load(items[position])
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .centerCrop()
-        .roundCorners(16)
+      GlideApp.with(cl.context).load(items[position])
+        .transition(DrawableTransitionOptions.withCrossFade()).centerCrop().roundCorners(16)
         .into(twitterImage)
       twitterImage.setSafeOnClickListener {
         onImageClick(items[position])
@@ -51,12 +50,13 @@ class TwitterItemImageAdapter(
     }
   }
 
-  override fun getItemCount(): Int {
-    return items.size
-  }
+  override fun getItemCount(): Int = items.size
 
-  fun loadItems(newItems: List<String>) {
-    items = newItems
+  fun loadItems(newHashMap: MutableMap<String, Boolean>) {
+    this.hashMap = newHashMap
+    hashMap.forEach {
+      items.add(it.key)
+    }
     notifyDataSetChanged()
   }
 }
@@ -67,5 +67,6 @@ class TwitterItemImageViewHolder(
 
   val cl: ConstraintLayout = view.clTwitterItemImage
   val twitterImage: ImageView = view.ivTwitterItemImage
+  val videoLabel: ImageView = view.imageVideoLabel
 
 }

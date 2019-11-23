@@ -49,8 +49,9 @@ class TwitterPaginationAdapter(
       var videoUrl: String? = ""
       var videoDuration: Int? = null
       userTimelineModel = getItem(position)
-      if (getItem(position)?.extendedEntities?.media?.get(0)?.type == "video") {
-        val videoInfo = getItem(position)?.extendedEntities?.media?.get(0)?.videoInfo
+
+      if (userTimelineModel?.extendedEntities?.media?.get(0)?.type == TWITTER_VIDEO_TYPE) {
+        val videoInfo = userTimelineModel?.extendedEntities?.media?.get(0)?.videoInfo
         val videoVariants = videoInfo?.variants
         loopi@ for (i in videoVariants.orEmpty()) {
           if (i?.bitrate == 2176000) {
@@ -72,8 +73,8 @@ class TwitterPaginationAdapter(
           )
         }
       }
-      itemView.setSafeOnClickListener { onClick(getItem(position)) }
-      GlideApp.with(profileImage.context).load(getItem(position)?.user?.profileImageUrlHttps)
+      itemView.setSafeOnClickListener { onClick(userTimelineModel) }
+      GlideApp.with(profileImage.context).load(userTimelineModel?.user?.profileImageUrlHttps)
         .transition(DrawableTransitionOptions.withCrossFade()).centerCrop()
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(profileImage)
@@ -84,9 +85,11 @@ class TwitterPaginationAdapter(
 class TwitterPaginationViewHolder(
   private val view: View
 ) : RecyclerView.ViewHolder(view) {
+
   var onImageClick: (String) -> Unit = {}
   val profileImage: ImageView = view.ivTwitterItemProfileImage
   private val rv: RecyclerView = view.rlTwitterItemMedia
+
   var userTimelineModel: UserTimelineModel? = null
     set(value) {
       field = value
@@ -96,10 +99,10 @@ class TwitterPaginationViewHolder(
         )
         tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
         tvTwitterItemScreenName.text = view.context.getString(
-          R.string.twitter_screen_name, value?.user?.screenName
+          R.string.twitter_screen_name, value?.user?.screenName ?: ""
         )
-        tvTwitterItemText.text = value?.fullText
-        tvTwitterName.text = value?.user?.name
+        tvTwitterItemText.text = value?.fullText ?: ""
+        tvTwitterName.text = value?.user?.name ?: ""
       }
     }
 
@@ -109,14 +112,12 @@ class TwitterPaginationViewHolder(
     if (value?.extendedEntities?.media?.get(0) != null) {
       rv.show()
       val mediaList = value.extendedEntities.media
-      val listOfStrings = mutableListOf<String>()
+      val hashMap = mutableMapOf<String, Boolean>()
 
-      for (i in mediaList) {
-        listOfStrings.add(
-          i?.mediaUrlHttps ?: ""
-        )
+      mediaList.forEach {
+        hashMap[it?.mediaUrlHttps ?: ""] = it?.type == TWITTER_VIDEO_TYPE
       }
-      when (listOfStrings.size) {
+      when (hashMap.size) {
         1 -> {
           rv.layoutManager = GridLayoutManager(
             view.context, 1
@@ -176,7 +177,7 @@ class TwitterPaginationViewHolder(
       })
       rv.adapter = iAdapter
 
-      iAdapter.loadItems(listOfStrings)
+      iAdapter.loadItems(hashMap)
     } else {
       rv.gone()
     }
