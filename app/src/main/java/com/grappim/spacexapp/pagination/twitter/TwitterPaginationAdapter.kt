@@ -64,7 +64,7 @@ class TwitterPaginationAdapter(
       onImageClick = {
         if (isVideo) {
           onImageClickS(
-            videoUrl!!, isVideo, videoDuration
+            videoUrl ?: "", isVideo, videoDuration
           )
         } else {
           onImageClickS(

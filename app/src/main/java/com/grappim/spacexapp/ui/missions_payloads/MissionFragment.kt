@@ -66,7 +66,7 @@ class MissionFragment : BaseFragment(), KoinComponent {
 
       elvMission.setAdapter(
         CustomExpandableListAdapter(
-          context,
+          requireContext(),
           elvMission,
           "Orbit Params",
           it,
