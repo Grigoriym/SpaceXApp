@@ -15,7 +15,7 @@ android {
     minSdkVersion 21
     targetSdkVersion 29
     versionCode 1
-    versionName "1.9.4"
+    versionName "0.0.1"
     multiDexEnabled true
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     archivesBaseName = "$applicationId-v$versionCode($versionName)"
