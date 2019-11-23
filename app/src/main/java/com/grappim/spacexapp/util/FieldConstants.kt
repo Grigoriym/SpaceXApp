@@ -39,3 +39,7 @@ const val KOIN_SPACEX_RETROFIT = "kodeinSpaceXKodein"
 const val KOIN_REDDIT_OK_HTTP_CLIENT = "koinRedditOkHttpClient"
 
 const val KOIN_REDDIT_RETROFIT = "koinRedditRetrofit"
+
+const val SPACE_X = "SpaceX"
+
+const val TWITTER_VIDEO_TYPE = "video"

@@ -73,7 +73,7 @@ class TwitterFragment : Fragment(), KoinComponent {
     val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
       requireContext(),
       R.layout.layout_spinner_item,
-      arrayListOf("SpaceX", "Elon Musk")
+      arrayListOf(SPACE_X, "Elon Musk")
     )
     spinner?.adapter = spinnerArrayAdapter
     spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -90,7 +90,7 @@ class TwitterFragment : Fragment(), KoinComponent {
         Timber.d("TwitterFragment - onItemSelected - $position")
         when (position) {
           0 -> {
-            viewModel.setCurrentScreenName("SpaceX")
+            viewModel.setCurrentScreenName(SPACE_X)
           }
           1 -> {
             viewModel.setCurrentScreenName("elonmusk")
