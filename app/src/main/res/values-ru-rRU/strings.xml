@@ -77,6 +77,6 @@
   <string name="diameter">Диаметр</string>
   <string name="mass">Масса</string>
 
-  <string name="twitter_screen_name">/@%1$s</string>
+  <string name="twitter_screen_name">"@"%1$s</string>
 
 </resources>
