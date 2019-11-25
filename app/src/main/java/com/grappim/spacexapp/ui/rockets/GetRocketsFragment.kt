@@ -52,7 +52,7 @@ class GetRocketsFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderRockets(rockets: List<RocketModel>?) {
-    rAdapter.loadItems(rockets!!)   //todo
+    rAdapter.loadItems(rockets ?: listOf())
     pbGetRockets.gone()
     rvGetRockets.scheduleLayoutAnimation()
   }
