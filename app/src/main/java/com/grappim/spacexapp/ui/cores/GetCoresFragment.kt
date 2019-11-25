@@ -65,7 +65,7 @@ class GetCoresFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderCores(cores: List<CoreModel>?) {
-    coreAdapter.loadItems(cores!!)//todo
+    coreAdapter.loadItems(cores ?: listOf())
     pbGetCores.gone()
     rvGetCores.scheduleLayoutAnimation()
   }

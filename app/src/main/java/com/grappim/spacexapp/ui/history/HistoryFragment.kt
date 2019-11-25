@@ -65,7 +65,7 @@ class HistoryFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderHistory(cores: List<HistoryModel>?) {
-    hAdapter.loadItems(cores!!)//todo
+    hAdapter.loadItems(cores ?: listOf())
     pbFragmentHistory.gone()
     rvFragmentHistory.scheduleLayoutAnimation()
   }

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 const val dateTimePattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+const val historyTimePattern = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 const val dtpyyyyMMdd = "yyyy-MM-dd"
 const val twitterDateFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy"
 const val capsuleFormattedDate = "MMM d ''yy 'at' HH:mm zzz"
@@ -16,15 +17,18 @@ private val formatterTwitter = SimpleDateFormat(twitterDateFormat, Locale.ENGLIS
 
 private val capsuleSdf = SimpleDateFormat(capsuleFormattedDate, Locale.getDefault())
 private val capsuleFormatter = SimpleDateFormat(dateTimePattern, Locale.getDefault())
+private val hisotoryFormatter = SimpleDateFormat(historyTimePattern, Locale.getDefault())
 
-fun getFormattedyyyyMMdd(value: String): String =
-  sdf.format(formatter.parse(value) ?: Date())
+fun getFormattedyyyyMMdd(value: String): String = sdf.format(formatter.parse(value) ?: Date())
 
 fun getDateForCapsule(value: String): String =
   capsuleSdf.format(capsuleFormatter.parse(value) ?: Date())
 
+fun getDateForHistory(value: String): String =
+  capsuleSdf.format(hisotoryFormatter.parse(value) ?: Date())
+
 fun getTwitterDate(date: String?): String? =
-  sdfTwitter.format(formatterTwitter.parse(date))
+  sdfTwitter.format(formatterTwitter.parse(date) ?: Date())
 
 private const val nextLaunchPattern = "dd MMM ''yy - HH:mm"
 private val nextLaunchFromFormatter = SimpleDateFormat(nextLaunchPattern, Locale.US)

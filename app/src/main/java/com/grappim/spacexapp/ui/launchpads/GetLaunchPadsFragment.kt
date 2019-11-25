@@ -46,7 +46,7 @@ class GetLaunchPadsFragment : BaseFragment(), KoinComponent {
   }
 
   private fun renderLaunchPads(rockets: List<LaunchPadModel>?) {
-    lAdapter.loadItems(rockets!!)   //todo
+    lAdapter.loadItems(rockets ?: listOf())
     pbGetLaunchPads.gone()
     rvGetLaunchPads.scheduleLayoutAnimation()
   }
