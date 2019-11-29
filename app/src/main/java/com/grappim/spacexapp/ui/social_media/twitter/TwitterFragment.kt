@@ -106,16 +106,16 @@ class TwitterFragment : Fragment(), KoinComponent {
     setHasOptionsMenu(true)
 
     viewModel.apply {
-      tweets.observe(this@TwitterFragment, Observer {
+      tweets.observe(viewLifecycleOwner, Observer {
         uAdapter.submitList(it)
       })
-      networkState.observe(this@TwitterFragment, Observer {
+      networkState.observe(viewLifecycleOwner, Observer {
         when (it) {
           NetworkState.LOADING -> pbTwitter.show()
           NetworkState.LOADED -> pbTwitter.gone()
         }
       })
-      currentScreenName.observe(this@TwitterFragment, Observer {
+      currentScreenName.observe(viewLifecycleOwner, Observer {
         showTweets()
       })
       onFailure(failure, ::handleFailure)

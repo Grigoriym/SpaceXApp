@@ -140,9 +140,6 @@ class TwitterPaginationViewHolder(
                 0 -> {
                   2
                 }
-                1 -> {
-                  1
-                }
                 else -> {
                   1
                 }

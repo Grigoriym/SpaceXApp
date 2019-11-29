@@ -33,6 +33,7 @@ android {
       buildConfigField 'String', "AccessTokenSecret", twitter_api_access_token_secret
       minifyEnabled false
       versionNameSuffix "-debug"
+      applicationIdSuffix ".debug"
     }
   }
   androidExtensions {
