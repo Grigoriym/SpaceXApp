@@ -1,34 +1,36 @@
 package com.grappim.spacexapp.ui.launches.details
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.util.PARCELABLE_LAUNCH_MODEL
 import com.grappim.spacexapp.util.dp
 import com.grappim.spacexapp.util.gone
 import com.grappim.spacexapp.util.show
-import kotlinx.android.synthetic.main.activity_launch_details.*
+import kotlinx.android.synthetic.main.fragment_launch_details.*
 
-class LaunchDetailsActivity : AppCompatActivity() {
+class LaunchDetailsFragment : Fragment() {
 
-  var args: LaunchModel? = null
+  private val args: LaunchDetailsFragmentArgs by navArgs()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_launch_details)
+  override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? =
+    inflater.inflate(R.layout.fragment_launch_details, container, false)
 
-    intent?.apply {
-      args = getParcelableExtra(PARCELABLE_LAUNCH_MODEL)
-    }
-
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     fillContent()
   }
 
   private fun fillContent() {
-    args?.apply {
+    args.launchModel.apply {
       if (this.links?.missionPatch == null) {
         ivLaunchDetailsMissionPatch.gone()
         val constraintSet = ConstraintSet()
@@ -43,7 +45,7 @@ class LaunchDetailsActivity : AppCompatActivity() {
         constraintSet.applyTo(clLaunchDetailsInfo)
       } else {
         ivLaunchDetailsMissionPatch.show()
-        Glide.with(this@LaunchDetailsActivity)
+        Glide.with(requireActivity())
           .load(this.links.missionPatch)
           .into(ivLaunchDetailsMissionPatch)
       }

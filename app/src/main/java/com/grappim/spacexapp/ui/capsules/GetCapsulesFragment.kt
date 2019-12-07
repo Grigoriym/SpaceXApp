@@ -56,9 +56,9 @@ open class GetCapsulesFragment : BaseFragment(), KoinComponent {
   private fun getData() {
     pbGetCapsules.show()
     when (args.capsulesToGetArgs) {
-      0 -> viewModel.loadAllCapsules()
-      1 -> viewModel.loadUpcomingCapsules()
-      2 -> viewModel.loadPastCapsules()
+      ARG_CAPSULES_ALL -> viewModel.loadAllCapsules()
+      ARG_CAPSULES_UPCOMING -> viewModel.loadUpcomingCapsules()
+      ARG_CAPSULES_PAST -> viewModel.loadPastCapsules()
       else -> {
         renderFailure(getString(R.string.error_retrieving_data))
       }
@@ -84,10 +84,10 @@ open class GetCapsulesFragment : BaseFragment(), KoinComponent {
       findNavController().navigate(GetCapsulesFragmentDirections.nextFragment(it))
     }
     rvGetCapsules.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = cAdapter
     }
   }

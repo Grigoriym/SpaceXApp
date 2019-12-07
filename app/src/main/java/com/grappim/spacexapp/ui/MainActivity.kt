@@ -9,12 +9,15 @@ import androidx.core.view.GravityCompat
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import com.grappim.spacexapp.util.PrefsManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.core.KoinComponent
@@ -22,7 +25,7 @@ import org.koin.core.inject
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-  KoinComponent {
+  KoinComponent, MainActivityListener {
 
   private lateinit var navController: NavController
   private lateinit var appBarConfiguration: AppBarConfiguration
@@ -98,6 +101,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     return displaySelectedScreen(item.itemId)
   }
 
+  override fun showLaunchDetails(model: LaunchModel) {
+    navController.navigate(LaunchesFragmentDirections.nextFragment(model))
+  }
+
   private fun displaySelectedScreen(itemId: Int): Boolean {
     when (itemId) {
       R.id.nav_capsules -> navController.navigate(R.id.capsules_nav_graph)
@@ -125,4 +132,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
       super.onBackPressed()
     }
   }
+}
+
+interface MainActivityListener{
+  fun showLaunchDetails(model:LaunchModel)
 }

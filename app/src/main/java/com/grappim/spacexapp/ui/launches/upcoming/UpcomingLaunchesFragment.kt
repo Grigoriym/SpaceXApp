@@ -11,7 +11,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.ui.launches.details.LaunchDetailsActivity
+import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.*
 import org.koin.core.KoinComponent
@@ -85,15 +85,13 @@ class UpcomingLaunchesFragment : Fragment(), KoinComponent {
 
   private fun bindAdapter() {
     lAdapter = LaunchesAdapter {
-      context?.launchActivity<LaunchDetailsActivity> {
-        putExtra(PARCELABLE_LAUNCH_MODEL, it)
-      }
+      (requireActivity() as? MainActivity)?.showLaunchDetails(it)
     }
     rvUpcomingLaunches.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = lAdapter
     }
   }

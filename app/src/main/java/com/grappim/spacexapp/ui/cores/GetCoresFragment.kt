@@ -55,9 +55,9 @@ class GetCoresFragment : BaseFragment(), KoinComponent {
   private fun getData() {
     pbGetCores.show()
     when (args.coresToGetArgs) {
-      0 -> viewModel.loadAllCores()
-      1 -> viewModel.loadPastCores()
-      2 -> viewModel.loadUpcomingCores()
+      ARG_CORES_ALL -> viewModel.loadAllCores()
+      ARG_CORES_PAST -> viewModel.loadPastCores()
+      ARG_CORES_UPCOMING -> viewModel.loadUpcomingCores()
       else -> {
         renderFailure(getString(R.string.error_retrieving_data))
       }
@@ -79,10 +79,10 @@ class GetCoresFragment : BaseFragment(), KoinComponent {
   private fun bindAdapter() {
     coreAdapter = CoresAdapter {}//todo ripple effect works strange on items
     rvGetCores.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = coreAdapter
     }
   }

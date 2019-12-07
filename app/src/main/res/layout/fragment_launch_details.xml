@@ -3,26 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  tools:context=".ui.launches.details.LaunchDetailsActivity">
-
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/ablLaunchDetails"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
-
-    <androidx.appcompat.widget.Toolbar
-      android:id="@+id/tlbrLaunchDetails"
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      android:background="?attr/colorPrimary"
-      android:theme="@style/ThemeOverlay.MaterialComponents.Dark" />
-
-  </com.google.android.material.appbar.AppBarLayout>
+  android:layout_height="match_parent">
 
   <com.google.android.material.card.MaterialCardView
     android:id="@+id/materialCardView"
@@ -31,16 +12,16 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
-    app:layout_constraintEnd_toEndOf="@+id/ablLaunchDetails"
-    app:layout_constraintStart_toStartOf="@+id/ablLaunchDetails"
-    app:layout_constraintTop_toBottomOf="@+id/ablLaunchDetails">
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/clLaunchDetailsInfo"
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-      <ImageView
+      <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivLaunchDetailsMissionPatch"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -50,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView56"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +40,7 @@
         app:layout_constraintTop_toTopOf="@+id/ivLaunchDetailsMissionPatch"
         tools:text="KSC LC 39A" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLaunchDetailsMissionName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView56"
         tools:text="STP-2" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView60"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,7 +58,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvLaunchDetailsMissionName"
         tools:text="25 Jun '19 - 09:30" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView64"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +67,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView56"
         tools:text="F-NR" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLaunchDetailsFlightNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -94,7 +75,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvLaunchDetailsMissionName"
         tools:text="81" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLaunchDetailsDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -105,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView60"
         tools:text="Description" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView69"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,7 +97,7 @@
         app:layout_constraintStart_toStartOf="@+id/tvLaunchDetailsDetails"
         app:layout_constraintTop_toBottomOf="@+id/tvLaunchDetailsDetails" />
 
-      <TextView
+      <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textView70"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,7 +109,7 @@
 
   </com.google.android.material.card.MaterialCardView>
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/textView71"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -148,7 +129,7 @@
     app:layout_constraintTop_toBottomOf="@+id/textView71"
     tools:itemCount="3" />
 
-  <TextView
+  <androidx.appcompat.widget.AppCompatTextView
     android:id="@+id/textView72"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
