@@ -15,7 +15,7 @@
       app:destination="@id/getCoresFragment">
       <argument
         android:name="coresToGetArgs"
-        app:argType="integer" />
+        app:argType="string" />
     </action>
   </fragment>
 
@@ -26,7 +26,7 @@
     tools:layout="@layout/fragment_get_cores">
     <argument
       android:name="coresToGetArgs"
-      app:argType="integer" />
+      app:argType="string" />
   </fragment>
 
 </navigation>

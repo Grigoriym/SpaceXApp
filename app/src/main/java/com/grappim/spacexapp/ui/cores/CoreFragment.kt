@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.ui.base.BaseFragment
+import com.grappim.spacexapp.util.*
 import com.grappim.spacexapp.util.setSafeOnClickListener
 import kotlinx.android.synthetic.main.fragment_core.*
 
@@ -22,15 +23,15 @@ class CoreFragment : BaseFragment() {
     super.onViewCreated(view, savedInstanceState)
 
     btnCoreAll.setSafeOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(0))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_ALL))
     }
 
     btnCorePast.setSafeOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(1))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_PAST))
     }
 
     btnCoreUpcoming.setSafeOnClickListener {
-      findNavController().navigate(CoreFragmentDirections.nextFragment(2))
+      findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_UPCOMING))
     }
   }
 }

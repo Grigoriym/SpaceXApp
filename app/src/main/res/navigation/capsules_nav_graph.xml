@@ -21,7 +21,7 @@
       app:popExitAnim="@anim/slide_out_right">
       <argument
         android:name="capsulesToGetArgs"
-        app:argType="integer" />
+        app:argType="string" />
     </action>
   </fragment>
 
@@ -43,7 +43,7 @@
     </action>
     <argument
       android:name="capsulesToGetArgs"
-      app:argType="integer" />
+      app:argType="string" />
   </fragment>
 
   <fragment

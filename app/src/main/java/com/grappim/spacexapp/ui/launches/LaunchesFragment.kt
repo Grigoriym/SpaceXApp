@@ -20,7 +20,7 @@ class LaunchesFragment : Fragment() {
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     Timber.d("LaunchesFragment - onViewCreated")
-    val lfpa = LaunchesFragmentPagerAdapter(activity?.supportFragmentManager)
+    val lfpa = LaunchesFragmentPagerAdapter(requireActivity().supportFragmentManager)
     vpLaunches.adapter = lfpa
     tlLaunches.setupWithViewPager(vpLaunches)
   }

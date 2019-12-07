@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.ui.base.BaseFragment
+import com.grappim.spacexapp.util.ARG_CAPSULES_ALL
+import com.grappim.spacexapp.util.ARG_CAPSULES_PAST
+import com.grappim.spacexapp.util.ARG_CAPSULES_UPCOMING
 import com.grappim.spacexapp.util.setSafeOnClickListener
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
@@ -24,15 +27,15 @@ class CapsuleFragment : BaseFragment() {
     Timber.d("CapsuleFragment - onViewCreated")
 
     btnGetAllCapsules.setSafeOnClickListener {
-      findNavController().navigate(CapsuleFragmentDirections.nextFragment(0))
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(ARG_CAPSULES_ALL))
     }
 
     btnGetUpcomingCapsules.setSafeOnClickListener {
-      findNavController().navigate(CapsuleFragmentDirections.nextFragment(1))
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(ARG_CAPSULES_UPCOMING))
     }
 
     btnGetPastCapsules.setSafeOnClickListener {
-      findNavController().navigate(CapsuleFragmentDirections.nextFragment(2))
+      findNavController().navigate(CapsuleFragmentDirections.nextFragment(ARG_CAPSULES_PAST))
     }
   }
 }
