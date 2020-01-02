@@ -19,9 +19,6 @@ class RocketsAdapter(
 
   private var items: List<RocketModel> = emptyList()
 
-  private val animationUp = AnimationUtils.loadAnimation(context, R.anim.slide_up)
-  private val animationDown = AnimationUtils.loadAnimation(context, R.anim.slide_down)
-
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
@@ -51,9 +48,14 @@ class RocketsAdapter(
         .apply(RequestOptions().placeholder(R.drawable.glide_placeholder).centerCrop())
         .into(ivGetRockets)
 
-      itemView.setSafeOnClickListener {
+      itemView.setOnClickListener {
         if (tvRocketDescription.isShown) {
-          tvRocketDescription.startAnimation(animationUp)
+          tvRocketDescription.startAnimation(
+            AnimationUtils.loadAnimation(
+              itemView.context,
+              R.anim.slide_up
+            )
+          )
           val countDownTimeStatic = object : CountDownTimer(200, 16) {
             override fun onTick(millisUntilFinished: Long) {}
 
@@ -65,7 +67,7 @@ class RocketsAdapter(
         } else {
           tvRocketDescription.apply {
             show()
-            startAnimation(animationDown)
+            startAnimation(AnimationUtils.loadAnimation(context, R.anim.slide_down))
           }
         }
       }
