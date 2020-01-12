@@ -24,6 +24,7 @@ const val KOIN_SPACEX_OK_HTTP_CLIENT = "kodeinSpaceXOkHttpClient"
 const val KOIN_SPACEX_RETROFIT = "kodeinSpaceXKodein"
 const val KOIN_REDDIT_OK_HTTP_CLIENT = "koinRedditOkHttpClient"
 const val KOIN_REDDIT_RETROFIT = "koinRedditRetrofit"
+const val KOIN_NOTIFICATION_MANAGER = "koin_notification_manager"
 
 const val SPACE_X = "SpaceX"
 
