@@ -3,8 +3,9 @@ package com.grappim.spacexapp.recyclerview.viewholders
 import android.view.View
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.util.getDateForCapsule
 import kotlinx.android.synthetic.main.layout_capsule_item.view.*
 
 class CapsuleViewHolder(
@@ -21,7 +22,7 @@ class CapsuleViewHolder(
           if (value?.originalLaunch == null) {
             "Unknown"
           } else {
-            getDateForCapsule(value.originalLaunch)
+            DateTimeUtils.getDateTimeFormatter3().format(value.originalLaunch.getOffsetDateTime())
           }
         tvCapsuleType.text = value?.type
         tvCapsuleNumberOfMissions.text = value?.missions?.size.toString()

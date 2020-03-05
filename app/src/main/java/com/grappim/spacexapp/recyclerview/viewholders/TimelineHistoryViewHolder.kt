@@ -4,6 +4,8 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.model.history.HistoryModel
 import kotlinx.android.synthetic.main.layout_history_item.view.*
 
@@ -19,7 +21,9 @@ class TimelineHistoryViewHolder(
       field = value
       itemView.apply {
         tvHistoryItemTitle.text = value?.title
-        tvHistoryItemDate.text = value?.eventDateUtc
+        tvHistoryItemDate.text = DateTimeUtils.getDateTimeFormatter().format(
+          value?.eventDateUtc?.getOffsetDateTime()
+        )
       }
     }
 

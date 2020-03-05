@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.getDateForHistory
 import kotlinx.android.synthetic.main.fragment_history_details.*
@@ -27,7 +29,8 @@ class HistoryDetailsFragment : BaseFragment() {
 
     args.historyModel.let {
       tvHistoryDetailsTitle.text = it.title
-      tvHistoryDetailsDate.text = getDateForHistory(it.eventDateUtc ?: "")
+      tvHistoryDetailsDate.text =
+        DateTimeUtils.getDateTimeFormatter().format(it.eventDateUtc?.getOffsetDateTime())
       tvHistoryDetailsDetails.text = it.details
     }
   }

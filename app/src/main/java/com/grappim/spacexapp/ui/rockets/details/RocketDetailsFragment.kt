@@ -7,6 +7,8 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
@@ -54,7 +56,9 @@ class RocketDetailsFragment : BaseFragment() {
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
       tvRocketDetailsDateFirstFlight.text =
         if (it.firstFlight != null) {
-          getFormattedyyyyMMdd(it.firstFlight)
+          DateTimeUtils.getDateTimeFormatter1().format(
+            it.firstFlight.getOffsetDateTime(formatter = DateTimeUtils.getDateTimeFormatter2())
+          )
         } else {
           "Unknown"
         }

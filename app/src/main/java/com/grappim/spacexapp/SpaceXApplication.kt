@@ -2,6 +2,7 @@ package com.grappim.spacexapp
 
 import androidx.multidex.MultiDexApplication
 import com.grappim.spacexapp.di.*
+import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import timber.log.Timber
@@ -32,6 +33,7 @@ class SpaceXApplication : MultiDexApplication() {
       )
     }
     timberInit()
+    AndroidThreeTen.init(this)
     Timber.d("Application - onCreate")
   }
 

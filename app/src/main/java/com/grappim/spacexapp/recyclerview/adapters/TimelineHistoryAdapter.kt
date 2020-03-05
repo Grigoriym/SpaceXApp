@@ -28,8 +28,7 @@ class TimelineHistoryAdapter(
     TimelineHistoryViewHolder(
       parent
         .context
-        .inflateLayout(R.layout.layout_history_item, parent),
-      viewType
+        .inflateLayout(R.layout.layout_history_item, parent), viewType
     )
 
   override fun onBindViewHolder(
