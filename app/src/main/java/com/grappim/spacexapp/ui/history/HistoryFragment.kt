@@ -8,11 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.TimelineHistoryAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

@@ -5,9 +5,9 @@ import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.services.RedditService
 import com.grappim.spacexapp.repository.RedditRepository
 import com.grappim.spacexapp.repository.RedditRepositoryImpl
-import com.grappim.spacexapp.util.KOIN_REDDIT_OK_HTTP_CLIENT
-import com.grappim.spacexapp.util.KOIN_REDDIT_RETROFIT
-import com.grappim.spacexapp.util.REDDIT_BASE_URL
+import com.grappim.spacexapp.core.utils.KOIN_REDDIT_OK_HTTP_CLIENT
+import com.grappim.spacexapp.core.utils.KOIN_REDDIT_RETROFIT
+import com.grappim.spacexapp.core.utils.REDDIT_BASE_URL
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -22,5 +22,5 @@ val redditModule = module {
     )
   }
   single { RedditService(get(named(KOIN_REDDIT_RETROFIT))) }
-  single { RedditRepositoryImpl() as RedditRepository }
+  single { RedditRepositoryImpl() }
 }

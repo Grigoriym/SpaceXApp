@@ -7,12 +7,14 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
-import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 import timber.log.Timber
 
@@ -54,7 +56,9 @@ class RocketDetailsFragment : BaseFragment() {
       tvRocketDetailsCostPerLaunch.text = it.costPerLaunch.toString()
       tvRocketDetailsDateFirstFlight.text =
         if (it.firstFlight != null) {
-          getFormattedyyyyMMdd(it.firstFlight)
+          DateTimeUtils.getDateTimeFormatter1().format(
+            it.firstFlight.getOffsetDateTime(formatter = DateTimeUtils.getDateTimeFormatter2())
+          )
         } else {
           "Unknown"
         }
@@ -63,7 +67,11 @@ class RocketDetailsFragment : BaseFragment() {
       tvRocketDetailsCountry.text = it.country
       tvRocketDetailsSuccessRate.text = it.successRatePct.toString()
       tvRocketDetailsStages.text = it.stages.toString()
-      ivRocketDetailsActive.setImageResource(setMyImageResource(it.active))
+      ivRocketDetailsActive.setImageResource(
+        setMyImageResource(
+          it.active
+        )
+      )
 
       GlideApp.with(this)
         .load(it.flickrImages?.random())

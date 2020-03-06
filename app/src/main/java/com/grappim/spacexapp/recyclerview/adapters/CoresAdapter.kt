@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.viewholders.CoreViewHolder
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class CoresAdapter(
   private inline val onClick: (CoreModel) -> Unit

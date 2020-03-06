@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
@@ -62,7 +63,11 @@ class MissionFragment : BaseFragment(), KoinComponent {
       tvMissionPayloadId.text = it.payloadId
       tvMissionManufacturer.text = it.manufacturer
       tvMissionNationality.text = it.nationality ?: "N/A"
-      ivMissionReused.setImageResource(setMyImageResource(it.reused))
+      ivMissionReused.setImageResource(
+        setMyImageResource(
+          it.reused
+        )
+      )
 
       elvMission.setAdapter(
         CustomExpandableListAdapter(

@@ -8,9 +8,9 @@ import com.github.vipulasri.timelineview.TimelineView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.recyclerview.viewholders.TimelineHistoryViewHolder
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setMyColorFilter
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setMyColorFilter
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class TimelineHistoryAdapter(
   private inline val onClick: (HistoryModel) -> Unit
@@ -28,8 +28,7 @@ class TimelineHistoryAdapter(
     TimelineHistoryViewHolder(
       parent
         .context
-        .inflateLayout(R.layout.layout_history_item, parent),
-      viewType
+        .inflateLayout(R.layout.layout_history_item, parent), viewType
     )
 
   override fun onBindViewHolder(

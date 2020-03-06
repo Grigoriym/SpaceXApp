@@ -11,8 +11,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.util.GlideApp
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import kotlinx.android.synthetic.main.layout_reddit_item.view.*
 
 class RedditPaginationAdapter(

@@ -9,11 +9,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
+import com.grappim.spacexapp.core.utils.ARG_CORES_ALL
+import com.grappim.spacexapp.core.utils.ARG_CORES_PAST
+import com.grappim.spacexapp.core.utils.ARG_CORES_UPCOMING
 import com.grappim.spacexapp.model.cores.CoreModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_cores.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

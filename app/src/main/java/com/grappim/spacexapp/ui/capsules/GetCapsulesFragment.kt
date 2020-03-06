@@ -10,11 +10,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

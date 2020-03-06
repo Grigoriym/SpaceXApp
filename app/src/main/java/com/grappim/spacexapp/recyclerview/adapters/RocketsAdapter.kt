@@ -8,6 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.gone
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.viewholders.RocketsViewHolder
 import com.grappim.spacexapp.util.*

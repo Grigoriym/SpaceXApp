@@ -11,11 +11,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
+import com.grappim.spacexapp.core.utils.DateTimeUtils
+import com.grappim.spacexapp.core.utils.TWITTER_VIDEO_TYPE
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
 import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
+import org.threeten.bp.format.DateTimeFormatter
 
 class TwitterPaginationAdapter(
   val onClick: (UserTimelineModel?) -> Unit, val onImageClickS: (String, Boolean, Int?) -> Unit
@@ -97,7 +101,15 @@ class TwitterPaginationViewHolder(
         setInnerRv(
           this, value
         )
-        tvTwitterItemCreatedAt.text = getTwitterDate(value?.createdAt)
+        tvTwitterItemCreatedAt.text = value?.createdAt?.let { date ->
+          DateTimeUtils.getDateTimeFormatter5().format(
+            date.getOffsetDateTime(
+              formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy")
+            )
+          )
+        } ?: let {
+          "Unknown"
+        }
         tvTwitterItemScreenName.text = view.context.getString(
           R.string.twitter_screen_name, value?.user?.screenName ?: ""
         )

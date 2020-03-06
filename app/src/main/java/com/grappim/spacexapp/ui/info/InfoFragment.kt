@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.fragment_info.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject

@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.cores.CoreModel
-import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setMyImageResource
 import kotlinx.android.synthetic.main.layout_core_item.view.*
 
 class CoreViewHolder(
@@ -26,7 +26,11 @@ class CoreViewHolder(
         value?.rtlsLandings ?: 0,
         value?.rtlsAttempts ?: 0
       )
-      view.ivCoreItemWaterLanding.setImageResource(setMyImageResource(value?.waterLanding))
+      view.ivCoreItemWaterLanding.setImageResource(
+        setMyImageResource(
+          value?.waterLanding
+        )
+      )
       value?.missions?.let {
         var result: String? = ""
         for (item in it) {
