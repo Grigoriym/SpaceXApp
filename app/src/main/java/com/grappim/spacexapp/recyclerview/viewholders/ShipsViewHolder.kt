@@ -2,9 +2,8 @@ package com.grappim.spacexapp.recyclerview.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.chip.ChipGroup
 import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setMyImageResource
 import kotlinx.android.synthetic.main.layout_ship_item.view.*
 
 class ShipsViewHolder(
@@ -17,6 +16,10 @@ class ShipsViewHolder(
       view.tvShipItemStatus.text = value?.status
       view.tvShipItemType.text = value?.shipType
       view.tvShipItemHomePort.text = value?.homePort
-      view.ivShipItemActive.setImageResource(setMyImageResource(value?.active))
+      view.ivShipItemActive.setImageResource(
+        setMyImageResource(
+          value?.active
+        )
+      )
     }
 }

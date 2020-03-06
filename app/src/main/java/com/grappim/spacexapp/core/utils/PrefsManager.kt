@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.util
+package com.grappim.spacexapp.core.utils
 
 import android.content.Context
 

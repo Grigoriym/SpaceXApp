@@ -14,7 +14,7 @@ import com.grappim.spacexapp.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.getFormattedyyyyMMdd
-import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_rocket_details.*
 import timber.log.Timber
 
@@ -67,7 +67,11 @@ class RocketDetailsFragment : BaseFragment() {
       tvRocketDetailsCountry.text = it.country
       tvRocketDetailsSuccessRate.text = it.successRatePct.toString()
       tvRocketDetailsStages.text = it.stages.toString()
-      ivRocketDetailsActive.setImageResource(setMyImageResource(it.active))
+      ivRocketDetailsActive.setImageResource(
+        setMyImageResource(
+          it.active
+        )
+      )
 
       GlideApp.with(this)
         .load(it.flickrImages?.random())

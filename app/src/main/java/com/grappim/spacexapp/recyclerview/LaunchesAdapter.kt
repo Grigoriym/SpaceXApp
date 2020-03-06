@@ -6,8 +6,13 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.show
 import kotlinx.android.synthetic.main.layout_launches_item.view.*
 
 class LaunchesAdapter(
@@ -83,11 +88,19 @@ class LaunchesAdapter(
         view.apply {
           tvLaunchesFlightNumber.text = value?.flightNumber.toString()
           tvLaunchesMissionName.text = value?.missionName
-          tvLaunchesDate.text = getNextLaunchUtcTime(value?.launchDateUtc)
+          tvLaunchesDate.text = value?.launchDateUtc?.let { date ->
+            DateTimeUtils.getDateTimeFormatter4().format(date.getOffsetDateTime())
+          } ?: let {
+            "Unknown"
+          }
           if (value?.launchSuccess != null) {
             groupLaunchesItem.show()
             ivLaunchesItemLaunchSuccess
-              .setImageResource(setMyImageResource(value.launchSuccess))
+              .setImageResource(
+                setMyImageResource(
+                  value.launchSuccess
+                )
+              )
           }
         }
       }

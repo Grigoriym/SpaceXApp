@@ -15,7 +15,7 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.GlideApp
-import com.grappim.spacexapp.util.setMyImageResource
+import com.grappim.spacexapp.core.extensions.setMyImageResource
 import kotlinx.android.synthetic.main.fragment_ship_details.*
 import timber.log.Timber
 
@@ -67,7 +67,11 @@ class ShipDetailsFragment : BaseFragment() {
         it.successfulLandings ?: 0,
         it.attemptedLandings ?: 0
       )
-      ivShipDetailsActive.setImageResource(setMyImageResource(it.active))
+      ivShipDetailsActive.setImageResource(
+        setMyImageResource(
+          it.active
+        )
+      )
       mAdapter.loadItems(it.missions!!)
 
       for (item in it.roles.orEmpty()) {

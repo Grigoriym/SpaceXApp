@@ -5,14 +5,14 @@ import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.services.SpaceXService
 import com.grappim.spacexapp.repository.SpaceXRepository
-import com.grappim.spacexapp.util.KOIN_SPACEX_OK_HTTP_CLIENT
-import com.grappim.spacexapp.util.KOIN_SPACEX_RETROFIT
-import com.grappim.spacexapp.util.SPACE_X_BASE_URL
+import com.grappim.spacexapp.core.utils.KOIN_SPACEX_OK_HTTP_CLIENT
+import com.grappim.spacexapp.core.utils.KOIN_SPACEX_RETROFIT
+import com.grappim.spacexapp.core.utils.SPACE_X_BASE_URL
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val spaceXModule = module {
-  single { SpaceXRepositoryImpl(get(), get()) as SpaceXRepository }
+  single { SpaceXRepositoryImpl(get(), get()) }
   single(named(KOIN_SPACEX_OK_HTTP_CLIENT)) { createOkHttpClient() }
   single(named(KOIN_SPACEX_RETROFIT)) {
     createRetrofit(

@@ -9,7 +9,7 @@ import android.widget.ExpandableListView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class CustomExpandableListAdapter(
   private val context: Context?,

@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.Mission
 import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class RvInnerMissionsAdapter(
   private inline val onClick: (Mission?) -> Unit

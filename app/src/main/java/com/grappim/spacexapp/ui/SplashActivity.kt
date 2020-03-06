@@ -3,8 +3,8 @@ package com.grappim.spacexapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.grappim.spacexapp.util.PrefsManager
-import com.grappim.spacexapp.util.launchActivity
+import com.grappim.spacexapp.core.utils.PrefsManager
+import com.grappim.spacexapp.core.extensions.launchActivity
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber

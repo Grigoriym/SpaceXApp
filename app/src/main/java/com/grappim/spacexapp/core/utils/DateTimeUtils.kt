@@ -15,8 +15,14 @@ object DateTimeUtils {
   fun getDateTimeFormatter2(): DateTimeFormatter =
     DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneOffset.UTC)
 
-  fun getDateTimeFormatter3():DateTimeFormatter =
-    DateTimeFormatter.ofPattern("MMM d ''yy 'at' HH:mm zzz")
+  fun getDateTimeFormatter3(): DateTimeFormatter =
+    DateTimeFormatter.ofPattern("MMM d ''yy 'at' HH:mm")
+
+  fun getDateTimeFormatter4(): DateTimeFormatter =
+    DateTimeFormatter.ofPattern("dd MMM ''yy - HH:mm")
+
+  fun getDateTimeFormatter5(): DateTimeFormatter =
+    DateTimeFormatter.ofPattern("MMM dd")
 
   fun getOffsetTimeZone(inUtc: Boolean): ZoneOffset =
     when (inUtc) {

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator

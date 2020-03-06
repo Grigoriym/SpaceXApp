@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.ARG_CAPSULES_ALL
-import com.grappim.spacexapp.util.ARG_CAPSULES_PAST
-import com.grappim.spacexapp.util.ARG_CAPSULES_UPCOMING
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
+import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
 

@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.util
+package com.grappim.spacexapp.core.utils
 
 const val SPACE_X_BASE_URL = "https://api.spacexdata.com/v3/"
 const val REDDIT_BASE_URL = "https://www.reddit.com/"

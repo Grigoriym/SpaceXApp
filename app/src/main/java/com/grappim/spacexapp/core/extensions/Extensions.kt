@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.util
+package com.grappim.spacexapp.core.extensions
 
 import android.app.Activity
 import android.content.Context
@@ -26,6 +26,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.utils.SafeClickListener
+import com.grappim.spacexapp.util.Failure
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -59,11 +61,7 @@ inline fun <reified T : Any> Activity.launchActivity(
 ) {
   val intent = newIntent<T>(this)
   intent.init()
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-    startActivityForResult(intent, requestCode, options)
-  } else {
-    startActivityForResult(intent, requestCode)
-  }
+  startActivityForResult(intent, requestCode, options)
 }
 
 inline fun <reified T : Any> Context.launchActivity(
@@ -72,11 +70,7 @@ inline fun <reified T : Any> Context.launchActivity(
 ) {
   val intent = newIntent<T>(this)
   intent.init()
-  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-    startActivity(intent, options)
-  } else {
-    startActivity(intent)
-  }
+  startActivity(intent, options)
 }
 
 fun Fragment.startBrowser(uriString: String?) {

@@ -4,7 +4,7 @@ import android.content.Context
 import com.grappim.spacexapp.BuildConfig
 import com.grappim.spacexapp.network.interceptors.Oauth1SigningInterceptor
 import com.grappim.spacexapp.network.interceptors.OauthKeys
-import com.grappim.spacexapp.util.networkInfo
+import com.grappim.spacexapp.core.extensions.networkInfo
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

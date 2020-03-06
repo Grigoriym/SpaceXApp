@@ -4,8 +4,8 @@ import android.os.Build
 import android.os.Bundle
 import android.widget.MediaController
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.PARCELABLE_TWITTER_VIDEO
-import com.grappim.spacexapp.util.PARCELABLE_TWITTER_VIDEO_DURATION
+import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO
+import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO_DURATION
 import kotlinx.android.synthetic.main.activity_full_screen_video.*
 
 class FullScreenVideoActivity : FullScreenBaseActivity() {

@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.recyclerview.viewholders.CapsuleViewHolder
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class CapsulesAdapter(
   private inline val onClick: (CapsuleModel) -> Unit

@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.recyclerview.viewholders.LaunchPadViewHolder
-import com.grappim.spacexapp.util.inflateLayout
-import com.grappim.spacexapp.util.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 
 class LaunchPadsAdapter(
   private inline val onClick: (LaunchPadModel) -> Unit

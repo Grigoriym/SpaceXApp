@@ -11,6 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.*
+import com.grappim.spacexapp.core.utils.REDDIT_FOR_BROWSER_URI
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.reddit.RedditPaginationAdapter
 import com.grappim.spacexapp.util.*
