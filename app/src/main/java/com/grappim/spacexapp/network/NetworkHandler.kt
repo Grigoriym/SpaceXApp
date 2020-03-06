@@ -2,9 +2,9 @@ package com.grappim.spacexapp.network
 
 import android.content.Context
 import com.grappim.spacexapp.BuildConfig
+import com.grappim.spacexapp.core.extensions.networkInfo
 import com.grappim.spacexapp.network.interceptors.Oauth1SigningInterceptor
 import com.grappim.spacexapp.network.interceptors.OauthKeys
-import com.grappim.spacexapp.core.extensions.networkInfo
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,14 +26,19 @@ fun createRetrofit(baseUrl: String, client: OkHttpClient): Retrofit = Retrofit.B
 fun createOkHttpClient(vararg interceptors: Interceptor): OkHttpClient {
   val okHttp = OkHttpClient.Builder()
 
-  val logging = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-      message -> Timber.tag("API").d(message)
-  })
-  logging.level = HttpLoggingInterceptor.Level.BODY
+  if (BuildConfig.DEBUG) {
+    val logging = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+      override fun log(message: String) {
+        Timber.tag("API").d(message)
+      }
+    }).apply {
+      level = HttpLoggingInterceptor.Level.BODY
+    }
 
-  okHttp.addInterceptor(logging)
+    okHttp.addInterceptor(logging)
+  }
 
-  for (i in interceptors){
+  for (i in interceptors) {
     okHttp.addInterceptor(i)
   }
 

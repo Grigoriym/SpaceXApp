@@ -13,11 +13,11 @@ import com.bumptech.glide.request.RequestOptions
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.DateTimeUtils
+import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.utils.TWITTER_VIDEO_TYPE
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 import org.threeten.bp.format.DateTimeFormatter
 

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
+import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.GlideApp
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
 import timber.log.Timber

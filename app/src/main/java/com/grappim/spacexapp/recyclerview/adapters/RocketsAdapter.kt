@@ -12,9 +12,9 @@ import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.inflateLayout
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.viewholders.RocketsViewHolder
-import com.grappim.spacexapp.util.*
 
 class RocketsAdapter(
   context: Context?,
