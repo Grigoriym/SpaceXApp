@@ -1,6 +1,8 @@
 package com.grappim.spacexapp
 
 import androidx.multidex.MultiDexApplication
+import com.grappim.spacexapp.core.di.AppComponent
+import com.grappim.spacexapp.core.di.DaggerAppComponent
 import com.grappim.spacexapp.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
@@ -15,6 +17,10 @@ import timber.log.Timber
 //todo remove coroutines and implement rx?
 
 class SpaceXApplication : MultiDexApplication() {
+
+  val appComponent:AppComponent by lazy {
+    DaggerAppComponent.factory().create(applicationContext)
+  }
 
   override fun onCreate() {
     super.onCreate()

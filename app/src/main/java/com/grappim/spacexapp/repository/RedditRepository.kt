@@ -5,5 +5,5 @@ import com.grappim.spacexapp.pagination.Listing
 
 interface RedditRepository {
 
-  fun getPostsBySubreddit(sureddit: String): Listing<RedditModel>
+  fun getPostsBySubreddit(subReddit: String): Listing<RedditModel>
 }

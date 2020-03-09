@@ -27,8 +27,8 @@ class RedditViewModel(
     repoResult.value?.refresh?.invoke()
   }
 
-  fun setCurrentSubreddit(subreddit: String) {
-    _currentSubreddit.value = subreddit
+  fun setCurrentSubreddit(subReddit: String) {
+    _currentSubreddit.value = subReddit
   }
 
   fun showPosts() {

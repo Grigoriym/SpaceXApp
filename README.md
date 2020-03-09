@@ -1,8 +1,11 @@
 ## SpaceX application.
 
-Kotlin, AndroidX, Retrofit, Gson, Coroutines, Koin, Timber, Navigation, Pagination, LiveData, ViewModel.
+Kotlin, AndroidX, Retrofit, Gson, Coroutines, Koin/Dagger, Timber, Navigation, Pagination, LiveData, ViewModel, ThreeTenAbp.
 
 The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/apps/details?id=nl.studionoorderlicht.spacex&hl=en).
+
+### FYI:
+1. I used dagger and koin at the same time in this project only for testing.
 
 #### Used APIs:
 + [SpaceX API](https://github.com/r-spacex/SpaceX-API)

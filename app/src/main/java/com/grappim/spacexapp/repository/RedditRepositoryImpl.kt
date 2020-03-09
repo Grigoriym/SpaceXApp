@@ -8,8 +8,8 @@ import com.grappim.spacexapp.pagination.Listing
 import com.grappim.spacexapp.pagination.reddit.RedditDataSourceFactory
 
 class RedditRepositoryImpl : RedditRepository {
-  override fun getPostsBySubreddit(subreddit: String): Listing<RedditModel> {
-    val sourceFactory = RedditDataSourceFactory(subreddit)
+  override fun getPostsBySubreddit(subReddit: String): Listing<RedditModel> {
+    val sourceFactory = RedditDataSourceFactory(subReddit)
     val livePagedList = sourceFactory.toLiveData(
       config = Config(
         pageSize = 30,
