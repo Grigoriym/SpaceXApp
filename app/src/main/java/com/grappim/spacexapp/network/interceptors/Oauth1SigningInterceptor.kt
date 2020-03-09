@@ -59,13 +59,13 @@ class Oauth1SigningInterceptor(
     keys.accessToken?.let { parameters[OAUTH_TOKEN] = it }
 
     //Copy query parameters into param map
-    val url = request.url()
-    for (i in 0 until url.querySize()) {
-      parameters[url.queryParameterName(i)] = url.queryParameterValue(i)
+    val url = request.url
+    for (i in 0 until url.querySize) {
+      parameters[url.queryParameterName(i)] = url.queryParameterValue(i).toString()
     }
 
     //Copy form body into param map
-    request.body()?.let {
+    request.body?.let {
       it.asString().split('&')
         .takeIf { it.isNotEmpty() }
         ?.map { it.split('=', limit = 2) }
@@ -82,8 +82,8 @@ class Oauth1SigningInterceptor(
     }
 
     //Create signature
-    val method = request.method().encodeUtf8()
-    val baseUrl = request.url().newBuilder().query(null).build().toString().encodeUtf8()
+    val method = request.method.encodeUtf8()
+    val baseUrl = request.url.newBuilder().query(null).build().toString().encodeUtf8()
     val signingKey = "${keys.consumerSecret.encodeUtf8()}&${keys.accessSecret?.encodeUtf8()
       ?: ""}"
     val params = parameters.encodeForSignature()

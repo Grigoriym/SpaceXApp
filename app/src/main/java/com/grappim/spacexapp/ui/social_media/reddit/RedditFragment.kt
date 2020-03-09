@@ -1,5 +1,6 @@
 package com.grappim.spacexapp.ui.social_media.reddit
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -7,25 +8,33 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.REDDIT_FOR_BROWSER_URI
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.reddit.RedditPaginationAdapter
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_reddit.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class RedditFragment : Fragment(), KoinComponent {
+class RedditFragment : Fragment() {
 
-  private val viewModelFactory: RedditViewModelFactory by inject()
-  private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
+  @Inject
+  lateinit var viewModel: RedditViewModel
+
+  @Inject
+  lateinit var viewModelFactory: RedditViewModelFactory
+
   private lateinit var rAdapter: RedditPaginationAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -114,16 +123,16 @@ class RedditFragment : Fragment(), KoinComponent {
     setHasOptionsMenu(true)
 
     viewModel.apply {
-      posts.observe(this@RedditFragment, Observer {
+      posts.observe(viewLifecycleOwner, Observer {
         rAdapter.submitList(it)
       })
-      networkState.observe(this@RedditFragment, Observer {
+      networkState.observe(viewLifecycleOwner, Observer {
         when (it) {
           NetworkState.LOADING -> pbReddit.show()
           NetworkState.LOADED -> pbReddit.gone()
         }
       })
-      currentSubreddit.observe(this@RedditFragment, Observer {
+      currentSubreddit.observe(viewLifecycleOwner, Observer {
         showPosts()
       })
       onFailure(failure, ::handleFailure)

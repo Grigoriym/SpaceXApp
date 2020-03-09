@@ -2,27 +2,36 @@ package com.grappim.spacexapp.pagination.reddit
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
+import com.grappim.spacexapp.SpaceXApplication
+import com.grappim.spacexapp.api.RedditApi
+import com.grappim.spacexapp.core.di.AppComponent
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper
-import com.grappim.spacexapp.network.services.RedditService
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.util.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import javax.inject.Inject
 
 class RedditDataSource(
   private val subreddit: String? = null
-) : ItemKeyedDataSource<String, RedditModel>(), KoinComponent, NetworkHelper {
+) : ItemKeyedDataSource<String, RedditModel>(), NetworkHelper {
 
-  private val service: RedditService by inject()
-  private val networkHandler: NetworkHandler by inject()
+  @Inject
+  @AppComponent.RedditApiQualifier
+  lateinit var service: RedditApi
+
+  @Inject
+  lateinit var networkHandler: NetworkHandler
 
   val networkState = MutableLiveData<NetworkState>()
   val failure = MutableLiveData<Failure>()
+
+  init {
+    SpaceXApplication.instance.appComponent.inject(this)
+  }
 
   override fun loadInitial(
     params: LoadInitialParams<String>,
@@ -53,7 +62,7 @@ class RedditDataSource(
           }
         }
       }
-      false, null -> {
+      false -> {
         failure.postValue(Failure.NetworkConnection)
       }
     }
@@ -89,7 +98,7 @@ class RedditDataSource(
           }
         }
       }
-      false, null -> {
+      false -> {
         failure.postValue(Failure.NetworkConnection)
       }
     }
@@ -122,7 +131,7 @@ class RedditDataSource(
           }
         }
       }
-      false, null -> {
+      false -> {
         failure.postValue(Failure.NetworkConnection)
       }
     }

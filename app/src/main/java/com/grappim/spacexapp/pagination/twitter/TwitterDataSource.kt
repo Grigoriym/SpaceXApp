@@ -3,7 +3,7 @@ package com.grappim.spacexapp.pagination.twitter
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.network.NetworkHandler
+import com.grappim.spacexapp.network.NetworkHandlerOld
 import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.TwitterService
 import com.grappim.spacexapp.pagination.NetworkState
@@ -20,7 +20,7 @@ class TwitterDataSource(
 ) : ItemKeyedDataSource<Long, UserTimelineModel>(), KoinComponent, NetworkHelper {
 
   private val service: TwitterService by inject()
-  private val networkHandler: NetworkHandler by inject()
+  private val networkHandler: NetworkHandlerOld by inject()
 
   val networkState = MutableLiveData<NetworkState>()
   val failure = MutableLiveData<Failure>()

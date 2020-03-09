@@ -11,8 +11,8 @@ import com.grappim.spacexapp.core.extensions.inflateLayout
 import com.grappim.spacexapp.core.extensions.px
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.utils.roundCorners
-import com.grappim.spacexapp.util.*
 import kotlinx.android.synthetic.main.layout_twitter_item_image.view.*
 
 class TwitterItemImageAdapter(

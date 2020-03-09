@@ -3,7 +3,7 @@ package com.grappim.spacexapp.ui.full_screen
 import android.os.Bundle
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.GlideApp
+import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_IMAGES
 import kotlinx.android.synthetic.main.activity_full_screen_image.*
 

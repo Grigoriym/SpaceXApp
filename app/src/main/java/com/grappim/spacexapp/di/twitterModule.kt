@@ -1,15 +1,15 @@
 package com.grappim.spacexapp.di
 
+import com.grappim.spacexapp.core.utils.KOIN_TWITTER_INTERCEPTOR
+import com.grappim.spacexapp.core.utils.KOIN_TWITTER_OK_HTTP_CLIENT
+import com.grappim.spacexapp.core.utils.KOIN_TWITTER_RETROFIT
+import com.grappim.spacexapp.core.utils.TWITTER_API_BASE_URL
 import com.grappim.spacexapp.network.createOkHttpClient
 import com.grappim.spacexapp.network.createRetrofit
 import com.grappim.spacexapp.network.createTwitterOauthInterceptor
 import com.grappim.spacexapp.network.services.TwitterService
 import com.grappim.spacexapp.repository.TwitterPaginationRepository
 import com.grappim.spacexapp.repository.TwitterPaginationRepositoryImpl
-import com.grappim.spacexapp.core.utils.KOIN_TWITTER_INTERCEPTOR
-import com.grappim.spacexapp.core.utils.KOIN_TWITTER_OK_HTTP_CLIENT
-import com.grappim.spacexapp.core.utils.KOIN_TWITTER_RETROFIT
-import com.grappim.spacexapp.core.utils.TWITTER_API_BASE_URL
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
