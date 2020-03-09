@@ -6,8 +6,11 @@ import androidx.paging.toLiveData
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.pagination.Listing
 import com.grappim.spacexapp.pagination.reddit.RedditDataSourceFactory
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RedditRepositoryImpl : RedditRepository {
+@Singleton
+class RedditRepositoryImpl @Inject constructor() : RedditRepository {
   override fun getPostsBySubreddit(subReddit: String): Listing<RedditModel> {
     val sourceFactory = RedditDataSourceFactory(subReddit)
     val livePagedList = sourceFactory.toLiveData(

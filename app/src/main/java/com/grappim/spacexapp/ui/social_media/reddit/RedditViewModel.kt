@@ -6,8 +6,9 @@ import androidx.lifecycle.Transformations.map
 import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
 import com.grappim.spacexapp.repository.RedditRepository
+import javax.inject.Inject
 
-class RedditViewModel(
+class RedditViewModel @Inject constructor(
   private val repository: RedditRepository
 ) : ViewModel() {
 

@@ -26,5 +26,5 @@ val viewModelFactoryModule = module {
   factory { TwitterViewModelFactory(get()) }
   factory { CompletedLaunchesViewModelFactory(get()) }
   factory { UpcomingLaunchesViewModelFactory(get()) }
-  factory { RedditViewModelFactory(get()) }
+//  factory { RedditViewModelFactory(get()) }
 }

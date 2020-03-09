@@ -18,12 +18,17 @@ import timber.log.Timber
 
 class SpaceXApplication : MultiDexApplication() {
 
-  val appComponent:AppComponent by lazy {
+  companion object {
+    var instance: SpaceXApplication? = null
+  }
+
+  val appComponent: AppComponent by lazy {
     DaggerAppComponent.factory().create(applicationContext)
   }
 
   override fun onCreate() {
     super.onCreate()
+    instance = this
     startKoin {
       androidContext(this@SpaceXApplication)
       modules(
@@ -33,8 +38,7 @@ class SpaceXApplication : MultiDexApplication() {
           twitterModule,
           viewModelFactoryModule,
           getModule,
-          mixNodule,
-          redditModule
+          mixNodule
         )
       )
     }

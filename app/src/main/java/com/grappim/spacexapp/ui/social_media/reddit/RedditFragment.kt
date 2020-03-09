@@ -1,5 +1,6 @@
 package com.grappim.spacexapp.ui.social_media.reddit
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.REDDIT_FOR_BROWSER_URI
 import com.grappim.spacexapp.pagination.NetworkState
@@ -20,12 +22,23 @@ import kotlinx.android.synthetic.main.fragment_reddit.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class RedditFragment : Fragment(), KoinComponent {
+class RedditFragment : Fragment() {
 
-  private val viewModelFactory: RedditViewModelFactory by inject()
-  private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
+  @Inject
+  lateinit var viewModel: RedditViewModel
+  @Inject
+  lateinit var viewModelFactory: RedditViewModelFactory
+
+//  private val viewModelFactory: RedditViewModelFactory by inject()
+//  private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
   private lateinit var rAdapter: RedditPaginationAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

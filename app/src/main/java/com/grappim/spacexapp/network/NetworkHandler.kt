@@ -12,8 +12,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+import javax.inject.Singleton
 
 class NetworkHandler(private val context: Context) {
+  val isConnected get() = context.networkInfo?.isConnectedOrConnecting
+}
+
+@Singleton
+class NetworkHandlerD @Inject constructor(private val context: Context) {
   val isConnected get() = context.networkInfo?.isConnectedOrConnecting
 }
 

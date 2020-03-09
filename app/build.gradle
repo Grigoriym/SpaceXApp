@@ -81,10 +81,12 @@ dependencies {
   implementation 'com.squareup.retrofit2:retrofit:2.7.2'
   implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
   implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+  implementation 'com.squareup.retrofit2:adapter-rxjava2:2.7.2'
 
   implementation "com.google.dagger:dagger:2.26"
   kapt "com.google.dagger:dagger-compiler:2.26"
 
+  implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0-RC8"
   implementation 'com.jakewharton.threetenabp:threetenabp:1.2.2'
   implementation 'com.jakewharton.timber:timber:4.7.1'
   implementation 'com.github.vipulasri:timelineview:1.1.3'
