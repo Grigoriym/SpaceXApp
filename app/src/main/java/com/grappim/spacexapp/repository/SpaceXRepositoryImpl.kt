@@ -9,7 +9,7 @@ import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.network.NetworkHandler
+import com.grappim.spacexapp.network.NetworkHandlerOld
 import com.grappim.spacexapp.network.NetworkHelper
 import com.grappim.spacexapp.network.services.SpaceXService
 import com.grappim.spacexapp.util.Either
@@ -18,7 +18,7 @@ import com.grappim.spacexapp.util.Failure
 //todo make one general function for every suspend
 
 class SpaceXRepositoryImpl(
-  private val networkHandler: NetworkHandler,
+  private val networkHandler: NetworkHandlerOld,
   private val service: SpaceXService
 ) : SpaceXRepository, NetworkHelper {
 

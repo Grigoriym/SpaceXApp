@@ -19,7 +19,7 @@ import timber.log.Timber
 class SpaceXApplication : MultiDexApplication() {
 
   companion object {
-    var instance: SpaceXApplication? = null
+    lateinit var instance: SpaceXApplication
   }
 
   val appComponent: AppComponent by lazy {

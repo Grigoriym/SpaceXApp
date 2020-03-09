@@ -1,11 +1,12 @@
 package com.grappim.spacexapp.core.utils
 
 import android.content.Context
+import javax.inject.Inject
 
-class PrefsManager(
+class PrefsManager @Inject constructor(
   val context: Context
 ) {
-  private val pref = context.getSharedPreferences(THEME_PREFS, Context.MODE_PRIVATE)
+  private val pref = context.getSharedPreferences(PREFS_MANAGER, Context.MODE_PRIVATE)
   private val editor = pref.edit()
 
   fun isNightThemeEnabled(): Boolean =

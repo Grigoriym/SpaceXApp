@@ -20,7 +20,7 @@ class NetworkModule {
 
   @Provides
   @Singleton
-  @Named("provideRedditApi")
+  @AppComponent.RedditApiQualifier
   fun provideRedditApi(retrofit: Retrofit): RedditApi =
     retrofit.create(RedditApi::class.java)
 

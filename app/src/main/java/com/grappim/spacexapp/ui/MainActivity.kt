@@ -15,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import com.grappim.spacexapp.core.utils.PrefsManager
@@ -22,16 +23,20 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-  KoinComponent, MainActivityListener {
+  MainActivityListener {
 
   private lateinit var navController: NavController
   private lateinit var appBarConfiguration: AppBarConfiguration
   private lateinit var switcher: SwitchCompat
-  private val prefsManager: PrefsManager by inject()
+
+  @Inject
+  lateinit var prefsManager: PrefsManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    (application as SpaceXApplication).appComponent.inject(this)
     setupNightMode()
     Timber.d("MainActivity - onCreate")
     super.onCreate(savedInstanceState)

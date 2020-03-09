@@ -7,7 +7,7 @@ const val TWITTER_API_BASE_URL = "https://api.twitter.com/1.1/"
 const val TWITTER_FOR_BROWSER_URI = "https://twitter.com/i/web/status/"
 const val TWITTER_USER_TIMELINE_GET = "statuses/user_timeline.json"
 
-const val THEME_PREFS = "THEME_PREFS"
+const val PREFS_MANAGER = "PREFS_MANAGER"
 
 const val NIGHT_THEME_PREF_KEY = "nightTheme"
 

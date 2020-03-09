@@ -8,7 +8,6 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
@@ -17,10 +16,8 @@ import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.REDDIT_FOR_BROWSER_URI
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.reddit.RedditPaginationAdapter
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_reddit.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -28,11 +25,10 @@ class RedditFragment : Fragment() {
 
   @Inject
   lateinit var viewModel: RedditViewModel
+
   @Inject
   lateinit var viewModelFactory: RedditViewModelFactory
 
-//  private val viewModelFactory: RedditViewModelFactory by inject()
-//  private val viewModel by viewModels<RedditViewModel> { viewModelFactory }
   private lateinit var rAdapter: RedditPaginationAdapter
 
   override fun onAttach(context: Context) {
@@ -127,16 +123,16 @@ class RedditFragment : Fragment() {
     setHasOptionsMenu(true)
 
     viewModel.apply {
-      posts.observe(this@RedditFragment, Observer {
+      posts.observe(viewLifecycleOwner, Observer {
         rAdapter.submitList(it)
       })
-      networkState.observe(this@RedditFragment, Observer {
+      networkState.observe(viewLifecycleOwner, Observer {
         when (it) {
           NetworkState.LOADING -> pbReddit.show()
           NetworkState.LOADED -> pbReddit.gone()
         }
       })
-      currentSubreddit.observe(this@RedditFragment, Observer {
+      currentSubreddit.observe(viewLifecycleOwner, Observer {
         showPosts()
       })
       onFailure(failure, ::handleFailure)

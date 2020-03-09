@@ -3,17 +3,19 @@ package com.grappim.spacexapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.grappim.spacexapp.core.utils.PrefsManager
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.launchActivity
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import com.grappim.spacexapp.core.utils.PrefsManager
 import timber.log.Timber
+import javax.inject.Inject
 
-class SplashActivity : AppCompatActivity(), KoinComponent {
+class SplashActivity : AppCompatActivity() {
 
-  private val prefs: PrefsManager by inject()
+  @Inject
+  lateinit var prefs: PrefsManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    (application as SpaceXApplication).appComponent.inject(this)
     Timber.d("SplashActivity - onCreate")
     initSharedPrefs()
     super.onCreate(savedInstanceState)

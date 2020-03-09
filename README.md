@@ -5,7 +5,8 @@ Kotlin, AndroidX, Retrofit, Gson, Coroutines, Koin/Dagger, Timber, Navigation, P
 The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/apps/details?id=nl.studionoorderlicht.spacex&hl=en).
 
 ### FYI:
-1. I used dagger and koin at the same time in this project only for testing.
+1. Now migrating to Dagger2 from Koin.
+2. DI usage: Kodein -> Koin -> Dagger2
 
 #### Used APIs:
 + [SpaceX API](https://github.com/r-spacex/SpaceX-API)
