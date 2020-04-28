@@ -5,6 +5,7 @@ import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.api.RedditApi
 import com.grappim.spacexapp.core.di.AppComponent
+import com.grappim.spacexapp.core.di.qualifiers.RedditApiQualifier
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper
@@ -20,7 +21,7 @@ class RedditDataSource(
 ) : ItemKeyedDataSource<String, RedditModel>(), NetworkHelper {
 
   @Inject
-  @AppComponent.RedditApiQualifier
+  @RedditApiQualifier
   lateinit var service: RedditApi
 
   @Inject

@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.model.reddit
 
-
 import com.google.gson.annotations.SerializedName
 
 data class RedditModel(
