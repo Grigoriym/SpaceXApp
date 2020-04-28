@@ -2,28 +2,37 @@ package com.grappim.spacexapp.pagination.twitter
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
+import com.grappim.spacexapp.SpaceXApplication
+import com.grappim.spacexapp.api.TwitterApi
+import com.grappim.spacexapp.core.di.qualifiers.TwitterApiQualifier
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.network.NetworkHandlerOld
+import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper
-import com.grappim.spacexapp.network.services.TwitterService
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.util.Failure
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class TwitterDataSource(
   private val screenName: String? = null
-) : ItemKeyedDataSource<Long, UserTimelineModel>(), KoinComponent, NetworkHelper {
+) : ItemKeyedDataSource<Long, UserTimelineModel>(), NetworkHelper {
 
-  private val service: TwitterService by inject()
-  private val networkHandler: NetworkHandlerOld by inject()
+  @Inject
+  @TwitterApiQualifier
+  lateinit var service: TwitterApi
+
+  @Inject
+  lateinit var networkHandler: NetworkHandler
 
   val networkState = MutableLiveData<NetworkState>()
   val failure = MutableLiveData<Failure>()
+
+  init {
+    SpaceXApplication.instance.appComponent.inject(this)
+  }
 
   override fun loadInitial(
     params: LoadInitialParams<Long>,

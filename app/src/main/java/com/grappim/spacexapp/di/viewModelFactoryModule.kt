@@ -22,7 +22,6 @@ val viewModelFactoryModule = module {
   factory { InfoViewModelFactory(get()) }
   factory { HistoryViewModelFactory(get()) }
   factory { LaunchPadViewModelFactory(get()) }
-  factory { TwitterViewModelFactory(get()) }
   factory { CompletedLaunchesViewModelFactory(get()) }
   factory { UpcomingLaunchesViewModelFactory(get()) }
 }

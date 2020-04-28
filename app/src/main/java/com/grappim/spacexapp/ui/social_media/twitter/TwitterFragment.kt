@@ -1,5 +1,6 @@
 package com.grappim.spacexapp.ui.social_media.twitter
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
@@ -7,27 +8,35 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.*
 import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.pagination.twitter.TwitterPaginationAdapter
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_twitter.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class TwitterFragment : Fragment(), KoinComponent {
+class TwitterFragment : Fragment() {
 
-  private val viewModelFactory: TwitterViewModelFactory by inject()
-  private val viewModel by viewModels<TwitterViewModel> { viewModelFactory }
+  @Inject
+  lateinit var viewModel: TwitterViewModel
+
+  @Inject
+  lateinit var viewModelFactory: TwitterViewModelFactory
+
   private lateinit var uAdapter: TwitterPaginationAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

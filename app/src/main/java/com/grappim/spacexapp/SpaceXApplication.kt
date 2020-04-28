@@ -35,10 +35,8 @@ class SpaceXApplication : MultiDexApplication() {
         listOf(
           networkModule,
           spaceXModule,
-          twitterModule,
           viewModelFactoryModule,
-          getModule,
-          mixNodule
+          getModule
         )
       )
     }

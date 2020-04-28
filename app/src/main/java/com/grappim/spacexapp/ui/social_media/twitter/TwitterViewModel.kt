@@ -8,8 +8,9 @@ import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
 import com.grappim.spacexapp.repository.TwitterPaginationRepository
 import timber.log.Timber
+import javax.inject.Inject
 
-class TwitterViewModel(
+class TwitterViewModel @Inject constructor(
   private val repository: TwitterPaginationRepository
 ) : ViewModel(), LifecycleObserver {
 

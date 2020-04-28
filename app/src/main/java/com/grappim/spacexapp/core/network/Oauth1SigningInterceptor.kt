@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.network.interceptors
+package com.grappim.spacexapp.core.network
 
 import okhttp3.Interceptor
 import okhttp3.Request
