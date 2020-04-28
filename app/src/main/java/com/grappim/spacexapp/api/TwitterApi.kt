@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.network.api
+package com.grappim.spacexapp.api
 
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.core.utils.TWITTER_USER_TIMELINE_GET

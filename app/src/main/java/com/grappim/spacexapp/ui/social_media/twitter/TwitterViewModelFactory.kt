@@ -3,8 +3,9 @@ package com.grappim.spacexapp.ui.social_media.twitter
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.repository.TwitterPaginationRepository
+import javax.inject.Inject
 
-class TwitterViewModelFactory(
+class TwitterViewModelFactory @Inject constructor(
   private val repository: TwitterPaginationRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 

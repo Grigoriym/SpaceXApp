@@ -11,6 +11,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RedditRepositoryImpl @Inject constructor() : RedditRepository {
+
   override fun getPostsBySubreddit(subReddit: String): Listing<RedditModel> {
     val sourceFactory = RedditDataSourceFactory(subReddit)
     val livePagedList = sourceFactory.toLiveData(
@@ -34,4 +35,5 @@ class RedditRepositoryImpl @Inject constructor() : RedditRepository {
       }
     )
   }
+
 }

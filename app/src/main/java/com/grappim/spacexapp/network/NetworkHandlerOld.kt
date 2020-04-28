@@ -7,8 +7,6 @@ import android.os.Build
 import com.grappim.spacexapp.BuildConfig
 import com.grappim.spacexapp.core.extensions.getConnectivityManager
 import com.grappim.spacexapp.core.extensions.networkInfo
-import com.grappim.spacexapp.network.interceptors.Oauth1SigningInterceptor
-import com.grappim.spacexapp.network.interceptors.OauthKeys
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -86,16 +84,3 @@ fun createOkHttpClient(vararg interceptors: Interceptor): OkHttpClient {
     .writeTimeout(20, TimeUnit.SECONDS)
     .build()
 }
-
-fun createTwitterOauthInterceptor(): Interceptor {
-  return Oauth1SigningInterceptor(
-    ::getOauthKeys
-  )
-}
-
-fun getOauthKeys() = OauthKeys(
-  consumerKey = BuildConfig.ApiKey,
-  consumerSecret = BuildConfig.SecretApiKey,
-  accessToken = BuildConfig.AccessToken,
-  accessSecret = BuildConfig.AccessTokenSecret
-)

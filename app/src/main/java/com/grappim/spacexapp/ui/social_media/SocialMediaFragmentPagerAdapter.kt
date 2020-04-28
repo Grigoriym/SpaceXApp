@@ -9,6 +9,7 @@ import com.grappim.spacexapp.ui.social_media.twitter.TwitterFragment
 class SocialMediaFragmentPagerAdapter(
   fragmentManager: FragmentManager
 ) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+
   override fun getItem(position: Int): Fragment {
     return when (position) {
       0 -> TwitterFragment()
