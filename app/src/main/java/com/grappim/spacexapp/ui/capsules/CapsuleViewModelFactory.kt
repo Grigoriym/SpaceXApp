@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.network.gets.GetAllCapsules
 import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
+import javax.inject.Inject
 
-class CapsuleViewModelFactory(
+class CapsuleViewModelFactory @Inject constructor(
   private val getAllCapsules: GetAllCapsules,
   private val getUpcomingCapsules: GetUpcomingCapsules,
   private val getPastCapsules: GetPastCapsules

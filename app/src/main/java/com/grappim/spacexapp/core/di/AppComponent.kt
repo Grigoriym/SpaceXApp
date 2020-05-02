@@ -1,10 +1,12 @@
 package com.grappim.spacexapp.core.di
 
 import android.content.Context
+import com.grappim.spacexapp.core.repository.SpaceXRepository
 import com.grappim.spacexapp.pagination.reddit.RedditDataSource
 import com.grappim.spacexapp.pagination.twitter.TwitterDataSource
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.SplashActivity
+import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
 import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterFragment
 import dagger.BindsInstance
@@ -28,4 +30,7 @@ interface AppComponent {
 
   fun inject(twitterDataSource: TwitterDataSource)
   fun inject(twitterFragment: TwitterFragment)
+
+  fun inject(getCapsulesFragment: GetCapsulesFragment)
+  fun inject(spaceXRepository: SpaceXRepository)
 }

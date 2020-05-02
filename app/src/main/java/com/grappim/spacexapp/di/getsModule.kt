@@ -5,9 +5,9 @@ import org.koin.dsl.module
 
 val getModule = module {
   single { GetRockets(get()) }
-  single { GetAllCapsules(get()) }
-  single { GetPastCapsules(get()) }
-  single { GetUpcomingCapsules(get()) }
+//  single { GetAllCapsules(get()) }
+//  single { GetPastCapsules(get()) }
+//  single { GetUpcomingCapsules(get()) }
   single { GetAllCores(get()) }
   single { GetPastCores(get()) }
   single { GetUpcomingCores(get()) }

@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.repository
+package com.grappim.spacexapp.core.repository
 
 import androidx.lifecycle.Transformations
 import androidx.paging.Config

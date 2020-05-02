@@ -2,14 +2,13 @@ package com.grappim.spacexapp.core.di
 
 import com.grappim.spacexapp.BuildConfig
 import com.grappim.spacexapp.api.RedditApi
+import com.grappim.spacexapp.api.SpaceXApi
 import com.grappim.spacexapp.api.TwitterApi
-import com.grappim.spacexapp.core.di.qualifiers.RedditApiQualifier
-import com.grappim.spacexapp.core.di.qualifiers.RedditRetrofit
-import com.grappim.spacexapp.core.di.qualifiers.TwitterApiQualifier
-import com.grappim.spacexapp.core.di.qualifiers.TwitterRetrofit
+import com.grappim.spacexapp.core.di.qualifiers.*
 import com.grappim.spacexapp.core.network.Oauth1SigningInterceptor
 import com.grappim.spacexapp.core.network.OauthKeys
 import com.grappim.spacexapp.core.utils.REDDIT_BASE_URL
+import com.grappim.spacexapp.core.utils.SPACE_X_BASE_URL
 import com.grappim.spacexapp.core.utils.TWITTER_API_BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -42,6 +41,13 @@ class NetworkModule {
 
   @Provides
   @Singleton
+  @SpacexApiQualifier
+  fun provideSpacexApi(
+    @SpacexRetrofit retrofit: Retrofit
+  ): SpaceXApi = retrofit.create(SpaceXApi::class.java)
+
+  @Provides
+  @Singleton
   @RedditRetrofit
   fun provideRedditRetrofit(): Retrofit =
     Retrofit.Builder()
@@ -60,6 +66,17 @@ class NetworkModule {
       .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
       .addConverterFactory(GsonConverterFactory.create())
       .client(createClient(createTwitterOauthInterceptor()))
+      .build()
+
+  @Provides
+  @Singleton
+  @SpacexRetrofit
+  fun provideSpacexRetrofit(): Retrofit =
+    Retrofit.Builder()
+      .baseUrl(SPACE_X_BASE_URL)
+      .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+      .addConverterFactory(GsonConverterFactory.create())
+      .client(createClient())
       .build()
 
   private fun createClient(vararg interceptors: Interceptor): OkHttpClient {

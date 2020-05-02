@@ -9,8 +9,9 @@ import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class CapsulesViewModel(
+class CapsulesViewModel @Inject constructor(
   private val getAllCapsules: GetAllCapsules,
   private val getUpcomingCapsules: GetUpcomingCapsules,
   private val getPastCapsules: GetPastCapsules

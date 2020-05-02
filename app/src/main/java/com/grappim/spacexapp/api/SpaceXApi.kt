@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.network.api
+package com.grappim.spacexapp.api
 
 import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.model.cores.CoreModel

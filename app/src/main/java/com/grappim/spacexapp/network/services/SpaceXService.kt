@@ -10,7 +10,7 @@ import com.grappim.spacexapp.model.mission.MissionModel
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.network.api.SpaceXApi
+import com.grappim.spacexapp.api.SpaceXApi
 import retrofit2.Response
 import retrofit2.Retrofit
 
