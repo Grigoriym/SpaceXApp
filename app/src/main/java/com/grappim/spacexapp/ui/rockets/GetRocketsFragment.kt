@@ -1,28 +1,34 @@
 package com.grappim.spacexapp.ui.rockets
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RocketsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_rockets.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import javax.inject.Inject
 
-class GetRocketsFragment : BaseFragment(), KoinComponent {
+class GetRocketsFragment : BaseFragment() {
 
-  private val viewModelFactory: RocketsViewModelFactory by inject()
+  @Inject
+  lateinit var viewModel: RocketsViewModel
+
   private lateinit var rAdapter: RocketsAdapter
-  private val viewModel by viewModels<RocketsViewModel> { viewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

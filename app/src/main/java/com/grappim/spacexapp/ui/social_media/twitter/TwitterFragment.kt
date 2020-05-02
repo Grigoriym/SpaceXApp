@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.*
 import com.grappim.spacexapp.pagination.NetworkState
@@ -35,7 +34,7 @@ class TwitterFragment : Fragment() {
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+    getAppComponent().inject(this)
   }
 
   override fun onCreateView(

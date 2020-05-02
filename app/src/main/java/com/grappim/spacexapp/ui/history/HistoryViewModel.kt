@@ -7,8 +7,9 @@ import com.grappim.spacexapp.model.history.HistoryModel
 import com.grappim.spacexapp.network.gets.GetHistory
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class HistoryViewModel(
+class HistoryViewModel @Inject constructor(
   private val getHistory: GetHistory
 ) : BaseViewModel(), LifecycleObserver {
 

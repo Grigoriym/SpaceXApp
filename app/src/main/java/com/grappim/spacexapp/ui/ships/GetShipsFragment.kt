@@ -1,29 +1,35 @@
 package com.grappim.spacexapp.ui.ships
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.ShipsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_ships.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class GetShipsFragment : BaseFragment(), KoinComponent {
+class GetShipsFragment : BaseFragment() {
+
+  @Inject
+  lateinit var viewModel: ShipsViewModel
 
   private lateinit var shipAdapter: ShipsAdapter
-  private val viewModelFactory: ShipsViewModelFactory by inject()
-  private val viewModel by viewModels<ShipsViewModel> { viewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,
@@ -71,10 +77,10 @@ class GetShipsFragment : BaseFragment(), KoinComponent {
       findNavController().navigate(GetShipsFragmentDirections.nextFragment(it))
     })
     rvGetShips.apply {
-      layoutManager = LinearLayoutManager(context)
+      layoutManager = LinearLayoutManager(requireContext())
       addItemDecoration(MarginItemDecorator())
       layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(context, R.anim.layout_animation_down_to_up)
+        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
       adapter = shipAdapter
     }
   }

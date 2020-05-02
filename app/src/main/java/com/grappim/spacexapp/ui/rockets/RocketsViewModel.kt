@@ -7,8 +7,9 @@ import com.grappim.spacexapp.model.rocket.RocketModel
 import com.grappim.spacexapp.network.gets.GetRockets
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class RocketsViewModel(
+class RocketsViewModel @Inject constructor(
   private val getRockets: GetRockets
 ) : BaseViewModel(), LifecycleObserver {
 

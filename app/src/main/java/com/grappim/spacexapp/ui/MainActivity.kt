@@ -20,8 +20,6 @@ import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import com.grappim.spacexapp.core.utils.PrefsManager
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
 import javax.inject.Inject
 

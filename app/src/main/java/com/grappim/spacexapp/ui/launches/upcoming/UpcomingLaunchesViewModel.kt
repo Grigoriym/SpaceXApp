@@ -6,8 +6,9 @@ import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.network.gets.GetUpcomingLaunches
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class UpcomingLaunchesViewModel(
+class UpcomingLaunchesViewModel @Inject constructor(
   private val getUpcomingLaunches: GetUpcomingLaunches
 ) : BaseViewModel() {
 
