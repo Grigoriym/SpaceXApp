@@ -1,15 +1,16 @@
 package com.grappim.spacexapp.ui.capsules
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
@@ -19,16 +20,21 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CapsulesAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-open class GetCapsulesFragment : BaseFragment(), KoinComponent {
+open class GetCapsulesFragment : BaseFragment() {
+
+  @Inject
+  lateinit var viewModel: CapsulesViewModel
 
   private lateinit var cAdapter: CapsulesAdapter
-  private val viewModelFactory: CapsuleViewModelFactory by inject()
   private val args: GetCapsulesFragmentArgs by navArgs()
-  private val viewModel by viewModels<CapsulesViewModel> { viewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

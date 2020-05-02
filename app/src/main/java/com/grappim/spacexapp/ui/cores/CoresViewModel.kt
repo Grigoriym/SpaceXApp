@@ -9,8 +9,9 @@ import com.grappim.spacexapp.network.gets.GetPastCores
 import com.grappim.spacexapp.network.gets.GetUpcomingCores
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class CoresViewModel(
+class CoresViewModel @Inject constructor(
   private val getAllCores: GetAllCores,
   private val getPastCores: GetPastCores,
   private val getUpcomingCores: GetUpcomingCores

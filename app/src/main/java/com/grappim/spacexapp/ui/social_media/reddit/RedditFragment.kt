@@ -33,7 +33,7 @@ class RedditFragment : Fragment() {
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+    getAppComponent().inject(this)
   }
 
   override fun onCreateView(

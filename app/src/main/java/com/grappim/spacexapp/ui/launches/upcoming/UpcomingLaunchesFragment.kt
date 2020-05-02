@@ -1,29 +1,35 @@
 package com.grappim.spacexapp.ui.launches.upcoming
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.recyclerview.LaunchesAdapter
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.ui.MainActivity
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class UpcomingLaunchesFragment : Fragment(), KoinComponent {
+class UpcomingLaunchesFragment : Fragment() {
+
+  @Inject
+  lateinit var viewModel: UpcomingLaunchesViewModel
 
   private lateinit var lAdapter: LaunchesAdapter
-  private val launchesViewModelFactory: UpcomingLaunchesViewModelFactory by inject()
-  private val viewModel by viewModels<UpcomingLaunchesViewModel> { launchesViewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

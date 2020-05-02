@@ -1,9 +1,6 @@
 package com.grappim.spacexapp.core.di
 
-import com.grappim.spacexapp.repository.RedditRepository
-import com.grappim.spacexapp.repository.RedditRepositoryImpl
-import com.grappim.spacexapp.repository.TwitterPaginationRepository
-import com.grappim.spacexapp.repository.TwitterPaginationRepositoryImpl
+import com.grappim.spacexapp.core.repository.*
 import dagger.Binds
 import dagger.Module
 
@@ -17,5 +14,10 @@ abstract class AppModule {
   abstract fun provideTwitterRepository(
     twitterRepositoryImpl: TwitterPaginationRepositoryImpl
   ): TwitterPaginationRepository
+
+  @Binds
+  abstract fun provideSpaceXrepository(
+    spaceXRepositoryImpl: SpaceXRepositoryImpl
+  ): SpaceXRepository
 
 }

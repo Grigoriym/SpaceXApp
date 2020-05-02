@@ -1,29 +1,35 @@
 package com.grappim.spacexapp.ui.missions_payloads
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.*
+import com.grappim.spacexapp.util.payloads
 import kotlinx.android.synthetic.main.fragment_mission.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
 //todo mission or payload?
 
-class MissionFragment : BaseFragment(), KoinComponent {
+class MissionFragment : BaseFragment() {
+
+  @Inject
+  lateinit var viewModel: MissionViewModel
 
   private val args: MissionFragmentArgs by navArgs()
-  private val viewModelFactory:MissionViewModelFactory by inject()
-  private val viewModel by viewModels<MissionViewModel> { viewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

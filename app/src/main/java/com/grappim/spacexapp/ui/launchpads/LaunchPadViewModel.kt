@@ -7,8 +7,9 @@ import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.network.gets.GetAllLaunchPads
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class LaunchPadViewModel(
+class LaunchPadViewModel @Inject constructor(
   private val getAllLaunchPads: GetAllLaunchPads
 ) : BaseViewModel(), LifecycleObserver {
 
