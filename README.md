@@ -5,8 +5,7 @@ Kotlin, AndroidX, Retrofit, Gson, Coroutines, Koin/Dagger, Timber, Navigation, P
 The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/apps/details?id=nl.studionoorderlicht.spacex&hl=en).
 
 ### FYI:
-1. Now migrating to Dagger2 from Koin.
-2. DI usage: Kodein -> Koin -> Dagger2
+1. DI usage: Kodein -> Koin -> Dagger2
 
 #### Used APIs:
 + [SpaceX API](https://github.com/r-spacex/SpaceX-API)
@@ -19,3 +18,7 @@ The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/ap
 3. CodingWithMitch for [SearchView and RecyclerView](https://codingwithmitch.com/blog/filtering-recyclerview-searchview/)
 4. [Spinner items customization](https://android--code.blogspot.com/2015/08/android-spinner-text-color.html)
 5. [Safe click listener](https://medium.com/@simonkarmy2004/solving-android-multiple-clicks-problem-kotlin-b99c06135da0)
+
+### Dagger graph by [Scabbard](https://github.com/arunkumar9t2/scabbard)
+
+![SpaceX dagger graph](docs/com.grappim.spacexapp.core.di.AppComponent.png)
