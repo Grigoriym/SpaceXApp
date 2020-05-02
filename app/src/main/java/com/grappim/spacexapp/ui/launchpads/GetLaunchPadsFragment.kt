@@ -1,27 +1,33 @@
 package com.grappim.spacexapp.ui.launchpads
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.LaunchPadsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_launch_pads.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import javax.inject.Inject
 
-class GetLaunchPadsFragment : BaseFragment(), KoinComponent {
+class GetLaunchPadsFragment : BaseFragment() {
 
-  private val viewModelFactory: LaunchPadViewModelFactory by inject()
-  private val viewModel by viewModels<LaunchPadViewModel> { viewModelFactory }
+  @Inject
+  lateinit var viewModel: LaunchPadViewModel
+
   private lateinit var lAdapter: LaunchPadsAdapter
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

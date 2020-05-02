@@ -8,8 +8,9 @@ import com.grappim.spacexapp.network.gets.GetAllPayloads
 import com.grappim.spacexapp.network.gets.GetPayloadById
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class MissionViewModel(
+class MissionViewModel @Inject constructor(
   private val getAllPayloads: GetAllPayloads,
   private val getPayloadById: GetPayloadById
 ) : BaseViewModel(), LifecycleObserver {

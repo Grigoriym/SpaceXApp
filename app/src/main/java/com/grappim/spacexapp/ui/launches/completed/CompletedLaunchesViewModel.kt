@@ -6,8 +6,9 @@ import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.network.gets.GetPastLaunches
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class CompletedLaunchesViewModel(
+class CompletedLaunchesViewModel @Inject constructor(
   private val getPastLaunches: GetPastLaunches
 ) : BaseViewModel() {
 

@@ -28,15 +28,12 @@ open class GetCapsulesFragment : BaseFragment() {
   @Inject
   lateinit var viewModel: CapsulesViewModel
 
-  @Inject
-  lateinit var viewModelFactory: CapsuleViewModelFactory
-
   private lateinit var cAdapter: CapsulesAdapter
   private val args: GetCapsulesFragmentArgs by navArgs()
 
   override fun onAttach(context: Context) {
     super.onAttach(context)
-    (requireActivity().application as SpaceXApplication).appComponent.inject(this)
+    getAppComponent().inject(this)
   }
 
   override fun onCreateView(

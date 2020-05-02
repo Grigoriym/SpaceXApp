@@ -1,14 +1,15 @@
 package com.grappim.spacexapp.ui.cores
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.ARG_CORES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CORES_PAST
@@ -18,16 +19,21 @@ import com.grappim.spacexapp.recyclerview.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.CoresAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_cores.*
-import org.koin.core.KoinComponent
-import org.koin.core.inject
 import timber.log.Timber
+import javax.inject.Inject
 
-class GetCoresFragment : BaseFragment(), KoinComponent {
+class GetCoresFragment : BaseFragment() {
+
+  @Inject
+  lateinit var viewModel: CoresViewModel
 
   private lateinit var coreAdapter: CoresAdapter
   private val args: GetCoresFragmentArgs by navArgs()
-  private val viewModelFactory: CoreViewModelFactory by inject()
-  private val viewModel by viewModels<CoresViewModel> { viewModelFactory }
+
+  override fun onAttach(context: Context) {
+    super.onAttach(context)
+    getAppComponent().inject(this)
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater, container: ViewGroup?,

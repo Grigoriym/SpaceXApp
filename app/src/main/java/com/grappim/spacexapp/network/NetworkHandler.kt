@@ -17,10 +17,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class NetworkHandlerOld(private val context: Context) {
-  val isConnected get() = context.networkInfo?.isConnectedOrConnecting
-}
-
 @Singleton
 @Suppress("DEPRECATION")
 class NetworkHandler @Inject constructor(private val context: Context) {

@@ -3,10 +3,7 @@ package com.grappim.spacexapp
 import androidx.multidex.MultiDexApplication
 import com.grappim.spacexapp.core.di.AppComponent
 import com.grappim.spacexapp.core.di.DaggerAppComponent
-import com.grappim.spacexapp.di.*
 import com.jakewharton.threetenabp.AndroidThreeTen
-import org.koin.android.ext.koin.androidContext
-import org.koin.core.context.startKoin
 import timber.log.Timber
 
 //todo twitter images (corners, spacing)
@@ -29,17 +26,6 @@ class SpaceXApplication : MultiDexApplication() {
   override fun onCreate() {
     super.onCreate()
     instance = this
-    startKoin {
-      androidContext(this@SpaceXApplication)
-      modules(
-        listOf(
-          networkModule,
-          spaceXModule,
-          viewModelFactoryModule,
-          getModule
-        )
-      )
-    }
     timberInit()
     AndroidThreeTen.init(this)
     Timber.d("Application - onCreate")

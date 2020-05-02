@@ -7,8 +7,9 @@ import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.network.gets.GetInfo
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.UseCase
+import javax.inject.Inject
 
-class InfoViewModel(
+class InfoViewModel @Inject constructor(
   private val getInfo: GetInfo
 ) : BaseViewModel(), LifecycleObserver {
 
