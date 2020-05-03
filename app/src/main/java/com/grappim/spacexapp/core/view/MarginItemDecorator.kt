@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.recyclerview
+package com.grappim.spacexapp.core.view
 
 import android.graphics.Rect
 import android.view.View

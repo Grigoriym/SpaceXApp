@@ -16,8 +16,8 @@ import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.utils.TWITTER_VIDEO_TYPE
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.recyclerview.TwitterItemImageAdapter
+import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.ui.social_media.twitter.TwitterItemImageAdapter
 import kotlinx.android.synthetic.main.layout_twitter_item.view.*
 import org.threeten.bp.format.DateTimeFormatter
 
@@ -140,7 +140,11 @@ class TwitterPaginationViewHolder(
             view.context, 2
           )
           rv.layoutManager = glm
-          rv.addItemDecoration(MarginItemDecorator(isHorizontal = true))
+          rv.addItemDecoration(
+            MarginItemDecorator(
+              isHorizontal = true
+            )
+          )
         }
         3 -> {
           val glm = GridLayoutManager(
@@ -181,9 +185,11 @@ class TwitterPaginationViewHolder(
         }
       }
 
-      val iAdapter = TwitterItemImageAdapter(onImageClick = {
-        onImageClick(it)
-      })
+      val iAdapter =
+        TwitterItemImageAdapter(
+          onImageClick = {
+            onImageClick(it)
+          })
       rv.adapter = iAdapter
 
       iAdapter.loadItems(hashMap)

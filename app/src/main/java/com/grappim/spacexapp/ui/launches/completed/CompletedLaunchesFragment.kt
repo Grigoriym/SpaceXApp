@@ -8,11 +8,10 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.recyclerview.LaunchesAdapter
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
+import com.grappim.spacexapp.ui.launches.LaunchesAdapter
+import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_completed_launches.*
