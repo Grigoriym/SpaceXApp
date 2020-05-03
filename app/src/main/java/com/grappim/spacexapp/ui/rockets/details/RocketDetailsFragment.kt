@@ -9,8 +9,8 @@ import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.elv.CustomExpandableListAdapter
-import com.grappim.spacexapp.elv.MetricsListAdapterItem
+import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.core.view.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.utils.GlideApp

@@ -15,10 +15,10 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
+import com.grappim.spacexapp.core.extensions.getAppComponent
+import com.grappim.spacexapp.core.utils.PrefsManager
 import com.grappim.spacexapp.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
-import com.grappim.spacexapp.core.utils.PrefsManager
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import javax.inject.Inject
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   lateinit var prefsManager: PrefsManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    (application as SpaceXApplication).appComponent.inject(this)
-    setupNightMode()
+    getAppComponent().inject(this)
+    setupDayNightMode()
     Timber.d("MainActivity - onCreate")
     super.onCreate(savedInstanceState)
 
@@ -44,11 +44,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     setupSwitcher()
   }
 
-  private fun setupNightMode() {
+  private fun setupDayNightMode() {
     AppCompatDelegate.setDefaultNightMode(
-      if (!prefsManager.isNightThemeEnabled())
+      if (!prefsManager.isNightThemeEnabled()) {
         AppCompatDelegate.MODE_NIGHT_YES
-      else AppCompatDelegate.MODE_NIGHT_NO
+      } else {
+        AppCompatDelegate.MODE_NIGHT_NO
+      }
     )
   }
 
@@ -94,8 +96,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     navigationView.setNavigationItemSelectedListener(this)
   }
 
-  override fun onSupportNavigateUp() =
-    findNavController(R.id.nav_host_fragment).navigateUp(appBarConfiguration)
+  override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment)
+    .navigateUp(appBarConfiguration)
 
   override fun onNavigationItemSelected(item: MenuItem): Boolean {
     item.isChecked = true
@@ -136,6 +138,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
   }
 }
 
-interface MainActivityListener{
-  fun showLaunchDetails(model:LaunchModel)
+interface MainActivityListener {
+  fun showLaunchDetails(model: LaunchModel)
 }

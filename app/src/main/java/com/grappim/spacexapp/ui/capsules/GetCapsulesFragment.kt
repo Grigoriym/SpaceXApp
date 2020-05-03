@@ -14,8 +14,8 @@ import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
-import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.model.capsule.CapsuleModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_capsules.*
 import timber.log.Timber
@@ -26,7 +26,7 @@ open class GetCapsulesFragment : BaseFragment() {
   @Inject
   lateinit var viewModel: CapsulesViewModel
 
-  private lateinit var cAdapter: CapsulesAdapter
+  private lateinit var mAdapter: CapsulesAdapter
   private val args: GetCapsulesFragmentArgs by navArgs()
 
   override fun onAttach(context: Context) {
@@ -74,7 +74,7 @@ open class GetCapsulesFragment : BaseFragment() {
 
   private fun renderCapsules(capsules: List<CapsuleModel>?) {
     capsules?.let {
-      cAdapter.loadItems(it)
+      mAdapter.loadItems(it)
     }
     pbGetCapsules.gone()
     rvGetCapsules.scheduleLayoutAnimation()
@@ -87,15 +87,17 @@ open class GetCapsulesFragment : BaseFragment() {
   }
 
   private fun bindAdapter() {
-    cAdapter = CapsulesAdapter {
+    mAdapter = CapsulesAdapter {
       findNavController().navigate(GetCapsulesFragmentDirections.nextFragment(it))
     }
     rvGetCapsules.apply {
       layoutManager = LinearLayoutManager(requireContext())
       addItemDecoration(MarginItemDecorator())
-      layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
-      adapter = cAdapter
+      layoutAnimation = AnimationUtils.loadLayoutAnimation(
+        requireContext(),
+        R.anim.layout_animation_down_to_up
+      )
+      adapter = mAdapter
     }
   }
 }

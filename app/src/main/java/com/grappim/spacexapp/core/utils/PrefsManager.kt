@@ -6,6 +6,7 @@ import javax.inject.Inject
 class PrefsManager @Inject constructor(
   val context: Context
 ) {
+
   private val pref = context.getSharedPreferences(PREFS_MANAGER, Context.MODE_PRIVATE)
   private val editor = pref.edit()
 

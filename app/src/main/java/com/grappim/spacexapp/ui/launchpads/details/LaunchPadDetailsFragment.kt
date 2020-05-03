@@ -5,8 +5,8 @@ import android.view.*
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.elv.CustomExpandableListAdapter
-import com.grappim.spacexapp.elv.LocationListAdapterItem
+import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.core.view.elv.LocationListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.core.extensions.startBrowser
 import kotlinx.android.synthetic.main.fragment_launch_pad_details.*

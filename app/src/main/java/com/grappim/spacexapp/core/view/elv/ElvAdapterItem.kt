@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.elv
+package com.grappim.spacexapp.core.view.elv
 
 interface ElvAdapterItem {
 

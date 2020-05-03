@@ -57,9 +57,9 @@ class CapsulesViewModel @Inject constructor(
   }
 
   override fun onCleared() {
-    super.onCleared()
     getAllCapsules.unBind()
     getPastCapsules.unBind()
     getUpcomingCapsules.unBind()
+    super.onCleared()
   }
 }

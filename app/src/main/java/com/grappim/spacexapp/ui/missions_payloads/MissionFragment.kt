@@ -7,9 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
-import com.grappim.spacexapp.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.payloads
