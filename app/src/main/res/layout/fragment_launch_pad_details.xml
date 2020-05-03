@@ -88,7 +88,7 @@
       app:layout_constraintTop_toBottomOf="@+id/cgLaunchPadDetails"
       app:layout_constraintVertical_bias="0.0">
 
-      <com.grappim.spacexapp.widgets.NonScrollExpandableListView
+      <com.grappim.spacexapp.core.view.NonScrollExpandableListView
         android:id="@+id/elvLaunchPadDetailsLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

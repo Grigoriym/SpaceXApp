@@ -234,7 +234,7 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/textView29">
 
-        <com.grappim.spacexapp.widgets.NonScrollExpandableListView
+        <com.grappim.spacexapp.core.view.NonScrollExpandableListView
                 android:id="@+id/elvRocketDetailsMetrics"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

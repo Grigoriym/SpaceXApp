@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
-import com.grappim.spacexapp.elv.CustomExpandableListAdapter
-import com.grappim.spacexapp.elv.InfoHeadquartersAdapterItem
+import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
+import com.grappim.spacexapp.core.view.elv.InfoHeadquartersAdapterItem
 import com.grappim.spacexapp.model.info.InfoModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_info.*

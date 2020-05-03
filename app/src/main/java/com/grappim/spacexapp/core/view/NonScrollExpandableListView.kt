@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.widgets
+package com.grappim.spacexapp.core.view
 
 import android.content.Context
 import android.util.AttributeSet

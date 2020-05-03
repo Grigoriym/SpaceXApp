@@ -3,7 +3,7 @@ package com.grappim.spacexapp.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.grappim.spacexapp.SpaceXApplication
+import com.grappim.spacexapp.core.extensions.getAppComponent
 import com.grappim.spacexapp.core.extensions.launchActivity
 import com.grappim.spacexapp.core.utils.PrefsManager
 import timber.log.Timber
@@ -15,9 +15,9 @@ class SplashActivity : AppCompatActivity() {
   lateinit var prefs: PrefsManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    (application as SpaceXApplication).appComponent.inject(this)
+    getAppComponent().inject(this)
     Timber.d("SplashActivity - onCreate")
-    initSharedPrefs()
+    initDayNightMode()
     super.onCreate(savedInstanceState)
   }
 
@@ -27,7 +27,7 @@ class SplashActivity : AppCompatActivity() {
     finish()
   }
 
-  private fun initSharedPrefs() {
+  private fun initDayNightMode() {
     if (!prefs.isNightThemeEnabled()) {
       AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
     } else {
