@@ -14,7 +14,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
+import com.grappim.spacexapp.core.view.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_ship_details.*
 import timber.log.Timber
@@ -72,7 +72,7 @@ class ShipDetailsFragment : BaseFragment() {
           it.active
         )
       )
-      mAdapter.loadItems(it.missions)
+      mAdapter.loadItems(it.missions ?: listOf())
 
       for (item in it.roles.orEmpty()) {
         val chip = Chip(context)
@@ -86,9 +86,7 @@ class ShipDetailsFragment : BaseFragment() {
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      if (it != null) {
-        findNavController().navigate(ShipDetailsFragmentDirections.nextFragment(it))
-      }
+      findNavController().navigate(ShipDetailsFragmentDirections.nextFragment(it))
     }
     rvShipDetailsMissions.apply {
       layoutManager = LinearLayoutManager(requireContext())

@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.elv
+package com.grappim.spacexapp.core.view.elv
 
 import android.view.View
 import com.grappim.spacexapp.model.info.InfoModel

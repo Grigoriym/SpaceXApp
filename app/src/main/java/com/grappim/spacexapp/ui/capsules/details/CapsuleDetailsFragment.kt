@@ -12,7 +12,7 @@ import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
+import com.grappim.spacexapp.core.view.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.*
@@ -52,15 +52,13 @@ class CapsuleDetailsFragment : BaseFragment() {
       tvCapsuleDetailsReuseCount.text = it.reuseCount.toString()
       tvCapsuleDetailsType.text = it.type?.capitalize()
       tvCapsuleDetailsStatus.text = it.status?.capitalize()
-      mAdapter.loadItems(it.missions)
+      mAdapter.loadItems(it.missions ?: listOf())
     }
   }
 
   private fun bindAdapter() {
     mAdapter = RvInnerMissionsAdapter {
-      if (it != null) {
-        findNavController().navigate(CapsuleDetailsFragmentDirections.nextFragment(it))
-      }
+      findNavController().navigate(CapsuleDetailsFragmentDirections.nextFragment(it))
     }
     rvCapsuleDetails.apply {
       layoutManager = LinearLayoutManager(requireContext())
