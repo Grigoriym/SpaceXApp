@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.recyclerview
+package com.grappim.spacexapp.ui.launches
 
 import android.view.View
 import android.view.ViewGroup
@@ -6,14 +6,11 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.core.extensions.inflateLayout
-import com.grappim.spacexapp.core.extensions.setMyImageResource
-import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.core.extensions.show
 import kotlinx.android.synthetic.main.layout_launches_item.view.*
+import java.util.*
 
 class LaunchesAdapter(
   val onClick: (LaunchModel) -> Unit
@@ -25,12 +22,7 @@ class LaunchesAdapter(
   override fun onCreateViewHolder(
     parent: ViewGroup,
     viewType: Int
-  ): LaunchesViewHolder =
-    LaunchesViewHolder(
-      parent
-        .context
-        .inflateLayout(R.layout.layout_launches_item, parent)
-    )
+  ): LaunchesViewHolder = LaunchesViewHolder(parent.inflate(R.layout.layout_launches_item))
 
   override fun getItemCount() = filteredList.size
 
@@ -39,8 +31,27 @@ class LaunchesAdapter(
     position: Int
   ) {
     holder.apply {
-      model = filteredList[position]
-      itemView.setSafeOnClickListener { onClick(filteredList[position]) }
+      itemView.apply {
+        val model = filteredList[position]
+
+        tvLaunchesFlightNumber.text = model.flightNumber.toString()
+        tvLaunchesMissionName.text = model.missionName
+        tvLaunchesDate.text = model.launchDateUtc?.let { date ->
+          DateTimeUtils.getDateTimeFormatter4().format(date.getOffsetDateTime())
+        } ?: let {
+          "Unknown"
+        }
+        model.launchSuccess?.let {
+          groupLaunchesItem.show()
+          ivLaunchesItemLaunchSuccess
+            .setImageResource(
+              setMyImageResource(
+                model.launchSuccess
+              )
+            )
+        }
+        setSafeOnClickListener { onClick(filteredList[position]) }
+      }
     }
   }
 
@@ -56,7 +67,7 @@ class LaunchesAdapter(
         val filteredResults: List<LaunchModel>? = if (constraint?.length == 0) {
           items
         } else {
-          getFilteredResults(constraint = constraint.toString().toLowerCase())
+          getFilteredResults(constraint = constraint.toString().toLowerCase(Locale.ROOT))
         }
         val results = FilterResults()
         results.values = filteredResults
@@ -72,37 +83,12 @@ class LaunchesAdapter(
   private fun getFilteredResults(constraint: String): List<LaunchModel> {
     val results = mutableListOf<LaunchModel>()
     for (i in items) {
-      if (i.missionName != null && i.missionName.toLowerCase().contains(constraint)) {
+      if (i.missionName != null && i.missionName.toLowerCase(Locale.ROOT).contains(constraint)) {
         results.add(i)
       }
     }
     return results
   }
 
-  class LaunchesViewHolder(
-    private val view: View
-  ) : RecyclerView.ViewHolder(view) {
-    var model: LaunchModel? = null
-      set(value) {
-        field = value
-        view.apply {
-          tvLaunchesFlightNumber.text = value?.flightNumber.toString()
-          tvLaunchesMissionName.text = value?.missionName
-          tvLaunchesDate.text = value?.launchDateUtc?.let { date ->
-            DateTimeUtils.getDateTimeFormatter4().format(date.getOffsetDateTime())
-          } ?: let {
-            "Unknown"
-          }
-          if (value?.launchSuccess != null) {
-            groupLaunchesItem.show()
-            ivLaunchesItemLaunchSuccess
-              .setImageResource(
-                setMyImageResource(
-                  value.launchSuccess
-                )
-              )
-          }
-        }
-      }
-  }
+  class LaunchesViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }

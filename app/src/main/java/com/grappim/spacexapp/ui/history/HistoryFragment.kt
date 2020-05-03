@@ -8,11 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.recyclerview.adapters.TimelineHistoryAdapter
+import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_history.*
 import timber.log.Timber

@@ -9,11 +9,9 @@ import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.core.extensions.*
 import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
-import com.grappim.spacexapp.recyclerview.adapters.RocketsAdapter
+import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_rockets.*
 import javax.inject.Inject
@@ -70,7 +68,7 @@ class GetRocketsFragment : BaseFragment() {
   }
 
   private fun bindAdapter() {
-    rAdapter = RocketsAdapter(context) {
+    rAdapter = RocketsAdapter {
       findNavController().navigate(GetRocketsFragmentDirections.nextFragment(it))
     }
     rvGetRockets.apply {

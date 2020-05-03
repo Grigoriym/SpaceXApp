@@ -1,40 +1,45 @@
 package com.grappim.spacexapp.recyclerview.adapters
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.capsule.Mission
-import com.grappim.spacexapp.recyclerview.viewholders.RvInnerMissionsViewHolder
-import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
+import com.grappim.spacexapp.model.capsule.Mission
+import kotlinx.android.synthetic.main.layout_inner_rv_details_mission_item.view.*
 
 class RvInnerMissionsAdapter(
   private inline val onClick: (Mission?) -> Unit
-) : RecyclerView.Adapter<RvInnerMissionsViewHolder>() {
-  private var items: List<Mission?>? = emptyList()
+) : RecyclerView.Adapter<RvInnerMissionsAdapter.RvInnerMissionsViewHolder>() {
+
+  private var items: List<Mission>? = emptyList()
 
   override fun onCreateViewHolder(
     parent: ViewGroup, viewType: Int
   ): RvInnerMissionsViewHolder =
     RvInnerMissionsViewHolder(
-      parent
-        .context
-        .inflateLayout(R.layout.layout_inner_rv_details_mission_item, parent)
+      parent.inflate((R.layout.layout_inner_rv_details_mission_item))
     )
 
   override fun getItemCount(): Int = items?.size ?: 0
 
   override fun onBindViewHolder(holder: RvInnerMissionsViewHolder, position: Int) {
     holder.apply {
-      mission = items?.get(position)
-      itemView.setSafeOnClickListener {
-        onClick(items?.get(position))
+      itemView.apply {
+        val item = items?.get(position)
+        setSafeOnClickListener {
+          onClick(item)
+        }
+        tvInnerRVDetailsMissionName.text = item?.name
       }
     }
   }
 
-  fun loadItems(newItems: List<Mission?>?) {
+  fun loadItems(newItems: List<Mission>?) {
     items = newItems
     notifyDataSetChanged()
   }
+
+  class RvInnerMissionsViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
