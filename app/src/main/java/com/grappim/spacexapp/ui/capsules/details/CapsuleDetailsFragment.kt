@@ -11,7 +11,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
 import com.grappim.spacexapp.core.utils.GlideApp
-import com.grappim.spacexapp.recyclerview.MarginItemDecorator
+import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.recyclerview.adapters.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
 import com.grappim.spacexapp.util.capsuleImageList

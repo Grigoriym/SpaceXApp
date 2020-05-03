@@ -1,20 +1,23 @@
-package com.grappim.spacexapp.recyclerview.adapters
+package com.grappim.spacexapp.ui.history
 
 import android.graphics.drawable.Drawable
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.vipulasri.timelineview.TimelineView
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.recyclerview.viewholders.TimelineHistoryViewHolder
-import com.grappim.spacexapp.core.extensions.inflateLayout
+import com.grappim.spacexapp.core.extensions.getOffsetDateTime
+import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setMyColorFilter
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
+import com.grappim.spacexapp.core.utils.DateTimeUtils
+import com.grappim.spacexapp.model.history.HistoryModel
+import kotlinx.android.synthetic.main.layout_history_item.view.*
 
 class TimelineHistoryAdapter(
   private inline val onClick: (HistoryModel) -> Unit
-) : RecyclerView.Adapter<TimelineHistoryViewHolder>() {
+) : RecyclerView.Adapter<TimelineHistoryAdapter.TimelineHistoryViewHolder>() {
 
   private var items: List<HistoryModel> = emptyList()
 
@@ -26,9 +29,8 @@ class TimelineHistoryAdapter(
     viewType: Int
   ): TimelineHistoryViewHolder =
     TimelineHistoryViewHolder(
-      parent
-        .context
-        .inflateLayout(R.layout.layout_history_item, parent), viewType
+      parent.inflate(R.layout.layout_history_item),
+      viewType
     )
 
   override fun onBindViewHolder(
@@ -36,9 +38,15 @@ class TimelineHistoryAdapter(
     position: Int
   ) {
     holder.apply {
-      history = items[position]
-      cl.setSafeOnClickListener { onClick(items[position]) }
-      timeline.marker = setMarker(holder)
+      itemView.apply {
+        val item = items[position]
+        clHistoryItem.setSafeOnClickListener { onClick(items[position]) }
+        timeline.marker = setMarker(holder)
+
+        tvHistoryItemTitle.text = item.title
+        tvHistoryItemDate.text = DateTimeUtils.getDateTimeFormatter()
+          .format(item.eventDateUtc?.getOffsetDateTime())
+      }
     }
   }
 
@@ -54,5 +62,16 @@ class TimelineHistoryAdapter(
     val color = ContextCompat.getColor(holder.itemView.context, R.color.timelineMarker)
     drawable?.setMyColorFilter(color)
     return drawable
+  }
+
+  class TimelineHistoryViewHolder(
+    itemView: View,
+    viewType: Int
+  ) : RecyclerView.ViewHolder(itemView) {
+    val timeline: TimelineView = itemView.timelineHistory
+
+    init {
+      timeline.initLine(viewType)
+    }
   }
 }
