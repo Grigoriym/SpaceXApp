@@ -4,8 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.api.RedditApi
-import com.grappim.spacexapp.core.di.AppComponent
-import com.grappim.spacexapp.core.di.qualifiers.RedditApiQualifier
+import com.grappim.spacexapp.di.qualifiers.RedditApiQualifier
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper

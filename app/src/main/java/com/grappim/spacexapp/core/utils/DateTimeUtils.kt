@@ -24,10 +24,19 @@ object DateTimeUtils {
   fun getDateTimeFormatter5(): DateTimeFormatter =
     DateTimeFormatter.ofPattern("MMM dd")
 
-  fun getOffsetTimeZone(inUtc: Boolean): ZoneOffset =
-    when (inUtc) {
-      true -> ZoneOffset.UTC
-      else -> ZoneOffset.from(OffsetDateTime.now().offset)
+  fun getZoneOffset(inUtc: Boolean): ZoneOffset {
+    return if (inUtc) {
+      ZoneOffset.UTC
+    } else {
+      getCurrentZoneOffset()
     }
+  }
+
+  fun getNowOffsetDateTime(
+    inUtc: Boolean = false
+  ): OffsetDateTime =
+    OffsetDateTime.now(getZoneOffset(inUtc))
+
+  private fun getCurrentZoneOffset(): ZoneOffset = OffsetDateTime.now().offset
 
 }

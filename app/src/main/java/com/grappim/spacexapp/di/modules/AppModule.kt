@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.core.di
+package com.grappim.spacexapp.di.modules
 
 import com.grappim.spacexapp.core.repository.*
 import dagger.Binds

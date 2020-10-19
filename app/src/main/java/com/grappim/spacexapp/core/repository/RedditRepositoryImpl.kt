@@ -3,13 +3,13 @@ package com.grappim.spacexapp.core.repository
 import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
+import com.grappim.spacexapp.di.scopes.AppScope
 import com.grappim.spacexapp.model.reddit.RedditModel
 import com.grappim.spacexapp.pagination.Listing
 import com.grappim.spacexapp.pagination.reddit.RedditDataSourceFactory
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@AppScope
 class RedditRepositoryImpl @Inject constructor() : RedditRepository {
 
   override fun getPostsBySubreddit(subReddit: String): Listing<RedditModel> {

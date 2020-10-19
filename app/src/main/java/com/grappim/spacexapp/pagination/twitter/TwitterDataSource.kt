@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.paging.ItemKeyedDataSource
 import com.grappim.spacexapp.SpaceXApplication
 import com.grappim.spacexapp.api.TwitterApi
-import com.grappim.spacexapp.core.di.qualifiers.TwitterApiQualifier
+import com.grappim.spacexapp.di.qualifiers.TwitterApiQualifier
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.network.NetworkHandler
 import com.grappim.spacexapp.network.NetworkHelper

@@ -4,7 +4,6 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.cores.CoreModel
-import com.grappim.spacexapp.network.gets.GetAllCores
 import com.grappim.spacexapp.network.gets.GetPastCores
 import com.grappim.spacexapp.network.gets.GetUpcomingCores
 import com.grappim.spacexapp.ui.base.BaseViewModel
@@ -12,7 +11,7 @@ import com.grappim.spacexapp.util.UseCase
 import javax.inject.Inject
 
 class CoresViewModel @Inject constructor(
-  private val getAllCores: GetAllCores,
+  private val getCoresUseCase: GetCoresUseCase,
   private val getPastCores: GetPastCores,
   private val getUpcomingCores: GetUpcomingCores
 ) : BaseViewModel(), LifecycleObserver {
@@ -30,7 +29,7 @@ class CoresViewModel @Inject constructor(
     get() = _upcomingCores
 
   fun loadAllCores() =
-    getAllCores(UseCase.None()) {
+    getCoresUseCase(UseCase.None()) {
       it.either(::handleFailure, ::handleAllCores)
     }
 
@@ -58,7 +57,7 @@ class CoresViewModel @Inject constructor(
 
   override fun onCleared() {
     super.onCleared()
-    getAllCores.unBind()
+    getCoresUseCase.unBind()
     getPastCores.unBind()
     getUpcomingCores.unBind()
   }

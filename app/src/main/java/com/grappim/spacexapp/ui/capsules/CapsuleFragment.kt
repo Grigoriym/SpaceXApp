@@ -14,13 +14,7 @@ import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import kotlinx.android.synthetic.main.fragment_capsule.*
 import timber.log.Timber
 
-class CapsuleFragment : BaseFragment() {
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? =
-    inflater.inflate(R.layout.fragment_capsule, container, false)
+class CapsuleFragment : BaseFragment(R.layout.fragment_capsule) {
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

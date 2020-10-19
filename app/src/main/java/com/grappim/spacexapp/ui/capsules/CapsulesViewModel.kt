@@ -1,10 +1,8 @@
 package com.grappim.spacexapp.ui.capsules
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.network.gets.GetAllCapsules
 import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
 import com.grappim.spacexapp.ui.base.BaseViewModel
@@ -12,10 +10,10 @@ import com.grappim.spacexapp.util.UseCase
 import javax.inject.Inject
 
 class CapsulesViewModel @Inject constructor(
-  private val getAllCapsules: GetAllCapsules,
+  private val getCapsulesUseCase: GetCapsulesUseCase,
   private val getUpcomingCapsules: GetUpcomingCapsules,
   private val getPastCapsules: GetPastCapsules
-) : BaseViewModel(), LifecycleObserver {
+) : BaseViewModel(){
 
   private val _allCapsules = MutableLiveData<List<CapsuleModel>>()
   val allCapsules: LiveData<List<CapsuleModel>>
@@ -30,7 +28,7 @@ class CapsulesViewModel @Inject constructor(
     get() = _pastCapsules
 
   fun loadAllCapsules() =
-    getAllCapsules(UseCase.None()) {
+    getCapsulesUseCase(UseCase.None()) {
       it.either(::handleFailure, ::handleCapsules)
     }
 
@@ -57,7 +55,7 @@ class CapsulesViewModel @Inject constructor(
   }
 
   override fun onCleared() {
-    getAllCapsules.unBind()
+    getCapsulesUseCase.unBind()
     getPastCapsules.unBind()
     getUpcomingCapsules.unBind()
     super.onCleared()

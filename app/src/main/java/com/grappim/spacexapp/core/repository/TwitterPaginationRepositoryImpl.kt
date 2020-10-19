@@ -3,14 +3,14 @@ package com.grappim.spacexapp.core.repository
 import androidx.lifecycle.Transformations
 import androidx.paging.Config
 import androidx.paging.toLiveData
+import com.grappim.spacexapp.di.scopes.AppScope
 import com.grappim.spacexapp.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.pagination.Listing
 import com.grappim.spacexapp.pagination.twitter.TwitterDataSourceFactory
 import timber.log.Timber
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@AppScope
 class TwitterPaginationRepositoryImpl @Inject constructor() : TwitterPaginationRepository {
 
   override fun getTweets(screenName: String): Listing<UserTimelineModel> {

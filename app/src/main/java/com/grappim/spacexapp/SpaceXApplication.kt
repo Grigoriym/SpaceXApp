@@ -1,8 +1,8 @@
 package com.grappim.spacexapp
 
 import androidx.multidex.MultiDexApplication
-import com.grappim.spacexapp.core.di.AppComponent
-import com.grappim.spacexapp.core.di.DaggerAppComponent
+import com.grappim.spacexapp.di.components.AppComponent
+import com.grappim.spacexapp.di.components.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
 
@@ -20,7 +20,9 @@ class SpaceXApplication : MultiDexApplication() {
   }
 
   val appComponent: AppComponent by lazy {
-    DaggerAppComponent.factory().create(applicationContext)
+    DaggerAppComponent
+      .factory()
+      .create(applicationContext)
   }
 
   override fun onCreate() {

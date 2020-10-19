@@ -5,10 +5,10 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import com.grappim.spacexapp.core.extensions.getConnectivityManager
+import com.grappim.spacexapp.di.scopes.AppScope
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@AppScope
 @Suppress("DEPRECATION")
 class NetworkHandler @Inject constructor(private val context: Context) {
   val isConnected: Boolean

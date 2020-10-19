@@ -102,11 +102,12 @@ class TwitterPaginationViewHolder(
           this, value
         )
         tvTwitterItemCreatedAt.text = value?.createdAt?.let { date ->
-          DateTimeUtils.getDateTimeFormatter5().format(
-            date.getOffsetDateTime(
-              formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy")
-            )
-          )
+          date
+//          DateTimeUtils.getDateTimeFormatter5().format(
+//            date.getOffsetDateTime(
+//              formatter = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy")
+//            )
+//          )
         } ?: let {
           "Unknown"
         }

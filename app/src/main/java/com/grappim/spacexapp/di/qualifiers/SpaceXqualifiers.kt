@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.core.di.qualifiers
+package com.grappim.spacexapp.di.qualifiers
 
 import javax.inject.Qualifier
 
