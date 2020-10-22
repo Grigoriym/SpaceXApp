@@ -18,7 +18,6 @@ abstract class UseCase<out Type, in Params> where Type : Any {
   abstract suspend fun run(params: Params): Either<Failure, Type>
 
   operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
-    Timber.d("UseCase - invoke")
     val job = CoroutineScope(Dispatchers.IO).async { run(params) }
     parentJob = CoroutineScope(Dispatchers.Main).launch { onResult(job.await()) }
   }
