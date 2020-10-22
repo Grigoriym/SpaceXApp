@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_get_capsules.srlGetCapsules
 import timber.log.Timber
 import javax.inject.Inject
 
-open class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
+class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
