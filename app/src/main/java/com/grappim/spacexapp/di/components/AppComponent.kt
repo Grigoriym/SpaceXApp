@@ -11,7 +11,6 @@ import com.grappim.spacexapp.pagination.reddit.RedditDataSource
 import com.grappim.spacexapp.pagination.twitter.TwitterDataSource
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.SplashActivity
-import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
 import com.grappim.spacexapp.ui.cores.GetCoresFragment
 import com.grappim.spacexapp.ui.history.HistoryFragment
 import com.grappim.spacexapp.ui.info.InfoFragment
@@ -48,7 +47,9 @@ interface AppComponent {
 
     }
 
-    fun capsulesComponent(): CapsulesComponent.Factory
+    fun fragmentsComponent(): FragmentsComponent.Factory
+    fun capsulesComponent(): CapsuleComponent.Factory
+    fun coresComponent(): CoresComponent.Factory
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)

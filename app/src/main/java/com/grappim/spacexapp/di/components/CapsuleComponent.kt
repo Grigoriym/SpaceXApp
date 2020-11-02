@@ -1,16 +1,16 @@
 package com.grappim.spacexapp.di.components
 
-import com.grappim.spacexapp.di.scopes.FragmentScope
+import com.grappim.spacexapp.di.scopes.CapsuleScope
 import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
 import dagger.Subcomponent
 
-@FragmentScope
+@CapsuleScope
 @Subcomponent
-interface CapsulesComponent {
+interface CapsuleComponent {
 
     @Subcomponent.Factory
     interface Factory {
-        fun create(): CapsulesComponent
+        fun create(): CapsuleComponent
     }
 
     fun inject(getCapsulesFragment: GetCapsulesFragment)

@@ -21,7 +21,7 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CoresViewModel::class)
-    abstract fun bindRandomUsersViewModel(viewModel: CapsulesViewModel): ViewModel
+    abstract fun bindRandomUsersViewModel(viewModel: CoresViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.getCapsulesComponent
+import com.grappim.spacexapp.core.extensions.getCapsuleComponent
 import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showSnackbar
@@ -41,7 +41,8 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     private val args: GetCapsulesFragmentArgs by navArgs()
 
     override fun onAttach(context: Context) {
-        context.getCapsulesComponent().inject(this)
+        val component = context.getCapsuleComponent()
+        component.inject(this)
         super.onAttach(context)
     }
 
@@ -93,7 +94,6 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
 
     private fun bindAdapter() {
         rvGetCapsules.apply {
-            layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(MarginItemDecorator())
             layoutAnimation = AnimationUtils.loadLayoutAnimation(
                 requireContext(),

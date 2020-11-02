@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.ui.cores
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.grappim.spacexapp.model.cores.CoreModel
@@ -11,55 +10,55 @@ import com.grappim.spacexapp.util.UseCase
 import javax.inject.Inject
 
 class CoresViewModel @Inject constructor(
-  private val getCoresUseCase: GetCoresUseCase,
-  private val getPastCores: GetPastCores,
-  private val getUpcomingCores: GetUpcomingCores
-) : BaseViewModel(), LifecycleObserver {
+    private val getCoresUseCase: GetCoresUseCase,
+    private val getPastCores: GetPastCores,
+    private val getUpcomingCores: GetUpcomingCores
+) : BaseViewModel() {
 
-  private val _allCores = MutableLiveData<List<CoreModel>>()
-  val allCores: LiveData<List<CoreModel>>
-    get() = _allCores
+    private val _allCores = MutableLiveData<List<CoreModel>>()
+    val allCores: LiveData<List<CoreModel>>
+        get() = _allCores
 
-  private val _pastCores = MutableLiveData<List<CoreModel>>()
-  val pastCores: LiveData<List<CoreModel>>
-    get() = _pastCores
+    private val _pastCores = MutableLiveData<List<CoreModel>>()
+    val pastCores: LiveData<List<CoreModel>>
+        get() = _pastCores
 
-  private val _upcomingCores = MutableLiveData<List<CoreModel>>()
-  val upcomingCores: LiveData<List<CoreModel>>
-    get() = _upcomingCores
+    private val _upcomingCores = MutableLiveData<List<CoreModel>>()
+    val upcomingCores: LiveData<List<CoreModel>>
+        get() = _upcomingCores
 
-  fun loadAllCores() =
-    getCoresUseCase(UseCase.None()) {
-      it.either(::handleFailure, ::handleAllCores)
+    fun loadAllCores() =
+        getCoresUseCase(UseCase.None()) {
+            it.either(::handleFailure, ::handleAllCores)
+        }
+
+    fun loadPastCores() =
+        getPastCores(UseCase.None()) {
+            it.either(::handleFailure, ::handlePastCores)
+        }
+
+    fun loadUpcomingCores() =
+        getUpcomingCores(UseCase.None()) {
+            it.either(::handleFailure, ::handleupcomingCores)
+        }
+
+    private fun handlePastCores(cores: List<CoreModel>) {
+        this._pastCores.value = cores
     }
 
-  fun loadPastCores() =
-    getPastCores(UseCase.None()) {
-      it.either(::handleFailure, ::handlePastCores)
+    private fun handleupcomingCores(cores: List<CoreModel>) {
+        this._upcomingCores.value = cores
     }
 
-  fun loadUpcomingCores() =
-    getUpcomingCores(UseCase.None()) {
-      it.either(::handleFailure, ::handleupcomingCores)
+    private fun handleAllCores(cores: List<CoreModel>) {
+        this._allCores.value = cores
     }
 
-  private fun handlePastCores(cores: List<CoreModel>) {
-    this._pastCores.value = cores
-  }
-
-  private fun handleupcomingCores(cores: List<CoreModel>) {
-    this._upcomingCores.value = cores
-  }
-
-  private fun handleAllCores(cores: List<CoreModel>) {
-    this._allCores.value = cores
-  }
-
-  override fun onCleared() {
-    super.onCleared()
-    getCoresUseCase.unBind()
-    getPastCores.unBind()
-    getUpcomingCores.unBind()
-  }
+    override fun onCleared() {
+        super.onCleared()
+        getCoresUseCase.unBind()
+        getPastCores.unBind()
+        getUpcomingCores.unBind()
+    }
 
 }
