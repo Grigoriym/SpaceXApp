@@ -24,6 +24,9 @@ android {
     buildConfigField 'String', "AccessToken", twitter_api_access_token
     buildConfigField 'String', "AccessTokenSecret", twitter_api_access_token_secret
   }
+  buildFeatures {
+    viewBinding true
+  }
 
   scabbard {
     enabled true

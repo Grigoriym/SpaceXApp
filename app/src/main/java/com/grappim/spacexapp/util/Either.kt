@@ -1,5 +1,9 @@
 package com.grappim.spacexapp.util
 
+import com.grappim.spacexapp.util.Either.Left
+import com.grappim.spacexapp.util.Either.Right
+import timber.log.Timber
+
 /**
  * Copyright (C) 2018 Fernando Cejas Open Source Project
  *
@@ -58,3 +62,16 @@ fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
   }
 
 fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.c(::right))
+
+inline fun <L, R> Either<L, R>.onSuccess(action: (R) -> Unit): Either<L, R> {
+  if (this is Either.Right) action(b)
+  return this
+}
+
+inline fun <L, R> Either<L, R>.onFailure(action: (L) -> Unit): Either<L, R> {
+  if (this is Either.Left) {
+    Timber.e("Either.onFailure() $a")
+    action(a)
+  }
+  return this
+}

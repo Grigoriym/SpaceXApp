@@ -8,12 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getCapsuleComponent
 import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
@@ -78,11 +79,16 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
         }
     }
 
-    private fun renderCapsules(capsules: List<CapsuleModel>?) {
-        capsules?.let {
-            capsulesAdapter.loadItems(it)
+    private fun renderCapsules(event: Resource<List<CapsuleModel>>) {
+        pbGetCapsules.showOrGone(event is Resource.Loading)
+        when (event) {
+            is Resource.Error -> {
+                showError(event.exception)
+            }
+            is Resource.Success -> {
+                capsulesAdapter.loadItems(event.data)
+            }
         }
-        pbGetCapsules.gone()
         rvGetCapsules.scheduleLayoutAnimation()
     }
 
@@ -90,6 +96,10 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
         rvGetCapsules.showSnackbar(failureText)
         pbGetCapsules.gone()
         srlGetCapsules.isRefreshing = false
+    }
+
+    private fun showError(throwable: Throwable) {
+        rvGetCapsules.showSnackbar(throwable.message ?: "")
     }
 
     private fun bindAdapter() {

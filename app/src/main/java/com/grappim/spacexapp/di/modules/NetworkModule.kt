@@ -4,6 +4,7 @@ import com.grappim.spacexapp.BuildConfig
 import com.grappim.spacexapp.api.RedditApi
 import com.grappim.spacexapp.api.SpaceXApi
 import com.grappim.spacexapp.api.TwitterApi
+import com.grappim.spacexapp.core.network.ErrorMappingInterceptor
 import com.grappim.spacexapp.core.network.Oauth1SigningInterceptor
 import com.grappim.spacexapp.core.network.OauthKeys
 import com.grappim.spacexapp.core.utils.REDDIT_BASE_URL
@@ -101,11 +102,13 @@ class NetworkModule {
     @OauthClientQualifier
     fun provideOauthOkHttpClient(
         @HttpLoggingInterceptorQualifier loggingInterceptor: HttpLoggingInterceptor,
-        oauthInterceptor: Oauth1SigningInterceptor
+        oauthInterceptor: Oauth1SigningInterceptor,
+        errorMappingInterceptor: ErrorMappingInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(60L, TimeUnit.SECONDS)
             .readTimeout(60L, TimeUnit.SECONDS)
+            .addInterceptor(errorMappingInterceptor)
             .apply {
                 if (BuildConfig.DEBUG) {
                     addInterceptor(loggingInterceptor)
@@ -118,11 +121,13 @@ class NetworkModule {
     @AppScope
     @GeneralClientQualifier
     fun provideOkHttpClient(
-        @HttpLoggingInterceptorQualifier loggingInterceptor: HttpLoggingInterceptor
+        @HttpLoggingInterceptorQualifier loggingInterceptor: HttpLoggingInterceptor,
+        errorMappingInterceptor: ErrorMappingInterceptor
     ): OkHttpClient =
         OkHttpClient.Builder()
             .connectTimeout(60L, TimeUnit.SECONDS)
             .readTimeout(60L, TimeUnit.SECONDS)
+            .addInterceptor(errorMappingInterceptor)
             .apply {
                 if (BuildConfig.DEBUG) {
                     addInterceptor(loggingInterceptor)

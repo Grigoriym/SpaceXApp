@@ -43,13 +43,13 @@ interface SpaceXApi {
   suspend fun getAllRockets(): Response<List<RocketModel>>
 
   @GET("capsules")
-  suspend fun getAllCapsules(): Response<List<CapsuleModel>>
+  suspend fun getAllCapsules(): List<CapsuleModel>
 
   @GET("capsules/upcoming")
-  suspend fun getUpcomingCapsules(): Response<List<CapsuleModel>>
+  suspend fun getUpcomingCapsules(): List<CapsuleModel>
 
   @GET("capsules/past")
-  suspend fun getPastCapsules(): Response<List<CapsuleModel>>
+  suspend fun getPastCapsules(): List<CapsuleModel>
 
   @GET("capsules/{capsuleSerial}")
   suspend fun getOneCapsuleBySerial(

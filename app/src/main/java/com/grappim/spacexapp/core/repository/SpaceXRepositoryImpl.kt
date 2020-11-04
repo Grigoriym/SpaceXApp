@@ -1,6 +1,7 @@
 package com.grappim.spacexapp.core.repository
 
 import com.grappim.spacexapp.api.SpaceXApi
+import com.grappim.spacexapp.data.remote.BaseRepository
 import com.grappim.spacexapp.di.qualifiers.SpacexApiQualifier
 import com.grappim.spacexapp.di.scopes.AppScope
 import com.grappim.spacexapp.model.capsule.CapsuleModel
@@ -22,28 +23,16 @@ import javax.inject.Inject
 class SpaceXRepositoryImpl @Inject constructor(
     private val networkHandler: NetworkHandler,
     @SpacexApiQualifier private val service: SpaceXApi
-) : SpaceXRepository, NetworkHelper {
+) : SpaceXRepository, NetworkHelper, BaseRepository() {
 
-    override suspend fun allCapsules(): Either<Failure, List<CapsuleModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllCapsules(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allCapsules(): Either<Throwable, List<CapsuleModel>> =
+        apiCall { service.getAllCapsules()}
 
-    override suspend fun upcomingCapsules(): Either<Failure, List<CapsuleModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getUpcomingCapsules(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun upcomingCapsules(): Either<Throwable, List<CapsuleModel>> =
+        apiCall { service.getUpcomingCapsules() }
 
-    override suspend fun pastCapsules(): Either<Failure, List<CapsuleModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getPastCapsules(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun pastCapsules(): Either<Throwable, List<CapsuleModel>> =
+        apiCall { service.getPastCapsules() }
 
     override suspend fun allRockets(): Either<Failure, List<RocketModel>> {
         return when (networkHandler.isConnected) {

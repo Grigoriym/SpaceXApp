@@ -8,10 +8,10 @@ import com.grappim.spacexapp.util.UseCase
 import javax.inject.Inject
 
 class GetCapsulesUseCase @Inject constructor(
-  private val spaceXRepo: SpaceXRepository
-) : UseCase<List<CapsuleModel>, UseCase.None>() {
+    private val spaceXRepo: SpaceXRepository
+) {
 
-    override suspend fun run(params: None): Either<Failure, List<CapsuleModel>> =
+    suspend operator fun invoke(): Either<Throwable, List<CapsuleModel>> =
         spaceXRepo.allCapsules()
 
 }
