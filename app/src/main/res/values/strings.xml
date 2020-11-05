@@ -79,4 +79,7 @@
 
   <string name="twitter_screen_name">"@"%1$s</string>
 
+  <string name="error_something_gone_wrong">Something has gone wrong</string>
+  <string name="error_no_internet">No internet</string>
+
 </resources>

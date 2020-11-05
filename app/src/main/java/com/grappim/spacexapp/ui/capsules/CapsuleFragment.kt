@@ -27,9 +27,9 @@ class CapsuleFragment : BaseFragment(R.layout.fragment_capsule) {
 
         btnGetUpcomingCapsules.setSafeOnClickListener {
             findNavController().navigate(
-              CapsuleFragmentDirections.nextFragment(
-                ARG_CAPSULES_UPCOMING
-              )
+                CapsuleFragmentDirections.nextFragment(
+                    ARG_CAPSULES_UPCOMING
+                )
             )
         }
 

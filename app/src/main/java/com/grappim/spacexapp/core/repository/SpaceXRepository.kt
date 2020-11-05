@@ -22,11 +22,11 @@ interface SpaceXRepository {
 
   suspend fun pastCapsules(): Either<Throwable, List<CapsuleModel>>
 
-  suspend fun allCores(): Either<Failure, List<CoreModel>>
+  suspend fun allCores(): Either<Throwable, List<CoreModel>>
 
-  suspend fun upcomingCores(): Either<Failure, List<CoreModel>>
+  suspend fun upcomingCores(): Either<Throwable, List<CoreModel>>
 
-  suspend fun pastCores(): Either<Failure, List<CoreModel>>
+  suspend fun pastCores(): Either<Throwable, List<CoreModel>>
 
   suspend fun allShips(): Either<Failure, List<ShipModel>>
 

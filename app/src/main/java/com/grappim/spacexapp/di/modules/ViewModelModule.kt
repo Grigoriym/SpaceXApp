@@ -16,12 +16,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(CapsulesViewModel::class)
-    abstract fun bindRepoViewModel(viewModel: CapsulesViewModel): ViewModel
+    abstract fun bindCapsulesViewModel(viewModel: CapsulesViewModel): ViewModel
 
     @Binds
     @IntoMap
     @ViewModelKey(CoresViewModel::class)
-    abstract fun bindRandomUsersViewModel(viewModel: CoresViewModel): ViewModel
+    abstract fun bindCoresViewModel(viewModel: CoresViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory

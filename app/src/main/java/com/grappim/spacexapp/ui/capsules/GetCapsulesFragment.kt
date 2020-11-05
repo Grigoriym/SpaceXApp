@@ -6,10 +6,12 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getCapsuleComponent
+import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showOrGone
@@ -55,7 +57,6 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
             allCapsules.observe(viewLifecycleOwner, ::renderCapsules)
             upcomingCapsules.observe(viewLifecycleOwner, ::renderCapsules)
             pastCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-            failure.observe(viewLifecycleOwner, ::handleFailure)
         }
 
         bindAdapter()
@@ -68,7 +69,6 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     }
 
     private fun getData() {
-        pbGetCapsules.show()
         when (args.capsulesToGetArgs) {
             ARG_CAPSULES_ALL -> viewModel.loadAllCapsules()
             ARG_CAPSULES_UPCOMING -> viewModel.loadUpcomingCapsules()
@@ -99,7 +99,7 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     }
 
     private fun showError(throwable: Throwable) {
-        rvGetCapsules.showSnackbar(throwable.message ?: "")
+        rvGetCapsules.showSnackbar(requireContext().getErrorMessage(throwable))
     }
 
     private fun bindAdapter() {

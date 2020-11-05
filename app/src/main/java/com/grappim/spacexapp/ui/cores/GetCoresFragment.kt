@@ -9,11 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getCoresComponent
+import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.onFailure
-import com.grappim.spacexapp.core.extensions.onObserve
 import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.utils.ARG_CORES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CORES_PAST
 import com.grappim.spacexapp.core.utils.ARG_CORES_UPCOMING
@@ -34,9 +35,7 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
     private val viewModel: CoresViewModel by viewModels { viewModelFactory }
 
     private val coresAdapter by lazy {
-        CoresAdapter {
-
-        }
+        CoresAdapter {}
     }
     private val args: GetCoresFragmentArgs by navArgs()
 
@@ -49,14 +48,11 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("GetCoresFragment - onViewCreated")
-
         viewModel.apply {
-            onObserve(allCores, ::renderCores)
-            onObserve(upcomingCores, ::renderCores)
-            onObserve(pastCores, ::renderCores)
-            onFailure(failure, ::handleFailure)
+            allCores.observe(viewLifecycleOwner, ::renderCores)
+            upcomingCores.observe(viewLifecycleOwner, ::renderCores)
+            pastCores.observe(viewLifecycleOwner, ::renderCores)
         }
-
         bindAdapter()
         getData()
 
@@ -67,7 +63,6 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
     }
 
     private fun getData() {
-        pbGetCores.show()
         when (args.coresToGetArgs) {
             ARG_CORES_ALL -> viewModel.loadAllCores()
             ARG_CORES_PAST -> viewModel.loadPastCores()
@@ -78,9 +73,17 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
         }
     }
 
-    private fun renderCores(cores: List<CoreModel>?) {
-        coresAdapter.loadItems(cores ?: listOf())
-        pbGetCores.gone()
+    private fun renderCores(event: Resource<List<CoreModel>>) {
+        pbGetCores.showOrGone(event is Resource.Loading)
+        when (event) {
+            is Resource.Error -> {
+                showError(event.exception)
+            }
+            is Resource.Success -> {
+                coresAdapter.loadItems(event.data)
+            }
+        }
+
         rvGetCores.scheduleLayoutAnimation()
     }
 
@@ -90,7 +93,6 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
         srlGetCores.isRefreshing = false
     }
 
-    //todo ripple effect works strange on items
     private fun bindAdapter() {
         rvGetCores.apply {
             addItemDecoration(MarginItemDecorator())
@@ -98,5 +100,9 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
                 .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
             adapter = coresAdapter
         }
+    }
+
+    private fun showError(throwable: Throwable) {
+        rvGetCores.showSnackbar(requireContext().getErrorMessage(throwable))
     }
 }

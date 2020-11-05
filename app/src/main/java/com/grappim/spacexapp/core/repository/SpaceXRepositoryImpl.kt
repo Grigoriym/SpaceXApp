@@ -41,26 +41,14 @@ class SpaceXRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun allCores(): Either<Failure, List<CoreModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllCores(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allCores(): Either<Throwable, List<CoreModel>> =
+        apiCall { service.getAllCores() }
 
-    override suspend fun upcomingCores(): Either<Failure, List<CoreModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getUpcomingCores(), emptyList())
-            false, null -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun upcomingCores(): Either<Throwable, List<CoreModel>> =
+        apiCall { service.getUpcomingCores() }
 
-    override suspend fun pastCores(): Either<Failure, List<CoreModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getPastCores(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun pastCores(): Either<Throwable, List<CoreModel>> =
+        apiCall { service.getPastCores() }
 
     override suspend fun allShips(): Either<Failure, List<ShipModel>> {
         return when (networkHandler.isConnected) {
