@@ -23,10 +23,10 @@ interface SpaceXApi {
     @GET("launches/past")
     suspend fun getPastLaunches(
         @Query("order") order: String? = "desc"
-    ): Response<List<LaunchModel>>
+    ): List<LaunchModel>
 
     @GET("launches/upcoming")
-    suspend fun getUpcomingLaunches(): Response<List<LaunchModel>>
+    suspend fun getUpcomingLaunches(): List<LaunchModel>
 
     @GET("launches/next")
     suspend fun getNextLaunch(): Response<LaunchModel>
@@ -40,7 +40,7 @@ interface SpaceXApi {
     ): Response<LaunchModel>
 
     @GET("rockets")
-    suspend fun getAllRockets(): Response<List<RocketModel>>
+    suspend fun getAllRockets(): List<RocketModel>
 
     @GET("capsules")
     suspend fun getAllCapsules(): List<CapsuleModel>
@@ -71,7 +71,7 @@ interface SpaceXApi {
     ): Response<CoreModel>
 
     @GET("ships")
-    suspend fun getAllShips(): Response<List<ShipModel>>
+    suspend fun getAllShips(): List<ShipModel>
 
     @GET("ships/{shipId}")
     suspend fun getOneShipById(
@@ -79,7 +79,7 @@ interface SpaceXApi {
     ): Response<ShipModel>
 
     @GET("launchpads")
-    suspend fun getAllLaunchPads(): Response<List<LaunchPadModel>>
+    suspend fun getAllLaunchPads(): List<LaunchPadModel>
 
     @GET("launchpads/{site_id}")
     suspend fun getLaunchPadBySiteId(
@@ -90,7 +90,7 @@ interface SpaceXApi {
     suspend fun getInfo(): Response<InfoModel>
 
     @GET("history")
-    suspend fun getHistory(): Response<List<HistoryModel>>
+    suspend fun getHistory(): List<HistoryModel>
 
     @GET("payloads")
     suspend fun getAllPayloads(): Response<List<PayloadModel>>

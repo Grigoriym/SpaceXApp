@@ -14,41 +14,41 @@ import com.grappim.spacexapp.util.Failure
 
 interface SpaceXRepository {
 
-  suspend fun allRockets(): Either<Failure, List<RocketModel>>
+    suspend fun allRockets(): Either<Throwable, List<RocketModel>>
 
-  suspend fun allCapsules(): Either<Throwable, List<CapsuleModel>>
+    suspend fun allCapsules(): Either<Throwable, List<CapsuleModel>>
 
-  suspend fun upcomingCapsules(): Either<Throwable, List<CapsuleModel>>
+    suspend fun upcomingCapsules(): Either<Throwable, List<CapsuleModel>>
 
-  suspend fun pastCapsules(): Either<Throwable, List<CapsuleModel>>
+    suspend fun pastCapsules(): Either<Throwable, List<CapsuleModel>>
 
-  suspend fun allCores(): Either<Throwable, List<CoreModel>>
+    suspend fun allCores(): Either<Throwable, List<CoreModel>>
 
-  suspend fun upcomingCores(): Either<Throwable, List<CoreModel>>
+    suspend fun upcomingCores(): Either<Throwable, List<CoreModel>>
 
-  suspend fun pastCores(): Either<Throwable, List<CoreModel>>
+    suspend fun pastCores(): Either<Throwable, List<CoreModel>>
 
-  suspend fun allShips(): Either<Failure, List<ShipModel>>
+    suspend fun allShips(): Either<Throwable, List<ShipModel>>
 
-  suspend fun allLaunchPads(): Either<Failure, List<LaunchPadModel>>
+    suspend fun allLaunchPads(): Either<Throwable, List<LaunchPadModel>>
 
-  suspend fun info(): Either<Failure, InfoModel>
+    suspend fun info(): Either<Failure, InfoModel>
 
-  suspend fun history(): Either<Failure, List<HistoryModel>>
+    suspend fun history(): Either<Throwable, List<HistoryModel>>
 
-  suspend fun allPayloads(): Either<Failure, List<PayloadModel>>
+    suspend fun allPayloads(): Either<Failure, List<PayloadModel>>
 
-  suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel>
+    suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel>
 
-  suspend fun allLaunches(): Either<Failure, List<LaunchModel>>
+    suspend fun allLaunches(): Either<Failure, List<LaunchModel>>
 
-  suspend fun pastLaunches(): Either<Failure, List<LaunchModel>>
+    suspend fun pastLaunches(): Either<Throwable, List<LaunchModel>>
 
-  suspend fun upcomingLaunches(): Either<Failure, List<LaunchModel>>
+    suspend fun upcomingLaunches(): Either<Throwable, List<LaunchModel>>
 
-  suspend fun nextLaunch(): Either<Failure, LaunchModel>
+    suspend fun nextLaunch(): Either<Failure, LaunchModel>
 
-  suspend fun latestLaunch(): Either<Failure, LaunchModel>
+    suspend fun latestLaunch(): Either<Failure, LaunchModel>
 
-  suspend fun oneLaunch(flightNumber: Int?): Either<Failure, LaunchModel>
+    suspend fun oneLaunch(flightNumber: Int?): Either<Failure, LaunchModel>
 }

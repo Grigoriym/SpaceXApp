@@ -11,7 +11,6 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getCoresComponent
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
@@ -81,10 +80,9 @@ class GetCoresFragment : BaseFragment(R.layout.fragment_get_cores) {
             }
             is Resource.Success -> {
                 coresAdapter.loadItems(event.data)
+                rvGetCores.scheduleLayoutAnimation()
             }
         }
-
-        rvGetCores.scheduleLayoutAnimation()
     }
 
     override fun renderFailure(failureText: String) {

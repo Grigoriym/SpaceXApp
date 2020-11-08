@@ -15,27 +15,27 @@ import timber.log.Timber
 
 class SpaceXApplication : MultiDexApplication() {
 
-  companion object {
-    lateinit var instance: SpaceXApplication
-  }
-
-  val appComponent: AppComponent by lazy {
-    DaggerAppComponent
-      .factory()
-      .create(applicationContext)
-  }
-
-  override fun onCreate() {
-    super.onCreate()
-    instance = this
-    timberInit()
-    AndroidThreeTen.init(this)
-    Timber.d("Application - onCreate")
-  }
-
-  private fun timberInit() {
-    if (BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
+    companion object {
+        lateinit var instance: SpaceXApplication
     }
-  }
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent
+            .factory()
+            .create(applicationContext)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        timberInit()
+        AndroidThreeTen.init(this)
+        Timber.d("Application - onCreate")
+    }
+
+    private fun timberInit() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
 }

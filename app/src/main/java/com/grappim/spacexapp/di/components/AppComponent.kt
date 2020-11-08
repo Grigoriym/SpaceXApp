@@ -60,13 +60,5 @@ interface AppComponent {
     fun inject(twitterDataSource: TwitterDataSource)
     fun inject(twitterFragment: TwitterFragment)
 
-    fun inject(getCoresFragment: GetCoresFragment)
-    fun inject(historyFragment: HistoryFragment)
     fun inject(infoFragment: InfoFragment)
-    fun inject(completedLaunchesFragment: CompletedLaunchesFragment)
-    fun inject(upcomingLaunchesFragment: UpcomingLaunchesFragment)
-    fun inject(getLaunchPadsFragment: GetLaunchPadsFragment)
-    fun inject(missionFragment: MissionFragment)
-    fun inject(getRocketsFragment: GetRocketsFragment)
-    fun inject(getShipsFragment: GetShipsFragment)
 }

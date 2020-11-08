@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.cores.CoreModel
-import com.grappim.spacexapp.network.gets.GetPastCores
 import com.grappim.spacexapp.network.gets.GetUpcomingCores
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
 import com.grappim.spacexapp.util.onFailure
 import com.grappim.spacexapp.util.onSuccess
 import kotlinx.coroutines.launch
@@ -16,7 +14,7 @@ import javax.inject.Inject
 
 class CoresViewModel @Inject constructor(
     private val getCoresUseCase: GetCoresUseCase,
-    private val getPastCores: GetPastCores,
+    private val getPastCoresUseCase: GetPastCoresUseCase,
     private val getUpcomingCores: GetUpcomingCores
 ) : BaseViewModel() {
 
@@ -47,7 +45,7 @@ class CoresViewModel @Inject constructor(
     fun loadPastCores() {
         viewModelScope.launch {
             _pastCores.value = Resource.Loading
-            getPastCores.invoke()
+            getPastCoresUseCase.invoke()
                 .onFailure {
                     _pastCores.value = Resource.Error(it)
                 }.onSuccess {

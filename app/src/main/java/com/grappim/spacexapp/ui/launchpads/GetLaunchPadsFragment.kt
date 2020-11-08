@@ -2,78 +2,89 @@ package com.grappim.spacexapp.ui.launchpads
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.*
-import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.core.extensions.getErrorMessage
+import com.grappim.spacexapp.core.extensions.getFragmentsComponent
+import com.grappim.spacexapp.core.extensions.gone
+import com.grappim.spacexapp.core.extensions.showOrGone
+import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_get_launch_pads.*
+import kotlinx.android.synthetic.main.fragment_get_launch_pads.pbGetLaunchPads
+import kotlinx.android.synthetic.main.fragment_get_launch_pads.rvGetLaunchPads
+import kotlinx.android.synthetic.main.fragment_get_launch_pads.srlGetLaunchPads
 import javax.inject.Inject
 
-class GetLaunchPadsFragment : BaseFragment() {
+class GetLaunchPadsFragment : BaseFragment(R.layout.fragment_get_launch_pads) {
 
-  @Inject
-  lateinit var viewModel: LaunchPadViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-  private lateinit var lAdapter: LaunchPadsAdapter
+    private val viewModel: LaunchPadViewModel by viewModels { viewModelFactory }
 
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    getAppComponent().inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? =
-    inflater.inflate(R.layout.fragment_get_launch_pads, container, false)
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    viewModel.apply {
-      onObserve(allLaunchPads, ::renderLaunchPads)
-      onFailure(failure, ::handleFailure)
+    private val launchPadAdapter: LaunchPadsAdapter by lazy {
+        LaunchPadsAdapter {
+            findNavController().navigate(GetLaunchPadsFragmentDirections.nextFragment(it))
+        }
     }
 
-    bindAdapter()
-    getData()
-
-    srlGetLaunchPads.setOnRefreshListener {
-      getData()
-      srlGetLaunchPads.isRefreshing = false
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val component = context.getFragmentsComponent()
+        component.inject(this)
     }
-  }
 
-  private fun renderLaunchPads(rockets: List<LaunchPadModel>?) {
-    lAdapter.loadItems(rockets ?: listOf())
-    pbGetLaunchPads.gone()
-    rvGetLaunchPads.scheduleLayoutAnimation()
-  }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.apply {
+            allLaunchPads.observe(viewLifecycleOwner, ::renderLaunchPads)
+        }
 
-  override fun renderFailure(failureText: String) {
-    rvGetLaunchPads.showSnackbar(failureText)
-    pbGetLaunchPads.gone()
-    srlGetLaunchPads.isRefreshing = false
-  }
+        bindAdapter()
+        getData()
 
-  private fun getData() {
-    pbGetLaunchPads.show()
-    viewModel.loadAllLaunchPads()
-  }
-
-  private fun bindAdapter() {
-    lAdapter = LaunchPadsAdapter {
-      findNavController().navigate(GetLaunchPadsFragmentDirections.nextFragment(it))
+        srlGetLaunchPads.setOnRefreshListener {
+            getData()
+            srlGetLaunchPads.isRefreshing = false
+        }
     }
-    rvGetLaunchPads.apply {
-      layoutManager = LinearLayoutManager(context)
-      addItemDecoration(MarginItemDecorator())
-      adapter = lAdapter
+
+    private fun renderLaunchPads(resource: Resource<List<LaunchPadModel>>) {
+        pbGetLaunchPads.showOrGone(resource is Resource.Loading)
+        when (resource) {
+            is Resource.Error -> {
+                showError(resource.exception)
+            }
+            is Resource.Success -> {
+                launchPadAdapter.loadItems(resource.data)
+                rvGetLaunchPads.scheduleLayoutAnimation()
+            }
+        }
     }
-  }
+
+    override fun renderFailure(failureText: String) {
+        rvGetLaunchPads.showSnackbar(failureText)
+        pbGetLaunchPads.gone()
+        srlGetLaunchPads.isRefreshing = false
+    }
+
+    private fun getData() {
+        viewModel.loadAllLaunchPads()
+    }
+
+    private fun bindAdapter() {
+        rvGetLaunchPads.apply {
+            addItemDecoration(MarginItemDecorator())
+            adapter = launchPadAdapter
+        }
+    }
+
+    private fun showError(throwable: Throwable) {
+        rvGetLaunchPads.showSnackbar(requireContext().getErrorMessage(throwable))
+    }
 }

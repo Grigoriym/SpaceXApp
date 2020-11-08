@@ -6,7 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class HistoryModel(
-  @SerializedName("details")
   val details: String?,
   @SerializedName("event_date_unix")
   val eventDateUnix: Int?,
@@ -14,17 +13,14 @@ data class HistoryModel(
   val eventDateUtc: String?,
   @SerializedName("flight_number")
   val flightNumber: Int?,
-  @SerializedName("id")
   val id: Int?,
-  @SerializedName("links")
   val links: Links?,
-  @SerializedName("title")
   val title: String?
 ) : Parcelable {
-  companion object {
-    fun empty() = HistoryModel(
-      "", 0, "", 0,
-      0, null, ""
-    )
-  }
+    companion object {
+        fun empty() = HistoryModel(
+          "", 0, "", 0,
+          0, null, ""
+        )
+    }
 }

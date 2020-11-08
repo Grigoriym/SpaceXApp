@@ -2,31 +2,34 @@ package com.grappim.spacexapp.ui.launches.upcoming
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.network.gets.GetUpcomingLaunches
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.util.onFailure
+import com.grappim.spacexapp.util.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class UpcomingLaunchesViewModel @Inject constructor(
-  private val getUpcomingLaunches: GetUpcomingLaunches
+    private val getUpcomingLaunchesUseCase: GetUpcomingLaunchesUseCase
 ) : BaseViewModel() {
 
-  private val _upcomingLaunches = MutableLiveData<List<LaunchModel>>()
-  val upcomingLaunches: LiveData<List<LaunchModel>>
-    get() = _upcomingLaunches
+    private val _upcomingLaunches = MutableLiveData<Resource<List<LaunchModel>>>()
+    val upcomingLaunches: LiveData<Resource<List<LaunchModel>>>
+        get() = _upcomingLaunches
 
-  private fun handleLaunches(launches: List<LaunchModel>) {
-    this._upcomingLaunches.value = launches
-  }
 
-  fun loadAllLaunches() =
-    getUpcomingLaunches(UseCase.None()) {
-      it.either(::handleFailure, ::handleLaunches)
+    fun loadAllLaunches() {
+        _upcomingLaunches.value = Resource.Loading
+        viewModelScope.launch {
+            getUpcomingLaunchesUseCase.invoke()
+                .onFailure {
+                    _upcomingLaunches.value = Resource.Error(it)
+                }.onSuccess {
+                    _upcomingLaunches.value = Resource.Success(it)
+                }
+        }
     }
 
-  override fun onCleared() {
-    super.onCleared()
-    getUpcomingLaunches.unBind()
-  }
 }

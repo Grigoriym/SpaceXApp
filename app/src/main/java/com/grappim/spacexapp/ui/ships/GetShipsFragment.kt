@@ -2,84 +2,96 @@ package com.grappim.spacexapp.ui.ships
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.*
-import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.core.extensions.getErrorMessage
+import com.grappim.spacexapp.core.extensions.getFragmentsComponent
+import com.grappim.spacexapp.core.extensions.gone
+import com.grappim.spacexapp.core.extensions.showOrGone
+import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.model.ships.ShipModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_get_ships.*
+import kotlinx.android.synthetic.main.fragment_get_ships.pbGetShips
+import kotlinx.android.synthetic.main.fragment_get_ships.rvGetShips
+import kotlinx.android.synthetic.main.fragment_get_ships.srlGetShips
 import timber.log.Timber
 import javax.inject.Inject
 
-class GetShipsFragment : BaseFragment() {
+class GetShipsFragment : BaseFragment(R.layout.fragment_get_ships) {
 
-  @Inject
-  lateinit var viewModel: ShipsViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-  private lateinit var shipAdapter: ShipsAdapter
+    private val viewModel: ShipsViewModel by viewModels { viewModelFactory }
 
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    getAppComponent().inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? =
-    inflater.inflate(R.layout.fragment_get_ships, container, false)
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    Timber.d("GetShipsFragment - onViewCreated")
-
-    viewModel.apply {
-      onObserve(allShips, ::renderShips)
-      onFailure(failure, ::handleFailure)
+    private val shipAdapter: ShipsAdapter by lazy {
+        ShipsAdapter(onClick = {
+            findNavController().navigate(GetShipsFragmentDirections.nextFragment(it))
+        })
     }
 
-    bindAdapter()
-    getData()
-
-    srlGetShips.setOnRefreshListener {
-      getData()
-      srlGetShips.isRefreshing = false
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val component = context.getFragmentsComponent()
+        component.inject(this)
     }
-  }
 
-  private fun getData() {
-    pbGetShips.show()
-    viewModel.loadAllShips()
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Timber.d("GetShipsFragment - onViewCreated")
 
-  private fun renderShips(ships: List<ShipModel>?) {
-    shipAdapter.loadItems(ships)
-    pbGetShips.gone()
-    rvGetShips.scheduleLayoutAnimation()
-  }
+        viewModel.apply {
+            allShips.observe(viewLifecycleOwner, ::renderShips)
+        }
 
-  override fun renderFailure(failureText: String) {
-    rvGetShips.showSnackbar(failureText)
-    pbGetShips.gone()
-    srlGetShips.isRefreshing = false
-  }
+        bindAdapter()
+        getData()
 
-  private fun bindAdapter() {
-    shipAdapter = ShipsAdapter(onClick = {
-      findNavController().navigate(GetShipsFragmentDirections.nextFragment(it))
-    })
-    rvGetShips.apply {
-      layoutManager = LinearLayoutManager(requireContext())
-      addItemDecoration(MarginItemDecorator())
-      layoutAnimation = AnimationUtils
-        .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
-      adapter = shipAdapter
+        srlGetShips.setOnRefreshListener {
+            getData()
+            srlGetShips.isRefreshing = false
+        }
     }
-  }
+
+    private fun getData() {
+        viewModel.loadAllShips()
+    }
+
+    private fun renderShips(resource: Resource<List<ShipModel>>) {
+        pbGetShips.showOrGone(resource is Resource.Loading)
+        when (resource) {
+            is Resource.Error -> {
+                showError(resource.exception)
+            }
+            is Resource.Success -> {
+                shipAdapter.loadItems(resource.data)
+                rvGetShips.scheduleLayoutAnimation()
+            }
+        }
+    }
+
+    override fun renderFailure(failureText: String) {
+        rvGetShips.showSnackbar(failureText)
+        pbGetShips.gone()
+        srlGetShips.isRefreshing = false
+    }
+
+    private fun bindAdapter() {
+        rvGetShips.apply {
+            addItemDecoration(MarginItemDecorator())
+            layoutAnimation = AnimationUtils
+                .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
+            adapter = shipAdapter
+        }
+    }
+
+    private fun showError(throwable: Throwable) {
+        rvGetShips.showSnackbar(requireContext().getErrorMessage(throwable))
+    }
 }

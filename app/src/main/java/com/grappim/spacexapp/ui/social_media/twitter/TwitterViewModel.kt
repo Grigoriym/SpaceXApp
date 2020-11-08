@@ -12,30 +12,30 @@ import javax.inject.Inject
 
 class TwitterViewModel @Inject constructor(
   private val repository: TwitterPaginationRepository
-) : ViewModel(), LifecycleObserver {
+) : ViewModel() {
 
-  private val _currentScreenName = MutableLiveData<String>()
-  val currentScreenName: LiveData<String>
-    get() = _currentScreenName
+    private val _currentScreenName = MutableLiveData<String>()
+    val currentScreenName: LiveData<String>
+        get() = _currentScreenName
 
-  private val repoResult = map(_currentScreenName) {
-    repository.getTweets(it)
-  }
-  val tweets = switchMap(repoResult) { it.pagedList }
-  val networkState = switchMap(repoResult) { it.networkState }
+    private val repoResult = map(_currentScreenName) {
+        repository.getTweets(it)
+    }
+    val tweets = switchMap(repoResult) { it.pagedList }
+    val networkState = switchMap(repoResult) { it.networkState }
 
-  val failure = switchMap(repoResult) { it.failure }
+    val failure = switchMap(repoResult) { it.failure }
 
-  fun refresh() {
-    Timber.d("TwitterViewModel - refresh")
-    repoResult.value?.refresh?.invoke()
-  }
+    fun refresh() {
+        Timber.d("TwitterViewModel - refresh")
+        repoResult.value?.refresh?.invoke()
+    }
 
-  fun setCurrentScreenName(name: String) {
-    _currentScreenName.value = name
-  }
+    fun setCurrentScreenName(name: String) {
+        _currentScreenName.value = name
+    }
 
-  fun showTweets() {
-    repository.getTweets(_currentScreenName.value ?: "")
-  }
+    fun showTweets() {
+        repository.getTweets(_currentScreenName.value ?: "")
+    }
 }

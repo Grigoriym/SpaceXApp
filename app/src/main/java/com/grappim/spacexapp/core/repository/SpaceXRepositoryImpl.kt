@@ -26,7 +26,7 @@ class SpaceXRepositoryImpl @Inject constructor(
 ) : SpaceXRepository, NetworkHelper, BaseRepository() {
 
     override suspend fun allCapsules(): Either<Throwable, List<CapsuleModel>> =
-        apiCall { service.getAllCapsules()}
+        apiCall { service.getAllCapsules() }
 
     override suspend fun upcomingCapsules(): Either<Throwable, List<CapsuleModel>> =
         apiCall { service.getUpcomingCapsules() }
@@ -34,12 +34,8 @@ class SpaceXRepositoryImpl @Inject constructor(
     override suspend fun pastCapsules(): Either<Throwable, List<CapsuleModel>> =
         apiCall { service.getPastCapsules() }
 
-    override suspend fun allRockets(): Either<Failure, List<RocketModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllRockets(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allRockets(): Either<Throwable, List<RocketModel>> =
+        apiCall { service.getAllRockets() }
 
     override suspend fun allCores(): Either<Throwable, List<CoreModel>> =
         apiCall { service.getAllCores() }
@@ -50,19 +46,11 @@ class SpaceXRepositoryImpl @Inject constructor(
     override suspend fun pastCores(): Either<Throwable, List<CoreModel>> =
         apiCall { service.getPastCores() }
 
-    override suspend fun allShips(): Either<Failure, List<ShipModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllShips(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allShips(): Either<Throwable, List<ShipModel>> =
+        apiCall { service.getAllShips() }
 
-    override suspend fun allLaunchPads(): Either<Failure, List<LaunchPadModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllLaunchPads(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allLaunchPads(): Either<Throwable, List<LaunchPadModel>> =
+        apiCall { service.getAllLaunchPads() }
 
     override suspend fun info(): Either<Failure, InfoModel> {
         return when (networkHandler.isConnected) {
@@ -71,12 +59,8 @@ class SpaceXRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun history(): Either<Failure, List<HistoryModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getHistory(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun history(): Either<Throwable, List<HistoryModel>> =
+        apiCall { service.getHistory() }
 
     override suspend fun allPayloads(): Either<Failure, List<PayloadModel>> {
         return when (networkHandler.isConnected) {
@@ -99,19 +83,11 @@ class SpaceXRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun pastLaunches(): Either<Failure, List<LaunchModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getPastLaunches(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun pastLaunches(): Either<Throwable, List<LaunchModel>> =
+        apiCall { service.getPastLaunches() }
 
-    override suspend fun upcomingLaunches(): Either<Failure, List<LaunchModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getUpcomingLaunches(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun upcomingLaunches(): Either<Throwable, List<LaunchModel>> =
+        apiCall { service.getUpcomingLaunches() }
 
     override suspend fun nextLaunch(): Either<Failure, LaunchModel> {
         return when (networkHandler.isConnected) {

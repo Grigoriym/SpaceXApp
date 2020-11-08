@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.network.gets.GetPastCapsules
 import com.grappim.spacexapp.network.gets.GetUpcomingCapsules
 import com.grappim.spacexapp.ui.base.BaseViewModel
 import com.grappim.spacexapp.util.onFailure
@@ -16,7 +15,7 @@ import javax.inject.Inject
 class CapsulesViewModel @Inject constructor(
     private val getCapsulesUseCase: GetCapsulesUseCase,
     private val getUpcomingCapsules: GetUpcomingCapsules,
-    private val getPastCapsules: GetPastCapsules
+    private val getPastCapsulesUseCase: GetPastCapsulesUseCase
 ) : BaseViewModel() {
 
     private val _allCapsules = MutableLiveData<Resource<List<CapsuleModel>>>()
@@ -58,7 +57,7 @@ class CapsulesViewModel @Inject constructor(
     fun loadPastCapsules() {
         viewModelScope.launch {
             _pastCapsules.value = Resource.Loading
-            getPastCapsules.invoke()
+            getPastCapsulesUseCase.invoke()
                 .onFailure {
                     _pastCapsules.value = Resource.Error(it)
                 }.onSuccess {

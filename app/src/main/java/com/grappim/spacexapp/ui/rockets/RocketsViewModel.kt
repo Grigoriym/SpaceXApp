@@ -1,34 +1,34 @@
 package com.grappim.spacexapp.ui.rockets
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.network.gets.GetRockets
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.util.onFailure
+import com.grappim.spacexapp.util.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class RocketsViewModel @Inject constructor(
-  private val getRockets: GetRockets
-) : BaseViewModel(), LifecycleObserver {
+    private val getRocketsUseCase: GetRocketsUseCase
+) : BaseViewModel() {
 
-  private val _allRockets = MutableLiveData<List<RocketModel>>()
-  val allRockets: LiveData<List<RocketModel>>
-    get() = _allRockets
+    private val _allRockets = MutableLiveData<Resource<List<RocketModel>>>()
+    val allRockets: LiveData<Resource<List<RocketModel>>>
+        get() = _allRockets
 
-  fun loadRockets() =
-    getRockets(UseCase.None()) {
-      it.either(::handleFailure, ::handleRockets)
+    fun loadRockets() {
+        _allRockets.value = Resource.Loading
+        viewModelScope.launch {
+            getRocketsUseCase.invoke()
+                .onFailure {
+                    _allRockets.value = Resource.Error(it)
+                }.onSuccess {
+                    _allRockets.value = Resource.Success(it)
+                }
+        }
     }
-
-  private fun handleRockets(rockets: List<RocketModel>) {
-    this._allRockets.value = rockets
-  }
-
-  override fun onCleared() {
-    super.onCleared()
-    getRockets.unBind()
-  }
 
 }
