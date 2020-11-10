@@ -1,4 +1,4 @@
-package com.grappim.spacexapp.api
+package com.grappim.spacexapp.api.model
 
 data class BaseApiError(
     val status: Int,

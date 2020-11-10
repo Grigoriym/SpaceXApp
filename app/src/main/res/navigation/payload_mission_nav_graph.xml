@@ -12,7 +12,7 @@
     android:label="Missions">
     <argument
       android:name="missionArgs"
-      app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+      app:argType="com.grappim.spacexapp.api.model.capsule.Mission" />
   </fragment>
 
 </navigation>

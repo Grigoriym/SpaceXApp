@@ -15,7 +15,7 @@
       app:destination="@id/rocketDetailsFragment">
       <argument
         android:name="rocketModel"
-        app:argType="com.grappim.spacexapp.model.rocket.RocketModel" />
+        app:argType="com.grappim.spacexapp.api.model.rocket.RocketModel" />
     </action>
   </fragment>
 
@@ -26,7 +26,7 @@
     tools:layout="@layout/fragment_rocket_details">
     <argument
       android:name="rocketModel"
-      app:argType="com.grappim.spacexapp.model.rocket.RocketModel" />
+      app:argType="com.grappim.spacexapp.api.model.rocket.RocketModel" />
   </fragment>
 
 </navigation>

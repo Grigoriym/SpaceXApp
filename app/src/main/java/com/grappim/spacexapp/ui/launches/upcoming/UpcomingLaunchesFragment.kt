@@ -22,7 +22,6 @@ import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
-import com.grappim.spacexapp.core.functional.Failure
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.pbUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.rvUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.srlUpcomingLaunches
@@ -105,13 +104,6 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches) {
             layoutAnimation = AnimationUtils
                 .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
             adapter = launchesAdapter
-        }
-    }
-
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-            is Failure.ServerError -> renderFailure("Server Error")
         }
     }
 

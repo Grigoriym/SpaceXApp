@@ -19,7 +19,6 @@ class UpcomingLaunchesViewModel @Inject constructor(
     val upcomingLaunches: LiveData<Resource<List<LaunchModel>>>
         get() = _upcomingLaunches
 
-
     fun loadAllLaunches() {
         _upcomingLaunches.value = Resource.Loading
         viewModelScope.launch {

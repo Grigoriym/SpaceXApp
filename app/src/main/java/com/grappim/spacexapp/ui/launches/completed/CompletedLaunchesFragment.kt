@@ -22,7 +22,6 @@ import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
-import com.grappim.spacexapp.core.functional.Failure
 import kotlinx.android.synthetic.main.fragment_completed_launches.pbCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.rvCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.srlCompletedLaunches
@@ -97,13 +96,6 @@ class CompletedLaunchesFragment : Fragment(R.layout.fragment_completed_launches)
 
     private fun getData() {
         viewModel.loadPastLaunches()
-    }
-
-    private fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.NetworkConnection -> renderFailure("Network Connection Error")
-            is Failure.ServerError -> renderFailure("Server Error")
-        }
     }
 
     private fun bindAdapter() {

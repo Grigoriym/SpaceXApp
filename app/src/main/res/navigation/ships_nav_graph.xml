@@ -17,7 +17,7 @@
       app:destination="@id/shipDetailsFragment">
       <argument
         android:name="shipModel"
-        app:argType="com.grappim.spacexapp.model.ships.ShipModel" />
+        app:argType="com.grappim.spacexapp.api.model.ships.ShipModel" />
     </action>
   </fragment>
 
@@ -31,11 +31,11 @@
       app:destination="@id/payload_mission_nav_graph">
       <argument
         android:name="missionArgs"
-        app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+        app:argType="com.grappim.spacexapp.api.model.capsule.Mission" />
     </action>
     <argument
       android:name="shipModel"
-      app:argType="com.grappim.spacexapp.model.ships.ShipModel" />
+      app:argType="com.grappim.spacexapp.api.model.ships.ShipModel" />
   </fragment>
 
 </navigation>

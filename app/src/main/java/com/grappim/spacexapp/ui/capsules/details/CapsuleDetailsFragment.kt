@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import coil.api.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.core.view.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
@@ -38,9 +38,7 @@ class CapsuleDetailsFragment : BaseFragment(R.layout.fragment_capsule_details) {
 
         bindAdapter()
 
-        GlideApp.with(this)
-            .load(capsuleImageList["default"])
-            .into(ivCapsuleDetailsToolbar)
+        ivCapsuleDetailsToolbar.load(capsuleImageList["default"])
 
         args.capsuleModel.let {
             tvCapsuleDetailsDetails.text = it.details

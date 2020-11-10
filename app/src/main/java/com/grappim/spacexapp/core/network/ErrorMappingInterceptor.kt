@@ -1,7 +1,7 @@
 package com.grappim.spacexapp.core.network
 
 import com.google.gson.Gson
-import com.grappim.spacexapp.api.BaseApiError
+import com.grappim.spacexapp.api.model.BaseApiError
 import com.grappim.spacexapp.core.exception.NetworkException
 import com.grappim.spacexapp.di.scopes.AppScope
 import okhttp3.Interceptor

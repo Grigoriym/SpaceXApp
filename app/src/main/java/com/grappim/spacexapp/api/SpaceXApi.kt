@@ -18,7 +18,7 @@ import retrofit2.http.Query
 interface SpaceXApi {
 
     @GET("launches")
-    suspend fun getAllLaunches(): Response<List<LaunchModel>>
+    suspend fun getAllLaunches(): List<LaunchModel>
 
     @GET("launches/past")
     suspend fun getPastLaunches(
@@ -29,15 +29,15 @@ interface SpaceXApi {
     suspend fun getUpcomingLaunches(): List<LaunchModel>
 
     @GET("launches/next")
-    suspend fun getNextLaunch(): Response<LaunchModel>
+    suspend fun getNextLaunch(): LaunchModel
 
     @GET("launches/latest")
-    suspend fun getLatestLaunch(): Response<LaunchModel>
+    suspend fun getLatestLaunch(): LaunchModel
 
     @GET("launches/{flightNumber}")
     suspend fun getOneLaunch(
         @Path("flightNumber") flightNumber: Int?
-    ): Response<LaunchModel>
+    ): LaunchModel
 
     @GET("rockets")
     suspend fun getAllRockets(): List<RocketModel>
@@ -54,7 +54,7 @@ interface SpaceXApi {
     @GET("capsules/{capsuleSerial}")
     suspend fun getOneCapsuleBySerial(
         @Path("capsuleSerial") capsuleSerial: String?
-    ): Response<CapsuleModel>
+    ): CapsuleModel
 
     @GET("cores")
     suspend fun getAllCores(): List<CoreModel>
@@ -68,7 +68,7 @@ interface SpaceXApi {
     @GET("cores/{coreSerial}")
     suspend fun getOneCoreBySerial(
         @Path("coreSerial") coreSerial: String?
-    ): Response<CoreModel>
+    ): CoreModel
 
     @GET("ships")
     suspend fun getAllShips(): List<ShipModel>
@@ -84,7 +84,7 @@ interface SpaceXApi {
     @GET("launchpads/{site_id}")
     suspend fun getLaunchPadBySiteId(
         @Path("site_id") siteId: String?
-    ): Response<LaunchPadModel>
+    ): LaunchPadModel
 
     @GET("info")
     suspend fun getInfo(): InfoModel
@@ -101,10 +101,10 @@ interface SpaceXApi {
     ): PayloadModel
 
     @GET("missions")
-    suspend fun getAllMissions(): Response<List<MissionModel>>
+    suspend fun getAllMissions(): List<MissionModel>
 
     @GET("missions/{missionId}")
     suspend fun getOneMissionById(
         @Path("missionId") missionId: String?
-    ): Response<MissionModel>
+    ): MissionModel
 }

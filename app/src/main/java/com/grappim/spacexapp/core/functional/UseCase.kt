@@ -14,9 +14,9 @@ abstract class UseCase<out Type, in Params> where Type : Any {
 
   private var parentJob: Job? = null
 
-  abstract suspend fun run(params: Params): Either<Failure, Type>
+  abstract suspend fun run(params: Params): Either<Throwable, Type>
 
-  operator fun invoke(params: Params, onResult: (Either<Failure, Type>) -> Unit = {}) {
+  operator fun invoke(params: Params, onResult: (Either<Throwable, Type>) -> Unit = {}) {
     val job = CoroutineScope(Dispatchers.IO).async { run(params) }
     parentJob = CoroutineScope(Dispatchers.Main).launch { onResult(job.await()) }
   }

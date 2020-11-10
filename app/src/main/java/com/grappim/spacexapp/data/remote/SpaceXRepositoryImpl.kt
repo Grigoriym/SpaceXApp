@@ -1,8 +1,6 @@
 package com.grappim.spacexapp.data.remote
 
 import com.grappim.spacexapp.api.SpaceXApi
-import com.grappim.spacexapp.di.qualifiers.SpacexApiQualifier
-import com.grappim.spacexapp.di.scopes.AppScope
 import com.grappim.spacexapp.api.model.capsule.CapsuleModel
 import com.grappim.spacexapp.api.model.cores.CoreModel
 import com.grappim.spacexapp.api.model.history.HistoryModel
@@ -12,17 +10,15 @@ import com.grappim.spacexapp.api.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.api.model.payloads.PayloadModel
 import com.grappim.spacexapp.api.model.rocket.RocketModel
 import com.grappim.spacexapp.api.model.ships.ShipModel
-import com.grappim.spacexapp.core.network.NetworkHandler
-import com.grappim.spacexapp.core.network.NetworkHelper
 import com.grappim.spacexapp.core.functional.Either
-import com.grappim.spacexapp.core.functional.Failure
+import com.grappim.spacexapp.di.qualifiers.SpacexApiQualifier
+import com.grappim.spacexapp.di.scopes.AppScope
 import javax.inject.Inject
 
 @AppScope
 class SpaceXRepositoryImpl @Inject constructor(
-    private val networkHandler: NetworkHandler,
     @SpacexApiQualifier private val service: SpaceXApi
-) : SpaceXRepository, NetworkHelper, BaseRepository() {
+) : SpaceXRepository, BaseRepository() {
 
     override suspend fun allCapsules(): Either<Throwable, List<CapsuleModel>> =
         apiCall { service.getAllCapsules() }
@@ -63,12 +59,8 @@ class SpaceXRepositoryImpl @Inject constructor(
     override suspend fun payloadById(payloadId: String): Either<Throwable, PayloadModel> =
         apiCall { service.getPayloadById(payloadId) }
 
-    override suspend fun allLaunches(): Either<Failure, List<LaunchModel>> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getAllLaunches(), emptyList())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun allLaunches(): Either<Throwable, List<LaunchModel>> =
+        apiCall { service.getAllLaunches() }
 
     override suspend fun pastLaunches(): Either<Throwable, List<LaunchModel>> =
         apiCall { service.getPastLaunches() }
@@ -76,24 +68,12 @@ class SpaceXRepositoryImpl @Inject constructor(
     override suspend fun upcomingLaunches(): Either<Throwable, List<LaunchModel>> =
         apiCall { service.getUpcomingLaunches() }
 
-    override suspend fun nextLaunch(): Either<Failure, LaunchModel> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getNextLaunch(), LaunchModel.empty())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun nextLaunch(): Either<Throwable, LaunchModel> =
+        apiCall { service.getNextLaunch() }
 
-    override suspend fun latestLaunch(): Either<Failure, LaunchModel> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getLatestLaunch(), LaunchModel.empty())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun latestLaunch(): Either<Throwable, LaunchModel> =
+        apiCall { service.getLatestLaunch() }
 
-    override suspend fun oneLaunch(flightNumber: Int?): Either<Failure, LaunchModel> {
-        return when (networkHandler.isConnected) {
-            true -> makeRequest(service.getOneLaunch(flightNumber), LaunchModel.empty())
-            false -> Either.Left(Failure.NetworkConnection)
-        }
-    }
+    override suspend fun oneLaunch(flightNumber: Int?): Either<Throwable, LaunchModel> =
+        apiCall { service.getOneLaunch(flightNumber) }
 }

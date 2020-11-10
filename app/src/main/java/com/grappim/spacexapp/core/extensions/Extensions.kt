@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.utils.SafeClickListener
-import com.grappim.spacexapp.core.functional.Failure
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*
@@ -183,7 +182,7 @@ val Context.networkInfo: NetworkInfo?
 fun <T : Any, L : LiveData<T>> LifecycleOwner.onObserve(liveData: L, body: (T?) -> Unit) =
     liveData.observe(this, Observer(body))
 
-fun <L : LiveData<Failure>> LifecycleOwner.onFailure(liveData: L, body: (Failure?) -> Unit) =
+fun <L : LiveData<Throwable>> LifecycleOwner.onFailure(liveData: L, body: (Throwable?) -> Unit) =
     liveData.observe(this, Observer(body))
 
 fun View.setSafeOnClickListener(onSafeClick: (View) -> Unit) {

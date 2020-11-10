@@ -8,9 +8,6 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.functional.FAILURE_NETWORK_CONNECTION_ERROR
-import com.grappim.spacexapp.core.functional.FAILURE_SERVER_ERROR
-import com.grappim.spacexapp.core.functional.Failure
 import timber.log.Timber
 
 /**
@@ -45,10 +42,4 @@ abstract class BaseFragment : Fragment {
         setHasOptionsMenu(true)
     }
 
-    protected fun handleFailure(failure: Failure?) {
-        when (failure) {
-            is Failure.NetworkConnection -> renderFailure(FAILURE_NETWORK_CONNECTION_ERROR)
-            is Failure.ServerError -> renderFailure(FAILURE_SERVER_ERROR)
-        }
-    }
 }

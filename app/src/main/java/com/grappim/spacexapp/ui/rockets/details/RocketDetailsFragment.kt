@@ -11,11 +11,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.navArgs
+import coil.api.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.core.view.elv.MetricsListAdapterItem
 import com.grappim.spacexapp.ui.base.BaseFragment
@@ -82,10 +82,7 @@ class RocketDetailsFragment : BaseFragment(R.layout.fragment_rocket_details) {
               )
             )
 
-            GlideApp.with(this)
-                .load(it.flickrImages?.random())
-                .centerCrop()
-                .into(ivRocketDetails)
+            ivRocketDetails.load(it.flickrImages?.random())
 
             elvRocketDetailsMetrics.setAdapter(
               CustomExpandableListAdapter(
