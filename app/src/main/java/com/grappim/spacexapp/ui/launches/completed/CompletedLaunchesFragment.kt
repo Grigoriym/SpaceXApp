@@ -15,15 +15,14 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.core.functional.Failure
 import kotlinx.android.synthetic.main.fragment_completed_launches.pbCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.rvCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.srlCompletedLaunches

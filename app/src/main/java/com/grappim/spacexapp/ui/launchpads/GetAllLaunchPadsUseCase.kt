@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.ui.launchpads
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.launchpads.LaunchPadModel
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetAllLaunchPadsUseCase @Inject constructor(

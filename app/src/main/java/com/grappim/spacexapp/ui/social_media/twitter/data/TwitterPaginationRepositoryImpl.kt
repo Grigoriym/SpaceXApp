@@ -6,9 +6,7 @@ import androidx.paging.PagingData
 import com.grappim.spacexapp.api.TwitterApi
 import com.grappim.spacexapp.di.qualifiers.TwitterApiQualifier
 import com.grappim.spacexapp.di.scopes.AppScope
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.ui.social_media.twitter.TwitterPagingSource
-import com.grappim.spacexapp.ui.social_media.twitter.domain.TwitterPaginationRepository
+import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

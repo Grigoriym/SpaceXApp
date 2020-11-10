@@ -18,7 +18,7 @@ import com.grappim.spacexapp.core.utils.ARG_CORES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CORES_PAST
 import com.grappim.spacexapp.core.utils.ARG_CORES_UPCOMING
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.api.model.cores.CoreModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_cores.pbGetCores
 import kotlinx.android.synthetic.main.fragment_get_cores.rvGetCores

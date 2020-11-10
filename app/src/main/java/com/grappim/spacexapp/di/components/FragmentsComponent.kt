@@ -9,6 +9,7 @@ import com.grappim.spacexapp.ui.launchpads.GetLaunchPadsFragment
 import com.grappim.spacexapp.ui.missions_payloads.MissionFragment
 import com.grappim.spacexapp.ui.rockets.GetRocketsFragment
 import com.grappim.spacexapp.ui.ships.GetShipsFragment
+import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterFragment
 import dagger.Subcomponent
 
@@ -38,5 +39,7 @@ interface FragmentsComponent {
     fun inject(infoFragment: InfoFragment)
 
     fun inject(twitterFragment: TwitterFragment)
+
+    fun inject(redditFragment: RedditFragment)
 
 }

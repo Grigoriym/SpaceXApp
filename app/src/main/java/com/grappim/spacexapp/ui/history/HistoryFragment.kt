@@ -14,7 +14,7 @@ import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.history.HistoryModel
+import com.grappim.spacexapp.api.model.history.HistoryModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_history.pbFragmentHistory
 import kotlinx.android.synthetic.main.fragment_history.rvFragmentHistory

@@ -12,7 +12,7 @@ import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setMyColorFilter
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.model.history.HistoryModel
+import com.grappim.spacexapp.api.model.history.HistoryModel
 import kotlinx.android.synthetic.main.layout_history_item.view.clHistoryItem
 import kotlinx.android.synthetic.main.layout_history_item.view.timelineHistory
 import kotlinx.android.synthetic.main.layout_history_item.view.tvHistoryItemDate

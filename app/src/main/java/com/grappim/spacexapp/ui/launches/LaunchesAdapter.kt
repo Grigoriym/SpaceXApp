@@ -12,7 +12,7 @@ import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import kotlinx.android.synthetic.main.layout_launches_item.view.groupLaunchesItem
 import kotlinx.android.synthetic.main.layout_launches_item.view.ivLaunchesItemLaunchSuccess
 import kotlinx.android.synthetic.main.layout_launches_item.view.tvLaunchesDate

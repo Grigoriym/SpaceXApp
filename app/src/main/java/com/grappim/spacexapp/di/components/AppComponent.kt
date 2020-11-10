@@ -7,12 +7,8 @@ import com.grappim.spacexapp.di.modules.NetworkModule
 import com.grappim.spacexapp.di.modules.ViewModelModule
 import com.grappim.spacexapp.di.scopes.AppScope
 import com.grappim.spacexapp.di.scopes.GsonScope
-import com.grappim.spacexapp.pagination.reddit.RedditDataSource
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.SplashActivity
-import com.grappim.spacexapp.ui.info.InfoFragment
-import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
-import com.grappim.spacexapp.ui.social_media.twitter.TwitterFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -44,10 +40,4 @@ interface AppComponent {
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)
-
-    fun inject(redditDataSource: RedditDataSource)
-    fun inject(redditFragment: RedditFragment)
-
-//    fun inject(twitterDataSource: TwitterDataSource)
-
 }

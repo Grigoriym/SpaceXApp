@@ -16,9 +16,9 @@ import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
-import com.grappim.spacexapp.model.payloads.PayloadModel
+import com.grappim.spacexapp.api.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.payloads
+import com.grappim.spacexapp.core.utils.payloads
 import kotlinx.android.synthetic.main.fragment_mission.clMissionFragment
 import kotlinx.android.synthetic.main.fragment_mission.elvMission
 import kotlinx.android.synthetic.main.fragment_mission.ivMissionReused

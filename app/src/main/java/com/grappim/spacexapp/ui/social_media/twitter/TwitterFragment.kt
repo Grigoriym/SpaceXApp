@@ -13,7 +13,6 @@ import androidx.appcompat.widget.AppCompatSpinner
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -21,8 +20,6 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.launchActivity
-import com.grappim.spacexapp.core.extensions.onFailure
-import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.extensions.startBrowser
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_IMAGES
@@ -30,10 +27,8 @@ import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO_DURATION
 import com.grappim.spacexapp.core.utils.SPACE_X
 import com.grappim.spacexapp.core.utils.TWITTER_FOR_BROWSER_URI
-import com.grappim.spacexapp.pagination.NetworkState
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
-import com.grappim.spacexapp.util.Failure
 import kotlinx.android.synthetic.main.fragment_twitter.pbTwitter
 import kotlinx.android.synthetic.main.fragment_twitter.rvTwitter
 import kotlinx.android.synthetic.main.fragment_twitter.srlTwitter
@@ -148,25 +143,9 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
         Timber.d("TwitterFragment - onViewCreated")
         setHasOptionsMenu(true)
 
-//        viewModel.apply {
-//            tweets.observe(viewLifecycleOwner, Observer {
-//              uAdapter.submitList(it)
-//            })
-//            networkState.observe(viewLifecycleOwner, Observer {
-//              when (it) {
-//                NetworkState.LOADING -> pbTwitter.show()
-//                NetworkState.LOADED -> pbTwitter.gone()
-//              }
-//            })
-//            currentScreenName.observe(viewLifecycleOwner, Observer {
-//              showTweets()
-//            })
-//        }
-
         bindAdapter()
 
         srlTwitter.setOnRefreshListener {
-//            viewModel.refresh()
             tweetsAdapter.refresh()
             srlTwitter.isRefreshing = false
         }
@@ -199,7 +178,7 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
                     }
                 }
             })
-        tweetsAdapter.addLoadStateListener {loadState->
+        tweetsAdapter.addLoadStateListener { loadState ->
             pbTwitter.isVisible = loadState.source.refresh is LoadState.Loading
         }
 

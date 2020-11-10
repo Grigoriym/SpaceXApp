@@ -8,9 +8,9 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.util.FAILURE_NETWORK_CONNECTION_ERROR
-import com.grappim.spacexapp.util.FAILURE_SERVER_ERROR
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.core.functional.FAILURE_NETWORK_CONNECTION_ERROR
+import com.grappim.spacexapp.core.functional.FAILURE_SERVER_ERROR
+import com.grappim.spacexapp.core.functional.Failure
 import timber.log.Timber
 
 /**

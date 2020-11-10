@@ -1,9 +1,8 @@
 package com.grappim.spacexapp.ui.ships
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.ships.ShipModel
-import com.grappim.spacexapp.util.Either
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.ships.ShipModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetAllShipsUseCase @Inject constructor(

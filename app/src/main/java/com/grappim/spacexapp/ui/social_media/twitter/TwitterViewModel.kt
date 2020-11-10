@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
-import com.grappim.spacexapp.ui.social_media.twitter.domain.TwitterPaginationRepository
+import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.ui.social_media.twitter.data.TwitterPaginationRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -28,27 +28,4 @@ class TwitterViewModel @Inject constructor(
         currentSearchResult = newResult
         return newResult
     }
-
-//    private val _currentScreenName = MutableLiveData<String>()
-//    val currentScreenName: LiveData<String>
-//        get() = _currentScreenName
-//
-//    private val repoResult = map(_currentScreenName) {
-//        repository.getTweets(it)
-//    }
-//    val tweets = switchMap(repoResult) { it.pagedList }
-//    val networkState = switchMap(repoResult) { it.networkState }
-//
-//    fun refresh() {
-//        Timber.d("TwitterViewModel - refresh")
-//        repoResult.value?.refresh?.invoke()
-//    }
-//
-//    fun setCurrentScreenName(name: String) {
-//        _currentScreenName.value = name
-//    }
-//
-//    fun showTweets() {
-//        repository.getTweets(_currentScreenName.value ?: "")
-//    }
 }

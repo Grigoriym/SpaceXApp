@@ -1,6 +1,6 @@
 package com.grappim.spacexapp.data.remote
 
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.core.functional.Either
 import retrofit2.Call
 
 open class BaseRepository {

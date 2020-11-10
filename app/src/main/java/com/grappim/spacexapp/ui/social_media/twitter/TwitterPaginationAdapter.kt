@@ -3,7 +3,6 @@ package com.grappim.spacexapp.ui.social_media.twitter
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.paging.PagedListAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.GridLayoutManager
@@ -18,7 +17,7 @@ import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.utils.TWITTER_VIDEO_TYPE
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
 import kotlinx.android.synthetic.main.layout_twitter_item.view.ivTwitterItemProfileImage
 import kotlinx.android.synthetic.main.layout_twitter_item.view.rlTwitterItemMedia
 import kotlinx.android.synthetic.main.layout_twitter_item.view.tvTwitterItemCreatedAt

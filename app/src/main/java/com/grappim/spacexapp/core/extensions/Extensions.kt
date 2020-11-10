@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.utils.SafeClickListener
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.core.functional.Failure
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
 import java.util.*

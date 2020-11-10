@@ -7,7 +7,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.model.cores.CoreModel
+import com.grappim.spacexapp.api.model.cores.CoreModel
 import kotlinx.android.synthetic.main.layout_core_item.view.ivCoreItemWaterLanding
 import kotlinx.android.synthetic.main.layout_core_item.view.tvCoreItemASDS
 import kotlinx.android.synthetic.main.layout_core_item.view.tvCoreItemBlock

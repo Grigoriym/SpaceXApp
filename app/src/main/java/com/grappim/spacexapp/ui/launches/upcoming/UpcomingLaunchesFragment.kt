@@ -19,10 +19,10 @@ import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.core.functional.Failure
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.pbUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.rvUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.srlUpcomingLaunches

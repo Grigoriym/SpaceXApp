@@ -16,7 +16,7 @@ import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.core.view.elv.InfoHeadquartersAdapterItem
-import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.api.model.info.InfoModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_info.clFragmentInfo
 import kotlinx.android.synthetic.main.fragment_info.elvInfo

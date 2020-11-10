@@ -1,39 +1,32 @@
 package com.grappim.spacexapp.ui.social_media.reddit
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations.map
-import androidx.lifecycle.Transformations.switchMap
 import androidx.lifecycle.ViewModel
-import com.grappim.spacexapp.core.repository.RedditRepository
+import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.grappim.spacexapp.api.model.reddit.RedditChildren
+import com.grappim.spacexapp.ui.social_media.reddit.data.RedditRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class RedditViewModel @Inject constructor(
-  private val repository: RedditRepository
+    private val repository: RedditRepository
 ) : ViewModel() {
 
-  private val _currentSubreddit = MutableLiveData<String>()
-  val currentSubreddit: LiveData<String>
-    get() = _currentSubreddit
+    private var currentSubreddit: String? = null
+    private var currentSearchResult: Flow<PagingData<RedditChildren>>? = null
 
-  private val repoResult = map(_currentSubreddit) {
-    repository.getPostsBySubreddit(it)
-  }
-
-  val posts = switchMap(repoResult) { it.pagedList }
-  val networkState = switchMap(repoResult) { it.networkState }
-  val failure = switchMap(repoResult) { it.failure }
-
-  fun refresh() {
-    repoResult.value?.refresh?.invoke()
-  }
-
-  fun setCurrentSubreddit(subReddit: String) {
-    _currentSubreddit.value = subReddit
-  }
-
-  fun showPosts() {
-    repository.getPostsBySubreddit(_currentSubreddit.value ?: "")
-  }
+    fun search(subreddit: String): Flow<PagingData<RedditChildren>> {
+        val lastResult = currentSearchResult
+        if (subreddit == currentSubreddit && lastResult != null) {
+            return lastResult
+        }
+        currentSubreddit = subreddit
+        val newResult: Flow<PagingData<RedditChildren>> =
+            repository.getPostsBySubreddit(subreddit)
+                .cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
+    }
 
 }

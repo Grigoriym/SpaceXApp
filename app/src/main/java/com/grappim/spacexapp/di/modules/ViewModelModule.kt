@@ -14,6 +14,8 @@ import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModel
 import com.grappim.spacexapp.ui.missions_payloads.MissionViewModel
 import com.grappim.spacexapp.ui.rockets.RocketsViewModel
 import com.grappim.spacexapp.ui.ships.ShipsViewModel
+import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
+import com.grappim.spacexapp.ui.social_media.reddit.RedditViewModel
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModel
 import dagger.Binds
 import dagger.Module
@@ -79,4 +81,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(TwitterViewModel::class)
     abstract fun bindTwitterViewModel(twitterViewModel: TwitterViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RedditViewModel::class)
+    abstract fun bindRedditViewModel(redditViewModel: RedditViewModel): ViewModel
 }

@@ -1,15 +1,15 @@
 package com.grappim.spacexapp.api
 
-import com.grappim.spacexapp.model.capsule.CapsuleModel
-import com.grappim.spacexapp.model.cores.CoreModel
-import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.model.launchpads.LaunchPadModel
-import com.grappim.spacexapp.model.mission.MissionModel
-import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.api.model.capsule.CapsuleModel
+import com.grappim.spacexapp.api.model.cores.CoreModel
+import com.grappim.spacexapp.api.model.history.HistoryModel
+import com.grappim.spacexapp.api.model.info.InfoModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.api.model.mission.MissionModel
+import com.grappim.spacexapp.api.model.payloads.PayloadModel
+import com.grappim.spacexapp.api.model.rocket.RocketModel
+import com.grappim.spacexapp.api.model.ships.ShipModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

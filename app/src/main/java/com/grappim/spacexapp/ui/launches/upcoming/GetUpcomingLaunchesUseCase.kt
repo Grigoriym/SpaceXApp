@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.ui.launches.upcoming
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.launches.LaunchModel
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.launches.LaunchModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetUpcomingLaunchesUseCase @Inject constructor(

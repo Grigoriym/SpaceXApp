@@ -3,7 +3,7 @@ package com.grappim.spacexapp.ui.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.grappim.spacexapp.util.Failure
+import com.grappim.spacexapp.core.functional.Failure
 
 abstract class BaseViewModel : ViewModel() {
 

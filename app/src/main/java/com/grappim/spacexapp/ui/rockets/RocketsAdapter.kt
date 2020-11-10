@@ -11,7 +11,7 @@ import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
-import com.grappim.spacexapp.model.rocket.RocketModel
+import com.grappim.spacexapp.api.model.rocket.RocketModel
 import kotlinx.android.synthetic.main.layout_rocket_item.view.btnRocketItem
 import kotlinx.android.synthetic.main.layout_rocket_item.view.ivRocketItem
 import kotlinx.android.synthetic.main.layout_rocket_item.view.tvRocketItemDescription

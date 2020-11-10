@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.ui.history
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.history.HistoryModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetHistoryUseCase @Inject constructor(

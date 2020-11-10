@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getAppComponent
 import com.grappim.spacexapp.core.utils.PrefsManager
-import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView

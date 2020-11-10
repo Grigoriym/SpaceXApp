@@ -11,7 +11,7 @@ import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.core.view.RvInnerMissionsAdapter
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.util.capsuleImageList
+import com.grappim.spacexapp.core.utils.capsuleImageList
 import kotlinx.android.synthetic.main.fragment_capsule_details.ivCapsuleDetailsToolbar
 import kotlinx.android.synthetic.main.fragment_capsule_details.rvCapsuleDetails
 import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsDetails

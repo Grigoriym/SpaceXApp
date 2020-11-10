@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.grappim.spacexapp.core.functional.Resource
-import com.grappim.spacexapp.model.launches.LaunchModel
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.onFailure
-import com.grappim.spacexapp.util.onSuccess
+import com.grappim.spacexapp.core.functional.onFailure
+import com.grappim.spacexapp.core.functional.onSuccess
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

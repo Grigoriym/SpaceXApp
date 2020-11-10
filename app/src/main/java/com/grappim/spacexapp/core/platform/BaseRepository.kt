@@ -1,6 +1,6 @@
 package com.grappim.spacexapp.core.platform
 
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.core.functional.Either
 import retrofit2.Call
 import timber.log.Timber
 

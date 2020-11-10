@@ -8,7 +8,7 @@ import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.utils.DateTimeUtils
-import com.grappim.spacexapp.model.capsule.CapsuleModel
+import com.grappim.spacexapp.api.model.capsule.CapsuleModel
 import kotlinx.android.synthetic.main.layout_capsule_item.view.btnCapsuleSpecs
 import kotlinx.android.synthetic.main.layout_capsule_item.view.tvCapsuleNumberOfMissions
 import kotlinx.android.synthetic.main.layout_capsule_item.view.tvCapsuleOriginalLaunch

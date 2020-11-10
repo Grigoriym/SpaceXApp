@@ -1,6 +1,6 @@
 package com.grappim.spacexapp.api
 
-import com.grappim.spacexapp.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

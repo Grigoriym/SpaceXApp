@@ -6,14 +6,12 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getCapsuleComponent
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
@@ -21,7 +19,7 @@ import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
 import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.model.capsule.CapsuleModel
+import com.grappim.spacexapp.api.model.capsule.CapsuleModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_capsules.pbGetCapsules
 import kotlinx.android.synthetic.main.fragment_get_capsules.rvGetCapsules

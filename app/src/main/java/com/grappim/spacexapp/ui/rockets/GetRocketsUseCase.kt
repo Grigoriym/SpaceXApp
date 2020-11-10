@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.ui.rockets
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.rocket.RocketModel
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.rocket.RocketModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetRocketsUseCase @Inject constructor(

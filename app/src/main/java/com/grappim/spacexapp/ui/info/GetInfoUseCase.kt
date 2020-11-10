@@ -1,8 +1,8 @@
 package com.grappim.spacexapp.ui.info
 
-import com.grappim.spacexapp.core.repository.SpaceXRepository
-import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.util.Either
+import com.grappim.spacexapp.data.remote.SpaceXRepository
+import com.grappim.spacexapp.api.model.info.InfoModel
+import com.grappim.spacexapp.core.functional.Either
 import javax.inject.Inject
 
 class GetInfoUseCase @Inject constructor(

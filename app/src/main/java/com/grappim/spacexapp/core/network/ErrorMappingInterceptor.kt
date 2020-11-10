@@ -4,7 +4,6 @@ import com.google.gson.Gson
 import com.grappim.spacexapp.api.BaseApiError
 import com.grappim.spacexapp.core.exception.NetworkException
 import com.grappim.spacexapp.di.scopes.AppScope
-import com.grappim.spacexapp.network.NetworkHandler
 import okhttp3.Interceptor
 import okhttp3.Response
 import java.io.IOException

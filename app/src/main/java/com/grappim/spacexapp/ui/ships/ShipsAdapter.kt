@@ -7,7 +7,7 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.model.ships.ShipModel
+import com.grappim.spacexapp.api.model.ships.ShipModel
 import kotlinx.android.synthetic.main.layout_ship_item.view.ivShipItemActive
 import kotlinx.android.synthetic.main.layout_ship_item.view.tvShipItemHomePort
 import kotlinx.android.synthetic.main.layout_ship_item.view.tvShipItemName

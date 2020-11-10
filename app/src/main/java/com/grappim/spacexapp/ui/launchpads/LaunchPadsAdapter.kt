@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.model.launchpads.LaunchPadModel
+import com.grappim.spacexapp.api.model.launchpads.LaunchPadModel
 import kotlinx.android.synthetic.main.layout_launch_pad_item.view.tvLaunchPadItemLaunches
 import kotlinx.android.synthetic.main.layout_launch_pad_item.view.tvLaunchPadItemName
 

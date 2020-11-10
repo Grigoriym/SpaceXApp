@@ -1,7 +1,7 @@
 package com.grappim.spacexapp.core.view.elv
 
 import android.view.View
-import com.grappim.spacexapp.model.info.InfoModel
+import com.grappim.spacexapp.api.model.info.InfoModel
 import kotlinx.android.synthetic.main.layout_elv_info_headquarters.view.*
 
 class InfoHeadquartersAdapterItem(
