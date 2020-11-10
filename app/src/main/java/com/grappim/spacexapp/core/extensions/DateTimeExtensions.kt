@@ -4,6 +4,7 @@ import com.grappim.spacexapp.core.utils.DateTimeUtils
 import org.threeten.bp.*
 import org.threeten.bp.format.DateTimeFormatter
 import org.threeten.bp.format.DateTimeParseException
+import org.threeten.bp.temporal.ChronoField
 
 @Throws(DateTimeParseException::class)
 fun String?.getOffsetDateTime(
@@ -17,5 +18,31 @@ fun String?.getOffsetDateTime(
   } ?: let {
     OffsetDateTime
       .parse(this)
-      .withOffsetSameInstant(DateTimeUtils.getOffsetTimeZone(inUtc))
+      .withOffsetSameInstant(DateTimeUtils.getZoneOffset(inUtc))
   }
+
+fun String.getOffsetDateTimeFromString(
+  inUtc: Boolean = false
+): OffsetDateTime =
+  OffsetDateTime
+    .parse(this)
+    .withOffsetSameInstant(DateTimeUtils.getZoneOffset(inUtc))
+
+fun String.getOffsetDateTimeWithFormatter(
+  inUtc: Boolean = true,
+  formatter: DateTimeFormatter
+): OffsetDateTime {
+  val ldt = LocalDateTime.parse(this, formatter)
+  val zdt = ldt.atZone(DateTimeUtils.getZoneOffset(inUtc))
+  return zdt.toOffsetDateTime()
+}
+
+fun OffsetDateTime.toUtc(): OffsetDateTime =
+  this.withOffsetSameInstant(DateTimeUtils.getZoneOffset(true))
+
+fun OffsetDateTime.toTheLocalDateTime(): OffsetDateTime =
+  this.withOffsetSameInstant(DateTimeUtils.getZoneOffset(false))
+
+fun OffsetDateTime.getEpochMilli(): Long = this.toInstant().toEpochMilli()
+
+fun OffsetDateTime.getNanoOfSecond(): Long = this.getLong(ChronoField.NANO_OF_SECOND)

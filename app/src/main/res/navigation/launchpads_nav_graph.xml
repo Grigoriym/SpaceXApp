@@ -15,7 +15,7 @@
       app:destination="@id/launchPadDetailsFragment">
       <argument
         android:name="launchPadModel"
-        app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel" />
+        app:argType="com.grappim.spacexapp.api.model.launchpads.LaunchPadModel" />
     </action>
   </fragment>
 
@@ -26,7 +26,7 @@
     tools:layout="@layout/fragment_launch_pad_details">
     <argument
       android:name="launchPadModel"
-      app:argType="com.grappim.spacexapp.model.launchpads.LaunchPadModel" />
+      app:argType="com.grappim.spacexapp.api.model.launchpads.LaunchPadModel" />
   </fragment>
 
 </navigation>

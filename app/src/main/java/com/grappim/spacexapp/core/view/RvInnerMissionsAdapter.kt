@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.model.capsule.Mission
+import com.grappim.spacexapp.api.model.capsule.Mission
 import kotlinx.android.synthetic.main.layout_inner_rv_details_mission_item.view.*
 
 class RvInnerMissionsAdapter(

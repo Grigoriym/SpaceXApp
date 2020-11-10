@@ -21,4 +21,4 @@ The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/ap
 
 ### Dagger graph by [Scabbard](https://github.com/arunkumar9t2/scabbard)
 
-![SpaceX dagger graph](docs/com.grappim.spacexapp.core.di.AppComponent.png)
+![SpaceX dagger graph](docs/com.grappim.spacexapp.di.AppComponent.png)

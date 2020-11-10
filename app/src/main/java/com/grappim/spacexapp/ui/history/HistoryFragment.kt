@@ -2,81 +2,94 @@ package com.grappim.spacexapp.ui.history
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.*
-import com.grappim.spacexapp.model.history.HistoryModel
+import com.grappim.spacexapp.core.extensions.getErrorMessage
+import com.grappim.spacexapp.core.extensions.getFragmentsComponent
+import com.grappim.spacexapp.core.extensions.gone
+import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.extensions.showOrGone
+import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.api.model.history.HistoryModel
 import com.grappim.spacexapp.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_history.pbFragmentHistory
+import kotlinx.android.synthetic.main.fragment_history.rvFragmentHistory
+import kotlinx.android.synthetic.main.fragment_history.srlHistory
 import timber.log.Timber
 import javax.inject.Inject
 
-class HistoryFragment : BaseFragment() {
+class HistoryFragment : BaseFragment(R.layout.fragment_history) {
 
-  @Inject
-  lateinit var viewModel: HistoryViewModel
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
-  private lateinit var hAdapter: TimelineHistoryAdapter
+    private val viewModel: HistoryViewModel by viewModels { viewModelFactory }
 
-  override fun onAttach(context: Context) {
-    super.onAttach(context)
-    getAppComponent().inject(this)
-  }
-
-  override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
-  ): View? =
-    inflater.inflate(R.layout.fragment_history, container, false)
-
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    Timber.d("HistoryFragment - onActivityCreated")
-    super.onActivityCreated(savedInstanceState)
-
-    viewModel.apply {
-      onObserve(allHistory, ::renderHistory)
-      onFailure(failure, ::handleFailure)
+    private val historyAdaper: TimelineHistoryAdapter by lazy {
+        TimelineHistoryAdapter {
+            findNavController().navigate(HistoryFragmentDirections.nextFragment(it))
+        }
     }
 
-    bindAdapter()
-    getData()
-
-    srlHistory.setOnRefreshListener {
-      getData()
-      srlHistory.isRefreshing = false
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val component = context.getFragmentsComponent()
+        component.inject(this)
     }
-  }
 
-  private fun getData() {
-    pbFragmentHistory.show()
-    viewModel.loadHistory()
-  }
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        Timber.d("HistoryFragment - onActivityCreated")
+        super.onActivityCreated(savedInstanceState)
 
-  private fun bindAdapter() {
-    hAdapter = TimelineHistoryAdapter {
-      findNavController().navigate(HistoryFragmentDirections.nextFragment(it))
+        viewModel.apply {
+            allHistory.observe(viewLifecycleOwner, ::renderHistory)
+        }
+
+        bindAdapter()
+        getData()
+
+        srlHistory.setOnRefreshListener {
+            getData()
+            srlHistory.isRefreshing = false
+        }
     }
-    rvFragmentHistory.apply {
-      layoutManager = LinearLayoutManager(context)
-      addItemDecoration(MarginItemDecorator())
-      adapter = hAdapter
+
+    private fun getData() {
+        pbFragmentHistory.show()
+        viewModel.loadHistory()
     }
-  }
 
-  private fun renderHistory(cores: List<HistoryModel>?) {
-    hAdapter.loadItems(cores ?: listOf())
-    pbFragmentHistory.gone()
-    rvFragmentHistory.scheduleLayoutAnimation()
-  }
+    private fun bindAdapter() {
+        rvFragmentHistory.apply {
+            addItemDecoration(MarginItemDecorator())
+            adapter = historyAdaper
+        }
+    }
 
-  override fun renderFailure(failureText: String) {
-    rvFragmentHistory.showSnackbar(failureText)
-    pbFragmentHistory.gone()
-    srlHistory.isRefreshing = false
-  }
+    private fun renderHistory(resource: Resource<List<HistoryModel>>) {
+        pbFragmentHistory.showOrGone(resource is Resource.Loading)
+        when (resource) {
+            is Resource.Error -> {
+                showError(resource.exception)
+            }
+            is Resource.Success -> {
+                historyAdaper.loadItems(resource.data)
+                rvFragmentHistory.scheduleLayoutAnimation()
+            }
+        }
+    }
+
+    override fun renderFailure(failureText: String) {
+        rvFragmentHistory.showSnackbar(failureText)
+        pbFragmentHistory.gone()
+        srlHistory.isRefreshing = false
+    }
+
+    private fun showError(throwable: Throwable) {
+        rvFragmentHistory.showSnackbar(requireContext().getErrorMessage(throwable))
+    }
 }

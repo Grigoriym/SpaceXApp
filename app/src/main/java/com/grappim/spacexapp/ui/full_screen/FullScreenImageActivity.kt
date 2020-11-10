@@ -1,30 +1,24 @@
 package com.grappim.spacexapp.ui.full_screen
 
 import android.os.Bundle
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import coil.api.load
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.utils.GlideApp
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_IMAGES
-import kotlinx.android.synthetic.main.activity_full_screen_image.*
+import kotlinx.android.synthetic.main.activity_full_screen_image.ivFulScreen
 
-class FullScreenImageActivity : FullScreenBaseActivity() {
+class FullScreenImageActivity : FullScreenBaseActivity(R.layout.activity_full_screen_image) {
 
-  var args: String? = null
+    var args: String? = null
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_full_screen_image)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        intent.apply {
+            args = getStringExtra(PARCELABLE_TWITTER_IMAGES)
+        }
 
-    intent.apply {
-      args = getStringExtra(PARCELABLE_TWITTER_IMAGES)
+        args?.apply {
+            ivFulScreen.load(this)
+        }
     }
-
-    args?.apply {
-      GlideApp.with(baseContext)
-        .load(this)
-        .transition(DrawableTransitionOptions.withCrossFade())
-        .into(ivFulScreen)
-    }
-  }
 
 }

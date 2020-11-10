@@ -15,7 +15,7 @@
       app:destination="@id/historyDetailsFragment">
       <argument
         android:name="historyModel"
-        app:argType="com.grappim.spacexapp.model.history.HistoryModel" />
+        app:argType="com.grappim.spacexapp.api.model.history.HistoryModel" />
     </action>
   </fragment>
 
@@ -26,7 +26,7 @@
     android:label="History details">
     <argument
       android:name="historyModel"
-      app:argType="com.grappim.spacexapp.model.history.HistoryModel" />
+      app:argType="com.grappim.spacexapp.api.model.history.HistoryModel" />
   </fragment>
 
 </navigation>

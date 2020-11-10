@@ -1,8 +1,8 @@
 package com.grappim.spacexapp
 
 import androidx.multidex.MultiDexApplication
-import com.grappim.spacexapp.core.di.AppComponent
-import com.grappim.spacexapp.core.di.DaggerAppComponent
+import com.grappim.spacexapp.di.components.AppComponent
+import com.grappim.spacexapp.di.components.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
 import timber.log.Timber
 
@@ -15,25 +15,27 @@ import timber.log.Timber
 
 class SpaceXApplication : MultiDexApplication() {
 
-  companion object {
-    lateinit var instance: SpaceXApplication
-  }
-
-  val appComponent: AppComponent by lazy {
-    DaggerAppComponent.factory().create(applicationContext)
-  }
-
-  override fun onCreate() {
-    super.onCreate()
-    instance = this
-    timberInit()
-    AndroidThreeTen.init(this)
-    Timber.d("Application - onCreate")
-  }
-
-  private fun timberInit() {
-    if (BuildConfig.DEBUG) {
-      Timber.plant(Timber.DebugTree())
+    companion object {
+        lateinit var instance: SpaceXApplication
     }
-  }
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent
+            .factory()
+            .create(applicationContext)
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        instance = this
+        timberInit()
+        AndroidThreeTen.init(this)
+        Timber.d("Application - onCreate")
+    }
+
+    private fun timberInit() {
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
+    }
 }

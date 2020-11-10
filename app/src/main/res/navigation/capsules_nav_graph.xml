@@ -39,7 +39,7 @@
       app:popExitAnim="@anim/slide_out_right">
       <argument
         android:name="capsuleModel"
-        app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel" />
+        app:argType="com.grappim.spacexapp.api.model.capsule.CapsuleModel" />
     </action>
     <argument
       android:name="capsulesToGetArgs"
@@ -60,11 +60,11 @@
       app:popExitAnim="@anim/slide_out_right">
       <argument
         android:name="missionArgs"
-        app:argType="com.grappim.spacexapp.model.capsule.Mission" />
+        app:argType="com.grappim.spacexapp.api.model.capsule.Mission" />
     </action>
     <argument
       android:name="capsuleModel"
-      app:argType="com.grappim.spacexapp.model.capsule.CapsuleModel" />
+      app:argType="com.grappim.spacexapp.api.model.capsule.CapsuleModel" />
   </fragment>
 
 </navigation>

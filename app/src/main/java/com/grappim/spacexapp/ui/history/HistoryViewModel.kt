@@ -1,33 +1,33 @@
 package com.grappim.spacexapp.ui.history
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.grappim.spacexapp.model.history.HistoryModel
-import com.grappim.spacexapp.network.gets.GetHistory
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
+import com.grappim.spacexapp.api.model.history.HistoryModel
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.core.functional.onFailure
+import com.grappim.spacexapp.core.functional.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class HistoryViewModel @Inject constructor(
-  private val getHistory: GetHistory
-) : BaseViewModel(), LifecycleObserver {
+    private val getHistoryUseCase: GetHistoryUseCase
+) : BaseViewModel() {
 
-  private val _allHistory = MutableLiveData<List<HistoryModel>>()
-  val allHistory: LiveData<List<HistoryModel>>
-    get() = _allHistory
+    private val _allHistory = MutableLiveData<Resource<List<HistoryModel>>>()
+    val allHistory: LiveData<Resource<List<HistoryModel>>>
+        get() = _allHistory
 
-  private fun handleHistory(history: List<HistoryModel>) {
-    this._allHistory.value = history
-  }
-
-  fun loadHistory() =
-    getHistory(UseCase.None()) {
-      it.either(::handleFailure, ::handleHistory)
+    fun loadHistory() {
+        viewModelScope.launch {
+            getHistoryUseCase.invoke()
+                .onFailure {
+                    _allHistory.value = Resource.Error(it)
+                }.onSuccess {
+                    _allHistory.value = Resource.Success(it)
+                }
+        }
     }
 
-  override fun onCleared() {
-    super.onCleared()
-    getHistory.unBind()
-  }
 }

@@ -45,7 +45,7 @@
       app:popExitAnim="@anim/slide_out_right">
       <argument
         android:name="launchModel"
-        app:argType="com.grappim.spacexapp.model.launches.LaunchModel" />
+        app:argType="com.grappim.spacexapp.api.model.launches.LaunchModel" />
     </action>
   </fragment>
 
@@ -56,7 +56,7 @@
     tools:layout="@layout/fragment_launch_details">
     <argument
       android:name="launchModel"
-      app:argType="com.grappim.spacexapp.model.launches.LaunchModel" />
+      app:argType="com.grappim.spacexapp.api.model.launches.LaunchModel" />
   </fragment>
 
 </navigation>

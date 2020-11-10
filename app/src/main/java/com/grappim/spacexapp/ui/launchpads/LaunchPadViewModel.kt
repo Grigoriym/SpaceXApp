@@ -1,34 +1,33 @@
 package com.grappim.spacexapp.ui.launchpads
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.grappim.spacexapp.model.launchpads.LaunchPadModel
-import com.grappim.spacexapp.network.gets.GetAllLaunchPads
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
+import com.grappim.spacexapp.api.model.launchpads.LaunchPadModel
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.core.functional.onFailure
+import com.grappim.spacexapp.core.functional.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class LaunchPadViewModel @Inject constructor(
-  private val getAllLaunchPads: GetAllLaunchPads
-) : BaseViewModel(), LifecycleObserver {
+    private val getAllLaunchPadsUseCase: GetAllLaunchPadsUseCase
+) : BaseViewModel() {
 
-  private val _allLaunchPads = MutableLiveData<List<LaunchPadModel>>()
-  val allLaunchPads: LiveData<List<LaunchPadModel>>
-    get() = _allLaunchPads
+    private val _allLaunchPads = MutableLiveData<Resource<List<LaunchPadModel>>>()
+    val allLaunchPads: LiveData<Resource<List<LaunchPadModel>>>
+        get() = _allLaunchPads
 
-  private fun handleAllLaunchPads(launchPads: List<LaunchPadModel>) {
-    this._allLaunchPads.value = launchPads
-  }
-
-  fun loadAllLaunchPads() =
-    getAllLaunchPads(UseCase.None()) {
-      it.either(::handleFailure, ::handleAllLaunchPads)
+    fun loadAllLaunchPads() {
+        viewModelScope.launch {
+            getAllLaunchPadsUseCase.invoke()
+                .onFailure {
+                    _allLaunchPads.value = Resource.Error(it)
+                }.onSuccess {
+                    _allLaunchPads.value = Resource.Success(it)
+                }
+        }
     }
-
-  override fun onCleared() {
-    super.onCleared()
-    getAllLaunchPads.unBind()
-  }
 
 }

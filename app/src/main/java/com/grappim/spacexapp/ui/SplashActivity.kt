@@ -11,27 +11,27 @@ import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
 
-  @Inject
-  lateinit var prefs: PrefsManager
+    @Inject
+    lateinit var prefs: PrefsManager
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    getAppComponent().inject(this)
-    Timber.d("SplashActivity - onCreate")
-    initDayNightMode()
-    super.onCreate(savedInstanceState)
-  }
-
-  override fun onResume() {
-    super.onResume()
-    this.launchActivity<MainActivity> { }
-    finish()
-  }
-
-  private fun initDayNightMode() {
-    if (!prefs.isNightThemeEnabled()) {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-    } else {
-      AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        getAppComponent().inject(this)
+        Timber.d("SplashActivity - onCreate")
+        initDayNightMode()
+        super.onCreate(savedInstanceState)
     }
-  }
+
+    override fun onResume() {
+        super.onResume()
+        this.launchActivity<MainActivity> { }
+        finish()
+    }
+
+    private fun initDayNightMode() {
+        if (!prefs.isNightThemeEnabled()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+    }
 }

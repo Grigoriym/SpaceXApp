@@ -34,7 +34,7 @@ import javax.crypto.spec.SecretKeySpec
  * This class was taken from https://gist.github.com/polson/227e1a039a09f2728163bf7235990178
  */
 class Oauth1SigningInterceptor(
-  val getOauthKeys: () -> OauthKeys,
+  val getOauthKeys: OauthKeys,
   private val nonce: String = UUID.randomUUID().toString(),
   private val timestamp: Long = System.currentTimeMillis() / 1000L
 ) : Interceptor {
@@ -46,7 +46,7 @@ class Oauth1SigningInterceptor(
 
   @Throws(IOException::class)
   fun signRequest(request: Request): Request {
-    val keys = getOauthKeys()
+    val keys = getOauthKeys
 
     //Setup default parameters that will be sent with authorization header
     val parameters = hashMapOf(
