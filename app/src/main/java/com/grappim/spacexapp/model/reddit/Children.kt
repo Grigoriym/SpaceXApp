@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Children(
   @SerializedName("data")
-  val `data`: RedditModel?,
+  val `data`: RedditModel,
   @SerializedName("kind")
   val kind: String?
 )

@@ -32,13 +32,13 @@ interface SpaceXRepository {
 
     suspend fun allLaunchPads(): Either<Throwable, List<LaunchPadModel>>
 
-    suspend fun info(): Either<Failure, InfoModel>
+    suspend fun info(): Either<Throwable, InfoModel>
 
     suspend fun history(): Either<Throwable, List<HistoryModel>>
 
-    suspend fun allPayloads(): Either<Failure, List<PayloadModel>>
+    suspend fun allPayloads(): Either<Throwable, List<PayloadModel>>
 
-    suspend fun payloadById(payloadId: String?): Either<Failure, PayloadModel>
+    suspend fun payloadById(payloadId: String): Either<Throwable, PayloadModel>
 
     suspend fun allLaunches(): Either<Failure, List<LaunchModel>>
 

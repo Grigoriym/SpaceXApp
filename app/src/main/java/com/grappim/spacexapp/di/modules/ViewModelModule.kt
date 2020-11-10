@@ -7,12 +7,14 @@ import com.grappim.spacexapp.di.keys.ViewModelKey
 import com.grappim.spacexapp.ui.capsules.CapsulesViewModel
 import com.grappim.spacexapp.ui.cores.CoresViewModel
 import com.grappim.spacexapp.ui.history.HistoryViewModel
+import com.grappim.spacexapp.ui.info.InfoViewModel
 import com.grappim.spacexapp.ui.launches.completed.CompletedLaunchesViewModel
 import com.grappim.spacexapp.ui.launches.upcoming.UpcomingLaunchesViewModel
 import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModel
 import com.grappim.spacexapp.ui.missions_payloads.MissionViewModel
 import com.grappim.spacexapp.ui.rockets.RocketsViewModel
 import com.grappim.spacexapp.ui.ships.ShipsViewModel
+import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -65,6 +67,16 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(InfoViewModel::class)
+    abstract fun bindInfoFragment(infoFragment: InfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(UpcomingLaunchesViewModel::class)
     abstract fun bindUpcomingLaunchesViewModel(upcomingLaunchesViewModel: UpcomingLaunchesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(TwitterViewModel::class)
+    abstract fun bindTwitterViewModel(twitterViewModel: TwitterViewModel): ViewModel
 }

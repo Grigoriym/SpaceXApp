@@ -8,8 +8,8 @@ import kotlinx.android.synthetic.main.layout_elv_mission_item.view.tvElvMissionI
 import kotlinx.android.synthetic.main.layout_elv_mission_item.view.tvElvMissionItemSemiMajorAxisKm
 
 class MissionsPayloadsListAdapterItem(
-  val view: View,
-  private val body: PayloadModel
+    val view: View,
+    private val body: PayloadModel
 ) {
     fun fillItemWithData() {
         view.tvElvMissionItemLongitude.text = body.orbitParams?.longitude?.toString() ?: "0"

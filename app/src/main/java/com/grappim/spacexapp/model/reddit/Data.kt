@@ -9,7 +9,7 @@ data class Data(
   @SerializedName("before")
   val before: Any?,
   @SerializedName("children")
-  val children: List<Children?>?,
+  val children: List<Children>?,
   @SerializedName("dist")
   val dist: Int?,
   @SerializedName("modhash")

@@ -7,12 +7,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.onObserve
 import com.grappim.spacexapp.core.extensions.setMyImageResource
 import com.grappim.spacexapp.core.extensions.show
+import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.elv.CustomExpandableListAdapter
 import com.grappim.spacexapp.model.payloads.PayloadModel
 import com.grappim.spacexapp.ui.base.BaseFragment
@@ -52,7 +54,7 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
         pbMission.show()
 
         viewModel.apply {
-            onObserve(onePayload, ::renderPayload)
+            onePayload.observe(viewLifecycleOwner, ::renderPayload)
         }
 
         getData()
@@ -62,45 +64,56 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
         val missionName = args.missionArgs.name
         viewModel.loadPayloadById(
             payloads[missionName]
-                ?: missionName
+                ?: missionName ?: ""
         )
     }
 
-    private fun renderPayload(payload: PayloadModel?) {
-        pbMission.gone()
-        clMissionFragment.show()
+    private fun renderPayload(resource: Resource<PayloadModel>) {
+        pbMission.showOrGone(resource is Resource.Loading)
+        when (resource) {
+            is Resource.Error -> {
+                showError(resource.exception)
+            }
+            is Resource.Success -> {
+                clMissionFragment.show()
+                resource.data.let {
+                    tvMissionPayloadId.text = it.payloadId
+                    tvMissionManufacturer.text = it.manufacturer
+                    tvMissionNationality.text = it.nationality ?: "N/A"
+                    ivMissionReused.setImageResource(
+                        setMyImageResource(
+                            it.reused
+                        )
+                    )
 
-        payload?.let {
-            tvMissionPayloadId.text = it.payloadId
-            tvMissionManufacturer.text = it.manufacturer
-            tvMissionNationality.text = it.nationality ?: "N/A"
-            ivMissionReused.setImageResource(
-                setMyImageResource(
-                    it.reused
-                )
-            )
-
-            elvMission.setAdapter(
-                CustomExpandableListAdapter(
-                    requireContext(),
-                    elvMission,
-                    "Orbit Params",
-                    it,
-                    R.layout.layout_elv_mission_item,
-                    listAdapterItemInit = { view ->
-                        MissionsPayloadsListAdapterItem(
-                            view,
-                            it
-                        ).fillItemWithData()
-                    }
-                )
-            )
+                    elvMission.setAdapter(
+                        CustomExpandableListAdapter(
+                            requireContext(),
+                            elvMission,
+                            "Orbit Params",
+                            it,
+                            R.layout.layout_elv_mission_item,
+                            listAdapterItemInit = { view ->
+                                MissionsPayloadsListAdapterItem(
+                                    view,
+                                    it
+                                ).fillItemWithData()
+                            }
+                        )
+                    )
+                }
+            }
         }
+
     }
 
     override fun renderFailure(failureText: String) {
         tvMissionPayloadId.showSnackbar(failureText)
         clMissionFragment.gone()
         pbMission.gone()
+    }
+
+    private fun showError(throwable: Throwable) {
+        tvMissionPayloadId.showSnackbar(requireContext().getErrorMessage(throwable))
     }
 }

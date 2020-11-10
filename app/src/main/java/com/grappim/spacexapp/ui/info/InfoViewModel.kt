@@ -1,34 +1,34 @@
 package com.grappim.spacexapp.ui.info
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.info.InfoModel
-import com.grappim.spacexapp.network.gets.GetInfo
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.util.onFailure
+import com.grappim.spacexapp.util.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class InfoViewModel @Inject constructor(
-  private val getInfo: GetInfo
-) : BaseViewModel(), LifecycleObserver {
+    private val getInfoUseCase: GetInfoUseCase
+) : BaseViewModel() {
 
-  private val _info = MutableLiveData<InfoModel>()
-  val info: LiveData<InfoModel>
-    get() = _info
+    private val _info = MutableLiveData<Resource<InfoModel>>()
+    val info: LiveData<Resource<InfoModel>>
+        get() = _info
 
-  private fun handleInfo(info: InfoModel) {
-    this._info.value = info
-  }
-
-  fun loadInfo() =
-    getInfo(UseCase.None()) {
-      it.either(::handleFailure, ::handleInfo)
+    fun loadInfo() {
+        _info.value = Resource.Loading
+        viewModelScope.launch {
+            getInfoUseCase.invoke()
+                .onFailure {
+                    _info.value = Resource.Error(it)
+                }.onSuccess {
+                    _info.value = Resource.Success(it)
+                }
+        }
     }
-
-  override fun onCleared() {
-    super.onCleared()
-    getInfo.unBind()
-  }
 
 }

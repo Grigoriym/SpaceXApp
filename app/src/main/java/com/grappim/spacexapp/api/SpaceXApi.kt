@@ -87,18 +87,18 @@ interface SpaceXApi {
     ): Response<LaunchPadModel>
 
     @GET("info")
-    suspend fun getInfo(): Response<InfoModel>
+    suspend fun getInfo(): InfoModel
 
     @GET("history")
     suspend fun getHistory(): List<HistoryModel>
 
     @GET("payloads")
-    suspend fun getAllPayloads(): Response<List<PayloadModel>>
+    suspend fun getAllPayloads(): List<PayloadModel>
 
     @GET("payloads/{payloadId}")
     suspend fun getPayloadById(
         @Path("payloadId") payloadId: String?
-    ): Response<PayloadModel>
+    ): PayloadModel
 
     @GET("missions")
     suspend fun getAllMissions(): Response<List<MissionModel>>

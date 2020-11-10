@@ -19,7 +19,6 @@ class LaunchPadViewModel @Inject constructor(
     val allLaunchPads: LiveData<Resource<List<LaunchPadModel>>>
         get() = _allLaunchPads
 
-
     fun loadAllLaunchPads() {
         viewModelScope.launch {
             getAllLaunchPadsUseCase.invoke()

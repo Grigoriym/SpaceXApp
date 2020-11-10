@@ -1,49 +1,51 @@
 package com.grappim.spacexapp.ui.missions_payloads
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.model.payloads.PayloadModel
-import com.grappim.spacexapp.network.gets.GetAllPayloads
-import com.grappim.spacexapp.network.gets.GetPayloadById
 import com.grappim.spacexapp.ui.base.BaseViewModel
-import com.grappim.spacexapp.util.UseCase
+import com.grappim.spacexapp.util.onFailure
+import com.grappim.spacexapp.util.onSuccess
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MissionViewModel @Inject constructor(
-  private val getAllPayloads: GetAllPayloads,
-  private val getPayloadById: GetPayloadById
-) : BaseViewModel(), LifecycleObserver {
+    private val getAllPayloadsUseCase: GetAllPayloadsUseCase,
+    private val getPayloadByIdUseCase: GetPayloadByIdUseCase
+) : BaseViewModel() {
 
-    private val _allPayloads = MutableLiveData<List<PayloadModel>>()
-    val allPayloads: LiveData<List<PayloadModel>>
+    private val _allPayloads = MutableLiveData<Resource<List<PayloadModel>>>()
+    val allPayloads: LiveData<Resource<List<PayloadModel>>>
         get() = _allPayloads
 
-    private val _onePayload = MutableLiveData<PayloadModel>()
-    val onePayload: LiveData<PayloadModel>
+    private val _onePayload = MutableLiveData<Resource<PayloadModel>>()
+    val onePayload: LiveData<Resource<PayloadModel>>
         get() = _onePayload
 
-    private fun handleAllPayloads(payloads: List<PayloadModel>) {
-        this._allPayloads.value = payloads
-    }
-
-    private fun handleOnePayload(payload: PayloadModel) {
-        this._onePayload.value = payload
-    }
-
-    fun loadAllPayloads() =
-        getAllPayloads(UseCase.None()) {
-            it.either(::handleFailure, ::handleAllPayloads)
+    fun loadAllPayloads() {
+        _allPayloads.value = Resource.Loading
+        viewModelScope.launch {
+            getAllPayloadsUseCase.invoke()
+                .onFailure {
+                    _allPayloads.value = Resource.Error(it)
+                }.onSuccess {
+                    _allPayloads.value = Resource.Success(it)
+                }
         }
-
-    fun loadPayloadById(payloadId: String?) =
-        getPayloadById(GetPayloadById.Params(payloadId)) {
-            it.either(::handleFailure, ::handleOnePayload)
-        }
-
-    override fun onCleared() {
-        super.onCleared()
-        getAllPayloads.unBind()
-        getPayloadById.unBind()
     }
+
+    fun loadPayloadById(payloadId: String) {
+        _onePayload.value = Resource.Loading
+        viewModelScope.launch {
+            getPayloadByIdUseCase.invoke(payloadId)
+                .onFailure {
+                    _onePayload.value = Resource.Error(it)
+                }.onSuccess {
+                    _onePayload.value = Resource.Success(it)
+                }
+        }
+    }
+
 }
