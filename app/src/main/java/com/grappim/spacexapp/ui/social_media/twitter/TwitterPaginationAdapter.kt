@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.gone
-import com.grappim.spacexapp.core.extensions.inflateLayout
 import com.grappim.spacexapp.core.extensions.px
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.core.extensions.show
 import com.grappim.spacexapp.core.utils.TWITTER_VIDEO_TYPE
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.core.extensions.inflate
 import kotlinx.android.synthetic.main.layout_twitter_item.view.ivTwitterItemProfileImage
 import kotlinx.android.synthetic.main.layout_twitter_item.view.rlTwitterItemMedia
 import kotlinx.android.synthetic.main.layout_twitter_item.view.tvTwitterItemCreatedAt
@@ -44,13 +44,12 @@ class TwitterPaginationAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
     ): TwitterPaginationViewHolder = TwitterPaginationViewHolder(
-        parent.context.inflateLayout(
-            R.layout.layout_twitter_item, parent
-        )
+        parent.inflate(R.layout.layout_twitter_item)
     )
 
     override fun onBindViewHolder(
-        holder: TwitterPaginationViewHolder, position: Int
+        holder: TwitterPaginationViewHolder,
+        position: Int
     ) {
         holder.apply {
             var isVideo = false
@@ -99,9 +98,7 @@ class TwitterPaginationViewHolder(
         set(value) {
             field = value
             view.apply {
-                setInnerRv(
-                    this, value
-                )
+                setInnerRv(this, value)
                 tvTwitterItemCreatedAt.text = value?.createdAt?.let { date ->
                     date
 //          DateTimeUtils.getDateTimeFormatter5().format(
@@ -129,7 +126,7 @@ class TwitterPaginationViewHolder(
             val hashMap = mutableMapOf<String, Boolean>()
 
             mediaList.forEach {
-                hashMap[it?.mediaUrlHttps ?: ""] = it?.type == TWITTER_VIDEO_TYPE
+                hashMap[it.mediaUrlHttps ?: ""] = it.type == TWITTER_VIDEO_TYPE
             }
             when (hashMap.size) {
                 1 -> {

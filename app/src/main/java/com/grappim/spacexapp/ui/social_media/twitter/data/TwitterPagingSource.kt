@@ -14,12 +14,13 @@ class TwitterPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserTimelineModel> {
         val position = params.key ?: STARTING_PAGE_INDEX
 
-        val response = service.getUserTimelineAsync(
-            screenName = screenName,
-            page = position,
-            count = params.loadSize
-        )
         return try {
+            val response = service.getUserTimelineAsync(
+                screenName = screenName,
+                page = position,
+                count = params.loadSize
+            )
+
             LoadResult.Page(
                 data = response,
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,

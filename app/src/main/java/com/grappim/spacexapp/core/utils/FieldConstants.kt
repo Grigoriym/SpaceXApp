@@ -28,6 +28,9 @@ const val KOIN_NOTIFICATION_MANAGER = "koin_notification_manager"
 
 const val SPACE_X = "SpaceX"
 
+const val ELON_MUSK_SCREEN_NAME = "elonmusk"
+const val ELON_MUSK = "Elon Musk"
+
 const val TWITTER_VIDEO_TYPE = "video"
 
 const val ARG_CAPSULES_ALL = "arg_capsules_all"

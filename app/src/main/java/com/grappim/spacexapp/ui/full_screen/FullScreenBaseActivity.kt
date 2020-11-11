@@ -4,11 +4,7 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 
-open class FullScreenBaseActivity : AppCompatActivity {
-
-    constructor() : super()
-
-    constructor(@LayoutRes layoutRes: Int) : super(layoutRes)
+open class FullScreenBaseActivity(@LayoutRes layoutRes: Int) : AppCompatActivity(layoutRes) {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)

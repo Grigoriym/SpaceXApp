@@ -4,9 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.grappim.spacexapp.api.TwitterApi
+import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
 import com.grappim.spacexapp.di.qualifiers.TwitterApiQualifier
 import com.grappim.spacexapp.di.scopes.AppScope
-import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -17,18 +17,17 @@ class TwitterPaginationRepositoryImpl @Inject constructor(
 
     companion object {
         private const val DEFAULT_PAGE_SIZE = 50
+        private const val DEFAULT_PREFETCH_DISTANCE = 30
     }
 
-    override fun getSearchResult(screenName: String): Flow<PagingData<UserTimelineModel>> {
-        return Pager(
+    override fun getSearchResult(screenName: String): Flow<PagingData<UserTimelineModel>> =
+        Pager(
             config = PagingConfig(
                 pageSize = DEFAULT_PAGE_SIZE,
                 enablePlaceholders = false,
-                prefetchDistance = 30
+                prefetchDistance = DEFAULT_PREFETCH_DISTANCE
             ),
-            pagingSourceFactory = {
-                TwitterPagingSource(twitterApi, screenName)
-            }
+            pagingSourceFactory = { TwitterPagingSource(twitterApi, screenName) }
         ).flow
-    }
+
 }

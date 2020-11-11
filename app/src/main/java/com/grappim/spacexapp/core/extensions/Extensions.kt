@@ -81,12 +81,6 @@ fun Fragment.startBrowser(uriString: String?) {
 inline fun <reified T : Any> newIntent(context: Context): Intent =
     Intent(context, T::class.java)
 
-fun Context.inflateLayout(
-    @LayoutRes layoutId: Int, parent: ViewGroup? = null,
-    attachToRoot: Boolean = false
-): View =
-    LayoutInflater.from(this).inflate(layoutId, parent, attachToRoot)
-
 fun View.gone(): View {
     if (visibility != View.GONE) {
         visibility = View.GONE

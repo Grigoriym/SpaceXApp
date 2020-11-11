@@ -17,11 +17,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.launchActivity
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.extensions.startBrowser
+import com.grappim.spacexapp.core.utils.ELON_MUSK
+import com.grappim.spacexapp.core.utils.ELON_MUSK_SCREEN_NAME
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_IMAGES
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_VIDEO_DURATION
@@ -91,7 +94,7 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
         val spinnerArrayAdapter: ArrayAdapter<String>? = ArrayAdapter(
             requireContext(),
             R.layout.layout_spinner_item,
-            arrayListOf(SPACE_X, "Elon Musk")
+            arrayListOf(SPACE_X, ELON_MUSK)
         )
         spinner?.adapter = spinnerArrayAdapter
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -111,7 +114,7 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
                         search(SPACE_X)
                     }
                     1 -> {
-                        search("elonmusk")
+                        search(ELON_MUSK_SCREEN_NAME)
                     }
                 }
             }
@@ -179,7 +182,20 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
                 }
             })
         tweetsAdapter.addLoadStateListener { loadState ->
+            rvTwitter.isVisible = loadState.source.refresh is LoadState.NotLoading
             pbTwitter.isVisible = loadState.source.refresh is LoadState.Loading
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+                ?: loadState.refresh as? LoadState.Error
+            errorState?.let {
+                rvTwitter.showSnackbar(
+                    requireContext()
+                        .getErrorMessage(it.error)
+                )
+            }
         }
 
         rvTwitter.apply {

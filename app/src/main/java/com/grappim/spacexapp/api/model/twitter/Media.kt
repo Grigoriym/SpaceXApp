@@ -1,6 +1,5 @@
 package com.grappim.spacexapp.api.model.twitter
 
-
 import com.google.gson.annotations.SerializedName
 
 data class Media(
@@ -13,7 +12,7 @@ data class Media(
   @SerializedName("id_str")
   val idStr: String?,
   @SerializedName("indices")
-  val indices: List<Int?>?,
+  val indices: List<Int>?,
   @SerializedName("media_url")
   val mediaUrl: String?,
   @SerializedName("media_url_https")
