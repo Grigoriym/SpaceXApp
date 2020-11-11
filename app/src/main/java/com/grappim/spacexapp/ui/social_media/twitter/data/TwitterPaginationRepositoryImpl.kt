@@ -16,14 +16,15 @@ class TwitterPaginationRepositoryImpl @Inject constructor(
 ) : TwitterPaginationRepository {
 
     companion object {
-        private const val DEFAULT_PAGE_SIZE = 100
+        private const val DEFAULT_PAGE_SIZE = 50
     }
 
     override fun getSearchResult(screenName: String): Flow<PagingData<UserTimelineModel>> {
         return Pager(
             config = PagingConfig(
                 pageSize = DEFAULT_PAGE_SIZE,
-                enablePlaceholders = false
+                enablePlaceholders = false,
+                prefetchDistance = 30
             ),
             pagingSourceFactory = {
                 TwitterPagingSource(twitterApi, screenName)
