@@ -106,11 +106,6 @@ class InfoFragment : BaseFragment(R.layout.fragment_info) {
         }
     }
 
-    override fun renderFailure(failureText: String) {
-        clFragmentInfo.showSnackbar(failureText)
-        pbInfo.gone()
-    }
-
     private fun showError(throwable: Throwable) {
         clFragmentInfo.showSnackbar(requireContext().getErrorMessage(throwable))
     }

@@ -20,8 +20,6 @@ abstract class BaseFragment : Fragment {
 
     constructor(@LayoutRes layoutRes: Int) : super(layoutRes)
 
-    open fun renderFailure(failureText: String) {}
-
     override fun onPrepareOptionsMenu(menu: Menu) {
         Timber.d("BaseFragment - onPrepareOptionsMenu")
         menu.clear()

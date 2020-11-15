@@ -107,12 +107,6 @@ class MissionFragment : BaseFragment(R.layout.fragment_mission) {
 
     }
 
-    override fun renderFailure(failureText: String) {
-        tvMissionPayloadId.showSnackbar(failureText)
-        clMissionFragment.gone()
-        pbMission.gone()
-    }
-
     private fun showError(throwable: Throwable) {
         tvMissionPayloadId.showSnackbar(requireContext().getErrorMessage(throwable))
     }

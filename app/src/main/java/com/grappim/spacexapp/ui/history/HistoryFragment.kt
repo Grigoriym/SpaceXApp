@@ -83,12 +83,6 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         }
     }
 
-    override fun renderFailure(failureText: String) {
-        rvFragmentHistory.showSnackbar(failureText)
-        pbFragmentHistory.gone()
-        srlHistory.isRefreshing = false
-    }
-
     private fun showError(throwable: Throwable) {
         rvFragmentHistory.showSnackbar(requireContext().getErrorMessage(throwable))
     }

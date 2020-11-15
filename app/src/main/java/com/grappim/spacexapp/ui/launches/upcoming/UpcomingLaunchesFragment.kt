@@ -107,12 +107,6 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches) {
         }
     }
 
-    fun renderFailure(failureText: String) {
-        rvUpcomingLaunches.showSnackbar(failureText)
-        pbUpcomingLaunches.gone()
-        srlUpcomingLaunches.isRefreshing = false
-    }
-
     private fun renderLaunches(resource: Resource<List<LaunchModel>>) {
         pbUpcomingLaunches.showOrGone(resource is Resource.Loading)
         when (resource) {

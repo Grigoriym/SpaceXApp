@@ -73,12 +73,6 @@ class GetRocketsFragment : BaseFragment(R.layout.fragment_get_rockets) {
         }
     }
 
-    override fun renderFailure(failureText: String) {
-        rvGetRockets.showSnackbar(failureText)
-        pbGetRockets.gone()
-        srlGetRockets.isRefreshing = false
-    }
-
     private fun bindAdapter() {
         rvGetRockets.apply {
             addItemDecoration(MarginItemDecorator())

@@ -76,12 +76,6 @@ class GetShipsFragment : BaseFragment(R.layout.fragment_get_ships) {
         }
     }
 
-    override fun renderFailure(failureText: String) {
-        rvGetShips.showSnackbar(failureText)
-        pbGetShips.gone()
-        srlGetShips.isRefreshing = false
-    }
-
     private fun bindAdapter() {
         rvGetShips.apply {
             addItemDecoration(MarginItemDecorator())

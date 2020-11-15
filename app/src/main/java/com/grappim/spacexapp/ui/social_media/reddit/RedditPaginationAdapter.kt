@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.grappim.spacexapp.R
-import com.grappim.spacexapp.core.extensions.inflateLayout
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
 import com.grappim.spacexapp.api.model.reddit.RedditChildren
+import com.grappim.spacexapp.core.extensions.inflate
 import kotlinx.android.synthetic.main.layout_reddit_item.view.imagePreview
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditAuthor
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditCreatedUTC
@@ -26,11 +26,7 @@ class RedditPaginationAdapter(
         parent: ViewGroup,
         viewType: Int
     ): RedditPaginationViewHolder =
-        RedditPaginationViewHolder(
-            parent
-                .context
-                .inflateLayout(R.layout.layout_reddit_item, parent)
-        )
+        RedditPaginationViewHolder(parent.inflate(R.layout.layout_reddit_item,))
 
     override fun onBindViewHolder(holder: RedditPaginationViewHolder, position: Int) {
         holder.apply {
