@@ -59,8 +59,6 @@ class InfoFragment : BaseFragment(R.layout.fragment_info) {
         }
 
         clFragmentInfo.gone()
-
-        viewModel.loadInfo()
     }
 
     private fun renderInfo(resource: Resource<InfoModel>) {

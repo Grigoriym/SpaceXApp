@@ -2,6 +2,7 @@ package com.grappim.spacexapp.ui.launchpads
 
 import android.content.Context
 import android.os.Bundle
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,10 +47,9 @@ class GetLaunchPadsFragment : BaseFragment(R.layout.fragment_get_launch_pads) {
         }
 
         bindAdapter()
-        getData()
 
         srlGetLaunchPads.setOnRefreshListener {
-            getData()
+            viewModel.loadAllLaunchPads()
             srlGetLaunchPads.isRefreshing = false
         }
     }
@@ -67,13 +67,13 @@ class GetLaunchPadsFragment : BaseFragment(R.layout.fragment_get_launch_pads) {
         }
     }
 
-    private fun getData() {
-        viewModel.loadAllLaunchPads()
-    }
-
     private fun bindAdapter() {
         rvGetLaunchPads.apply {
             addItemDecoration(MarginItemDecorator())
+            layoutAnimation = AnimationUtils.loadLayoutAnimation(
+                requireContext(),
+                R.anim.layout_animation_down_to_up
+            )
             adapter = launchPadAdapter
         }
     }

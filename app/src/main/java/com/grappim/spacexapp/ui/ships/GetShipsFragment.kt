@@ -8,14 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.api.model.ships.ShipModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.api.model.ships.ShipModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_ships.pbGetShips
 import kotlinx.android.synthetic.main.fragment_get_ships.rvGetShips
@@ -51,16 +50,11 @@ class GetShipsFragment : BaseFragment(R.layout.fragment_get_ships) {
         }
 
         bindAdapter()
-        getData()
 
         srlGetShips.setOnRefreshListener {
-            getData()
+            viewModel.loadAllShips()
             srlGetShips.isRefreshing = false
         }
-    }
-
-    private fun getData() {
-        viewModel.loadAllShips()
     }
 
     private fun renderShips(resource: Resource<List<ShipModel>>) {

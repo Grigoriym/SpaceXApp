@@ -8,14 +8,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.api.model.rocket.RocketModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.api.model.rocket.RocketModel
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_rockets.pbGetRockets
 import kotlinx.android.synthetic.main.fragment_get_rockets.rvGetRockets
@@ -48,16 +47,11 @@ class GetRocketsFragment : BaseFragment(R.layout.fragment_get_rockets) {
         }
 
         bindAdapter()
-        getData()
 
         srlGetRockets.setOnRefreshListener {
-            getData()
+            viewModel.loadRockets()
             srlGetRockets.isRefreshing = false
         }
-    }
-
-    private fun getData() {
-        viewModel.loadRockets()
     }
 
     private fun renderRockets(resource: Resource<List<RocketModel>>) {
