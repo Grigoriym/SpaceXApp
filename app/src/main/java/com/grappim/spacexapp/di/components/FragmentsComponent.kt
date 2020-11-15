@@ -1,6 +1,8 @@
 package com.grappim.spacexapp.di.components
 
 import com.grappim.spacexapp.di.scopes.FragmentScope
+import com.grappim.spacexapp.ui.capsules.GetCapsulesFragment
+import com.grappim.spacexapp.ui.cores.GetCoresFragment
 import com.grappim.spacexapp.ui.history.HistoryFragment
 import com.grappim.spacexapp.ui.info.InfoFragment
 import com.grappim.spacexapp.ui.launches.completed.CompletedLaunchesFragment
@@ -41,5 +43,9 @@ interface FragmentsComponent {
     fun inject(twitterFragment: TwitterFragment)
 
     fun inject(redditFragment: RedditFragment)
+
+    fun inject(getCapsulesFragment: GetCapsulesFragment)
+
+    fun inject(getCoresFragment: GetCoresFragment)
 
 }

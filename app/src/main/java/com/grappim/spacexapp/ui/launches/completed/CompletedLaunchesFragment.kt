@@ -12,14 +12,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
 import kotlinx.android.synthetic.main.fragment_completed_launches.pbCompletedLaunches
@@ -105,12 +104,6 @@ class CompletedLaunchesFragment : Fragment(R.layout.fragment_completed_launches)
                 .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
             adapter = launchesAdapter
         }
-    }
-
-    private fun renderFailure(failureText: String) {
-        rvCompletedLaunches.showSnackbar(failureText)
-        pbCompletedLaunches.gone()
-        srlCompletedLaunches.isRefreshing = false
     }
 
     private fun renderLaunches(resource: Resource<List<LaunchModel>>) {

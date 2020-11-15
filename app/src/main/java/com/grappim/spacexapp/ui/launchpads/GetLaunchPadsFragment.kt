@@ -67,12 +67,6 @@ class GetLaunchPadsFragment : BaseFragment(R.layout.fragment_get_launch_pads) {
         }
     }
 
-    override fun renderFailure(failureText: String) {
-        rvGetLaunchPads.showSnackbar(failureText)
-        pbGetLaunchPads.gone()
-        srlGetLaunchPads.isRefreshing = false
-    }
-
     private fun getData() {
         viewModel.loadAllLaunchPads()
     }

@@ -35,8 +35,6 @@ interface AppComponent {
     }
 
     fun fragmentsComponent(): FragmentsComponent.Factory
-    fun capsulesComponent(): CapsuleComponent.Factory
-    fun coresComponent(): CoresComponent.Factory
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)
