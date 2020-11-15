@@ -30,8 +30,8 @@ class CapsulesViewModel @Inject constructor(
         get() = _pastCapsules
 
     fun loadAllCapsules() {
+        _allCapsules.value = Resource.Loading
         viewModelScope.launch {
-            _allCapsules.value = Resource.Loading
             getCapsulesUseCase.invoke()
                 .onFailure {
                     _allCapsules.value = Resource.Error(it)
@@ -42,8 +42,8 @@ class CapsulesViewModel @Inject constructor(
     }
 
     fun loadUpcomingCapsules() {
+        _upcomingCapsules.value = Resource.Loading
         viewModelScope.launch {
-            _upcomingCapsules.value = Resource.Loading
             getUpcomingCapsulesUseCase.invoke()
                 .onFailure {
                     _upcomingCapsules.value = Resource.Error(it)
@@ -54,8 +54,8 @@ class CapsulesViewModel @Inject constructor(
     }
 
     fun loadPastCapsules() {
+        _pastCapsules.value = Resource.Loading
         viewModelScope.launch {
-            _pastCapsules.value = Resource.Loading
             getPastCapsulesUseCase.invoke()
                 .onFailure {
                     _pastCapsules.value = Resource.Error(it)

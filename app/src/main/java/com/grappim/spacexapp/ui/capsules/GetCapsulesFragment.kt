@@ -15,14 +15,11 @@ import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_capsules.pbGetCapsules
 import kotlinx.android.synthetic.main.fragment_get_capsules.rvGetCapsules
-import kotlinx.android.synthetic.main.fragment_get_capsules.srlGetCapsules
+import kotlinx.android.synthetic.main.fragment_get_capsules.swipeGetCapsules
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -49,27 +46,40 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("GetCapsulesFragment - onViewCreated")
-
-        viewModel.apply {
-            allCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-            upcomingCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-            pastCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-        }
-
+        initViewModel()
         bindAdapter()
         getData()
-
-        srlGetCapsules.setOnRefreshListener {
+        swipeGetCapsules.setOnRefreshListener {
             getData()
-            srlGetCapsules.isRefreshing = false
+            swipeGetCapsules.isRefreshing = false
+        }
+    }
+
+    private fun initViewModel() {
+        when (args.capsulesToGetArgs) {
+            CapsulesArgs.ALL_CAPSULES.value -> viewModel.allCapsules.observe(
+                viewLifecycleOwner,
+                ::renderCapsules
+            )
+            CapsulesArgs.UPCOMING_CAPSULES.value -> viewModel.upcomingCapsules.observe(
+                viewLifecycleOwner,
+                ::renderCapsules
+            )
+            CapsulesArgs.PAST_CAPSULES.value -> viewModel.pastCapsules.observe(
+                viewLifecycleOwner,
+                ::renderCapsules
+            )
+            else -> {
+                throw IllegalStateException("wrong capsule args")
+            }
         }
     }
 
     private fun getData() {
         when (args.capsulesToGetArgs) {
-            ARG_CAPSULES_ALL -> viewModel.loadAllCapsules()
-            ARG_CAPSULES_UPCOMING -> viewModel.loadUpcomingCapsules()
-            ARG_CAPSULES_PAST -> viewModel.loadPastCapsules()
+            CapsulesArgs.ALL_CAPSULES.value -> viewModel.loadAllCapsules()
+            CapsulesArgs.UPCOMING_CAPSULES.value -> viewModel.loadUpcomingCapsules()
+            CapsulesArgs.PAST_CAPSULES.value -> viewModel.loadPastCapsules()
             else -> {
                 throw IllegalStateException("wrong capsule args")
             }
