@@ -16,7 +16,7 @@ class CapsulesViewModel @AssistedInject constructor(
     private val getCapsulesUseCase: GetCapsulesUseCase,
     private val getUpcomingCapsulesUseCase: GetUpcomingCapsulesUseCase,
     private val getPastCapsulesUseCase: GetPastCapsulesUseCase,
-    @Assisted val capsuleType: CapsulesArgs
+    @Assisted private val capsuleType: CapsulesArgs
 ) : BaseViewModel() {
 
     @AssistedInject.Factory

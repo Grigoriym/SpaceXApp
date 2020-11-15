@@ -4,8 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.grappim.spacexapp.core.platform.ViewModelFactory
 import com.grappim.spacexapp.di.keys.ViewModelKey
-import com.grappim.spacexapp.ui.capsules.CapsulesViewModel
-import com.grappim.spacexapp.ui.cores.CoresViewModel
 import com.grappim.spacexapp.ui.history.HistoryViewModel
 import com.grappim.spacexapp.ui.info.InfoViewModel
 import com.grappim.spacexapp.ui.launches.completed.CompletedLaunchesViewModel
@@ -14,7 +12,6 @@ import com.grappim.spacexapp.ui.launchpads.LaunchPadViewModel
 import com.grappim.spacexapp.ui.missions_payloads.MissionViewModel
 import com.grappim.spacexapp.ui.rockets.RocketsViewModel
 import com.grappim.spacexapp.ui.ships.ShipsViewModel
-import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
 import com.grappim.spacexapp.ui.social_media.reddit.RedditViewModel
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterViewModel
 import dagger.Binds
@@ -26,16 +23,6 @@ abstract class ViewModelModule {
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
-
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(CapsulesViewModel::class)
-//    abstract fun bindCapsulesViewModel(viewModel: CapsulesViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(CoresViewModel::class)
-    abstract fun bindCoresViewModel(viewModel: CoresViewModel): ViewModel
 
     @Binds
     @IntoMap

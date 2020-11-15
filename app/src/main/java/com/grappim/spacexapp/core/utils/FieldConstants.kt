@@ -23,7 +23,3 @@ const val ELON_MUSK_SCREEN_NAME = "elonmusk"
 const val ELON_MUSK = "Elon Musk"
 
 const val TWITTER_VIDEO_TYPE = "video"
-
-const val ARG_CORES_ALL = "arg_cores_all"
-const val ARG_CORES_UPCOMING = "arg_cores_upcoming"
-const val ARG_CORES_PAST = "arg_cores_past"

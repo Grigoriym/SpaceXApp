@@ -11,6 +11,7 @@ import com.grappim.spacexapp.di.scopes.GsonScope
 import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.SplashActivity
 import com.grappim.spacexapp.ui.capsules.CapsulesViewModel
+import com.grappim.spacexapp.ui.cores.CoresViewModel
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -40,6 +41,7 @@ interface AppComponent {
     fun fragmentsComponent(): FragmentsComponent.Factory
 
     fun capsulesViewModelFactory(): CapsulesViewModel.Factory
+    fun coresViewModelFactory(): CoresViewModel.Factory
 
     fun inject(mainActivity: MainActivity)
     fun inject(splashActivity: SplashActivity)

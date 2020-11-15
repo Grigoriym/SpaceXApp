@@ -47,8 +47,8 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("GetCapsulesFragment - onViewCreated")
-        initViewModel()
         bindAdapter()
+        initViewModel()
         swipeGetCapsules.setOnRefreshListener {
             viewModel.loadCapsules()
             swipeGetCapsules.isRefreshing = false
@@ -56,23 +56,18 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     }
 
     private fun initViewModel() {
-        when (args.capsulesToGetArgs) {
-            CapsulesArgs.ALL_CAPSULES.value -> viewModel.allCapsules.observe(
-                viewLifecycleOwner,
-                ::renderCapsules
-            )
-            CapsulesArgs.UPCOMING_CAPSULES.value -> viewModel.upcomingCapsules.observe(
-                viewLifecycleOwner,
-                ::renderCapsules
-            )
-            CapsulesArgs.PAST_CAPSULES.value -> viewModel.pastCapsules.observe(
-                viewLifecycleOwner,
-                ::renderCapsules
-            )
-            else -> {
-                throw IllegalStateException("wrong capsule args")
-            }
-        }
+        viewModel.allCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
+        viewModel.upcomingCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
+        viewModel.pastCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
     }
 
     private fun renderCapsules(event: Resource<List<CapsuleModel>>) {

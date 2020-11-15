@@ -11,7 +11,6 @@ import timber.log.Timber
 //todo check menu toolbar
 //todo maybe add some tesla stuff? There are some apis for this
 //todo bug with back button behavior, api data does not load
-//todo remove coroutines and implement rx?
 
 class SpaceXApplication : MultiDexApplication() {
 

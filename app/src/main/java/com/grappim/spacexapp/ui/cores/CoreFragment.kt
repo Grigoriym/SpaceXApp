@@ -5,9 +5,6 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.core.utils.ARG_CORES_ALL
-import com.grappim.spacexapp.core.utils.ARG_CORES_PAST
-import com.grappim.spacexapp.core.utils.ARG_CORES_UPCOMING
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_core.btnCoreAll
 import kotlinx.android.synthetic.main.fragment_core.btnCorePast
@@ -19,15 +16,21 @@ class CoreFragment : BaseFragment(R.layout.fragment_core) {
         super.onViewCreated(view, savedInstanceState)
 
         btnCoreAll.setSafeOnClickListener {
-            findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_ALL))
+            findNavController().navigate(
+                CoreFragmentDirections.nextFragment(CoreArgs.ALL_CORES.value)
+            )
         }
 
         btnCorePast.setSafeOnClickListener {
-            findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_PAST))
+            findNavController().navigate(
+                CoreFragmentDirections.nextFragment(CoreArgs.PAST_CORES.value)
+            )
         }
 
         btnCoreUpcoming.setSafeOnClickListener {
-            findNavController().navigate(CoreFragmentDirections.nextFragment(ARG_CORES_UPCOMING))
+            findNavController().navigate(
+                CoreFragmentDirections.nextFragment(CoreArgs.UPCOMING_CORES.value)
+            )
         }
     }
 }

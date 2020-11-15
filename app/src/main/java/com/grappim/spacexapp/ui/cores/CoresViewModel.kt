@@ -3,19 +3,26 @@ package com.grappim.spacexapp.ui.cores
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.api.model.cores.CoreModel
-import com.grappim.spacexapp.ui.base.BaseViewModel
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.functional.onFailure
 import com.grappim.spacexapp.core.functional.onSuccess
+import com.grappim.spacexapp.ui.base.BaseViewModel
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CoresViewModel @Inject constructor(
+class CoresViewModel @AssistedInject constructor(
     private val getCoresUseCase: GetCoresUseCase,
     private val getPastCoresUseCase: GetPastCoresUseCase,
-    private val getUpcomingCoresUseCase: GetUpcomingCoresUseCase
+    private val getUpcomingCoresUseCase: GetUpcomingCoresUseCase,
+    @Assisted private val coreType: CoreArgs
 ) : BaseViewModel() {
+
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(coreType: CoreArgs): CoresViewModel
+    }
 
     private val _allCores = MutableLiveData<Resource<List<CoreModel>>>()
     val allCores: LiveData<Resource<List<CoreModel>>>
@@ -29,9 +36,21 @@ class CoresViewModel @Inject constructor(
     val upcomingCores: LiveData<Resource<List<CoreModel>>>
         get() = _upcomingCores
 
-    fun loadAllCores() {
+    init {
+        loadCores()
+    }
+
+    fun loadCores() {
+        when (coreType) {
+            CoreArgs.ALL_CORES -> loadAllCores()
+            CoreArgs.PAST_CORES -> loadPastCores()
+            CoreArgs.UPCOMING_CORES -> loadUpcomingCores()
+        }
+    }
+
+    private fun loadAllCores() {
+        _allCores.value = Resource.Loading
         viewModelScope.launch {
-            _allCores.value = Resource.Loading
             getCoresUseCase.invoke()
                 .onFailure {
                     _allCores.value = Resource.Error(it)
@@ -41,9 +60,9 @@ class CoresViewModel @Inject constructor(
         }
     }
 
-    fun loadPastCores() {
+    private fun loadPastCores() {
+        _pastCores.value = Resource.Loading
         viewModelScope.launch {
-            _pastCores.value = Resource.Loading
             getPastCoresUseCase.invoke()
                 .onFailure {
                     _pastCores.value = Resource.Error(it)
@@ -53,9 +72,9 @@ class CoresViewModel @Inject constructor(
         }
     }
 
-    fun loadUpcomingCores() {
+    private fun loadUpcomingCores() {
+        _upcomingCores.value = Resource.Loading
         viewModelScope.launch {
-            _upcomingCores.value = Resource.Loading
             getUpcomingCoresUseCase.invoke()
                 .onFailure {
                     _upcomingCores.value = Resource.Error(it)
