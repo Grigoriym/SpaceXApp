@@ -46,7 +46,7 @@ class RedditFragment : Fragment(R.layout.fragment_reddit) {
 
     private val rAdapter: RedditPaginationAdapter by lazy {
         RedditPaginationAdapter {
-            startBrowser("$REDDIT_FOR_BROWSER_URI${it?.data?.permalink}")
+            startBrowser("$REDDIT_FOR_BROWSER_URI${it.data.permalink}")
         }
     }
 
