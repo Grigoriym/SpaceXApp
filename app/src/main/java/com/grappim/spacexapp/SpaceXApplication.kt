@@ -10,7 +10,6 @@ import timber.log.Timber
 //todo toolbar menu needs to be redone
 //todo check menu toolbar
 //todo maybe add some tesla stuff? There are some apis for this
-//todo bug with back button behavior, api data does not load
 
 class SpaceXApplication : MultiDexApplication() {
 
