@@ -19,6 +19,10 @@ class InfoViewModel @Inject constructor(
     val info: LiveData<Resource<InfoModel>>
         get() = _info
 
+    init {
+        loadInfo()
+    }
+
     fun loadInfo() {
         _info.value = Resource.Loading
         viewModelScope.launch {

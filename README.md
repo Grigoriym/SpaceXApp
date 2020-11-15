@@ -18,6 +18,7 @@ The whole UI was inspired by [SpaceX Companion](https://play.google.com/store/ap
 3. CodingWithMitch for [SearchView and RecyclerView](https://codingwithmitch.com/blog/filtering-recyclerview-searchview/)
 4. [Spinner items customization](https://android--code.blogspot.com/2015/08/android-spinner-text-color.html)
 5. [Safe click listener](https://medium.com/@simonkarmy2004/solving-android-multiple-clicks-problem-kotlin-b99c06135da0)
+6. Gabor Varadi for [Using AssistedInject with ViewModels](https://proandroiddev.com/dagger-tips-leveraging-assistedinjection-to-inject-viewmodels-with-savedstatehandle-and-93fe009ad874)
 
 ### Dagger graph by [Scabbard](https://github.com/arunkumar9t2/scabbard)
 

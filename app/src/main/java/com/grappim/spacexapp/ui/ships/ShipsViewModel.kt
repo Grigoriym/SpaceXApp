@@ -3,11 +3,11 @@ package com.grappim.spacexapp.ui.ships
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.api.model.ships.ShipModel
-import com.grappim.spacexapp.ui.base.BaseViewModel
+import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.functional.onFailure
 import com.grappim.spacexapp.core.functional.onSuccess
+import com.grappim.spacexapp.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,7 +19,12 @@ class ShipsViewModel @Inject constructor(
     val allShips: LiveData<Resource<List<ShipModel>>>
         get() = _allShips
 
+    init {
+        loadAllShips()
+    }
+
     fun loadAllShips() {
+        _allShips.value = Resource.Loading
         viewModelScope.launch {
             getAllShipsUseCase.invoke()
                 .onFailure {

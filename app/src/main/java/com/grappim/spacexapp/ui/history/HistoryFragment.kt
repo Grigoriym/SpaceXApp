@@ -50,17 +50,11 @@ class HistoryFragment : BaseFragment(R.layout.fragment_history) {
         }
 
         bindAdapter()
-        getData()
 
         srlHistory.setOnRefreshListener {
-            getData()
+            viewModel.loadHistory()
             srlHistory.isRefreshing = false
         }
-    }
-
-    private fun getData() {
-        pbFragmentHistory.show()
-        viewModel.loadHistory()
     }
 
     private fun bindAdapter() {
