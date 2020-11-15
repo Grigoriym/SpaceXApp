@@ -27,10 +27,10 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(CapsulesViewModel::class)
-    abstract fun bindCapsulesViewModel(viewModel: CapsulesViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(CapsulesViewModel::class)
+//    abstract fun bindCapsulesViewModel(viewModel: CapsulesViewModel): ViewModel
 
     @Binds
     @IntoMap

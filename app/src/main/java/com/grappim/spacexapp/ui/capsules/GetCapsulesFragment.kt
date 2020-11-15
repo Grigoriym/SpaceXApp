@@ -4,12 +4,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.capsule.CapsuleModel
+import com.grappim.spacexapp.core.extensions.fragmentViewModels
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.showOrGone
@@ -26,9 +25,11 @@ import javax.inject.Inject
 class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: CapsulesViewModel.Factory
 
-    private val viewModel: CapsulesViewModel by viewModels { viewModelFactory }
+    private val viewModel: CapsulesViewModel by fragmentViewModels {
+        viewModelFactory.create(CapsulesArgs.fromStringToArgs(args.capsulesToGetArgs))
+    }
 
     private val capsulesAdapter by lazy {
         CapsulesAdapter {
@@ -48,9 +49,8 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
         Timber.d("GetCapsulesFragment - onViewCreated")
         initViewModel()
         bindAdapter()
-        getData()
         swipeGetCapsules.setOnRefreshListener {
-            getData()
+            viewModel.loadCapsules()
             swipeGetCapsules.isRefreshing = false
         }
     }
@@ -75,17 +75,6 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
         }
     }
 
-    private fun getData() {
-        when (args.capsulesToGetArgs) {
-            CapsulesArgs.ALL_CAPSULES.value -> viewModel.loadAllCapsules()
-            CapsulesArgs.UPCOMING_CAPSULES.value -> viewModel.loadUpcomingCapsules()
-            CapsulesArgs.PAST_CAPSULES.value -> viewModel.loadPastCapsules()
-            else -> {
-                throw IllegalStateException("wrong capsule args")
-            }
-        }
-    }
-
     private fun renderCapsules(event: Resource<List<CapsuleModel>>) {
         pbGetCapsules.showOrGone(event is Resource.Loading)
         when (event) {
@@ -94,9 +83,9 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
             }
             is Resource.Success -> {
                 capsulesAdapter.loadItems(event.data)
+                rvGetCapsules.scheduleLayoutAnimation()
             }
         }
-        rvGetCapsules.scheduleLayoutAnimation()
     }
 
     private fun showError(throwable: Throwable) {
