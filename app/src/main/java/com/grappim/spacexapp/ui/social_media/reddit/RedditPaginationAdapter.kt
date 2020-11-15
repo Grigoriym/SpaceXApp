@@ -31,7 +31,7 @@ class RedditPaginationAdapter(
     override fun onBindViewHolder(holder: RedditPaginationViewHolder, position: Int) {
         holder.apply {
             model = getItem(position)
-            itemView.setSafeOnClickListener { onClick(getItem(position)) }
+            itemView.setSafeOnClickListener { onClick(model) }
             imagePreview.load(model?.data?.preview?.images?.get(0)?.source?.url)
         }
     }

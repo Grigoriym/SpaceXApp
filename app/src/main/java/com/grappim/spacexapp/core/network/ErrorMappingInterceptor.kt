@@ -17,7 +17,7 @@ class ErrorMappingInterceptor @Inject constructor(
 ) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response =
         try {
-            if (!networkHandler.isConnected) throw  NetworkException(NetworkException.ERROR_NO_INTERNET)
+            if (!networkHandler.isConnected) throw NetworkException(NetworkException.ERROR_NO_INTERNET)
             val request = chain.request()
             val response = chain.proceed(request)
             if (!response.isSuccessful) {

@@ -10,14 +10,16 @@ import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.core.extensions.getErrorMessage
+import com.grappim.spacexapp.core.extensions.getErrorState
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.extensions.startBrowser
 import com.grappim.spacexapp.core.utils.REDDIT_FOR_BROWSER_URI
@@ -80,12 +82,6 @@ class RedditFragment : Fragment(R.layout.fragment_reddit) {
         return super.onOptionsItemSelected(item)
     }
 
-    fun renderFailure(failureText: String) {
-        rvReddit.showSnackbar(failureText)
-        pbReddit.gone()
-        srlReddit.isRefreshing = false
-    }
-
     private fun initMenu(menu: Menu) {
         val item: MenuItem? = menu.findItem(R.id.twitter_menu_spinner)
         val spinner = item?.actionView as? AppCompatSpinner
@@ -136,8 +132,8 @@ class RedditFragment : Fragment(R.layout.fragment_reddit) {
         initSearch()
     }
 
-    private fun search(subreddit:String){
-     searchJob?.cancel()
+    private fun search(subreddit: String) {
+        searchJob?.cancel()
         rAdapter.refresh()
         searchJob = lifecycleScope.launch {
             viewModel.search(subreddit)
@@ -145,7 +141,7 @@ class RedditFragment : Fragment(R.layout.fragment_reddit) {
         }
     }
 
-    private fun initSearch(){
+    private fun initSearch() {
         lifecycleScope.launch {
             rAdapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
@@ -155,16 +151,21 @@ class RedditFragment : Fragment(R.layout.fragment_reddit) {
     }
 
     private fun bindAdapter() {
+        rAdapter.addLoadStateListener { loadState ->
+            rvReddit.isVisible = loadState.source.refresh is LoadState.NotLoading
+            pbReddit.isVisible = loadState.source.refresh is LoadState.Loading
+
+            loadState.getErrorState()?.let {
+                rvReddit.showSnackbar(
+                    requireContext().getErrorMessage(it.error)
+                )
+            }
+        }
+
         rvReddit.apply {
             layoutAnimation = AnimationUtils
                 .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
             adapter = rAdapter
         }
-    }
-
-    override fun onPause() {
-//    setHasOptionsMenu(false)
-        viewModelStore.clear()
-        super.onPause()
     }
 }

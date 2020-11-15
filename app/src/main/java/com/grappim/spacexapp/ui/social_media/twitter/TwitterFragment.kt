@@ -19,6 +19,7 @@ import androidx.paging.LoadState
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.twitter.TweetModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
+import com.grappim.spacexapp.core.extensions.getErrorState
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.launchActivity
 import com.grappim.spacexapp.core.extensions.showSnackbar
@@ -162,12 +163,7 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter), TwitterAdapterClick
             recyclerTwitter.isVisible = loadState.source.refresh is LoadState.NotLoading
             pbTwitter.isVisible = loadState.source.refresh is LoadState.Loading
 
-            val errorState = loadState.source.append as? LoadState.Error
-                ?: loadState.source.prepend as? LoadState.Error
-                ?: loadState.append as? LoadState.Error
-                ?: loadState.prepend as? LoadState.Error
-                ?: loadState.refresh as? LoadState.Error
-            errorState?.let {
+            loadState.getErrorState()?.let {
                 recyclerTwitter.showSnackbar(
                     requireContext()
                         .getErrorMessage(it.error)
