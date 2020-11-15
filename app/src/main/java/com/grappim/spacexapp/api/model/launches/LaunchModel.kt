@@ -31,7 +31,7 @@ data class LaunchModel(
   @SerializedName("links")
   val links: Links?,
   @SerializedName("mission_id")
-  val missionId: List<String?>?,
+  val missionId: List<String>?,
   @SerializedName("mission_name")
   val missionName: String?,
   @SerializedName("rocket")
@@ -52,14 +52,4 @@ data class LaunchModel(
   val timeline: Timeline?,
   @SerializedName("upcoming")
   val upcoming: Boolean?
-) : Parcelable {
-  companion object {
-    fun empty() = LaunchModel(
-      "", 0, false, "", 0,
-      "", null, null, null,
-      null, "", null, emptyList(), "",
-      null, emptyList(), null, null, false,
-      null, "", null, false
-    )
-  }
-}
+) : Parcelable

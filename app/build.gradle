@@ -31,9 +31,6 @@ android {
     correctErrorTypes true
   }
 
-  scabbard {
-    enabled true
-  }
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
@@ -77,6 +74,13 @@ android {
       applicationIdSuffix ".prod"
     }
   }
+}
+
+scabbard {
+  enabled true
+  outputFormat "png"
+  fullBindingGraphValidation true
+  qualifiedNames true
 }
 
 apply from: './dependencies.gradle'

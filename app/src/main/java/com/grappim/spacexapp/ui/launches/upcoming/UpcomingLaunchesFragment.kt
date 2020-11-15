@@ -11,17 +11,17 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.api.model.launches.LaunchModel
-import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
+import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.pbUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.rvUpcomingLaunches
 import kotlinx.android.synthetic.main.fragment_upcoming_launches.srlUpcomingLaunches
@@ -37,7 +37,9 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches) {
 
     private val launchesAdapter: LaunchesAdapter by lazy {
         LaunchesAdapter {
-            (requireActivity() as? MainActivity)?.showLaunchDetails(it)
+            findNavController().navigate(
+                LaunchesFragmentDirections.nextFragment(it)
+            )
         }
     }
 
@@ -86,16 +88,11 @@ class UpcomingLaunchesFragment : Fragment(R.layout.fragment_upcoming_launches) {
         }
 
         bindAdapter()
-        getData()
 
         srlUpcomingLaunches.setOnRefreshListener {
-            getData()
+            viewModel.loadAllLaunches()
             srlUpcomingLaunches.isRefreshing = false
         }
-    }
-
-    private fun getData() {
-        viewModel.loadAllLaunches()
     }
 
     private fun bindAdapter() {

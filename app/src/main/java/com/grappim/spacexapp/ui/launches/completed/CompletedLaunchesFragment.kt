@@ -11,6 +11,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.launches.LaunchModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
@@ -19,8 +20,8 @@ import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
-import com.grappim.spacexapp.ui.MainActivity
 import com.grappim.spacexapp.ui.launches.LaunchesAdapter
+import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import kotlinx.android.synthetic.main.fragment_completed_launches.pbCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.rvCompletedLaunches
 import kotlinx.android.synthetic.main.fragment_completed_launches.srlCompletedLaunches
@@ -36,7 +37,9 @@ class CompletedLaunchesFragment : Fragment(R.layout.fragment_completed_launches)
 
     private val launchesAdapter: LaunchesAdapter by lazy {
         LaunchesAdapter {
-            (requireActivity() as? MainActivity)?.showLaunchDetails(it)
+            findNavController().navigate(
+                LaunchesFragmentDirections.nextFragment(it)
+            )
         }
     }
 
@@ -85,16 +88,11 @@ class CompletedLaunchesFragment : Fragment(R.layout.fragment_completed_launches)
         }
 
         bindAdapter()
-        getData()
 
         srlCompletedLaunches.setOnRefreshListener {
-            getData()
+            viewModel.loadPastLaunches()
             srlCompletedLaunches.isRefreshing = false
         }
-    }
-
-    private fun getData() {
-        viewModel.loadPastLaunches()
     }
 
     private fun bindAdapter() {

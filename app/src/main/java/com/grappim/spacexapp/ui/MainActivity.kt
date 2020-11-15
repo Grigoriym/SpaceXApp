@@ -17,16 +17,13 @@ import com.google.android.material.navigation.NavigationView
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getAppComponent
 import com.grappim.spacexapp.core.utils.PrefsManager
-import com.grappim.spacexapp.api.model.launches.LaunchModel
-import com.grappim.spacexapp.ui.launches.LaunchesFragmentDirections
 import kotlinx.android.synthetic.main.activity_main.drawerLayout
 import kotlinx.android.synthetic.main.activity_main.navigationView
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
-    MainActivityListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -48,11 +45,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun setupDayNightMode() {
         AppCompatDelegate.setDefaultNightMode(
-          if (!prefsManager.isNightThemeEnabled()) {
-            AppCompatDelegate.MODE_NIGHT_YES
-          } else {
-            AppCompatDelegate.MODE_NIGHT_NO
-          }
+            if (!prefsManager.isNightThemeEnabled()) {
+                AppCompatDelegate.MODE_NIGHT_YES
+            } else {
+                AppCompatDelegate.MODE_NIGHT_NO
+            }
         )
     }
 
@@ -64,31 +61,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         switcher = actionView.findViewById(R.id.drawerSwitch)
         switcher.isChecked = prefsManager.isNightThemeEnabled()
         switcher.setOnCheckedChangeListener { _, isChecked ->
-            run {
-                if (!isChecked) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    prefsManager.setNightTheme(false)
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    prefsManager.setNightTheme(true)
-                }
+            if (!isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                prefsManager.setNightTheme(false)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                prefsManager.setNightTheme(true)
             }
         }
     }
 
     private fun setupNavigation() {
         appBarConfiguration = AppBarConfiguration(
-          setOf(
-            R.id.capsuleFragment,
-            R.id.getRocketsFragment,
-            R.id.getShipsFragment,
-            R.id.coreFragment,
-            R.id.infoFragment,
-            R.id.historyFragment,
-            R.id.getLaunchPadsFragment,
-            R.id.socialMediaFragment,
-            R.id.launchesFragment
-          ), drawerLayout
+            setOf(
+                R.id.capsuleFragment,
+                R.id.getRocketsFragment,
+                R.id.getShipsFragment,
+                R.id.coreFragment,
+                R.id.infoFragment,
+                R.id.historyFragment,
+                R.id.getLaunchPadsFragment,
+                R.id.socialMediaFragment,
+                R.id.launchesFragment
+            ), drawerLayout
         )
 
         setSupportActionBar(toolbar)
@@ -107,25 +102,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return displaySelectedScreen(item.itemId)
     }
 
-    override fun showLaunchDetails(model: LaunchModel) {
-        navController.navigate(LaunchesFragmentDirections.nextFragment(model))
-    }
-
     private fun displaySelectedScreen(itemId: Int): Boolean {
         when (itemId) {
-          R.id.nav_capsules -> navController.navigate(R.id.capsules_nav_graph)
-          R.id.nav_rockets -> navController.navigate(R.id.rockets_nav_graph)
-          R.id.nav_ships -> navController.navigate(R.id.ships_nav_graph)
-          R.id.nav_cores -> navController.navigate(R.id.cores_nav_graph)
-          R.id.nav_switch_theme -> {
-            switcher.isChecked = !switcher.isChecked
-            return false
-          }
-          R.id.nav_info -> navController.navigate(R.id.infoFragment)
-          R.id.nav_history -> navController.navigate(R.id.history_nav_graph)
-          R.id.nav_launch_pads -> navController.navigate(R.id.launchpads_nav_graph)
-          R.id.nav_social_media -> navController.navigate(R.id.socialMediaFragment)
-          R.id.nav_launches -> navController.navigate(R.id.launchesFragment)
+            R.id.nav_capsules -> navController.navigate(R.id.capsules_nav_graph)
+            R.id.nav_rockets -> navController.navigate(R.id.rockets_nav_graph)
+            R.id.nav_ships -> navController.navigate(R.id.ships_nav_graph)
+            R.id.nav_cores -> navController.navigate(R.id.cores_nav_graph)
+            R.id.nav_switch_theme -> {
+                switcher.isChecked = !switcher.isChecked
+                return false
+            }
+            R.id.nav_info -> navController.navigate(R.id.infoFragment)
+            R.id.nav_history -> navController.navigate(R.id.history_nav_graph)
+            R.id.nav_launch_pads -> navController.navigate(R.id.launchpads_nav_graph)
+            R.id.nav_social_media -> navController.navigate(R.id.socialMediaFragment)
+            R.id.nav_launches -> navController.navigate(R.id.launchesFragment)
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -138,8 +129,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
-}
-
-interface MainActivityListener {
-    fun showLaunchDetails(model: LaunchModel)
 }
