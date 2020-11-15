@@ -4,34 +4,32 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.capsule.CapsuleModel
+import com.grappim.spacexapp.core.extensions.fragmentViewModels
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
 import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_ALL
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_PAST
-import com.grappim.spacexapp.core.utils.ARG_CAPSULES_UPCOMING
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_get_capsules.pbGetCapsules
 import kotlinx.android.synthetic.main.fragment_get_capsules.rvGetCapsules
-import kotlinx.android.synthetic.main.fragment_get_capsules.srlGetCapsules
+import kotlinx.android.synthetic.main.fragment_get_capsules.swipeGetCapsules
 import timber.log.Timber
 import javax.inject.Inject
 
 class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var viewModelFactory: CapsulesViewModel.Factory
 
-    private val viewModel: CapsulesViewModel by viewModels { viewModelFactory }
+    private val viewModel: CapsulesViewModel by fragmentViewModels {
+        viewModelFactory.create(CapsulesArgs.fromStringToArgs(args.capsulesToGetArgs))
+    }
 
     private val capsulesAdapter by lazy {
         CapsulesAdapter {
@@ -49,31 +47,27 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Timber.d("GetCapsulesFragment - onViewCreated")
-
-        viewModel.apply {
-            allCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-            upcomingCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-            pastCapsules.observe(viewLifecycleOwner, ::renderCapsules)
-        }
-
         bindAdapter()
-        getData()
-
-        srlGetCapsules.setOnRefreshListener {
-            getData()
-            srlGetCapsules.isRefreshing = false
+        initViewModel()
+        swipeGetCapsules.setOnRefreshListener {
+            viewModel.loadCapsules()
+            swipeGetCapsules.isRefreshing = false
         }
     }
 
-    private fun getData() {
-        when (args.capsulesToGetArgs) {
-            ARG_CAPSULES_ALL -> viewModel.loadAllCapsules()
-            ARG_CAPSULES_UPCOMING -> viewModel.loadUpcomingCapsules()
-            ARG_CAPSULES_PAST -> viewModel.loadPastCapsules()
-            else -> {
-                throw IllegalStateException("wrong capsule args")
-            }
-        }
+    private fun initViewModel() {
+        viewModel.allCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
+        viewModel.upcomingCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
+        viewModel.pastCapsules.observe(
+            viewLifecycleOwner,
+            ::renderCapsules
+        )
     }
 
     private fun renderCapsules(event: Resource<List<CapsuleModel>>) {
@@ -84,9 +78,9 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
             }
             is Resource.Success -> {
                 capsulesAdapter.loadItems(event.data)
+                rvGetCapsules.scheduleLayoutAnimation()
             }
         }
-        rvGetCapsules.scheduleLayoutAnimation()
     }
 
     private fun showError(throwable: Throwable) {

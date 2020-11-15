@@ -27,6 +27,9 @@ android {
   buildFeatures {
     viewBinding true
   }
+  kapt {
+    correctErrorTypes true
+  }
 
   scabbard {
     enabled true
