@@ -8,6 +8,8 @@ import android.graphics.BlendModeColorFilter
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.os.Build
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import com.grappim.spacexapp.R
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
@@ -50,3 +52,10 @@ fun Drawable.setMyColorFilter(color: Int) {
         this.setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
 }
+
+fun CombinedLoadStates.getErrorState(): LoadState.Error? =
+    this.source.append as? LoadState.Error
+        ?: this.source.prepend as? LoadState.Error
+        ?: this.append as? LoadState.Error
+        ?: this.prepend as? LoadState.Error
+        ?: this.refresh as? LoadState.Error
