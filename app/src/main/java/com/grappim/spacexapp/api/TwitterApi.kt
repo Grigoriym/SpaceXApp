@@ -1,6 +1,6 @@
 package com.grappim.spacexapp.api
 
-import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.api.model.twitter.TweetModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -17,6 +17,6 @@ interface TwitterApi {
         @Query("exclude_replies") excludeReplies: String = "true",
         @Query("max_id") maxId: Long? = null,
         @Query("since_id") sinceId: Long? = null
-    ): List<UserTimelineModel>
+    ): List<TweetModel>
 
 }

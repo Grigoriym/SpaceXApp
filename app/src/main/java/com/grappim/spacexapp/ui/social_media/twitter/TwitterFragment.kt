@@ -17,9 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import com.grappim.spacexapp.R
+import com.grappim.spacexapp.api.model.twitter.TweetModel
 import com.grappim.spacexapp.core.extensions.getErrorMessage
 import com.grappim.spacexapp.core.extensions.getFragmentsComponent
-import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.launchActivity
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.extensions.startBrowser
@@ -33,7 +33,7 @@ import com.grappim.spacexapp.core.utils.TWITTER_FOR_BROWSER_URI
 import com.grappim.spacexapp.ui.full_screen.FullScreenImageActivity
 import com.grappim.spacexapp.ui.full_screen.FullScreenVideoActivity
 import kotlinx.android.synthetic.main.fragment_twitter.pbTwitter
-import kotlinx.android.synthetic.main.fragment_twitter.rvTwitter
+import kotlinx.android.synthetic.main.fragment_twitter.recyclerTwitter
 import kotlinx.android.synthetic.main.fragment_twitter.srlTwitter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
@@ -44,14 +44,16 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-class TwitterFragment : Fragment(R.layout.fragment_twitter) {
+class TwitterFragment : Fragment(R.layout.fragment_twitter), TwitterAdapterClickListener {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel: TwitterViewModel by viewModels { viewModelFactory }
 
-    private lateinit var tweetsAdapter: TwitterPaginationAdapter
+    private val tweetsAdapter: TwitterPaginationAdapter by lazy {
+        TwitterPaginationAdapter(this)
+    }
 
     private var searchJob: Job? = null
 
@@ -137,7 +139,7 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
             tweetsAdapter.loadStateFlow
                 .distinctUntilChangedBy { it.refresh }
                 .filter { it.refresh is LoadState.NotLoading }
-                .collect { rvTwitter.scrollToPosition(0) }
+                .collect { recyclerTwitter.scrollToPosition(0) }
         }
     }
 
@@ -155,34 +157,9 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
         initSearch()
     }
 
-    fun renderFailure(failureText: String) {
-        rvTwitter.showSnackbar(failureText)
-        pbTwitter.gone()
-        srlTwitter.isRefreshing = false
-    }
-
     private fun bindAdapter() {
-        tweetsAdapter = TwitterPaginationAdapter(
-            onClick = {
-                startBrowser("$TWITTER_FOR_BROWSER_URI${it?.idStr}")
-            },
-            onImageClickS = { url, isVideo, videoDuration ->
-                when (isVideo) {
-                    true -> {
-                        requireContext().launchActivity<FullScreenVideoActivity> {
-                            putExtra(PARCELABLE_TWITTER_VIDEO, url)
-                            putExtra(PARCELABLE_TWITTER_VIDEO_DURATION, videoDuration)
-                        }
-                    }
-                    false -> {
-                        requireContext().launchActivity<FullScreenImageActivity> {
-                            putExtra(PARCELABLE_TWITTER_IMAGES, url)
-                        }
-                    }
-                }
-            })
         tweetsAdapter.addLoadStateListener { loadState ->
-            rvTwitter.isVisible = loadState.source.refresh is LoadState.NotLoading
+            recyclerTwitter.isVisible = loadState.source.refresh is LoadState.NotLoading
             pbTwitter.isVisible = loadState.source.refresh is LoadState.Loading
 
             val errorState = loadState.source.append as? LoadState.Error
@@ -191,23 +168,51 @@ class TwitterFragment : Fragment(R.layout.fragment_twitter) {
                 ?: loadState.prepend as? LoadState.Error
                 ?: loadState.refresh as? LoadState.Error
             errorState?.let {
-                rvTwitter.showSnackbar(
+                recyclerTwitter.showSnackbar(
                     requireContext()
                         .getErrorMessage(it.error)
                 )
             }
         }
 
-        rvTwitter.apply {
+        recyclerTwitter.apply {
             layoutAnimation = AnimationUtils
                 .loadLayoutAnimation(requireContext(), R.anim.layout_animation_down_to_up)
             adapter = tweetsAdapter
         }
     }
 
-    override fun onPause() {
-//    setHasOptionsMenu(false)
-        viewModelStore.clear()
-        super.onPause()
+    override fun onTweetClick(tweet: TweetModel) {
+        startBrowser("$TWITTER_FOR_BROWSER_URI${tweet.idStr}")
+    }
+
+    override fun onImageClick(tweet: TweetModel) {
+        var isVideo = false
+        var url: String? = ""
+        var videoDuration: Int? = null
+        if (tweet.extendedEntities?.media?.get(0)?.type == TWITTER_VIDEO_TYPE) {
+            val videoInfo = tweet.extendedEntities.media[0].videoInfo
+            val videoVariants = videoInfo.variants
+            videoVariants?.find {
+                it.bitrate == TwitterVideoBitRates.BITRATE_2176000.bitrate
+            }?.let {
+                url = it.url
+                isVideo = true
+                videoDuration = videoInfo.durationMillis
+            }
+        }
+        when (isVideo) {
+            true -> {
+                requireContext().launchActivity<FullScreenVideoActivity> {
+                    putExtra(PARCELABLE_TWITTER_VIDEO, url)
+                    putExtra(PARCELABLE_TWITTER_VIDEO_DURATION, videoDuration)
+                }
+            }
+            false -> {
+                requireContext().launchActivity<FullScreenImageActivity> {
+                    putExtra(PARCELABLE_TWITTER_IMAGES, tweet.extendedEntities!!.media!![0].mediaUrlHttps!!)
+                }
+            }
+        }
     }
 }

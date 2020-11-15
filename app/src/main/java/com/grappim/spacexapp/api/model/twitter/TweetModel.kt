@@ -2,7 +2,7 @@ package com.grappim.spacexapp.api.model.twitter
 
 import com.google.gson.annotations.SerializedName
 
-data class UserTimelineModel(
+data class TweetModel(
 
     @SerializedName("created_at")
     val createdAt: String,
@@ -10,8 +10,6 @@ data class UserTimelineModel(
     val extendedEntities: ExtendedEntities?,
     @SerializedName("favorite_count")
     val favoriteCount: Int?,
-    @SerializedName("favorited")
-    val favorited: Boolean?,
     @SerializedName("full_text")
     val fullText: String?,
     @SerializedName("id")

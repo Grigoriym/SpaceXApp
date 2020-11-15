@@ -21,5 +21,3 @@ const val SPACE_X = "SpaceX"
 
 const val ELON_MUSK_SCREEN_NAME = "elonmusk"
 const val ELON_MUSK = "Elon Musk"
-
-const val TWITTER_VIDEO_TYPE = "video"

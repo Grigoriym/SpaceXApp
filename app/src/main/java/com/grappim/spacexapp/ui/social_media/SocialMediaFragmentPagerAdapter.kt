@@ -1,28 +1,19 @@
 package com.grappim.spacexapp.ui.social_media
 
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.grappim.spacexapp.ui.social_media.reddit.RedditFragment
 import com.grappim.spacexapp.ui.social_media.twitter.TwitterFragment
 
 class SocialMediaFragmentPagerAdapter(
-  fragmentManager: FragmentManager
-) : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+    fragment: Fragment
+) : FragmentStateAdapter(fragment) {
 
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-          0 -> TwitterFragment()
+    override fun getItemCount(): Int = 2
+
+    override fun createFragment(position: Int): Fragment =
+        when (position) {
+            0 -> TwitterFragment()
             else -> RedditFragment()
         }
-    }
-
-    override fun getCount(): Int = 2
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return when (position) {
-          0 -> "Twitter"
-            else -> "Reddit"
-        }
-    }
 }

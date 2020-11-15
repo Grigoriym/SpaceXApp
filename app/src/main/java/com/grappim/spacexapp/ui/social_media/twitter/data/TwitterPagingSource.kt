@@ -2,16 +2,16 @@ package com.grappim.spacexapp.ui.social_media.twitter.data
 
 import androidx.paging.PagingSource
 import com.grappim.spacexapp.api.TwitterApi
-import com.grappim.spacexapp.api.model.twitter.UserTimelineModel
+import com.grappim.spacexapp.api.model.twitter.TweetModel
 
 private const val STARTING_PAGE_INDEX = 1
 
 class TwitterPagingSource(
     private val service: TwitterApi,
     private val screenName: String
-) : PagingSource<Int, UserTimelineModel>() {
+) : PagingSource<Int, TweetModel>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UserTimelineModel> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TweetModel> {
         val position = params.key ?: STARTING_PAGE_INDEX
 
         return try {

@@ -24,6 +24,9 @@ object DateTimeUtils {
   fun getDateTimeFormatter5(): DateTimeFormatter =
     DateTimeFormatter.ofPattern("MMM dd")
 
+  fun getDateTimeTwitterFormatter():DateTimeFormatter =
+    DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss Z yyyy")
+
   fun getZoneOffset(inUtc: Boolean): ZoneOffset {
     return if (inUtc) {
       ZoneOffset.UTC
