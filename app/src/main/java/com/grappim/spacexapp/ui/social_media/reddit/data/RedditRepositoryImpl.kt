@@ -16,8 +16,8 @@ class RedditRepositoryImpl @Inject constructor(
 ) : RedditRepository {
 
     companion object {
-        private const val DEFAULT_PAGE_SIZE = 50
-        private const val DEFAULT_PREFETCH_DISTANCE = 30
+        private const val DEFAULT_PAGE_SIZE = 30
+        private const val DEFAULT_PREFETCH_DISTANCE = 20
     }
 
     override fun getPostsBySubreddit(subReddit: String): Flow<PagingData<RedditChildren>> {
