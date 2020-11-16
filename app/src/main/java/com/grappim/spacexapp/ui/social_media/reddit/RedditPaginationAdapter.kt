@@ -10,7 +10,6 @@ import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.reddit.RedditChildren
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
-import com.grappim.spacexapp.core.utils.DateTimeUtils
 import kotlinx.android.synthetic.main.layout_reddit_item.view.imagePreview
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditAuthor
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditCreatedUTC
@@ -49,14 +48,12 @@ class RedditPaginationAdapter(
             override fun areItemsTheSame(
                 oldItem: RedditChildren,
                 newItem: RedditChildren
-            ): Boolean =
-                oldItem == newItem
+            ): Boolean = oldItem == newItem
 
             override fun areContentsTheSame(
                 oldItem: RedditChildren,
                 newItem: RedditChildren
-            ): Boolean =
-                oldItem.data.name == newItem.data.name
+            ): Boolean = oldItem.data.name == newItem.data.name
         }
     }
 }
