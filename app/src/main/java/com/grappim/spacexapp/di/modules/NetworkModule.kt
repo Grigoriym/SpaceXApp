@@ -139,11 +139,7 @@ class NetworkModule {
     @AppScope
     @HttpLoggingInterceptorQualifier
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor =
-        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Timber.tag("API").d(message)
-            }
-        }).apply {
+        HttpLoggingInterceptor { message -> Timber.tag("API").d(message) }.apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
 

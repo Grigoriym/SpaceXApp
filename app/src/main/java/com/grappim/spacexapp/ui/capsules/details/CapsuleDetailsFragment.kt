@@ -4,23 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
 import coil.api.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime
 import com.grappim.spacexapp.core.utils.DateTimeUtils
+import com.grappim.spacexapp.core.utils.capsuleImageList
 import com.grappim.spacexapp.core.view.MarginItemDecorator
 import com.grappim.spacexapp.core.view.RvInnerMissionsAdapter
+import com.grappim.spacexapp.databinding.FragmentCapsuleDetailsBinding
 import com.grappim.spacexapp.ui.base.BaseFragment
-import com.grappim.spacexapp.core.utils.capsuleImageList
-import kotlinx.android.synthetic.main.fragment_capsule_details.ivCapsuleDetailsToolbar
-import kotlinx.android.synthetic.main.fragment_capsule_details.rvCapsuleDetails
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsDetails
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsLandings
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsOriginalLaunch
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsReuseCount
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsSerial
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsStatus
-import kotlinx.android.synthetic.main.fragment_capsule_details.tvCapsuleDetailsType
 import timber.log.Timber
 
 class CapsuleDetailsFragment : BaseFragment(R.layout.fragment_capsule_details) {
@@ -31,6 +24,9 @@ class CapsuleDetailsFragment : BaseFragment(R.layout.fragment_capsule_details) {
             findNavController().navigate(CapsuleDetailsFragmentDirections.nextFragment(it))
         }
     }
+    private val viewBinding: FragmentCapsuleDetailsBinding by viewBinding(
+        FragmentCapsuleDetailsBinding::bind
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,26 +34,26 @@ class CapsuleDetailsFragment : BaseFragment(R.layout.fragment_capsule_details) {
 
         bindAdapter()
 
-        ivCapsuleDetailsToolbar.load(capsuleImageList["default"])
+        viewBinding.ivCapsuleDetailsToolbar.load(capsuleImageList["default"])
 
         args.capsuleModel.let {
-            tvCapsuleDetailsDetails.text = it.details
-            tvCapsuleDetailsLandings.text = it.landings.toString()
-            tvCapsuleDetailsOriginalLaunch.text = it.originalLaunch?.let { date ->
+            viewBinding.tvCapsuleDetailsDetails.text = it.details
+            viewBinding.tvCapsuleDetailsLandings.text = it.landings.toString()
+            viewBinding.tvCapsuleDetailsOriginalLaunch.text = it.originalLaunch?.let { date ->
                 DateTimeUtils.getDateTimeFormatter3().format(date.getOffsetDateTime())
             } ?: let {
                 "Unknown"
             }
-            tvCapsuleDetailsSerial.text = it.capsuleSerial
-            tvCapsuleDetailsReuseCount.text = it.reuseCount.toString()
-            tvCapsuleDetailsType.text = it.type?.capitalize()
-            tvCapsuleDetailsStatus.text = it.status?.capitalize()
+            viewBinding.tvCapsuleDetailsSerial.text = it.capsuleSerial
+            viewBinding.tvCapsuleDetailsReuseCount.text = it.reuseCount.toString()
+            viewBinding.tvCapsuleDetailsType.text = it.type?.capitalize()
+            viewBinding.tvCapsuleDetailsStatus.text = it.status?.capitalize()
             missionsAdapter.loadItems(it.missions ?: listOf())
         }
     }
 
     private fun bindAdapter() {
-        rvCapsuleDetails.apply {
+        viewBinding.rvCapsuleDetails.apply {
             addItemDecoration(MarginItemDecorator())
             adapter = missionsAdapter
         }
