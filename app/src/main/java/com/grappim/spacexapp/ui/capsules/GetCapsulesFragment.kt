@@ -6,6 +6,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.capsule.CapsuleModel
 import com.grappim.spacexapp.core.extensions.fragmentViewModels
@@ -15,10 +16,8 @@ import com.grappim.spacexapp.core.extensions.showOrGone
 import com.grappim.spacexapp.core.extensions.showSnackbar
 import com.grappim.spacexapp.core.functional.Resource
 import com.grappim.spacexapp.core.view.MarginItemDecorator
+import com.grappim.spacexapp.databinding.FragmentGetCapsulesBinding
 import com.grappim.spacexapp.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_get_capsules.pbGetCapsules
-import kotlinx.android.synthetic.main.fragment_get_capsules.rvGetCapsules
-import kotlinx.android.synthetic.main.fragment_get_capsules.swipeGetCapsules
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -26,6 +25,8 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
 
     @Inject
     lateinit var viewModelFactory: CapsulesViewModel.Factory
+
+    private val viewBinding: FragmentGetCapsulesBinding by viewBinding(FragmentGetCapsulesBinding::bind)
 
     private val viewModel: CapsulesViewModel by fragmentViewModels {
         viewModelFactory.create(CapsulesArgs.fromStringToArgs(args.capsulesToGetArgs))
@@ -49,9 +50,9 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
         Timber.d("GetCapsulesFragment - onViewCreated")
         bindAdapter()
         initViewModel()
-        swipeGetCapsules.setOnRefreshListener {
+        viewBinding.swipeGetCapsules.setOnRefreshListener {
             viewModel.loadCapsules()
-            swipeGetCapsules.isRefreshing = false
+            viewBinding.swipeGetCapsules.isRefreshing = false
         }
     }
 
@@ -71,24 +72,24 @@ class GetCapsulesFragment : BaseFragment(R.layout.fragment_get_capsules) {
     }
 
     private fun renderCapsules(event: Resource<List<CapsuleModel>>) {
-        pbGetCapsules.showOrGone(event is Resource.Loading)
+        viewBinding.pbGetCapsules.showOrGone(event is Resource.Loading)
         when (event) {
             is Resource.Error -> {
                 showError(event.exception)
             }
             is Resource.Success -> {
                 capsulesAdapter.loadItems(event.data)
-                rvGetCapsules.scheduleLayoutAnimation()
+                viewBinding.rvGetCapsules.scheduleLayoutAnimation()
             }
         }
     }
 
     private fun showError(throwable: Throwable) {
-        rvGetCapsules.showSnackbar(requireContext().getErrorMessage(throwable))
+        viewBinding.rvGetCapsules.showSnackbar(requireContext().getErrorMessage(throwable))
     }
 
     private fun bindAdapter() {
-        rvGetCapsules.apply {
+        viewBinding.rvGetCapsules.apply {
             addItemDecoration(MarginItemDecorator())
             layoutAnimation = AnimationUtils.loadLayoutAnimation(
                 requireContext(),
