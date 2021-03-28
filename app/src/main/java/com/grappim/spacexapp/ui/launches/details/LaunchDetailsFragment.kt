@@ -5,7 +5,7 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import coil.api.load
+import coil.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.dp
 import com.grappim.spacexapp.core.extensions.gone

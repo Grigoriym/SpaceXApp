@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.reddit.RedditChildren
+import com.grappim.spacexapp.core.extensions.gone
 import com.grappim.spacexapp.core.extensions.inflate
 import com.grappim.spacexapp.core.extensions.setSafeOnClickListener
+import com.grappim.spacexapp.core.extensions.show
 import kotlinx.android.synthetic.main.layout_reddit_item.view.imagePreview
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditAuthor
 import kotlinx.android.synthetic.main.layout_reddit_item.view.tvRedditCreatedUTC
@@ -29,17 +31,22 @@ class RedditPaginationAdapter(
 
     override fun onBindViewHolder(holder: RedditPaginationViewHolder, position: Int) {
         holder.itemView.apply {
-            val model = getItem(position)
+            val model = getItem(position) ?: return
 
-            tvRedditAuthor.text = model?.data?.author
-            tvRedditCreatedUTC.text = model?.data?.createdUtc.toString()
-            tvRedditScore.text = model?.data?.score.toString()
-            tvRedditSelftext.text = model?.data?.selftext
-            tvRedditTitle.text = model?.data?.title
+            tvRedditAuthor.text = model.data.author
+            tvRedditCreatedUTC.text = model.data.createdUtc.toString()
+            tvRedditScore.text = model.data.score.toString()
+            if (model.data.selftext.isNullOrBlank()) {
+                tvRedditSelftext.gone()
+            } else {
+                tvRedditSelftext.show()
+                tvRedditSelftext.text = model.data.selftext
+            }
+            tvRedditTitle.text = model.data.title
 
-            imagePreview.load(model?.data?.preview?.images?.get(0)?.source?.url)
+            imagePreview.load(model.data.preview?.images?.get(0)?.source?.url)
 
-            setSafeOnClickListener { onClick(model!!) }
+            setSafeOnClickListener { onClick(model) }
         }
     }
 

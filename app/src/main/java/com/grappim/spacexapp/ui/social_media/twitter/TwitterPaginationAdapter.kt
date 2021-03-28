@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.api.model.twitter.TweetModel
 import com.grappim.spacexapp.core.extensions.getOffsetDateTime

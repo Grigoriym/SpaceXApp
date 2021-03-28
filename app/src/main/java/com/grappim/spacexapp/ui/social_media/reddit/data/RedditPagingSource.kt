@@ -1,15 +1,18 @@
 package com.grappim.spacexapp.ui.social_media.reddit.data
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.grappim.spacexapp.api.RedditApi
 import com.grappim.spacexapp.api.model.reddit.RedditChildren
-
-private const val STARTING_PAGE_INDEX = 1
 
 class RedditPagingSource(
     private val service: RedditApi,
     private val subReddit: String
 ) : PagingSource<Int, RedditChildren>() {
+
+    companion object {
+        private const val STARTING_PAGE_INDEX = 1
+    }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, RedditChildren> {
         val position = params.key ?: STARTING_PAGE_INDEX
@@ -28,4 +31,6 @@ class RedditPagingSource(
             LoadResult.Error(e)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, RedditChildren>): Int? = null
 }

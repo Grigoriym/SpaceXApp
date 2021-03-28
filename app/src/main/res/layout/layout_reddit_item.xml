@@ -42,7 +42,9 @@
             android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textSize="14sp"
+            android:textColor="@color/gray"
+            android:textSize="12sp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@+id/tvRedditTitle"
             app:layout_constraintStart_toStartOf="@+id/tvRedditTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvRedditTitle"
@@ -55,7 +57,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvRedditSelftext"
+            app:layout_constraintStart_toStartOf="@+id/tvRedditTitle"
             app:layout_constraintTop_toBottomOf="@+id/tvRedditSelftext"
             tools:text="11 days ago" />
 
@@ -72,7 +74,7 @@
             android:id="@+id/tvRedditScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/tvRedditSelftext"
+            app:layout_constraintEnd_toEndOf="@+id/tvRedditTitle"
             app:layout_constraintTop_toTopOf="@+id/tvRedditAuthor"
             tools:text="+1249" />
 

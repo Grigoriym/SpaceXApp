@@ -1,7 +1,7 @@
 package com.grappim.spacexapp.ui.full_screen
 
 import android.os.Bundle
-import coil.api.load
+import coil.load
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.utils.PARCELABLE_TWITTER_IMAGES
 import kotlinx.android.synthetic.main.activity_full_screen_image.ivFulScreen

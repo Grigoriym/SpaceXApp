@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.layout_core_item.view.tvCoreItemOriginalLa
 import kotlinx.android.synthetic.main.layout_core_item.view.tvCoreItemRTLS
 
 class CoresAdapter(
-  private inline val onClick: (CoreModel) -> Unit
+  private val onClick: (CoreModel) -> Unit
 ) : RecyclerView.Adapter<CoresAdapter.CoreViewHolder>() {
 
     private var items: List<CoreModel> = emptyList()
