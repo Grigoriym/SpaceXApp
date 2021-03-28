@@ -9,5 +9,4 @@ import dagger.Component
         AppComponent::class
     ]
 )
-interface ActivityComponent {
-}
+interface ActivityComponent

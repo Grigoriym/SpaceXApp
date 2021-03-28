@@ -1,6 +1,6 @@
 package com.grappim.spacexapp
 
-import androidx.multidex.MultiDexApplication
+import android.app.Application
 import com.grappim.spacexapp.di.components.AppComponent
 import com.grappim.spacexapp.di.components.DaggerAppComponent
 import com.jakewharton.threetenabp.AndroidThreeTen
@@ -11,11 +11,7 @@ import timber.log.Timber
 //todo check menu toolbar
 //todo maybe add some tesla stuff? There are some apis for this
 
-class SpaceXApplication : MultiDexApplication() {
-
-    companion object {
-        lateinit var instance: SpaceXApplication
-    }
+class SpaceXApplication : Application() {
 
     val appComponent: AppComponent by lazy {
         DaggerAppComponent
@@ -25,7 +21,6 @@ class SpaceXApplication : MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        instance = this
         timberInit()
         AndroidThreeTen.init(this)
         Timber.d("Application - onCreate")

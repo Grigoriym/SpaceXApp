@@ -12,7 +12,7 @@ import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.api.load
+import coil.load
 import com.google.android.material.chip.Chip
 import com.grappim.spacexapp.R
 import com.grappim.spacexapp.core.extensions.setMyImageResource

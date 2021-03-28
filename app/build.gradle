@@ -1,86 +1,79 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: "kotlin-kapt"
-apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply plugin: "scabbard.gradle"
-
-android {
-  compileSdkVersion versions.compileSdk
-  buildToolsVersion '30.0.2'
-
-  defaultConfig {
-    applicationId "com.grappim.spacexapp"
-    minSdkVersion versions.minSdk
-    targetSdkVersion versions.compileSdk
-    versionCode 1
-    versionName "0.0.1"
-    multiDexEnabled true
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    archivesBaseName = "$applicationId-v$versionCode($versionName)"
-
-    buildConfigField 'String', "ApiKey", twitter_api_key
-    buildConfigField 'String', "SecretApiKey", twitter_api_secret_key
-    buildConfigField 'String', "AccessToken", twitter_api_access_token
-    buildConfigField 'String', "AccessTokenSecret", twitter_api_access_token_secret
-  }
-  buildFeatures {
-    viewBinding true
-  }
-  kapt {
-    correctErrorTypes true
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_1_8.toString()
-    freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
-  }
-
-  signingConfigs {
-    debug {
-
-    }
-    release {
-
-    }
-  }
-  
-  buildTypes {
-    debug {
-      minifyEnabled false
-      debuggable true
-    }
-    release {
-      minifyEnabled true
-      debuggable false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-    }
-  }
-
-  flavorDimensions "default"
-  productFlavors {
-    dev {
-      signingConfig signingConfigs.debug
-      dimension "default"
-      applicationIdSuffix ".dev"
-    }
-    prod {
-      signingConfig signingConfigs.release
-      dimension "default"
-      applicationIdSuffix ".prod"
-    }
-  }
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
-scabbard {
-  enabled true
-  outputFormat "png"
-  fullBindingGraphValidation true
-  qualifiedNames true
+android {
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.grappim.spacexapp"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.compileSdk
+        versionCode 1
+        versionName "0.0.1"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        archivesBaseName = "$applicationId-v$versionCode($versionName)"
+
+        buildConfigField 'String', "ApiKey", twitter_api_key
+        buildConfigField 'String', "SecretApiKey", twitter_api_secret_key
+        buildConfigField 'String', "AccessToken", twitter_api_access_token
+        buildConfigField 'String', "AccessTokenSecret", twitter_api_access_token_secret
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    kapt {
+        correctErrorTypes true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+    signingConfigs {
+        debug {
+
+        }
+        release {
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+        release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        dev {
+            signingConfig signingConfigs.debug
+            dimension "default"
+            applicationIdSuffix ".dev"
+        }
+        prod {
+            signingConfig signingConfigs.release
+            dimension "default"
+            applicationIdSuffix ".prod"
+        }
+    }
 }
 
 apply from: './dependencies.gradle'
