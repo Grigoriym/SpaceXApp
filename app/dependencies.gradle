@@ -27,19 +27,19 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
     implementation "com.squareup.retrofit2:converter-gson:$versions.retrofit"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.9.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 
     implementation "com.jakewharton.threetenabp:threetenabp:1.2.4"
     implementation "com.jakewharton.timber:timber:$versions.timber"
     implementation "com.github.vipulasri:timelineview:$versions.timelineView"
 
-    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.4"
+    implementation "com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.6"
 
     compileOnly "com.squareup.inject:assisted-inject-annotations-dagger2:0.6.0"
     kapt "com.squareup.inject:assisted-inject-processor-dagger2:0.6.0"
 
     testImplementation "junit:junit:4.13.2"
-    androidTestImplementation "androidx.test:runner:1.4.1-alpha03"
+    androidTestImplementation "androidx.test:runner:1.5.0-alpha02"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
 }
