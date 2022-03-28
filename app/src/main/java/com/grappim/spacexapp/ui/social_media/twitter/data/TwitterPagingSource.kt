@@ -4,6 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.grappim.spacexapp.api.TwitterApi
 import com.grappim.spacexapp.api.model.twitter.TweetModel
+import timber.log.Timber
 
 class TwitterPagingSource(
     private val service: TwitterApi,
@@ -30,6 +31,7 @@ class TwitterPagingSource(
                 nextKey = if (response.isEmpty()) null else position + 1
             )
         } catch (e: Exception) {
+            Timber.e(e)
             LoadResult.Error(e)
         }
     }

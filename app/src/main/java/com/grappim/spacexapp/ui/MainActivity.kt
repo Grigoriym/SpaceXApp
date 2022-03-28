@@ -23,7 +23,8 @@ import kotlinx.android.synthetic.main.activity_main.toolbar
 import timber.log.Timber
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(),
+    NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
